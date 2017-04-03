@@ -1,0 +1,86 @@
+{% extends 'SonataBlockBundle:Block:block_base.html.twig' %}
+
+{% block block %}
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3 id="not_atend_order">0</h3>
+                    <p>Not Atend Sales</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="{{ path('admin_daiquiri_reservation_sale_list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3 id="sales_amount">0</h3>
+                    <p>Sales</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="{{ path('admin_daiquiri_reservation_sale_list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3 id="user_registration">0</h3>
+                    <p>User Registrations</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="{{ path('admin_daiquiri_admin_duser_list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3 id="max_product_number">0</h3>
+                    <p id="max_product_type">Unknow</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer" id="max_product_info">&nbsp;</a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: Routing.generate('daiquiri_admin_get_block_info'),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        $('#not_atend_order').html(data.no_atend_order);
+                        $('#user_registration').html(data.user);
+                        $('#request_number').html(data.user);
+                        //product
+                        $('#max_product_number').html(data.product_max.number);
+                        $('#max_product_info').html(data.product_max.product);
+                        $('#max_product_type').html(data.product_max.type);
+                        $('#sales_amount').html(data.amount_sales + '<sup style="font-size: 20px">.00 USD</sup>');
+
+                    } else {
+
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

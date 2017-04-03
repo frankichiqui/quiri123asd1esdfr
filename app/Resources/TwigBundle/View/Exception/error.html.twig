@@ -1,0 +1,12 @@
+{# empty Twig template #}
+{#% extends "DaiquiriAdminBundle:Default:standard_layout.html.twig"%#}
+
+{#% block show %#}
+{% if status_code == 404 %}
+    {% include 'error404.html.twig' %}
+{% elseif status_code == 403 %}
+    {% include 'error403.html.twig' %}
+{% else %}
+    {% include 'error500.html.twig' %}
+{% endif %}
+{#% endblock %#}

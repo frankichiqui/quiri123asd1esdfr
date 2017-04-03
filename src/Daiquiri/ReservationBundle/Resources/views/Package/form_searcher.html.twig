@@ -1,0 +1,142 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:Default:find_form.html.twig"%}
+{% block form_searcher %}            
+
+    <div class="col-md-12">
+        <div class="row">      
+            <div class="col-md-12">
+                <div class="box box-primary">
+
+                    <div class="box-header">
+                        <h4 class="box-title">
+                            Find a Package Option 
+                        </h4>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="sonata-ba-collapsed-fields">
+                            {{ form_start(form, {'action': admin.generateUrl('find-package-option-searcher'), 'method': 'POST'}) }}
+                            {{ form_errors(form) }}
+                            <div class="row">
+                                <div class="hidden">                                           
+                                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                        {{ form_widget(form.package) }} 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div>
+                                        {{ form_label(form.startdate) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.startdate) }} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div>
+                                        {{ form_label(form.destinations) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.destinations) }} 
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-1">
+                                    <div>
+                                        {{ form_label(form.days) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.days) }} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div>
+                                        {{ form_label(form.night) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.night) }} 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div>
+                                        {{ form_label(form.adults) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.adults) }} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div>
+                                        {{ form_label(form.kids) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.kids) }} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div>
+                                        {{ form_label(form.infant) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.infant) }} 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div>
+                                        &nbsp;
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            <button name="btn_create_and_edit" type="submit" class="btn btn-info"><i class="fa fa-search"></i> Search</button> 
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% if available is defined %}
+                    {% if available.return %}
+                        <div class="col-md-12">
+                            <div class="row">     
+
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h4 class="box-title">
+                                            Result
+                                        </h4>
+                                    </div>
+                                    <div class="box-body">
+  {% render(controller('DaiquiriAdminBundle:Package:renderResultItemPackageOption',{ '_sonata_admin' : 'admin.package','obj':available.output,'searcher':searcher})) %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-md-12">
+                            <div class="row">      
+
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h4 class="box-title">
+                                            Result
+                                        </h4>
+                                    </div>
+                                    <div class="box-body">
+                                        {{ available.msg | raw }}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

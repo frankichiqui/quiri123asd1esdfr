@@ -1,0 +1,387 @@
+{% if colective %}
+    {{ form_start(form_item, {'attr':{'id':'colective_oneway_'~ obj.id},'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+{% else %}
+    {{ form_start(form_item,{'attr':{'id':'exclusive_oneway_'~ obj.id} ,'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+{% endif %}
+<li {% if searcher.roundtrip and reverse is not null %} style="" {% else %} style="margin-bottom: 2%"{% endif %} >
+    <div class="booking-item-container">
+        <div class="booking-item">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="booking-item-airline-logo">                        
+                        {% if obj.provider.picture.galleryHasMedias is defined %}
+                            <img src="{% path obj.provider.picture, 'reference' %}" alt="{{ obj.provider }}" title="{{ obj.provider }}" />
+                        {% else %}
+                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ obj.provider }}" title="{{ obj.provider }}" />
+                        {% endif %}
+
+                        <p>{{ obj.provider }}</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="booking-item-flight-details">
+                        <div class="booking-item-arrival">
+                            {% if obj.getColective() == false %}
+                                <p><i class="fa fa-taxi fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b></p>
+                            {% else %}
+                                <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b><p>
+                                {% endif %}                                                   
+                            <p class="booking-item-destination"><i class="fa fa-calendar"></i> {{ searcher.date | date('M j, Y')}}({{ searcher.date | date('g:i a') }})</p>
+                            <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ obj.placefrom }}</p>
+                        </div>
+                        <div class="booking-item-arrival">
+                            {% if obj.getColective() == false %}
+                                <p> <i class="fa fa-taxi fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b></p>
+                            {% else %}
+                                <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b><p>
+                                {% endif %}                                                   
+                            <p class="booking-item-destination"><i class="fa fa-calendar"></i> {{ searcher.date | date('M j, Y')}}({{ searcher.date | date('g:i a') }})</p>
+                            <p class="booking-item-destination"><i class="fa fa-map-marker"> {{ obj.placeto }}</i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <p><i class="fa fa-user fa-2x"></i> <b>{{ 'Passengers' | trans({}, 'transfer') }}</b></p>
+                    <p class="booking-item-destination"><i class="fa fa-male"></i><small>{% if searcher.passengers == 1 %} {{ searcher.passengers }} {{ 'passenger'}}{% else %} {{ searcher.passengers }} {{ 'passengers'}} {% endif %} </small></p>
+                            {% if obj.getTypeTransfer() == 1 or obj.getTypeTransfer() == 2 %}
+                                {% if colective %}
+                            <p class="booking-item-destination form-inline"><i class="fa fa-plane"></i> {{ 'Fligth' | trans({}, 'transfer') }}</p>
+                            {{ form_widget(form_item.flight,{'attr':{ 'class':'form-control inline small'}}) }}
+                        {% else %}
+                            <p class="booking-item-destination form-inline"><i class="fa fa-plane"></i> {{ 'Fligth' | trans({}, 'transfer') }}</p>
+                            {{ form_widget(form_item.flight,{'attr':{ 'class':'form-control inline small'}}) }}
+                            <div class="hidden">
+                                <div>
+                                    {{ form_label(form_item.pickup_time) }}
+                                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                        {{ form_widget(form_item.pickup_time,{'id':obj.id,'attr':{ 'value':searcher.date | date("g:i a")}}) }} 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    {% else %}
+                        {% if colective %}
+                            <div class="hidden">
+                                <div>
+                                    {{ form_label(form_item.flight) }}
+                                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                        {{ form_widget(form_item.flight,{'attr':{'value':'-'}}) }} 
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <p class="booking-item-destination form-inline"><i class="fa fa-clock-o"></i> {{ 'Time' | trans({}, 'trasnfer') }}
+                                <small><div class="form-inline">{{ form_widget(form_item.pickup_time,{'id':obj.id,'attr':{'value':searcher.date | date("g:i a"), 'class':'form-control time-pick inline'}}) }}</div></small>
+                            </p>
+                            <div class="hidden">
+                                <div>
+                                    {{ form_label(form_item.flight) }}
+                                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                        {{ form_widget(form_item.flight,{'attr':{'value':'-'}}) }} 
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}             
+                    {% endif %}
+                </div>
+                <div class="col-md-3">
+                    {% if obj.getColective() == false %}
+                        <span class="booking-item-price">{{ (obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )) | price | raw }}</span><span>/{{ 'total' | trans({}, 'transfer') }}</span>
+                        {% else %}
+                        <span class="booking-item-price">{{ (obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )) | price | raw }}</span><span>/{{ 'total' | trans({}, 'transfer') }}</span>
+                        {% endif %}
+                    <button type="submit" class="btn btn-primary">{{ 'Add to Cart' | trans({}, 'car') }}</button>
+                    <p style="margin-top: 5%"><i class="fa fa-mail-forward fa-2x"></i> {{ 'Departing ' | trans({}, 'transfer') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="booking-item-details">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>{{ 'Transfer Details' | trans({}, 'transfer') }}</p>
+                    <h5 class="booking-item-title">{{ obj.title }}</h5>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                        <small><b>{{ 'Pick-up Place' | trans({}, 'transfer') }}: </b>
+                            {{ obj.placefrom }}
+                        </small>  
+
+                    </p>
+                    <p class="booking-item-address"><i class="fa fa-calendar"></i>
+                        <small><b>{{ 'Pick-up Time' | trans({}, 'transfer') }}: </b>
+                            {{ obj.starttime | date('g:i a')}} 
+                        </small>  
+
+                    </p>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                        <small><b>{{ 'Drop-off Place' | trans({}, 'transfer') }}: </b>
+                            {{ obj.placeto }}
+                        </small>   
+                    </p> 
+                    <p class="booking-item-address"><i class="fa fa-clock-o"></i>
+                        <small><b>{{ 'Drop-off Time' | trans({}, 'transfer') }}: </b>
+                            {{ obj.endtime | date('g:i a')}} 
+                        </small>  
+
+                    </p>
+                    {% if obj.getColective() == false %}
+                        <p class="booking-item-address"><i class="fa fa-taxi"></i>
+                            <small><b>{{ 'Transfer Type' | trans({}, 'transfer') }}: </b> 
+                                {{ 'Exclusive' | trans({}, 'transfer') }}
+                            </small>   
+                        </p> 
+                    {% else %}
+                        <p class="booking-item-address"><i class="fa fa-bus"></i>
+                            <small><b>{{ 'Transfer Type' | trans({}, 'transfer') }}: </b>
+                                {{ 'Colective' | trans({}, 'transfer') }}
+                            </small>   
+                        </p>
+                    {% endif %}  
+
+                    {% if obj.getColective() == false %}<i class="fa fa-dollar"></i>
+                        <b><small>{{ 'Price' | trans({}, 'transfer') }}:</b> {{ (obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )) | price | raw }}<span>/{{ 'total' | trans({}, 'transfer') }}</small></span>
+                    {% else %}<i class="fa fa-dollar"></i>
+                        <b><small>{{ 'Price' | trans({}, 'transfer') }}:</b> {{ (obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )) | price | raw }}<span>/{{ 'total' | trans({}, 'transfer') }}</small></span>
+                    {% endif %}
+
+                    <p><b><i class="fa fa-clock-o"></i><small> {{ 'Total trip time' | trans({}, 'transfer') }}:</b> 
+                        {% if obj.starttime is not null and obj.endtime is not null %}
+                            {{ obj.getFullTime() }} 
+                            {% if obj.getFullTime() < 2 %}
+                                {{ 'hour' | trans({}, 'transfer') }}
+                            {% else %}
+                                {{ 'hours' | trans({}, 'transfer') }}
+                            {% endif %}
+                        {% else %}
+                            - {{ 'hour(s)' | trans({}, 'transfer') }}
+                        {% endif %}</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>
+<a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a> 
+<div class="hidden">    
+    {{ form_widget(form_item.title,{'attr':{'value':obj.title}}) }}
+    {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+    {{ form_widget(form_item.unitariprice,{'attr':{'value':obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )}}) }}
+    {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+    {{ form_widget(form_item.totalprice,{'attr':{'value':obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )}}) }}
+    {{ form_widget(form_item.startdate,{'attr':{'value':searcher.date | date("Y-m-d")}}) }}
+    {{ form_widget(form_item.pickupplace,{'attr':{'value':obj.placefrom.id }}) }}
+    {{ form_widget(form_item.dropoffplace,{'attr':{'value':obj.placeto.id }}) }}
+    {{ form_widget(form_item.passengers,{'attr':{'value':searcher.passengers}}) }}
+    {{ form_widget(form_item.front,{'attr':{'value':1}}) }}
+</div>
+{{ form_end(form_item)}}       
+<script>
+    $('span[class="input-group-addon"]').remove();
+    {% if colective %}        
+    $('#{{'colective_oneway_'~ obj.id}}').on('submit', function (e) {
+        formAjaxFront(e, $(this));
+    });
+    {% else %}        
+    $('#{{'exclusive_oneway_'~ obj.id}}').on('submit', function (e) {
+        formAjaxFront(e, $(this));
+    });
+    {% endif %}
+</script>
+
+{% if searcher.roundtrip and reverse is not null %}   
+
+    {% if colective %}
+        {{ form_start(form_item_reverse, {'attr':{'id':'colective_reverse_'~ reverse.id},'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+    {% else %}
+        {{ form_start(form_item_reverse,{'attr':{'id':'exclusive_reverse_'~ reverse.id} ,'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+    {% endif %}
+    <li style="margin-bottom: 2%">
+        <div class="booking-item-container">
+            <div class="booking-item">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="booking-item-airline-logo">                        
+                            {% if reverse.provider.picture.galleryHasMedias is defined %}
+                                <img src="{% path reverse.provider.picture, 'reference' %}" alt="{{ reverse.provider }}" title="{{ reverse.provider }}" />
+                            {% else %}
+                                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ reverse.provider }}" title="{{ reverse.provider }}" />
+                            {% endif %}
+
+                            <p>{{ reverse.provider }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="booking-item-flight-details">
+                            <div class="booking-item-arrival">
+                                {% if reverse.getColective() == false %}
+                                    <p><i class="fa fa-taxi fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b></p>
+                                {% else %}
+                                    <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b><p>
+                                    {% endif %}                                                   
+                                <p class="booking-item-destination"><i class="fa fa-calendar"></i> {{ searcher.dateroundtrip | date('M j, Y')}}({{ searcher.roundtrip | date('g:i a') }})</p>
+                                <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ reverse.placefrom }}</p>
+                            </div>
+                            <div class="booking-item-arrival">
+                                {% if reverse.getColective() == false %}
+                                    <p> <i class="fa fa-taxi fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b></p>
+                                {% else %}
+                                    <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b><p>
+                                    {% endif %}                                                   
+                                <p class="booking-item-destination"><i class="fa fa-calendar"></i> {{ searcher.dateroundtrip | date('M j, Y')}}({{ searcher.roundtrip | date('g:i a') }})</p>
+                                <p class="booking-item-destination"><i class="fa fa-map-marker"> {{ reverse.placeto }}</i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <p><i class="fa fa-user fa-2x"></i> <b>{{ 'Passengers' | trans({}, 'transfer') }}</b></p>
+                        <p class="booking-item-destination"><i class="fa fa-male"></i><small>{% if searcher.passengers == 1 %} {{ searcher.passengers }} {{ 'passenger'}}{% else %} {{ searcher.passengers }} {{ 'passengers'}} {% endif %} </small></p>
+                                {% if reverse.getTypeTransfer() == 1 or reverse.getTypeTransfer() == 2 %}
+                                    {% if colective %}
+                                <p class="booking-item-destination form-inline"><i class="fa fa-plane"></i> {{ 'Fligth' | trans({}, 'transfer') }}</p>
+                                {{ form_widget(form_item_reverse.flight,{'attr':{ 'class':'form-control inline small'}}) }}
+                            {% else %}
+                                <p class="booking-item-destination form-inline"><i class="fa fa-plane"></i> {{ 'Fligth' | trans({}, 'transfer') }}</p>
+                                {{ form_widget(form_item_reverse.flight,{'attr':{ 'class':'form-control inline small'}}) }}
+                                <div class="hidden">
+                                    <div>
+                                        {{ form_label(form_item.pickup_time) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form_item_reverse.pickup_time,{'id':obj.id,'attr':{ 'value':searcher.date | date("g:i a")}}) }} 
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                        {% else %}
+                            {% if colective %}
+                                <div class="hidden">
+                                    <div>
+                                        {{ form_label(form_item_reverse.flight) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form_item_reverse.flight,{'attr':{'value':'-'}}) }} 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% else %}
+                                <p class="booking-item-destination form-inline"><i class="fa fa-clock-o"></i> {{ 'Time' | trans({}, 'trasnfer') }}
+                                    <small><div class="form-inline">{{ form_widget(form_item_reverse.pickup_time,{'id':reverse.id,'attr':{'value':searcher.dateroundtrip | date("g:i a"), 'class':'form-control time-pick inline'}}) }}</div></small>
+                                </p>
+                                <div class="hidden">
+                                    <div>
+                                        {{ form_label(form_item_reverse.flight) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form_item_reverse.flight,{'attr':{'value':'-'}}) }} 
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}             
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3">
+                        {% if reverse.getColective() == false %}
+                            <span class="booking-item-price">{{ (reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )) | price | raw }}</span><span>/{{ 'total' | trans({}, 'transfer') }}</span>
+                            {% else %}
+                            <span class="booking-item-price">{{ (reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )) | price | raw }}</span><span>/{{ 'total' | trans({}, 'transfer') }}</span>
+                            {% endif %}
+                        <button type="submit" class="btn btn-primary">{{ 'Add to Cart' | trans({}, 'car') }}</button>
+                        <p style="margin-top: 5%"><i class="fa fa-mail-reply fa-2x"></i> {{ 'Returning ' | trans({}, 'transfer') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="booking-item-details">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>{{ 'Transfer Details' | trans({}, 'transfer') }}</p>
+                        <h5 class="booking-item-title">{{ reverse.title }}</h5>
+                        <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                            <small><b>{{ 'Pick-up Place' | trans({}, 'transfer') }}: </b>
+                                {{ reverse.placefrom }}
+                            </small>  
+
+                        </p>
+                        <p class="booking-item-address"><i class="fa fa-calendar"></i>
+                            <small><b>{{ 'Pick-up Date & Time' | trans({}, 'transfer') }}: </b>
+                                {{ searcher.date  | date('M j, Y g:i a')}} 
+                            </small>  
+
+                        </p>
+                        <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                            <small><b>{{ 'Drop-off Place' | trans({}, 'transfer') }}: </b>
+                                {{ reverse.placeto }}
+                            </small>   
+                        </p> 
+                        <p class="booking-item-address"><i class="fa fa-calendar"></i>
+                            <small><b>{{ 'Drop-off Time' | trans({}, 'transfer') }}: </b>
+                                {{ reverse.endtime | date('g:i a')}} 
+                            </small>  
+
+                        </p>
+                        {% if reverse.getColective() == false %}
+                            <p class="booking-item-address"><i class="fa fa-taxi"></i>
+                                <small><b>{{ 'Transfer Type' | trans({}, 'transfer') }}: </b> 
+                                    {{ 'Exclusive' | trans({}, 'transfer') }}
+                                </small>   
+                            </p> 
+                        {% else %}
+                            <p class="booking-item-address"><i class="fa fa-bus"></i>
+                                <small><b>{{ 'Transfer Type' | trans({}, 'transfer') }}: </b>
+                                    {{ 'Colective' | trans({}, 'transfer') }}
+                                </small>   
+                            </p>
+                        {% endif %}  
+
+                        {% if reverse.getColective() == false %}<i class="fa fa-dollar"></i>
+                            <b><small>{{ 'Price' | trans({}, 'transfer') }}:</b> {{ (reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )) | price | raw }}<span>/{{ 'total' | trans({}, 'transfer') }}</small></span>
+                        {% else %}<i class="fa fa-dollar"></i>
+                            <b><small>{{ 'Price' | trans({}, 'transfer') }}:</b> {{ (reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )) | price | raw }}<span>/{{ 'total' | trans({}, 'transfer') }}</small></span>
+                        {% endif %}
+
+                        <p><b><i class="fa fa-clock-o"></i><small> {{ 'Total trip time' | trans({}, 'transfer') }}:</b> 
+                            {% if reverse.starttime is not null and reverse.endtime is not null %}
+                                {{ reverse.getFullTime() }} 
+                                {% if reverse.getFullTime() < 2 %}
+                                    {{ 'hour' | trans({}, 'transfer') }}
+                                {% else %}
+                                    {{ 'hours' | trans({}, 'transfer') }}
+                                {% endif %}
+                            {% else %}
+                                - {{ 'hour(s)' | trans({}, 'transfer') }}
+                            {% endif %}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a> 
+    <div class="hidden">    
+        {#obj.getTypeTransfer() ~ ' ' ~ #}
+        {{ form_widget(form_item_reverse.title,{'attr':{'value':reverse.title}}) }}
+        {{ form_widget(form_item_reverse.quantity,{'attr':{'value':1}}) }}
+        {{ form_widget(form_item_reverse.unitariprice,{'attr':{'value':reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )}}) }}
+        {{ form_widget(form_item_reverse.product,{'attr':{'value':reverse.id}}) }}
+        {{ form_widget(form_item_reverse.totalprice,{'attr':{'value':reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )}}) }}
+        {{ form_widget(form_item_reverse.startdate,{'attr':{'value':searcher.dateroundtrip | date("Y-m-d")}}) }}
+        {{ form_widget(form_item_reverse.pickupplace,{'attr':{'value':reverse.placefrom.id}}) }}
+        {{ form_widget(form_item_reverse.dropoffplace,{'attr':{'value':reverse.placeto.id}}) }}
+        {{ form_widget(form_item_reverse.passengers,{'attr':{'value':searcher.passengers}}) }}
+        {{ form_widget(form_item_reverse.front,{'attr':{'value':1}}) }}
+    </div>
+    {{ form_end(form_item_reverse)}}       
+    <script>
+        $('span[class="input-group-addon"]').remove();
+        {% if colective %}
+            $('#{{'colective_reverse_'~ reverse.id}}').on('submit', function (e) {
+                formAjaxFront(e, $(this));
+            });
+        {% else %}
+
+            $('#{{'exclusive_reverse_'~ reverse.id}}').on('submit', function (e) {
+                formAjaxFront(e, $(this));
+            });
+        {% endif %}
+    </script>
+
+{% endif %}

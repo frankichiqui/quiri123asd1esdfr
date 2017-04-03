@@ -1,0 +1,74 @@
+<div class="container nav-container">
+    <div class="nav">
+        <ul class="slimmenu" id="slimmenu">
+            <li class="active"><a href="{{ url('daiquiri_site_homepage1') }}">{{ 'Home' | trans({}, 'menu') }}</a>
+
+            </li>
+            <li><a href="{{ path('transfer_list') }}">{{ 'Transfers' | trans({}, 'menu') }}</a>
+                <ul>
+                    {%  render(controller('DaiquiriSiteBundle:TransferSearcher:getTransfersByPoloForMenu')) %}
+                </ul>  
+
+            </li>
+            <li><a href="{{ path('hotel_list') }}">{{ 'Hotels' | trans({}, 'menu') }}</a>
+                <ul>
+                   {# {%  render(controller('DaiquiriSiteBundle:OcupationSearcher:getHotelsByPoloForMenu'))%} #}
+                    
+                </ul>
+            </li>
+            <li><a href="{{ path('excursion_list') }}">{{ 'Excursions' | trans({}, 'menu') }}</a>
+                <ul>
+                   {# {%  render(controller('DaiquiriSiteBundle:ExcursionSearcher:getExcursionsByPoloForMenu'))%}#}
+                </ul>
+
+            </li>
+            <li><a href="{{ path('circuit_list') }}">{{ 'Circuits' | trans({}, 'menu') }}</a>
+                <ul>                    
+                    {#{%  render(controller('DaiquiriSiteBundle:CircuitSearcher:getCircuitsSlugAndTitle'))%}#}
+                </ul>
+
+            </li>
+            <li><a href="{{ path('rental_list') }}">{{ 'Rentals' | trans({}, 'menu') }}</a>
+                <ul>
+                    {#{%  render(controller('DaiquiriSiteBundle:RentalHouseRoomSearcher:getRentalHouseByProvinceForMenu'))%}#}
+                </ul>
+
+            </li>
+            <li><a href="{{ path('car_list') }}">{{ 'Cars' | trans({}, 'menu') }}</a>
+                <ul>                    
+                    {%  render(controller('DaiquiriSiteBundle:CarSearcher:getCarsCategoriesSlugAndTitle')) %}
+                </ul>
+
+            </li>
+
+        </ul>
+    </div>
+</div>
+<style>
+    .f-nav{
+        z-index: 9999; 
+        position: fixed; 
+        left: 0; 
+        top: 0; 
+        width: 100%;
+        background-color: #ffffff;
+        padding-left: 8.3%;
+        border-bottom: 2px solid #ed8323;
+    }
+</style>
+{% block other_js %}
+    <script>
+        $("document").ready(function ($) {
+            var pos = $('.nav-container').offset().top;
+            var nav = $('.nav-container');
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > pos) {
+                    nav.addClass("f-nav");
+                } else {
+                    nav.removeClass("f-nav");
+                }
+            });
+        });
+    </script>
+{% endblock%}

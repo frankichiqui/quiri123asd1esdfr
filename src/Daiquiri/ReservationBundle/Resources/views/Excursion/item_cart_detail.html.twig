@@ -1,0 +1,60 @@
+
+<div class="col-md-12" data-id="{{ it.id }}">
+    <div class="row item_cart">
+
+        <div class="col-md-12">
+
+            <div class="box box-primary">
+
+                <div class="box-header">
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+                            <i class="fa fa-times"></i></button>
+                    </div>
+                    <h4 class="box-title">
+                        <b> {{ it.title }}</b> x {{ it.quantity }}
+                    </h4>
+                </div>
+                <div class="box-body">  
+                    
+                    
+                    
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <a href="#" class="thumbnail">
+                                {% thumbnail it.product.picture, 'small' %}
+                            </a>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="label label-success">Departure</span>
+                            <div> {{ it.startdate | date('M j, Y ') }}</div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="label label-success">Pikup Place</span>
+                            <div>{{ it.pickupplace }}</div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <span class="label label-success">Adult(s) & Kid(s)</span>
+                            <div>{{ it.adult }} & {{ it.kid }}</div>
+
+                        </div>
+
+                        <div class="col-md-1">
+                            <span class="label label-success">Price</span>
+                            <div>{{ it.totalprice | price | raw }}</div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

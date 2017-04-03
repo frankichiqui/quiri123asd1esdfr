@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="pull-right box-tools">
+        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div class="col-md-3">
+        <div class="booking-item-car-img">
+            {% if product.picture.galleryHasMedias is defined %}
+                <img src="{% path product.picture, 'reference' %}" alt="{{ it.product.title }}" title="{{ it.product.title }}" />
+            {% else %}
+                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ it.product.title }}" title="{{ it.product.title }}" />
+            {% endif %}
+            <p class="booking-item-car-title">{{ it.product.title }}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="booking-item-features booking-item-features-sign clearfix">
+                    <li rel="tooltip" data-placement="top" title="{{ 'Passengers' | trans({}, 'car') }}"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x {{ it.product.capacity }}</span>
+                    </li>
+                    <li rel="tooltip" data-placement="top" title="{{ 'Doors' | trans({}, 'car') }}"><i class="im im-car-doors"></i><span class="booking-item-feature-sign">x {{ it.product.doors }}</span>
+                    </li>
+                    <li rel="tooltip" data-placement="top" title="{{ 'Baggage Quantity' | trans({}, 'car') }}"><i class="fa fa-briefcase"></i><span class="booking-item-feature-sign">x {{ it.product.luggagecapacity }}</span>
+                    </li>
+                    {% if it.product.transsmission == 0 %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Automatic Transmission' | trans({}, 'car') }}"><i class="im im-shift-auto"></i><span class="booking-item-feature-sign">{{ 'auto' | trans({}, 'car') }}</span>
+                        </li>
+                    {% else %}     
+                        <li rel="tooltip" data-placement="top" title="{{ 'Manual Transmission' | trans({}, 'car') }}"><i class="im im-shift"></i><span class="booking-item-feature-sign">{{ 'manual' | trans({}, 'car') }}</span>
+
+                        </li>
+                    {% endif %}
+                    {% if it.product.power == 0 %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Disel Vehicle' | trans({}, 'car') }}"><i class="im im-diesel"></i><span class="booking-item-feature-sign">diesel</span></li>
+                            {% elseif  it.product.power == 1 %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Hybrid Vehicle' | trans({}, 'car') }}"><i class="im im-diesel"></i><span class="booking-item-feature-sign">hybrid</span>
+                        </li>
+                    {% else %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Electric Vehicle' | trans({}, 'car') }}"><i class="im im-electric"></i><span class="booking-item-feature-sign">electric</span>
+                        </li>
+                    {% endif %}
+                    {% if it.product.engine is defined and not null %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Engine' | trans({}, 'car') }}"><i class="fa fa-gears"></i><span class="booking-item-feature-sign">{{ it.product.engine }}</span>
+                            {% endif %}
+                    </li>
+                </ul>
+                <ul class="booking-item-features booking-item-features-small clearfix">
+                    {% if it.product.clima == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Climate Control' | trans({}, 'car') }}"><i class="im im-climate-control"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.airConditioner == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Air Conditioning' | trans({}, 'car') }}"><i class="im im-air"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.satellite == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Satellite Navigation' | trans({}, 'car') }}"><i class="im im-satellite"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.powerdoorslock == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Power Door Locks' | trans({}, 'car') }}"><i class="im im-lock"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.radio == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'FM Radio' | trans({}, 'car') }}"><i class="im im-fm"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.cdPlayer == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Stereo CD/MP3' | trans({}, 'car') }}"><i class="im im-stereo"></i>
+                        </li>
+                    {% endif %}                              
+                    {% if it.product.tilt == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Tilt Steering Wheel' | trans({}, 'car') }}"><i class="im im-car-wheel"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.powerwindow == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Power Windows' | trans({}, 'car') }}"><i class="im im-car-window"></i>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <ul class="booking-item-features booking-item-features-dark">
+                    {% if it.product.terminalpickup == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Terminal Pickup' | trans({}, 'car') }}"><i class="fa fa-plane"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.shuttlebus == true %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Shuttle Bus to Car' | trans({}, 'car') }}"><i class="im im-bus"></i>
+                        </li>
+                    {% endif %}
+                    {% if it.product.drivers | length > 0 %}
+                        <li rel="tooltip" data-placement="top" title="{{ 'Car with Driver' | trans({}, 'car') }}"><i class="im im-driver"></i>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="booking-item-title"><b>{{ 'Service' | trans({}, 'car') }}: {{ it.title }} x {{ it.quantity }}</b></h6>
+                <p class="booking-item-address"><i class="fa fa-map-marker"></i>                
+                    <small><b>{{ 'Pick-up Place' | trans({}, 'car') }}:</b> {{ it.pickupplace }}</small>
+                </p>
+                <p class="booking-item-address form-inline"><i class="fa fa-calendar-times-o"></i>
+                    <small><b>{{ 'Pick-up Date & Time' | trans({}, 'car') }}:</b> {{ it.startdate | date('M j, Y g:i a') }}</small>
+                </p>
+                <p class="booking-item-address"><i class="fa fa-map-marker"></i>                
+                    <small><b>{{ 'Drop-off Place' | trans({}, 'car') }}:</b> {{ it.dropoffplace }}</small>
+                </p>
+                <p class="booking-item-address form-inline"><i class="fa fa-calendar-times-o"></i>
+                    <small><b>{{ 'Drop-off Date & Time' | trans({}, 'car') }}:</b> {{ it.enddate | date('M j, Y g:i a') }}</small>
+                </p>   
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <p class="booking-item-address form-inline">
+            {{ 'Price' | trans({}, 'car') }}: <small><span class="booking-item-price">{{ it.totalprice | price | raw }}</span></small>
+        </p> 
+    </div>
+</div>

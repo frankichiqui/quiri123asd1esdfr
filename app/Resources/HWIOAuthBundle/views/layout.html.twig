@@ -1,0 +1,208 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    <div class="container">
+        <h1 class="page-title">{{ 'Login/Register On Daiquirí' | trans({}, 'login') }}</h1>
+    </div>
+    <div class="gap"></div>
+
+
+    <div class="container">
+        <div class="row" data-gutter="60">
+            <div class="col-md-4">
+                <h3>{{ 'Welcome To Daiquirí' | trans({}, 'login') }}</h3>
+                <p>Euismod nunc porta magna elementum penatibus amet gravida sit ligula odio id nunc proin sem augue quis posuere interdum in sapien congue rutrum scelerisque sociosqu cubilia ridiculus et luctus mollis</p>
+                <p>Praesent est semper massa lobortis quisque lectus ridiculus hac eget</p>
+            </div>
+            <div class="col-md-4">
+                <h3>{{ 'Login' | trans({}, 'login') }}</h3>
+                {# Display oauth errors (here using Bootstrap) #}
+                {% if error is defined and error %}
+                    <div class="alert alert-danger">
+                        <button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <p class="text-small">{{ error }}</p>
+                    </div>
+                {% endif %}
+                <form action="{{ path('fos_user_security_check') }}" method="post" >
+                    <div class="form-group form-group-icon-left"><i class="fa fa-user input-icon input-icon-show"></i>
+                        <label>{{ 'Username or email' | trans({}, 'login') }}</label>
+                        {% if last_username is defined %}
+                            <input class="form-control" id="username" name="_username" placeholder="{{  'e.g. johndoe@gmail.com' | trans({}, 'login') }}" type="text" value="{{ last_username }}" required="required"/>
+                        {% else %}
+                            <input class="form-control" name="_username" placeholder="{{ 'e.g. johndoe@gmail.com'  | trans({}, 'login') }}" type="text" required="required"/>
+                        {% endif %}
+                    </div>
+                    <div class="form-group form-group-icon-left"><i class="fa fa-lock input-icon input-icon-show"></i>
+                        <label>{{ 'Password' | trans({}, 'login') }}</label>
+                        <input class="form-control" type="password" id="password" name="_password" placeholder="{{ 'my secret password' | trans({}, 'login') }}" required="required"/>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input class="i-check" type="checkbox" id="remember_me" name="_remember_me" />{{  'Keep me logged in' | trans({}, 'login') }}</label>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <input class="btn btn-primary" type="submit" value="{{ 'Sign in' | trans({}, 'login') }}" />                    
+                </form>
+                <div class="gap"></div>
+                {% block hwi_oauth_content %}                   
+                    <h3>{{ 'Or Login With' | trans({}, 'login') }}</h3>
+                    {# HWIOAuthBundle integration #}
+                    <a href="{{ hwi_oauth_login_url('facebook') }}" class="fa  fa-facebook-square btn btn-primary btn-normal"> Facebook</a>
+                    <a href="{{ hwi_oauth_login_url('twitter') }}" class="fa fa-twitter-square btn btn-primary btn-normal "> Twitter</a>
+                    <a href="{{ hwi_oauth_login_url('google') }}" class="fa  fa-google-plus-square btn btn-primary btn-normal"> Google+</a>
+
+                {% endblock hwi_oauth_content %}
+                <div class="gap"></div>
+            </div>
+
+            <div class="col-md-4">
+                <h3>{{ 'New To Daiquirí' | trans({}, 'login') }}</h3>
+                 {% if errors is defined and errors | length > 0 %}
+                    <div class="alert alert-danger">
+                        <button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <ul> 
+                            {% for error in errors %}
+                                <li> 
+                                    <p class="text-small">{{  error.message  }}</p>
+                                </li>
+                            {% endfor %}          
+                        </ul>
+                    </div>
+                {% endif %}
+                <form action="{{ path('fos_user_registration_register') }}" method="post">
+                    <div class="form-group form-group-icon-left"><i class="fa fa-user input-icon input-icon-show"></i>
+                        <label>{{ 'Username' | trans({}, 'login') }}</label>
+                        <input class="form-control" id="application_user_registration_form_username" name="application_user_registration_form[username]" required="required" maxlength="255" pattern=".{2,}" placeholder="{{ 'e.g. johndoe' | trans({}, 'login') }}" type="text"  />
+                    </div>
+                    <div id="cont_username" class="alert hidden">
+                        <p id="username1" class="text-small"></p>
+                    </div>
+                    <div class="form-group form-group-icon-left"><i class="fa fa-envelope input-icon input-icon-show"></i>
+                        <label>{{ 'Email' | trans({}, 'login') }}</label>
+                        <input class="form-control" id="application_user_registration_form_email" name="application_user_registration_form[email]" placeholder="{{ 'e.g. johndoe@gmail.com'  | trans({}, 'login') }}" type="email" required="required" />
+                    </div>
+                    <div id="cont_email" class="alert hidden">
+                        <p id="email" class="text-small"></p>
+                    </div>
+                    <div class="form-group form-group-icon-left"><i class="fa fa-lock input-icon input-icon-show"></i>
+                        <label>{{ 'Password'  | trans({}, 'login') }}</label>
+                        <input class="form-control" type="password" id="application_user_registration_form_plainPassword_first" name="application_user_registration_form[plainPassword][first]" placeholder="{{ 'my secret password'  | trans({}, 'login') }}" required="required" />
+                    </div>
+                    <div class="form-group form-group-icon-left"><i class="fa fa-lock input-icon input-icon-show"></i>
+                        <label>{{ 'Password Verification'  | trans({}, 'login') }}</label>
+                        <input class="form-control" type="password" id="application_user_registration_form_plainPassword_second" name="application_user_registration_form[plainPassword][second]" placeholder="{{ 'my secret password verification'  | trans({}, 'login') }}" required="required" />
+                    </div>
+                    <input type="hidden" id="application_user_registration_form__token" name="application_user_registration_form[_token]" value="{{ csrf_token('registration') }}" />
+                    <div id="cont_pass" class="alert hidden">
+                        <p id="pass" class="text-small"></p>
+                    </div>
+                    <input class="btn btn-primary" id="signup" type="submit" value="{{ 'Sign up for Daiquir&iacute;' | trans({}, 'login') }}" disabled="disabled" />
+                </form>
+            </div>
+        </div>
+    </div>   
+
+    <div class="gap"></div>
+
+
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+{% endblock %}
+{% block other_js %}
+
+    <script>
+        function checkUsernameExist() {
+            var username = $("#application_user_registration_form_username").val();
+            var url = Routing.generate('check_username', {username: username});
+
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function (result) {
+                    if (result.success) {
+                        $('#cont_username').removeClass('hidden');
+                        $('#cont_username').addClass('alert-danger');
+                        $("#username1").html("{{ 'This username is not available!' | trans({}, 'login') }}");
+                    }
+                    else {
+                        $('#cont_username').removeClass('alert-danger hidden');
+                        $('#cont_username').addClass('alert-success');
+                        $("#username1").html("{{ 'The username is available.' | trans({}, 'login') }}");
+                    }
+                }
+            });
+        }
+
+
+        function checkEmailExist() {
+            var email = $("#application_user_registration_form_email").val();
+            var url = Routing.generate('check_valid_email', {email: email});
+
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function (result) {
+                    if (result.success) {
+                        $('#cont_email').removeClass('hidden');
+                        $('#cont_email').addClass('alert-danger');
+                        $("#email").html("{{ 'This email is not available!' | trans({}, 'login') }}");
+                    }
+                    else {
+                        if (isEmail(email))
+                        {
+                            $('#cont_email').removeClass('alert-danger hidden');
+                            $('#cont_email').addClass('alert-success');
+                            $("#email").html("{{ 'The email is available.' | trans({}, 'login') }}");
+                        }
+                        else {
+                            $('#cont_email').removeClass('hidden');
+                            $('#cont_email').addClass('alert-danger');
+                            $("#email").html("{{ 'This is not correct email address!' | trans({}, 'login') }}");
+                        }
+                    }
+                }
+            });
+        }
+
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        function checkPasswordMatch() {
+            var password = $("#application_user_registration_form_plainPassword_first").val();
+            var confirmPassword = $("#application_user_registration_form_plainPassword_second").val();
+
+            if (password !== confirmPassword) {
+                $('#cont_pass').removeClass('hidden');
+                $('#cont_pass').addClass('alert-danger');
+                $("#pass").html("{{'Passwords do not match!' | trans({}, 'login') }}");
+            }
+            else {
+                $('#cont_pass').removeClass('alert-danger hidden');
+                $('#cont_pass').addClass('alert-success');
+                $("#pass").html("{{ 'Passwords match.' | trans({}, 'login') }}");
+                validateForm();
+            }
+        }
+        
+         function validateForm() {
+            var username = $("#application_user_registration_form_username").val();
+            var email = $("#application_user_registration_form_email").val();
+            var password = $("#application_user_registration_form_plainPassword_first").val();
+            var confirmPassword = $("#application_user_registration_form_plainPassword_second").val();
+            if((username !== "" && email !== "" && password !== "" && confirmPassword !== "") && (password === confirmPassword))
+                $('#cont_pass').click();
+                $('#signup').attr('disabled', false);
+        }
+
+
+        $(document).ready(function () {
+            $("#application_user_registration_form_username").blur(checkUsernameExist);
+            $("#application_user_registration_form_email").blur(checkEmailExist);
+            $("#application_user_registration_form_plainPassword_second").keyup(checkPasswordMatch);
+            $("#application_user_registration_form_plainPassword_second").blur(validateForm);
+        });
+    </script>
+{% endblock %}

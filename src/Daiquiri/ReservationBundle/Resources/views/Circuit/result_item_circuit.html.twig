@@ -1,0 +1,88 @@
+{{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+<div class="col-md-1">
+    <a href="#" class="thumbnail">
+        {% thumbnail obj.picture, 'small' %}
+    </a>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>{{ obj }} </b>  </p>
+
+            <p>{{ (obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Departure</b></p>
+
+            <small>{{ searcher.date | date("M j, Y") }}</small>
+        </div>
+    </div>
+</div>
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Paxs</b></p>          
+            <small>Adult(s):{{ searcher.adults }}, Kid(s):{{ searcher.kids }}</small>
+        </div>
+    </div>
+</div>       
+
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Price</b></p>
+            {% set p = obj.getTotalPrice(searcher.date,searcher.adults,searcher.kids, market.Object) %}
+            {% set p2 = obj.getTotalPrice(searcher.date,searcher.adults,searcher.kids, market.Object, 2) %}
+            <small>{{ p | price | raw }} in SGL / {{ p2 | price | raw }} in DBL </small>
+            <p><small>{% if obj.current_offert %}({{ obj.current_offert.getTitle() }}){% endif %}</small></p>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div>
+        {{ form_label(form_item.ocupation) }}
+        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+            {{ form_widget(form_item.ocupation) }} 
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div>
+        {{ form_label(form_item.pickupplace) }}
+        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+            {{ form_widget(form_item.pickupplace) }} 
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        &nbsp;
+        <div class="col-md-12">            
+            <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="btn btn-warning"><i class="fa fa-shopping-cart"></i>Add to Cart</button> 
+        </div>
+    </div>
+</div>           
+
+<div class="hidden">    
+    {{ form_widget(form_item.title,{'attr':{'value':obj.type ~ ' ' ~ obj.title}}) }}
+    {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+    {{ form_widget(form_item.unitariprice,{'attr':{'value':p }}) }}
+    {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+    {{ form_widget(form_item.totalprice,{'attr':{'value':p }}) }}
+    {{ form_widget(form_item.startdate,{'attr':{'value':searcher.date | date("Y-m-d")}}) }}
+    {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+    {{ form_widget(form_item.adults,{'attr':{'value':searcher.adults}}) }}
+    {{ form_widget(form_item.kids,{'attr':{'value':searcher.kids}}) }}
+    {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+</div>
+{{ form_end(form_item)}}       
+<script>
+    $('form[name="item_result{{ obj.id }}"]').on('submit', function (e) {
+        formAjax(e, $('form[name="item_result{{ obj.id }}"]'));
+    });
+</script>

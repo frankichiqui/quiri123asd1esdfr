@@ -1,0 +1,19 @@
+{# empty Twig template #}
+{% block minmaxinput_widget %}
+    {% spaceless %}        
+        <div class="input-group" style="width: 140px;">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default minmaxinput" disabled="disabled" data-type="minus" data-field="{{ form.vars.attr.name }}">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </span>
+            {{ block('number_widget') }}
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default minmaxinput" data-type="plus" data-field="{{ form.vars.attr.name }}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+    {% endspaceless %}
+    
+{% endblock %}

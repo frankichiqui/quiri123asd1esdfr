@@ -1,0 +1,63 @@
+{% set type = caritem.product.getTypeTransfer() %}
+{% set colective = caritem.product.getColective() %}
+<div class="booking-item">
+    <div class="row">
+        <div class="col-md-2">
+            {#<h5 class="booking-item-title">{{ 'Service' | trans({}, 'car') }}: {{ caritem.title }} x {{ caritem.quantity }} </h5>#}
+            <div class="booking-item-airline-logo">                        
+                {% if caritem.product.provider.picture is defined %}
+                    <img src="{% path caritem.product.provider.picture, 'reference' %}" alt="{{ caritem.product }}" title="{{ caritem.product }}" />
+                {% else %}
+                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ caritem.product }}" title="{{ caritem.product }}" />
+                {% endif %}
+
+                <p>{{ caritem.product.provider }}</p>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="booking-item-flight-details">
+                <div class="booking-item-arrival">
+                    {% if caritem.product.getColective() == false %}
+                        <p><i class="fa fa-taxi fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b></p>
+                    {% else %}
+                        <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b><p>
+                        {% endif %}                                                   
+                    <p class="booking-item-destination"><i class="fa fa-calendar"></i> {{ caritem.startdate | date('M j, Y')}}({{ caritem.startdate | date('g:i a') }})</p>
+                    <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ caritem.pickupplace }}</p>
+                </div>
+                <div class="booking-item-arrival">
+                    {% if caritem.product.getColective() == false %}
+                        <p> <i class="fa fa-taxi fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b></p>
+                    {% else %}
+                        <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b><p>
+                        {% endif %}                                                   
+                    <p class="booking-item-destination"><i class="fa fa-clock-o"></i> {{ caritem.product.endtime | date('g:i a') }}</p>
+                    <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ caritem.dropoffplace }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <p><i class="fa fa-user fa-2x"></i> <b>{{ 'Passengers' | trans({}, 'transfer') }}</b></p>
+            <p class="booking-item-destination"><i class="fa fa-male"></i><small>{% if caritem.passengers == 1 %} {{ caritem.passengers }} {{ 'passenger'}}{% else %} {{ caritem.passengers }} {{ 'passengers'}} {% endif %} </small></p>
+                    {% if colective %}    
+                        {% if type == 2 or type == 1%}
+                    <p class="booking-item-destination"><i class="fa fa-plane"></i> {{ caritem.flight }}</p>
+                {% endif %}
+            {% else %}
+                {% if type == 2 or type == 1%}
+                    <p class="booking-item-destination"><i class="fa fa-plane"></i> {{ caritem.flight }}</p>
+                {% else %}
+                    <p class="booking-item-destination"><i class="fa fa-clock-o"></i> {{ caritem.getPickupTime() | date('g:i a') }}</p>                   
+                {% endif%}
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            <span class="booking-item-price">{{ caritem.totalprice | price | raw }}</span><span>/{{ 'total' | trans({}, 'transfer') }}</span>
+                {% if colective %}
+                <p style="margin-top: 5%"><i class="fa fa-bus fa-2x"></i> {{ 'Colective Transfer' | trans({}, 'transfer') }}</p>
+            {% else %}
+                <p style="margin-top: 5%"><i class="fa fa-taxi fa-2x"></i> {{ 'Exclusive Transfer ' | trans({}, 'transfer') }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

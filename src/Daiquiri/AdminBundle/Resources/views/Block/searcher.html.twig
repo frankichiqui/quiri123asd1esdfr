@@ -1,0 +1,93 @@
+{% extends 'SonataBlockBundle:Block:block_base.html.twig' %}
+
+{% block block %}
+    {#{ 12 | price | raw }}
+    {{ dump(app.session.get('market',null)) }}
+    {{ dump(app.session.get('data_ip',null)) }#}
+    
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs pull-right">
+            {% if excursion %}
+                <li class="">
+                    <a href="#excursion" data-toggle="tab" aria-expanded="false">
+                        <i class="fa fa-tree"></i> Excursion</a>
+                </li>
+            {% endif %}
+            {% if hotel %}
+                <li class="">
+                    <a href="#hotel" data-toggle="tab" aria-expanded="true"> <i class="fa fa-building
+                                                                                "></i> Hotel</a>
+                </li>
+            {% endif %}
+            {% if rentalhouse %}
+                <li class="">
+                    <a href="#rentalhouse" data-toggle="tab" aria-expanded="true"> <i class="fa fa-home"></i> Rental House</a>
+                </li>
+            {% endif %}
+            {% if circuit %}
+                <li class="">
+                    <a href="#circuit" data-toggle="tab" aria-expanded="false">  <i class="fa fa-refresh"></i>Circuit</a>
+                </li>
+            {% endif %}
+            {% if car %}
+                <li class="">
+                    <a href="#car" data-toggle="tab" aria-expanded="false">  <i class="fa fa-car"></i> Car</a>
+                </li>
+            {% endif %}
+            {% if transfer %}
+                <li class="">
+                    <a href="#transfer" data-toggle="tab" aria-expanded="false">  <i class="fa fa-bus"></i> Transfer</a>
+                </li>
+            {% endif %}
+
+
+            <li class="active pull-left header">
+                <a href="#texto" data-toggle="tab" aria-expanded="false" > <i class="fa fa-search-plus"></i> Find your Reserve</a>
+
+
+            </li>
+        </ul>
+        <div class="tab-content">
+            {% if excursion %}
+                <div class="tab-pane" id="excursion">
+                    {% render(controller('DaiquiriReservationBundle:ExcursionSearcher:getFullExcursionSearcher',{'_sonata_admin' : 'admin.excursion.searcher'}))%}
+                </div>
+            {% endif %}
+            {% if hotel %}
+                <div class="tab-pane" id="hotel">
+                    {% render(controller('DaiquiriReservationBundle:OcupationSearcher:getFullOcupationSearcher',{'_sonata_admin' : 'admin.ocupation.searcher'}))%}
+                </div>
+            {% endif %}
+            {% if rentalhouse %}
+                <div class="tab-pane" id="rentalhouse">
+                    {% render(controller('DaiquiriReservationBundle:RentalHouseRoomSearcher:getFullRentalHouseRoomSearcher',{'_sonata_admin' : 'admin.rentalhouseroom.searcher'}))%}
+
+                </div>
+            {% endif %}
+            {% if circuit %}
+                <div class="tab-pane" id="circuit">
+                    {% render(controller('DaiquiriReservationBundle:CircuitSearcher:getFullCircuitSearcher',{'_sonata_admin' : 'admin.circuit.searcher'}))%}
+
+                </div>
+            {% endif %}
+            {% if car %}
+                <div class="tab-pane" id="car">
+                    {% render(controller('DaiquiriReservationBundle:CarSearcher:getFullCarSearcher',{'_sonata_admin' : 'admin.car.searcher'}))%}
+
+                </div>
+            {% endif %}
+            {% if transfer %}
+                <div class="tab-pane" id="transfer">
+                    {% render(controller('DaiquiriReservationBundle:TransferSearcher:getFullTransferSearcher',{'_sonata_admin' : 'admin.transfer.searcher'}))%}
+                </div>
+            {% endif %}
+
+
+            <div class="tab-pane" id="texto">
+                Select...
+            </div>
+
+        </div>
+        <!-- /.tab-content -->
+    </div>
+{% endblock %}

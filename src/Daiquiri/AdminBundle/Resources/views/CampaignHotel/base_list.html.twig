@@ -1,0 +1,27 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{% extends "SonataAdminBundle:CRUD:base_list.html.twig" %}
+
+{% block tab_menu %} 
+    {{ parent()}}
+
+    <script>
+        $(document).ready(function () {
+            //carga form
+            $('.campaign_set_price_bottom').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                a = $(this);
+                showDialog(true, 'Processing your request...Please wait');
+                div = $('<div/>');
+                div.attr('id', 'div_' + a.attr('id'));
+                div.load(a.attr('href'));
+                setContentDialog(div, a.attr('data-title'));
+                OnlyCancelBotton();
+            });
+            
+            
+        });
+
+    </script>
+{% endblock %}

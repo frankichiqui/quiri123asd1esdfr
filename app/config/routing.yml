@@ -1,0 +1,132 @@
+sonata_user_security:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
+    prefix: /
+    requirements:
+            _locale: en|es
+
+sonata_user_resetting:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
+    prefix: /resetting
+
+sonata_user_profile:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
+    prefix: /profile
+
+sonata_user_register:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
+    prefix: /register
+
+sonata_user_change_password:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+    prefix: /profile
+
+#HWIOAuthBundle routes
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+    options: { i18n: false }
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+    options: { i18n: false }
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+    options: { i18n: false }
+
+facebook_login:
+    pattern: /login/check-facebook
+    options: { i18n: false }
+    
+twitter_login:
+    pattern: /login/check-twitter
+    options: { i18n: false }
+    
+google_login:
+    pattern: /login/check-google
+    options: { i18n: false }
+    
+daiquiri_admin:
+    resource: "@DaiquiriAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+    options: { i18n: false }
+
+daiquiri_reservation:
+    resource: "@DaiquiriReservationBundle/Resources/config/routing.yml"
+    prefix:   /
+    options: { i18n: false }
+    
+daiquiri_site:
+    resource: "@DaiquiriSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    options: { i18n: false }
+
+admin_area:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /admin
+    options: { i18n: false }
+
+_sonata_admin:
+  resource: .
+  type: sonata_admin
+  prefix: /admin
+  options: { i18n: false }
+  
+sonata_user_admin_security:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+    options: { i18n: false }
+
+sonata_user_admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+    options: { i18n: false }
+
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+    options: { i18n: false }
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+    options: { i18n: false }
+    
+#fos_comment_api:
+#    type: rest
+#    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+#    prefix: /api
+#    defaults: { _format: html }
+#    options: { i18n: false }
+
+
+check_username:
+    path:     /{username}/check-username
+    defaults: { _controller: "ApplicationSonataUserBundle:Default:checkUsername" }     
+    methods:  [POST, GET]
+    options: { i18n: false }
+
+check_valid_email:
+    path:     /{email}/check-valid-email
+    defaults: { _controller: "ApplicationSonataUserBundle:Default:checkEmail" }     
+    methods:  [POST, GET]
+    options: { i18n: false }
+    
+set_positive_vote:
+    path:     /{id}/set-positive-vote
+    defaults: { _controller: "DaiquiriSiteBundle:Review:setPositiveVote" }     
+    methods:  [POST, GET]
+    options: { i18n: false }
+
+set_negative_vote:
+    path:     /{id}/set-negative-vote
+    defaults: { _controller: "DaiquiriSiteBundle:Review:setNegativeVote" }     
+    methods:  [POST, GET]
+    options: { i18n: false }
+
+

@@ -1,0 +1,69 @@
+{# empty Twig template #}
+
+<div class="row">
+    <div class="col-md-12">
+
+        {{ form_start(form,{'attr':{'id':'new'},'action':path('new-review-excursion')}) }}
+        {{form_errors(form)}} 
+        <div class="col-md-12">
+            <div class="form-group form-group-icon-left"><i class="fa fa-pencil input-icon"></i>
+                <label>Title</label>
+                {{ form_widget(form.title,{'attr':{'class':'form-control','placeholder':'Write something' }})}}   
+            </div>
+        </div>
+        <div class="col-md-12">    
+            <div class="form-group form-group-icon-left"><i class="fa fa-pencil input-icon"></i>
+                <label>Review</label>
+                {{ form_widget(form.description,{'attr':{'class':'form-control','placeholder':'Write something' }})}}   
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group form-group-icon-left"><i class="fa fa-star input-icon"></i>
+                <label>Vote</label>
+                {{ form_widget(form.votes,{'attr':{'class':'form-control','placeholder':'Write something' }})}}   
+            </div>
+        </div>
+        <div class="col-md-12">
+            <input class="btn btn-danger" type="reset" value="Reset">
+            <input class="btn btn-primary" type="submit" value="Send">
+        </div>
+
+        <div class="hidden">
+            {{ form_widget(form.product,{'attr':{'value' :review.product.id }})}}   
+            {{ form_rest(form) }}
+        </div>
+        {{ form_end(form) }}
+
+        <script>
+            $('#new').submit(function (e) {
+                form = $(this);
+                e.preventDefault();
+                $.post(
+                        form.attr('action'),
+                        form.serialize(),
+                        function (result) {
+                            alert = $('#alert');
+                            alert.removeClass('hidden');
+                            alert.find('.alert').addClass(result.class);
+                            if (result.success) {
+                                alert.find('p').html('{{ 'Gracias por dejarnos saber tu opinion, en unos minutos sera publicada' | trans()  }}');
+
+                            } else {
+                                alert.find('p').html('{{ 'Estamos teniendo problemas en la comunicacion con el servidor. Rogamos disculpas por la molestas que esto pueda ocacionarle' | trans()  }}');
+                            }
+                            $('#load_form').html(alert);
+                        }, 'JSON')
+                        ;
+            });
+        </script>
+
+    </div> 
+</div> 
+<div class="hidden" id="alert">
+    <h4>Success</h4>
+    <div class="alert">
+        <button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">×</span>
+        </button>
+        <p class="text-small">Accumsan fermentum aliquet vivamus cum</p>
+    </div>
+</div>

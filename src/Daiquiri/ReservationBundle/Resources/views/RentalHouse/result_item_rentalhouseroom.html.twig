@@ -1,0 +1,83 @@
+<div class="row">
+    {{ form_start(form_item, {'attr':{' id':'form_' ~ obj.id },'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+    <div class="col-md-1">
+        <a href="#" class="thumbnail">
+            {% thumbnail obj.picture, 'small' %}
+        </a>
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Room: <b>{{ obj }} </b>    [{{searcher.getDiffDays() }} Day(s) ]</p>
+
+                <p class="description">{{ (obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Facilities</p>
+                <p class="description">  {% if obj.getRentalHouseRoomFacilities() | length > 0%}
+                    {% for f in obj.getRentalHouseRoomFacilities() %}
+                        {{ f   }}
+                    {% endfor %}
+                    {% else %}
+                        <i class="fa fa-info text-danger"> </i> No Facilities regitered
+                        {% endif %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% set p = obj.getTotalPrice(searcher.startdate,searcher.enddate, market.Object) %}
+                        <p><b>Price</b></p>
+                        <small>{{ p | price | raw }}</small>
+                        <p><small>{% if obj.current_offert %}({{ obj.current_offert.getTitle() }}){% endif %}</small></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-1">
+                <div class="row">
+                    &nbsp;
+                    <div class="col-md-12">            
+                        <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="btn btn-warning"><i class="fa fa-shopping-cart"></i>Add to Cart</button> 
+                    </div>
+                </div>
+            </div>           
+
+            <div class="hidden">    
+                {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+                {{ form_widget(form_item.title,{'attr':{'value':'Rental House: '~ obj.rentalhouse.title~' - '~obj.title}}) }}
+                {{ form_widget(form_item.rentalhouse,{'attr':{'value':obj.rentalhouse.id }}) }}
+                {{ form_widget(form_item.room,{'attr':{'value':obj.id }}) }}
+                {{ form_widget(form_item.unitariprice,{'attr':{'value':p}}) }}
+                {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+                {{ form_widget(form_item.totalprice,{'attr':{'value':p}}) }}
+                {{ form_widget(form_item.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d")}}) }}
+                {{ form_widget(form_item.enddate,{'attr':{'value':searcher.enddate | date("Y-m-d")}}) }}
+                {{ form_widget(form_item.adult,{'attr':{'value':searcher.adults}}) }}
+                {{ form_widget(form_item.kid,{'attr':{'value':searcher.kids}}) }}
+                {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+            </div>
+            {{ form_end(form_item)}}       
+            <script>
+
+
+                $('#{{ 'form_' ~ obj.id }}').on('submit', function (e) {
+                    // console.log("di submit")
+                    formAjax(e, $('#{{ 'form_' ~ obj.id }}'));
+                });
+
+
+            </script>
+
+        </div>    
+
+
+
+
+

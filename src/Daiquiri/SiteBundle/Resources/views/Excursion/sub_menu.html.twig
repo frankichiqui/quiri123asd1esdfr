@@ -1,0 +1,9 @@
+{% for polo in list %}    
+    <li><a href="{{ path('excursion_list_polo',{'polo': polo['poloslug']}) }}"> {{ polo['polofrom'] }}</a>
+            <ul>
+                {% for excursion in polo['excursions'] %}
+                    <li><a href="{{ path('excursion_show',{'slug': excursion['slug']}) }}">{{ excursion['title'] }}</a></li>
+                {% endfor %}
+            </ul>
+    </li>
+{% endfor %}

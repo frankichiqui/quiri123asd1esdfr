@@ -1,0 +1,14 @@
+{# empty Twig template #}
+<form id="pan_international" method="POST" action="{{ action }}">
+<input type="hidden" name="operation[Ds_Merchant_Amount]" value="{{ amount }}" id="total"/>
+<input type="hidden" name="operation[Ds_Merchant_Order]" value="{{ orderid }}" id="orderid"/>
+<input type="hidden" name="operation[Ds_Merchant_ProductDescription]" value="{{ description }}" id="descrip"/>
+<input type="hidden" name="operation[Ds_Merchant_Titular]" value="{{ titular }}" id="titular"/>
+<input type="hidden" name="operation[Ds_Merchant_UrlOK]" value="{{ url_ok }}" id="url_ok"/>
+<input type="hidden" name="operation[Ds_Merchant_UrlKO]" value="{{ url_ko }}" id="url_ko"/>
+<input type="hidden" name="operation[Ds_Merchant_MerchantName]" value="{{ merchant }}" id="comercio"/>
+<input type="hidden" name="operation[Ds_Merchant_ConsumerLanguage]" value="{{ languaje }}" id="idioma"/>
+<input type="hidden" name="operation[Ds_Merchant_MerchantSignature]" value="{{ signature }}" id="firma"/>
+<input type="hidden" name="operation[Ds_Merchant_Currency]" value="{{ currency }}" id="moneda"/>
+<input type="hidden" name="operation[Ds_Merchant_UrlConfirm]" value="{{ url_confirm }}" id="url_recibir"/> 
+</form>

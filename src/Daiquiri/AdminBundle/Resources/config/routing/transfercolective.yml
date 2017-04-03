@@ -1,0 +1,4 @@
+transfercolective:
+    path:     /
+    defaults: { _controller: "DaiquiriAdminBundle:TransferColective:index" }
+

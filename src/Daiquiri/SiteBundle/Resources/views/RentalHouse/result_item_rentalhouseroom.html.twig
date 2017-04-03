@@ -1,0 +1,62 @@
+<li class="booking-item" style="margin-bottom: 2%">
+    {{ form_start(form_item, {'attr':{' id':'form_' ~ obj.id },'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="booking-item-car-img">
+                {% if obj.picture.galleryHasMedias is defined %}
+                    <img src="{% path obj.picture, 'reference' %}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+                {% else %}
+                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+                {% endif %}
+                <p class="booking-item-car-title">{{ obj.title }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="booking-item-title"><b>{{ obj.title }}</b></h6>
+
+                    <p class="booking-item-address form-inline"><i class="fa fa-calendar"></i>
+                        <small><b>{{ 'Day(s)' | trans({}, 'car') }}:</b> {{ searcher.getDiffDays() }}</small>
+                    </p>                    
+                </div>
+                <div class="col-md-6">
+                    <ul class="booking-item-features booking-item-features-sign clearfix">
+                        {% for f in obj.getRentalHouseRoomFacilities() %}
+                            <li rel="tooltip" data-placement="top" title="{{ f.title | trans({}, 'rental') }}">
+                                <i class="{{ f.faicon }}"></i>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        {% set p = obj.getTotalPrice(searcher.startdate,searcher.enddate, market.Object) %}
+        <div class="col-md-3"><span class="booking-item-price">{{ p | price | raw }}</span><span>/{{ 'night' | trans({}, 'rental') }}</span>
+            <button type="submit" class="btn btn-primary">{{ 'Add to Cart' | trans({}, 'rental') }}</button>
+        </div>
+    </div>
+    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a>  
+    <div class="hidden">    
+        {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+        {{ form_widget(form_item.title,{'attr':{'value':'Rental House: '~ obj.rentalhouse.title~' - '~obj.title}}) }}
+        {{ form_widget(form_item.rentalhouse,{'attr':{'value':obj.rentalhouse.id }}) }}
+        {{ form_widget(form_item.room,{'attr':{'value':obj.id }}) }}
+        {{ form_widget(form_item.unitariprice,{'attr':{'value':p}}) }}
+        {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+        {{ form_widget(form_item.totalprice,{'attr':{'value':p}}) }}
+        {{ form_widget(form_item.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.enddate,{'attr':{'value':searcher.enddate | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.adult,{'attr':{'value':searcher.adults}}) }}
+        {{ form_widget(form_item.kid,{'attr':{'value':searcher.kids}}) }}
+        {{ form_widget(form_item.front,{'attr':{'value':1}}) }}
+    </div>
+    {{ form_end(form_item)}}       
+    <script>
+        $('#{{ 'form_' ~ obj.id }}').on('submit', function (e) {
+            formAjaxFront(e, $('#{{ 'form_' ~ obj.id }}'));
+        });
+    </script>
+
+</li>

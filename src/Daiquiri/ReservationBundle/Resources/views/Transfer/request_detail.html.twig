@@ -1,0 +1,59 @@
+{# empty Twig template #}
+<div style="border-top:solid 2px #d2d6de">
+    <div  style="margin:10px;">
+        <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Request Details</div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;"> 
+                {% if request.transfer.getColective() %}
+                    {{ 'Shared Transfer' | trans({}, 'email') }}
+                {% else %}
+                    {{ 'Private Transfer' | trans({}, 'email') }}
+                {% endif %}
+            </span>
+            <div style="margin-top: 5px;">              
+                {{ request.transfer  | upper }}</div>
+        </div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Pickup Date' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ request.startdate  | date('M j, Y') }}</div>
+        </div>
+
+        {% if not request.transfer.getColective() %}        
+            {% if request.transfer.getTypeTransfer() == 3 %}
+                <div style="width: 30%;float: left">
+                    <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Pickup Time' | trans({}, 'email') }}</span>
+                    <div style="margin-top: 5px;">{{ request.getPickupTime()  | date('g:i a') }}</div>
+                </div>
+            {% else %}
+                <div style="width: 20%;float: left">
+                    <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Fligth' | trans({}, 'email') }}</span>
+                    <div style="margin-top: 5px;">{{ request.flight  }}</div>
+                </div>
+                <div style="width: 20%;float: left">
+                    <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Pickup Time' | trans({}, 'email') }}</span>
+                    <div style="margin-top: 5px;">{{ request.getPickupTime()  | date('g:i a') }}</div>
+                </div>
+
+            {% endif %}
+        {% else %}
+            {% if  request.transfer.getTypeTransfer() != 3 %}                                   
+                <div style="width: 20%;float: left">
+                    <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Fligth' | trans({}, 'email') }}</span>
+                    <div style="margin-top: 5px;">{{ request.flight  }}</div>
+                </div>            
+            {% endif %}
+        {% endif %}
+
+
+
+
+
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Passengers' | trans({}, 'pdf') }}</span>
+            <div style="margin-top: 5px;">{{ request.passengers  }}</div>
+        </div>
+
+
+        <div style="clear: both"></div>
+    </div>
+</div>

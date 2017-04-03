@@ -1,0 +1,34 @@
+<li class="booking-item">
+    <div class="row">
+        <div class="col-md-3">
+            {% if caritem.product.picture is defined %}
+                <img src="{% path caritem.product.picture, 'reference' %}" alt="{{ caritem.title }}" title="{{ caritem.title }}" />
+            {% else %}
+                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ caritem.title }}" title="{{ caritem.title }}" />
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            {{ caritem.product.description | truncate(250) | raw }}
+        </div>
+        <div class="col-md-4">
+            <h5 class="booking-item-title">{{ 'Service' | trans({}, 'circuit') }}: {{ caritem.title }} x {{ caritem.quantity }} </h5>
+            <p class="booking-item-address"><i class="fa fa-map-marker"></i>                
+                <small><b>{{ 'Pickup Place' | trans({}, 'circuit') }}:</b> {{ caritem.pickupplace }}</small>
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-male"></i>
+                <small><b>{{ 'Adult(s)' | trans({}, 'circuit') }}:</b></small> {{ caritem.adult }}
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-child"></i>
+                <small><b>{{ 'Kid(s)' | trans({}, 'circuit') }}:</b></small> {{ caritem.kid }}
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-calendar"></i>
+                <small><b>{{ 'Departure' | trans({}, 'circuit') }}:</b></small> {{ caritem.startdate | date('M j, Y ') }}
+            </p>                    
+        </div>
+        <div class="col-md-2">
+            <p class="booking-item-address form-inline"><i class="fa fa-dollar"></i>
+                {{ 'Price' | trans({}, 'excursion') }}: <span class="booking-item-price">{{ caritem.totalprice | price | raw }}</span>
+            </p> 
+        </div>
+    </div>  
+</li>

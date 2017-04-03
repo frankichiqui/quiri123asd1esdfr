@@ -1,0 +1,141 @@
+{% extends base_template %}
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    {% endblock %}
+
+{% block tab_menu %}
+    <ul class="nav navbar-nav navbar-left"  style="margin-top: 15px;">
+        <li>
+            Create dates and prices by season to circuit: <b>{{ circuit }}</b>  
+        </li>
+    </ul>
+{% endblock %}
+{% block show %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <div class="sonata-ba-view">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">      
+                    <div class="col-md-12">
+                        <div class="nav-tabs-custom">
+                            <ul role="tablist" class="nav nav-tabs">
+                                {% if  circuit is defined %}
+                                    {% for f in forms %}
+
+                                        <li class="{% if loop.index == 1 %}active{% endif %}">
+                                            <a data-toggle="tab" href="#tab_{{f.circuit_season.id}}" aria-expanded="false">
+                                                <i class="fa fa-exclamation-circle has-errors hide"></i> {{ f.circuit_season | upper }} </a>
+                                        </li>                               
+                                    {% endfor %}
+                                {% else %}
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#_not_room_found" aria-expanded="false">
+                                            <i class="fa fa-exclamation-circle has-errors hide"></i> Not Rooms Found</a></li>
+                                        {% endif %}
+                            </ul>
+                            <div class="tab-content">  
+                                {% set cont = 10 %}
+                                {% for form in forms %}
+                                    <div id="tab_{{ form.circuit_season.id}}" class="tab-pane fade {% if loop.index == 1 %}active in{% endif %}">
+                                        <div class="box-body  container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    {{ form_start(form.form, {'id': form.circuit_season.id,'action': admin.generateUrl('create-circuit-season-dates-price'), 'method': 'POST'}) }}
+                                                    {{ form_errors(form.form) }}
+
+                                                    <div class="col-md-3">
+                                                        <div class="box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    Circuit Season Options
+                                                                </h4>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="sonata-ba-collapsed-fields">
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_label(form.form.startdate) }}
+                                                                            {{ form_widget(form.form.startdate, {'id': form.circuit_season.id}) }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_label(form.form.enddate) }}
+                                                                            {{ form_widget(form.form.enddate,{'id': form.circuit_season.id+10}) }} 
+                                                                            {% set cont = cont * random(1000) %}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonDobleata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_label(form.form.adultprice) }}
+                                                                            <div class="input-group">
+
+                                                                                {{ form_widget(form.form.adultprice) }}
+                                                                            </div>                                                               
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_label(form.form.adultpriceDoble) }}
+                                                                            <div class="input-group">
+
+                                                                                {{ form_widget(form.form.adultpriceDoble) }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_label(form.form.kidPrice) }}
+                                                                            <div class="input-group">
+
+                                                                                {{ form_widget(form.form.kidPrice) }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_label(form.form.kidPriceDoble) }}
+                                                                            <div class="input-group">
+
+                                                                                {{ form_widget(form.form.kidPriceDoble) }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sonata-ba-form-actions well well-small form-actions stuck">
+                                            <input type='hidden'  id='circuit_season' name ='circuit_season' value='{{ form.circuit_season.id }}' />
+
+                                            <input type='hidden'  id='circuit' name ='circuit' value='{{ circuit.id }}' />
+
+                                            <button name="btn_create_and_edit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Create</button>                            
+                                            {#<button type="submit" class="btn btn-success" name="btn_create_and_list"><i class="fa fa-save"></i> <i class="fa fa-list"></i> Create and return to list</button>#}
+                                            <a class="btn btn-success" href="{{ admin.generateUrl('list') }}">
+                                                <i class="fa fa-th-list"></i> Return to list</a>
+                                        </div>
+                                        {{ form_end(form.form) }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(':text').addClass('sonata-medium-date form-control');
+    </script>
+
+{% endblock %}

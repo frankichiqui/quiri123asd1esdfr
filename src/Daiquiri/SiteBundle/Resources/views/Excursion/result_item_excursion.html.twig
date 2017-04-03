@@ -1,0 +1,79 @@
+<li class="booking-item" style="margin-bottom: 2%">
+    {{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+
+    <div class="row">
+        <div class="col-md-4">
+            {% if obj.picture.galleryHasMedias is defined %}
+                <a  href="{{ path('excursion_show',{'slug': obj.slug })}}"><img src="{% path obj.picture, 'reference' %}" alt="{{ obj.title }}" title="{{ obj.title }}" /></a>
+                {% else %}
+                <a  href="{{ path('excursion_show',{'slug': obj.slug })}}"><img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ obj.title }}" title="{{ obj.title }}" /></a>
+                {% endif %}
+        </div>
+        <div class="col-md-6">
+
+            <h5 class="booking-item-title">{{ obj.title }}</h5>
+            <p class="booking-item-address">
+                {% if obj.getColective() is not defined  or obj.getColective() == false %}
+                    <i class="fa fa-user"></i>
+                    <small><b>{{ 'Type' | trans({}, 'excursion') }}:</b> {{ 'Excluisve Ecursion' | trans({}, 'excursion') }}</small>
+                {% else %}
+                    <i class="fa fa-users"></i>
+                    <small><b>{{ 'Type' | trans({}, 'excursion') }}:</b> {{ 'Collective Ecursion' | trans({}, 'excursion') }}</small>
+                    <small><b>{{ 'Duration' | trans({}, 'excursion') }}:</b>  {{ obj.duration }} {{ 'hours' | trans({}, 'excursion') }}</small>
+                {% endif %}
+            </p>
+            <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                <small>
+                    <b>{{ 'Places' | trans({}, 'excursion') }}:</b>  
+                    {% for place in obj.places %}
+                        {{ place }} ({{ place.polo }})
+                    {% endfor%}
+                </small>
+                <i class="fa fa-users"></i>
+                <small>
+                    <b>{{ 'Pax(s)' | trans({}, 'excursion') }}:</b>{{ searcher.adults }}  {{ 'Adult(s)' | trans({}, 'excursion') }}
+                    {% if searcher.kids > 0 %}{{ searcher.kids }}{{ 'Kid(s)' | trans({}, 'excursion') }}{% endif %}
+                </small>
+            </p>
+
+            <p class="booking-item-address form-inline"><i class="fa fa-map-marker"></i>
+                <small><b>{{ 'Pick-up Place' | trans({}, 'excursion') }} {{ 'in date' | trans({}, 'excursion') }} {{ searcher.date| date('M j, Y') }} :</b></small> {{ form_widget(form_item.pickupplace, {'attr':{'class': 'form-control inline' }}) }}
+            </p>      
+
+        </div>
+        <div class="col-md-2"><span class="booking-item-price">{% if price is not null %} {{ price | price | raw }} {% else %} {{ price| price | raw }}{% endif %} </span><button class="{% if price is null or price == 0 %} disabled {% endif %}btn btn-primary" name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" >{{ 'Add to Cart' | trans({}, 'excursion') }}</button>
+        </div>
+    </div>
+
+    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a> 
+    <div class="hidden">    
+        {{ form_widget(form_item.title,{'attr':{'value':obj.type ~ ' ' ~ obj.title}}) }}
+        {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+        {{ form_widget(form_item.unitariprice,{'attr':{'value':price}}) }}
+        {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+        {{ form_widget(form_item.totalprice,{'attr':{'value':price}}) }}
+        {{ form_widget(form_item.startdate,{'attr':{'value':searcher.date | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.dropoffplace) }}
+        {{ form_widget(form_item.adult,{'attr':{'value':searcher.adults}}) }}
+        {{ form_widget(form_item.kid,{'attr':{'value':searcher.kids}}) }}
+        {{ form_widget(form_item.front,{'attr':{'value':1}}) }} 
+    </div>
+    {{ form_end(form_item)}}       
+    <script>
+        {#% if colective %}
+            form = $('form[name="daiquiri_reservationbundle_excursioncolectiveitem"]');
+            form.on('submit', function (e) {
+                formAjaxFront(e, form);
+            });
+            console.log(form);
+        {% else %}
+            form = $('form[name="daiquiri_reservationbundle_excursionexclusiveitem"]');
+            form.on('submit', function (e) {
+                formAjaxFront(e, form);
+            });
+        {% endif %#}
+            $('form[name="item_result{{ obj.id }}"]').on('submit', function (e) {
+                formAjaxFront(e, $('form[name="item_result{{ obj.id }}"]'), true);
+            });
+    </script>
+</li> 

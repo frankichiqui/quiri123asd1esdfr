@@ -1,0 +1,78 @@
+'-': '-'   # FIXME
+0: '0'   # FIXME
+1: '1'   # FIXME
+'1 Hour': '1 Hour'   # FIXME
+10: '10'   # FIXME
+'10 +': '10 +'   # FIXME
+'10 Hours': '10 Hours'   # FIXME
+11: '11'   # FIXME
+'11 Hours': '11 Hours'   # FIXME
+12: '12'   # FIXME
+'12 Hours': '12 Hours'   # FIXME
+13: '13'   # FIXME
+'13 Hours': '13 Hours'   # FIXME
+14: '14'   # FIXME
+'14 Hours': '14 Hours'   # FIXME
+15: '15'   # FIXME
+'15 Hours': '15 Hours'   # FIXME
+16: '16'   # FIXME
+'16 Hours': '16 Hours'   # FIXME
+17: '17'   # FIXME
+'17 Hours': '17 Hours'   # FIXME
+18: '18'   # FIXME
+'18 Hours': '18 Hours'   # FIXME
+19: '19'   # FIXME
+'19 Hours': '19 Hours'   # FIXME
+2: '2'   # FIXME
+'2 Hours': '2 Hours'   # FIXME
+20: '20'   # FIXME
+'20 Hours': '20 Hours'   # FIXME
+21: '21'   # FIXME
+'21 Hours': '21 Hours'   # FIXME
+22: '22'   # FIXME
+'22 Hours': '22 Hours'   # FIXME
+23: '23'   # FIXME
+'23 Hours': '23 Hours'   # FIXME
+24: '24'   # FIXME
+'24 Hours': '24 Hours'   # FIXME
+25: '25'   # FIXME
+26: '26'   # FIXME
+27: '27'   # FIXME
+28: '28'   # FIXME
+29: '29'   # FIXME
+3: '3'   # FIXME
+'3 Hours': '3 Hours'   # FIXME
+30: '30'   # FIXME
+31: '31'   # FIXME
+32: '32'   # FIXME
+33: '33'   # FIXME
+34: '34'   # FIXME
+35: '35'   # FIXME
+36: '36'   # FIXME
+37: '37'   # FIXME
+38: '38'   # FIXME
+39: '39'   # FIXME
+4: '4'   # FIXME
+'4 Hours': '4 Hours'   # FIXME
+40: '40'   # FIXME
+5: '5'   # FIXME
+'5 Hours': '5 Hours'   # FIXME
+6: '6'   # FIXME
+'6 Hours': '6 Hours'   # FIXME
+7: '7'   # FIXME
+'7 +': '7 +'   # FIXME
+'7 Hours': '7 Hours'   # FIXME
+8: '8'   # FIXME
+'8 Hours': '8 Hours'   # FIXME
+9: '9'   # FIXME
+'9 Hours': '9 Hours'   # FIXME
+All: All   # FIXME
+Anywhere: Anywhere   # FIXME
+Colective: Colective   # FIXME
+Create: Create   # FIXME
+Delete: Delete   # FIXME
+Duration: Duration   # FIXME
+Exclusive: Exclusive   # FIXME
+Update: Update   # FIXME
+'Where are you going?': 'Where are you going?'   # FIXME
+'Without driver': 'Without driver'   # FIXME

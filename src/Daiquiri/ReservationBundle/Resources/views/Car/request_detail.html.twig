@@ -1,0 +1,28 @@
+{# empty Twig template #}
+<div style="border-top:solid 2px #d2d6de">
+    <div  style="margin:10px;">
+        <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Request Details</div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Car' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ request.car  | upper }} </div>
+        </div>
+        <div style="width: 30%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Pickup  ' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">
+                {{ request.pickupplace.fulltitle }} - 
+                {{ request.startdate  | date('M j, Y') }}
+                {{ request.starttime  | date('g:i a') }}</div>
+        </div>
+        <div style="width: 30%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Dropoff' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">
+                {{ request.dropoffplace.fulltitle }} - 
+                {{ request.enddate  | date('M j, Y') }}
+                {{ request.endtime  | date('g:i a') }}</div>
+        </div>
+    </div>
+
+
+    <div style="clear: both"></div>
+</div>
+</div>

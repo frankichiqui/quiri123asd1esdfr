@@ -1,0 +1,36 @@
+{# empty Twig template #}
+<li id="{{ it.id }}" class="item_cart">
+    <a href="#" class="cart">
+
+        <div class="pull-left"> 
+            <i class="fa fa-car fa-2x img-circle thumbnail_cart"> </i>
+
+        </div> 
+        <div class="margin-left-40">
+            <div>
+                <h4><span class="text-blue">Car</span><small class="pull-right text-success">{{ it.getTotalprice() | price | raw }}</small></h4>
+            </div>
+            <div>
+                <small><i class="fa fa-car"></i> {{ it.title }} x {{ it.quantity }}</small>
+            </div>
+            <div>
+                <small><i class="fa fa-map-marker"></i> {{ it.pickupplace }}</small>                 
+                <small><i class="fa fa-calendar"></i> {{ it.startdate | date('M j, Y') }} <i class="fa fa-clock-o"></i> {{ it.startdate | date('g:i a') }}</small>                 
+                
+            </div>
+            <div>
+                <small><i class="fa fa-map-marker"></i> {{ it.dropoffplace }}</small> 
+                <small><i class="fa fa-calendar"></i> {{ it.enddate | date('M j, Y') }} <i class="fa fa-clock-o"></i> {{ it.enddate | date('g:i a') }}</small>            
+
+            </div>
+        </div>
+    </a>
+</li>
+
+
+
+
+
+
+
+

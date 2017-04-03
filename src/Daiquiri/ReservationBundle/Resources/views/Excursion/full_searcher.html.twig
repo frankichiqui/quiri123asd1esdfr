@@ -1,0 +1,121 @@
+
+<div class="sonata-ba-collapsed-fields">
+    {{ form_start(form, {'action': admin.generateUrl('create', {'id': admin.id(object), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}), 'method': 'POST'}) }}
+    {{ form_errors(form) }}
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                {{ form_label(form.date) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form.date, {'id':'date'}) }} 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div>
+                {{ form_label(form.exclusive) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form.exclusive) }} 
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div>
+                {{ form_label(form.polo) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form.polo) }} 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div>
+                {{ form_label(form.adults) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form.adults) }} 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div>
+                {{ form_label(form.kids) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form.kids) }} 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                {{ form_label(form.types) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form.types) }} 
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-12"><a href="#advance_excursion" class="advance_excursion">Advance Option</a></div>
+        <div class="advance_hotel hidden">      
+            <div class="col-md-2">
+                <div>
+                    {{ form_label(form.polofrom) }}
+                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                        {{ form_widget(form.polofrom) }} 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div>
+                    {{ form_label(form.places) }}
+                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                        {{ form_widget(form.places) }} 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div>
+                    {{ form_label(form.duration) }}
+                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                        {{ form_widget(form.duration) }} 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div>
+                    {{ form_label(form.excursion) }}
+                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                        {{ form_widget(form.excursion) }} 
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="pull-right margin-right-10">
+            <div>
+                &nbsp;
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    <button name="btn_create_and_edit" type="submit" class="btn btn-info"><i class="fa fa-search"></i> Search</button> 
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <script>
+
+            $('.advance_excursion').each(function () {
+
+                $(this).click(function (e) {
+                    e.preventDefault();
+                    // console.log('lolo' + $(this).parent().next());
+                    $(this).parent().next().toggleClass('hidden');
+                });
+            });
+
+        </script>
+    </div>
+</div>

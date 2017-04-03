@@ -1,0 +1,275 @@
+# Desc: /about-us/
+about_us: /about-us/   # FIXME
+
+# Desc: /cars/
+car_list: /cars/   # FIXME
+
+# Desc: /cars/by/{category}/
+car_list_category: '/cars/by/{category}/'   # FIXME
+
+# Desc: /cars/by/{category}/{page}/
+car_list_category_paginated: '/cars/by/{category}/{page}/'   # FIXME
+
+# Desc: /cars/{page}/
+car_list_paginated: '/cars/{page}/'   # FIXME
+
+# Desc: /search/cars/
+car_search: /search/cars/   # FIXME
+
+# Desc: /search/cars/{page}/
+car_search_paginated: '/search/cars/{page}/'   # FIXME
+
+# Desc: /car/{slug}/
+car_show: '/car/{slug}/'   # FIXME
+
+# Desc: /circuits/
+circuit_list: /circuits/   # FIXME
+
+# Desc: /circuits/{page}/
+circuit_list_paginated: '/circuits/{page}/'   # FIXME
+
+# Desc: /search/circuits/
+circuit_search: /search/circuits/   # FIXME
+
+# Desc: /search/circuits/{page}/
+circuit_search_paginated: '/search/circuits/{page}/'   # FIXME
+
+# Desc: /circuit/{slug}/
+circuit_show: '/circuit/{slug}/'   # FIXME
+
+# Desc: /contact/
+contact: /contact/   # FIXME
+
+# Desc: /contact/create
+contact_create: /contact/create   # FIXME
+
+# Desc: /contact/{id}/delete
+contact_delete: '/contact/{id}/delete'   # FIXME
+
+# Desc: /contact/{id}/edit
+contact_edit: '/contact/{id}/edit'   # FIXME
+
+# Desc: /contact/new
+contact_new: /contact/new   # FIXME
+
+# Desc: /contact/{id}
+contact_show: '/contact/{id}'   # FIXME
+
+# Desc: /contact/{id}/update
+contact_update: '/contact/{id}/update'   # FIXME
+
+# Desc: /contact-us/
+contact_us: /contact-us/   # FIXME
+
+# Desc: /
+daiquiri_site_homepage: /   # FIXME
+
+# Desc: /home/
+daiquiri_site_homepage1: /home/   # FIXME
+
+# Desc: /excursions/
+excursion_list: /excursions/   # FIXME
+
+# Desc: /excursions/{page}/
+excursion_list_paginated: '/excursions/{page}/'   # FIXME
+
+# Desc: /excursions/from/{polo}/
+excursion_list_polo: '/excursions/from/{polo}/'   # FIXME
+
+# Desc: /excursions/from/{polo}/{page}/
+excursion_list_polo_paginated: '/excursions/from/{polo}/{page}/'   # FIXME
+
+# Desc: /search/excursions/
+excursion_search: /search/excursions/   # FIXME
+
+# Desc: /search/excursions/{page}/
+excursion_search_paginated: '/search/excursions/{page}/'   # FIXME
+
+# Desc: /excursion/{slug}/
+excursion_show: '/excursion/{slug}/'   # FIXME
+
+# Desc: /profile/change-password
+fos_user_change_password: /profile/change-password   # FIXME
+
+# Desc: /profile/edit-profile
+fos_user_profile_edit: /profile/edit-profile   # FIXME
+
+# Desc: /profile/edit-authentication
+fos_user_profile_edit_authentication: /profile/edit-authentication   # FIXME
+
+# Desc: /profile/
+fos_user_profile_show: /profile/   # FIXME
+
+# Desc: /register/check-email
+fos_user_registration_check_email: /register/check-email   # FIXME
+
+# Desc: /register/confirm/{token}
+fos_user_registration_confirm: '/register/confirm/{token}'   # FIXME
+
+# Desc: /register/confirmed
+fos_user_registration_confirmed: /register/confirmed   # FIXME
+
+# Desc: /register/
+fos_user_registration_register: /register/   # FIXME
+
+# Desc: /resetting/check-email
+fos_user_resetting_check_email: /resetting/check-email   # FIXME
+
+# Desc: /resetting/request
+fos_user_resetting_request: /resetting/request   # FIXME
+
+# Desc: /resetting/reset/{token}
+fos_user_resetting_reset: '/resetting/reset/{token}'   # FIXME
+
+# Desc: /resetting/send-email
+fos_user_resetting_send_email: /resetting/send-email   # FIXME
+
+# Desc: /login_check
+fos_user_security_check: /login_check   # FIXME
+
+# Desc: /login
+fos_user_security_login: /login   # FIXME
+
+# Desc: /logout
+fos_user_security_logout: /logout   # FIXME
+
+# Desc: /get-block-{number}
+get-campaign-for-block: '/get-block-{number}'   # FIXME
+
+# Desc: /hotels/
+hotel_list: /hotels/   # FIXME
+
+# Desc: /hotels/{page}/
+hotel_list_paginated: '/hotels/{page}/'   # FIXME
+
+# Desc: /hotels/from/{polo}/
+hotel_list_polo: '/hotels/from/{polo}/'   # FIXME
+
+# Desc: /hotels/from/{polo}/{page}/
+hotel_list_polo_paginated: '/hotels/from/{polo}/{page}/'   # FIXME
+
+# Desc: /search/hotels/
+hotel_search: /search/hotels/   # FIXME
+
+# Desc: /search/hotels/{page}/
+hotel_search_paginated: '/search/hotels/{page}/'   # FIXME
+
+# Desc: /hotel/{slug}/
+hotel_show: '/hotel/{slug}/'   # FIXME
+
+# Desc: /rentals/
+rental_list: /rentals/   # FIXME
+
+# Desc: /rentals/{page}/
+rental_list_paginated: '/rentals/{page}/'   # FIXME
+
+# Desc: /rentals/from/{province}/
+rental_list_province: '/rentals/from/{province}/'   # FIXME
+
+# Desc: /rentals/from/{province}/{page}/
+rental_list_province_paginated: '/rentals/from/{province}/{page}/'   # FIXME
+
+# Desc: /search/rentals/
+rental_search: /search/rentals/   # FIXME
+
+# Desc: /search/rentals/{page}/
+rental_search_paginated: '/search/rentals/{page}/'   # FIXME
+
+# Desc: /rental/{slug}/
+rental_show: '/rental/{slug}/'   # FIXME
+
+# Desc: /review/
+review: /review/   # FIXME
+
+# Desc: /review/create
+review_create: /review/create   # FIXME
+
+# Desc: /review/{id}/delete
+review_delete: '/review/{id}/delete'   # FIXME
+
+# Desc: /review/{id}/edit
+review_edit: '/review/{id}/edit'   # FIXME
+
+# Desc: /review/new
+review_new: /review/new   # FIXME
+
+# Desc: /review/{id}
+review_show: '/review/{id}'   # FIXME
+
+# Desc: /review/{id}/update
+review_update: '/review/{id}/update'   # FIXME
+
+# Desc: /shopping-cart/
+show_cart: /shopping-cart/   # FIXME
+
+# Desc: /profile/change-password
+sonata_user_change_password: /profile/change-password   # FIXME
+
+# Desc: /profile/edit-profile
+sonata_user_profile_edit: /profile/edit-profile   # FIXME
+
+# Desc: /profile/edit-authentication
+sonata_user_profile_edit_authentication: /profile/edit-authentication   # FIXME
+
+# Desc: /profile/
+sonata_user_profile_show: /profile/   # FIXME
+
+# Desc: /register/check-email
+sonata_user_registration_check_email: /register/check-email   # FIXME
+
+# Desc: /register/confirm/{token}
+sonata_user_registration_confirm: '/register/confirm/{token}'   # FIXME
+
+# Desc: /register/confirmed
+sonata_user_registration_confirmed: /register/confirmed   # FIXME
+
+# Desc: /register/
+sonata_user_registration_register: /register/   # FIXME
+
+# Desc: /resetting/check-email
+sonata_user_resetting_check_email: /resetting/check-email   # FIXME
+
+# Desc: /resetting/request
+sonata_user_resetting_request: /resetting/request   # FIXME
+
+# Desc: /resetting/reset/{token}
+sonata_user_resetting_reset: '/resetting/reset/{token}'   # FIXME
+
+# Desc: /resetting/send-email
+sonata_user_resetting_send_email: /resetting/send-email   # FIXME
+
+# Desc: /login_check
+sonata_user_security_check: /login_check   # FIXME
+
+# Desc: /login
+sonata_user_security_login: /login   # FIXME
+
+# Desc: /logout
+sonata_user_security_logout: /logout   # FIXME
+
+# Desc: /transfers/
+transfer_list: /transfers/   # FIXME
+
+# Desc: /transfers/{page}/
+transfer_list_paginated: '/transfers/{page}/'   # FIXME
+
+# Desc: /transfers/pick-up-place/{pickupplace}/
+transfer_list_pickupplace: '/transfers/pick-up-place/{pickupplace}/'   # FIXME
+
+# Desc: /transfers/pick-up-place/{pickupplace}/{page}/
+transfer_list_pickupplace_paginated: '/transfers/pick-up-place/{pickupplace}/{page}/'   # FIXME
+
+# Desc: /transfers/from/{polo}/
+transfer_list_polo: '/transfers/from/{polo}/'   # FIXME
+
+# Desc: /transfers/from/{polo}/{page}/
+transfer_list_polo_paginated: '/transfers/from/{polo}/{page}/'   # FIXME
+
+# Desc: /search/transfers/
+transfer_search: /search/transfers/   # FIXME
+
+# Desc: /search/transfers/{page}/
+transfer_search_paginated: '/search/transfers/{page}/'   # FIXME
+
+# Desc: /transfer/{slug}/
+transfer_show: '/transfer/{slug}/'   # FIXME

@@ -1,0 +1,169 @@
+<form action="{{ path('rental_search') }}" method="POST">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-home input-icon"></i>
+                <label>{{ 'Where are you going?' | trans({}, 'search') }}</label>
+                {{ form_widget(form.house, {'attr':{'class': 'form-control' }}) }}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="input-daterange" data-date-format="M dd, yyyy">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                            <label>{{ 'Check-in' | trans({}, 'rental') }}</label>
+                            <input type="text" class="form-control" name="start" id="date-start-rental" />
+                            {{ form_widget(form.startdate, {'attr':{'class': 'form-control hidden', 'idm': 'd-s-rental' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                            <label>{{ 'Check-out' | trans({}, 'rental') }}</label>
+                            <input type="text" class="form-control" name="end" id="date-end-rental"/>
+                            {{ form_widget(form.enddate, {'attr':{'class': 'form-control hidden', 'idm': 'd-e-rental' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-select-plus">
+                            <label>{{ 'Adults' | trans({}, 'rental') }}</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active" onclick="checkRRentalAdults(this);">
+                                    <input type="radio" name="radio_rental_adults" />1</label>
+                                <label class="btn btn-primary" onclick="checkRRentalAdults(this);">
+                                    <input type="radio" name="radio_rental_adults" />2</label>
+                                <label class="btn btn-primary" onclick="checkRRentalAdults(this);">
+                                    <input type="radio" name="radio_rental_adults" />3</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="radio_rental_adults" />3+</label>
+                            </div>
+                            {{ form_widget(form.adults, {'attr':{'class': 'form-control hidden', 'idm': 'rr_adults' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-select-plus">
+                            <label>{{ 'Kids' | trans({}, 'rental') }}</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active"  onclick="checkRRentalKids(this);">
+                                    <input type="radio" name="radio_rental_kids" />0</label>
+                                <label class="btn btn-primary" onclick="checkRRentalKids(this);">
+                                    <input type="radio" name="radio_rental_kids" />1</label>
+                                <label class="btn btn-primary" onclick="checkRRentalKids(this);">
+                                    <input type="radio" name="radio_rental_kids" />2</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="radio_rental_kids" />2+</label>
+                            </div>
+                            {{ form_widget(form.kids, {'attr':{'class': 'form-control hidden', 'idm': 'rr_kids' }}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">        
+            <div class="col-md-12">
+                <div class="input-daterange" data-date-format="M dd, yyyy">
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon input-icon-highlight"></i>
+                            <label>{{ 'Polo' | trans({}, 'rental') }}</label>
+                            {{ form_widget(form.polo, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true', }}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-check-circle input-icon input-icon-highlight"></i>
+                            <label>{{ 'Type' | trans({}, 'rental') }}</label>
+                            {{ form_widget(form.type, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true', 'multiple':'multiple'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-select-plus">
+                            <label>{{ 'Rooms' | trans({}, 'rental') }}</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active" onclick="checkRRentalRooms(this);">
+                                    <input type="radio" name="radio_rental_rooms" />1</label>
+                                <label class="btn btn-primary" onclick="checkRRentalRooms(this);">
+                                    <input type="radio" name="radio_rental_rooms" />2</label>
+                                <label class="btn btn-primary" onclick="checkRRentalRooms(this);">
+                                    <input type="radio" name="radio_rental_rooms" />3</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="radio_rental_rooms" />3+</label>
+                            </div>
+                            {{ form_widget(form.rooms, {'attr':{'class': 'form-control hidden', 'idm': 'rr_rooms' }}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="checkbox" >
+        <label class="orange advanced_rental_house">
+            <input class="i-check check" type="checkbox"/>{{ 'Advanced' | trans({}, 'rental') }}
+        </label>
+    </div>
+    <div id="divadv_rental_house" class="row" style="display: none">
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                <label>{{ 'Province' | trans({}, 'rental') }}</label>
+                {{ form_widget(form.province, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true',  }}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-plus-circle input-icon"></i>
+                <label>{{ 'Facilities' | trans({}, 'rental') }}</label>
+                {{ form_widget(form.facilities, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true', 'multiple':'multiple' }}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-plus-square input-icon"></i>
+                <label>{{ 'Rooms Facilities' | trans({}, 'rental') }}</label>
+                {{ form_widget(form.facilities_room, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true', 'multiple':'multiple' }}) }}
+            </div>
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form_widget(form.PrivateRental, {'attr':{'class': 'form-control hidden' }}) }}
+        {{ form_rest(form) }}
+    </div>
+
+    <button class="btn btn-primary btn-lg" type="submit">{{ 'Search for Rentals' | trans({}, 'rental') }}</button>
+
+    <script>
+        var flip = 0;
+        $(".advanced_rental_house").on("click", function () {
+            $("#divadv_rental_house").toggle(flip++ % 2 === 0);
+        });
+        var flip3 = 0;
+        $(".check").on("ifChecked", function () {
+            $("#divadv_rental_house").toggle(flip3++ % 2 === 0);
+        });
+        $(".check").on("ifUnchecked", function () {
+            $("#divadv_rental_house").toggle(flip3++ % 2 === 0);
+        });
+
+        $("#date-start-rental").on("changeDate", function () {
+            $('input[idm="d-s-rental"]').val(
+                    $("#date-start-rental").datepicker('getFormattedDate')
+                    );
+
+        });
+
+        $("#date-end-rental").on("changeDate", function () {
+            $('input[idm="d-e-rental"]').val(
+                    $("#date-end-rental").datepicker('getFormattedDate')
+                    );
+        });
+
+        function checkRRentalAdults(obj) {          
+            $('select[idm="rr_adults"]').val($(obj)[0].innerText);           
+        }
+
+        function checkRRentalKids(obj) {
+            $('select[idm="rr_kids"]').val($(obj)[0].innerText);
+        }
+
+        function checkRRentalRooms(obj) {
+            $('select[idm="rr_rooms"]').val($(obj)[0].innerText);
+        }
+
+
+    </script>
+
+</form>

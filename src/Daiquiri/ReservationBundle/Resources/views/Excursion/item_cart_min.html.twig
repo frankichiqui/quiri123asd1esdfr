@@ -1,0 +1,25 @@
+<li id="{{ it.id }}" class="item_cart">
+    <a href="#" class="cart">
+
+        <div class="pull-left"> 
+            <i class="fa fa-tree fa-2x img-circle thumbnail_cart"> </i>
+
+        </div> 
+        <div class="margin-left-40">
+            <div>
+                <h4><span class="text-blue">{{ it.product.type }}</span><small class="pull-right text-success">{{ it.getTotalprice() | price | raw }}</small></h4>
+            </div>
+            <div>
+                <small><i class="fa fa-tree"></i> {{ product.getTitle() }} x {{ it.quantity }}</small>
+            </div>
+            <div>
+                <small><i class="fa fa-calendar"></i> {{ it.startdate | date('M j, Y') }}</small> 
+                <small><i class="fa fa-map-marker"></i> {{ it.pickupplace }}</small> 
+            </div>
+            <div>
+                <small><i class="fa fa-user fa-lg"></i> Adult(s) :{{ it.adult }}</small> 
+                <small><i class="fa fa-user"></i> Kid(s) : {{ it.kid }}</small>
+            </div>
+        </div>
+    </a>
+</li>

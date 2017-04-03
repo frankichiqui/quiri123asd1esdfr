@@ -1,0 +1,59 @@
+<li class="booking-item" style="margin-bottom: 2%">
+    {{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+    <div class="row">
+        <div class="col-md-4">
+            {% if obj.picture.galleryHasMedias is defined %}
+                <img src="{% path obj.picture, 'reference' %}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+            {% else %}
+                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+
+            <h5 class="booking-item-title">{{ obj.title }}</h5>
+            <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                {% set places = "" %}
+                {% for circuit_day in obj.getCircuitDays() %}
+                    {% for place in circuit_day.places %}
+                        {% set places = places ~ place ~ "(" ~ place.province ~ "), " %} 
+                    {% endfor %}
+                {% endfor %}
+                <small><b>{{ 'Places' | trans({}, 'circuit') }}:</b> {{ places | trim(", ") }}</small>
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-male"></i>
+                <small><b>{{ 'Adult(s)' | trans({}, 'circuit') }}:</b></small> {{ searcher.adults }}
+
+                {% if searcher.kids > 0%}
+                    <i class="fa fa-child"></i>
+                    <small><b>{{ 'Kid(s)' | trans({}, 'circuit') }}:</b></small> {{ searcher.kids }}
+                {% endif %}
+            </p>
+
+            <p class="booking-item-address form-inline"><i class="fa fa-map-marker"></i>
+                <small><b>{{ 'Select Pick-up Place' | trans({}, 'circuit') }} <i class="fa fa-calendar"></i>
+                        <small><b>{{ ' from Departure' | trans({}, 'circuit') }}:</b></small> {{ searcher.date | date("M j, Y") }}:</b></small> {{ form_widget(form_item.pickupplace, {'attr':{'class': 'form-control inline' }}) }}
+            </p>            
+        </div>
+        <div class="col-md-2"><span class="booking-item-price">{% if obj.getCurrentPrice() is not null %} {{ obj.getCurrentPrice() | price | raw }}{% endif %} </span><button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="{% if obj.getCurrentPrice() is null or obj.getCurrentPrice() == 0 %} disabled {% endif %}btn btn-primary">{{ 'Add to Cart' | trans({}, 'circuit') }}</button>
+        </div>
+
+    </div>    
+    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a>  
+    <div class="hidden">        
+        {{ form_widget(form_item.title,{'attr':{'value':obj.type ~ ' ' ~ obj.title}}) }}
+        {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+        {{ form_widget(form_item.unitariprice,{'attr':{'value':obj.getCurrentPrice() }}) }}
+        {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+        {{ form_widget(form_item.totalprice,{'attr':{'value':obj.getCurrentPrice() }}) }}
+        {{ form_widget(form_item.startdate,{'attr':{'value':searcher.date | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.adults,{'attr':{'value':searcher.adults}}) }}
+        {{ form_widget(form_item.kids,{'attr':{'value':searcher.kids}}) }}
+        {{ form_widget(form_item.front,{'attr':{'value':1}}) }}
+    </div>
+    {{ form_end(form_item)}}       
+    <script>
+        $('form[name="item_result{{ obj.id }}"]').on('submit', function (e) {
+            formAjaxFront(e, $('form[name="item_result{{ obj.id }}"]'), true);
+        });
+    </script>
+</li>

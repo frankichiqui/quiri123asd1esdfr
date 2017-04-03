@@ -1,0 +1,109 @@
+{% extends "DaiquiriReservationBundle:Default:find_form.html.twig"%}
+{% block form_searcher %}            
+
+
+    {# empty Twig template #}
+    <div class="col-md-12">
+        <div class="row">      
+            <div class="col-md-12">
+                <div class="box box-primary">
+
+                    <div class="box-header">
+                        <h4 class="box-title">
+                            {% if searcher.circuit is defined and form is defined %} Check Avilibility for Circuit <b>{{ searcher.circuit | upper }} </b>{% else %} Circuit  not found{% endif %}
+                        </h4>
+                    </div>
+                    {% if searcher.circuit is defined and form is defined %}
+                        <div class="box-body">
+                            <div class="sonata-ba-collapsed-fields">
+                                {{ form_start(form, {'action': admin.generateUrl('create', {'id': admin.id(searcher), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass'), 'view_render':'DaiquiriReservationBundle:Circuit:form_searcher_into_circuit.html.twig'}), 'method': 'POST'}) }}
+                                <div class="row">
+                                    <div class="hidden">
+                                        {{ form_widget(form.days) }}
+                                        {{ form_widget(form.circuit,{'value':searcher.circuit.id}) }} 
+                                        {{ form_widget(form.places) }} 
+                                        {{ form_widget(form.nights) }} 
+                                        {{ form_widget(form.title) }} 
+                                        {{ form_widget(form.polofrom) }} 
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            {{ form_label(form.date) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(form.date) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-1">
+                                        <div>
+                                            {{ form_label(form.adults) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(form.adults) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div>
+                                            {{ form_label(form.kids) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(form.kids) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div>
+                                            &nbsp;
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                <button name="btn_create_and_edit" type="submit" class="btn btn-info"><i class="fa fa-search"></i> Search</button> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{ form_end(form) }}
+                                </div>
+                                <div class="margin">
+                                    <span class="label label-warning">Info</span>
+                                    This circuit is available for 
+
+                                    {% for a in searcher.circuit.getCircuitAvailabilitys() %}
+                                        {% if a |date('Y-m-d') > 'now' |date('Y-m-d') %}
+                                            <i class="fa fa-calendar"></i> <b>{{ a | date('M j, Y')}} &nbsp;</b>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    {% else %} Circuit not found{% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% if salida is defined and salida | length >0%}
+        {% for s in salida %}           
+            <div class="col-md-12">
+                <div class="row">     
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    <span class="label label-primary">Circuit</span> {{ s.obj }}
+                                </h4>
+                            </div>
+                            <div class="box-body">                                
+                                {% render(controller('DaiquiriReservationBundle:CircuitSearcher:renderResultItem',{ '_sonata_admin' : 'admin.circuit','item':s})) %}                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row"></div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

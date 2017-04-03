@@ -1,0 +1,63 @@
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+    #    media: MyVendor\MediaBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    default_context: daiquiri
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        daiquiri:  # the default context is mandatory
+            providers:                
+                - sonata.media.provider.image
+                - sonata.media.provider.file                
+                - sonata.media.provider.youtube
+                - sonata.media.provider.dailymotion
+
+            formats:
+                40x40: { width: 40, height: 40, quality: 100 }
+                small: { width: 80, height: 80, quality: 100 }
+                min32: { width: 32, height: 32, quality: 100 }
+                min64: { width: 64, height: 64, quality: 100 }
+                others: { width: 70, height: 70, quality: 100 }
+                principal: { width: 800, height: 600, quality: 100 }
+                medium: { width: 150, height: 150, quality: 100 }
+                big: { width: 200, height: 200, quality: 100 }
+                300x300: { width: 300, height: 300, quality: 100 }
+                large: { width: 600, height: 600, quality: 100 }
+                800x600: { width: 800, height: 600, quality: 100 }
+                slide: { width: 1366, height: 450, quality: 100 }
+                500x281: { width: 500, height: 281, quality: 100 }
+                
+       
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+            
+    providers:
+        image:
+            service:    sonata.media.provider.image
+            resizer:    sonata.media.resizer.simple # sonata.media.resizer.square
+            filesystem: sonata.media.filesystem.local
+            cdn:        sonata.media.cdn.server
+            generator:  sonata.media.generator.default
+            thumbnail:  sonata.media.thumbnail.format
+            allowed_extensions: ['jpg', 'png', 'jpeg']
+            allowed_mime_types: ['image/pjpeg', 'image/jpeg', 'image/png', 'image/x-png']
+doctrine:
+    orm:
+          entity_managers:
+              default:
+                  mappings:
+                      ApplicationSonataMediaBundle: ~
+                      SonataMediaBundle: ~
+
+    dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType

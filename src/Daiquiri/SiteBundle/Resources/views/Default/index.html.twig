@@ -1,0 +1,31 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    {% include 'DaiquiriSiteBundle:Default:toparea.html.twig' %}
+    <div id="search">
+        {% include 'DaiquiriSiteBundle:Default:search.html.twig' %}       
+    </div>
+    <div class="gap"></div>
+    {#
+    <div class="bg-darken block-load-ajax" data-url="{{ path('get-campaign-for-block',{ number:1 }) }}"></div>
+    #}
+    <div class="block-load-ajax" data-url="{{ path('get-campaign-for-block',{ number:2 }) }}"></div>
+    <div class="gap gap-small"></div>
+    <div class="container">
+      {#  <div class="row">
+            <div class="block-load-ajax" data-url="{{ path('get-campaign-for-block',{ number:3 }) }}"></div>
+            <div class="block-load-ajax" data-url="{{ path('get-campaign-for-block',{ number:4 }) }}"></div>
+            <div class="block-load-ajax" data-url="{{ path('get-campaign-for-block',{ number:5 }) }}"></div>
+        </div>
+      #}
+    </div>
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+    <script>
+        $(document).ready(function () {
+            $('.block-load-ajax').each(function () {
+                $(this).load($(this).attr('data-url'));
+            });
+        });
+    </script>
+{% endblock %}
+

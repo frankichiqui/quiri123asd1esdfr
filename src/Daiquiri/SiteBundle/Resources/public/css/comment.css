@@ -1,0 +1,193 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-jul-2016, 14:48:39
+    Author     : eliecer
+*/
+
+.fos_comment_comment_show{ margin: 20px 0;}
+.fos_comment_comment_metas{ margin-top: 0;  margin-bottom: 5px;}
+.fos_comment_comment_body{font-size: 14px;}
+.fos_comment_comment_replies{ margin-left: 20px; }
+.fos_comment_comment_form_holder h3{ font-size: 16px;}
+
+
+textarea#fos_comment_comment_body{
+    width: 100%;
+}
+
+
+
+.fos_comment_thread_show {
+    margin-top: 2em;
+    padding: 1em 20px;
+    width: 472px;
+    background: #f0f0f0;
+    box-shadow: 0 0 7px #bbb;
+    -moz-box-shadow: 0 0 7px #bbb;
+    -webkit-box-shadow: 0 0 7px #bbb;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+.fos_comment_thread_show h3 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    color: #a0a0a0;
+}
+.fos_comment_comment_show {
+    color: #555;
+}
+.fos_comment_comment_metas {
+    line-height: 1.42857143;
+    color: #333;
+    background-color:#a0a0a0;
+    padding: 10px;
+}
+.fos_comment_comment_metas button{
+    color: #ffffff;
+    background-color: #c9302c;
+    border-color: #ac2925;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+.fos_comment_comment_body {
+    line-height: 1.5em;
+    background-color:#e08e0b;
+    margin-bottom: 5px;
+}
+.fos_comment_comments .fos_comment_comments {
+    margin-left: 2em;
+}
+.fos_comment_comment_reply {
+    text-align: right;
+}
+.fos_comment_comment_reply.replying {
+    text-align: left;
+    margin-top: 1em;
+    padding: 1em 20px;
+    background: #d6d6d6;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+.fos_comment_comment_reply_show_form {
+    padding: 2px 5px;
+    font-size: 0.8em;
+}
+.fos_comment_comment_reply.fos_comment_replying button.fos_comment_comment_reply_show_form {
+    display: none;
+}
+.fos_comment_thread_comments {
+    margin-bottom: 1.5em;
+}
+.fos_comment_reply_prototype {
+    display: none;
+}
+.fos_comment_thread_show > form.fos_comment_comment_form {
+    margin-bottom: 1em;
+}
+form.fos_comment_comment_form.processing {
+    opacity: 0.5;
+}
+form.fos_comment_comment_form label.author_name {
+    margin-top: 3px;
+    float:left;
+}
+form.fos_comment_comment_form label.author_name input {
+    padding: 2px 5px;
+}
+form.fos_comment_comment_form textarea {
+    width: 98%;
+    height: 6em;
+    padding: 1%;
+}
+form.fos_comment_comment_form.error textarea {
+    border-color: red;
+}
+.fos_comment_form_errors {
+    color: #ff0000;
+}
+.fos_comment_submit {
+    text-align: right;
+}
+.fos_comment_submit input {
+   
+    color: #ffffff;
+    margin-top: 3px;
+    background-color: #00a65a;
+    border-color: #008d4c;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+a.fos_comment_thread_feed {
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: right;
+}
+.fos_comment_comment_voting {
+    float: right;
+}
+.fos_comment_comment_score {
+    display: inline-block;
+}
+
+.fos_comment_comment_reply button{
+    color: #ffffff;
+    background-color: #f39c12;
+    border-color: #e08e0b;
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}

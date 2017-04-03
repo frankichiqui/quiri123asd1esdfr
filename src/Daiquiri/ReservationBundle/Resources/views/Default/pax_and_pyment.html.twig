@@ -1,0 +1,63 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{# empty Twig template #}
+{% extends base_template %}
+
+
+{#{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}#}
+
+{% block show %}
+
+    <div class="sonata-ba-view">
+        <div class="row">
+            {% if app.session.get('cart',{}) | length > 0 %}
+
+                {% for item in app.session.get('cart',{}) %}
+
+                    {% set it = item | unserialize %}  
+                    
+                    {% render(controller('DaiquiriReservationBundle:CartItem:getItemCartMin',{'it':it,'view_render_name':'item_cart_detail.html.twig'}))%}
+                   
+
+                {%  endfor %}
+
+
+            </div>
+        </div>
+
+        <div class="sonata-ba-form-actions well  well-small form-actions" >
+
+            <a name="btn_create_and_create" class="btn btn-warning" href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-plus-circle"></i> Continue Adding</a>
+            
+
+        </div>
+        <script>
+            $('.empty_cart').click(function (e) {
+                e.preventDefault();
+                showConfirDialogCartDetailDeleteAll('{{ path('reservation_cart_empty_cart') }}', "Are you sure you want to delete all item shopping cart?", $('.item_cart'));
+            });
+
+        </script>
+    {% else %}
+        <div class="col-md-12">
+            <div class="row item_cart">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header">
+                            <h4 class="box-title">
+                                <b>Shopping cart is empty </b>
+                            </h4>
+                        </div>
+                        <div class="box-body">  
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-home"></i> Please Add a Product
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% for polo in list %}    
+    <li>
+        <a href="{{ path('transfer_list_polo',{'polo': polo.slug }) }}">{{ polo }}</a>
+            
+    </li>
+{% endfor %}

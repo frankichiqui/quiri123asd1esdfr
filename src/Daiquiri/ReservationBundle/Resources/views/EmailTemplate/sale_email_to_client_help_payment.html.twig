@@ -1,0 +1,19 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Purchase Confirmation and Voucher' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    {% if sale.client.fullName != " " %}
+
+        {{ sale.client.fullName | upper }} 
+    {% else %}
+
+        {{ sale.client.username | upper }} 
+    {% endif %}
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'If you have problems for payment, pordemos help, just contact us by phone +53 7 2045101 or +53 7204 5097, plus you can write to booking@daiquiricuba.com, and our sales agents will give you all the information you need.' | trans({}, 'email') }}       
+    </div>
+
+
+{% endblock %}

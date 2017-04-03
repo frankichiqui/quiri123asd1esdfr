@@ -1,0 +1,11 @@
+{# empty Twig template #}
+{% extends "SonataAdminBundle:CRUD:base_list.html.twig" %}
+
+{% block tab_menu %} 
+   {% if admin.hasRoute('list') %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ admin.generateUrl('form-create-season-for-all-hotel-by-chain') }}" class="sonata-action-element"><i class="fa fa-plus-circle"></i>
+                Add Season by Chain</a></li>
+    </ul>
+       {% endif %}
+{% endblock %}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block seo %}
+            {% include "seo/seo.html.twig" %}
+        {% endblock %}
+        <!-- CSS -->
+
+        <!-- GOOGLE FONTS -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
+        <!-- /GOOGLE FONTS -->
+
+
+        {% block css %}
+
+            <link rel="stylesheet" href="{{ asset('bundles/daiquirisite/css/bootstrap.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/daiquirisite/css/font-awesome.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/daiquirisite/css/icomoon.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/daiquirisite/css/styles.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/daiquirisite/css/mystyles.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/daiquirisite/css/bootstrap-select.min.css') }}">
+
+            <style type="text/css">
+                @font-face {
+                    font-family: 'FontAwesome';
+                    src: url('{{ asset('bundles/daiquirisite/css/fonts/fontawesome-webfont.ttf')}}') ;
+                    font-weight: normal;
+                    font-style: normal;
+                }
+            </style>
+
+            <style type="text/css">
+                @font-face {
+                    font-family: 'Icomoon';
+                    src: url('{{ asset('bundles/daiquirisite/css/fonts/icomoon.ttf')}}') ;
+                    font-weight: normal;
+                    font-style: normal;
+                }
+            </style>  
+
+            <style type="text/css">
+                @font-face {
+                    font-family: 'FontAwesome';
+                    src: url('{{ asset('bundles/daiquirisite/css/fonts/fontawesome-webfont.woff')}}') ;
+                    font-weight: normal;
+                    font-style: normal;
+                }
+            </style>
+
+            <style type="text/css">
+                @font-face {
+                    font-family: 'FontAwesome';
+                    src: url('{{ asset('bundles/daiquirisite/css/fonts/fontawesome-webfont.woff2')}}') ;
+                    font-weight: normal;
+                    font-style: normal;
+                }
+            </style>
+
+            <style type="text/css">
+                @font-face {
+                    font-family: 'Icomoon';
+                    src: url('{{ asset('bundles/daiquirisite/css/fonts/icomoon.woff')}}') ;
+                    font-weight: normal;
+                    font-style: normal;
+                }
+            </style>
+            {% stylesheets '@DaiquiriAdminBundle/Resources/public/css/jquery.typeahead.min.css'%}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
+            {% endstylesheets %}
+        {% endblock %}
+
+        <script>
+            window.SONATA_CONFIG = {
+                CONFIRM_EXIT: {% if sonata_admin.adminPool.getOption('confirm_exit') %}true{% else %}false{% endif %}
+            };
+            window.SONATA_TRANSLATIONS = {
+                CONFIRM_EXIT: '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'
+            };
+        </script>
+        <script src="{{ asset('bundles/daiquirisite/js/modernizr.js') }}"></script>        
+        {% for javascript in sonata_admin.adminPool.getOption('javascripts', []) %}
+            <script src="{{ asset(javascript) }}"></script>
+        {% endfor %}
+        {% javascripts '@DaiquiriAdminBundle/Resources/public/js/jquery.typeahead.min.js'%}
+        <script src="{{ asset_url }}" type="text/javascript"></script>    
+        {% endjavascripts %}       
+        <script src="{{ asset('bundles/daiquirisite/js/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('bundles/daiquirisite/js/bootstrap-timepicker.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script  src="{{ asset('/js/fos_js_routes.js') }}"></script>
+        <script  src="{{ asset('bundles/daiquirisite/js/loadroutinglocale.js') }}"></script>
+
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}           
+        {% endblock %}
+        <!-- JS -->
+        {% block javascripts %}
+
+
+
+
+            {#<script src="{{ asset_url }}"></script>#}
+            <script type="text/javascript">
+            if (window.location.hash == '#_=_') {
+                window.location.hash = '';
+            }
+
+            //para el google analitics
+                {#(function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r;
+                    i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                    a = s.createElement(o),
+                            m = s.getElementsByTagName(o)[0];
+                    a.async = 1;
+                    a.src = g;
+                    m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                ga('create', 'UA-68832703-1', 'auto');
+                ga('send', 'pageview');#}
+            </script>      
+
+
+
+            <script src="{{ asset('bundles/daiquirisite/js/bootstrap-select.min.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/slimmenu.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/nicescroll.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/dropit.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/ionrangeslider.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/fotorama.js') }}"></script>
+           {#
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXl7gdTT6sXdeWvjAruLpEUr12mRhffv8&v=3.exp"></script>
+
+           #}
+
+            <script src="{{ asset('bundles/daiquirisite/js/card-payment.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/magnific.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/owl-carousel.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/fitvids.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/tweet.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/countdown.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/gridrotator.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/custom.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirireservation/js/main.js') }}"></script>
+            <script src="{{ asset('bundles/daiquirisite/js/cart.js') }}"></script>         
+
+            <script>
+
+
+                {#$(document).ready(function () {
+                     $("#search").load("{{ path('load_search')}}");
+                     });
+
+                    $.ajax({
+                        url: "{{ path('load_search')}}",
+                        cache: false
+                    })
+                            .done(function (html) {
+                                $("#search").append(html);
+                            });#}
+            </script>
+        {% endblock %}
+        {% block other_js %}
+        {% endblock %}
+        {% include 'DaiquiriSiteBundle:Default:genericmodal.html.twig' %}
+        {% include 'DaiquiriSiteBundle:Default:confirmationmodal.html.twig' %}
+    </body>
+</html>

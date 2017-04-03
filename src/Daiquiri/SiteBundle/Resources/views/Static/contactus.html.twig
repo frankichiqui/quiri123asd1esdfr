@@ -1,0 +1,84 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    <div class="container">
+        <h1 class="page-title">Contact Us</h1>
+    </div>
+    <div class="container">
+    </div>
+    <div id="map-canvas" style="height:400px;"></div>
+    <div class="container">
+        <div class="gap"></div>
+        <div class="row">
+            <div class="col-md-7">
+                <p>Inceptos hac sagittis sit elit primis iaculis arcu quam justo per primis tempus ad iaculis cursus condimentum nullam pretium dui id sit lacus duis dignissim primis potenti aliquam malesuada ullamcorper</p>
+                <p>Euismod volutpat risus luctus id varius volutpat adipiscing porttitor egestas nisl nunc luctus phasellus nibh tristique lacinia penatibus justo urna</p>
+                {% if error is defined and error %}
+                    <div class="alert alert-danger">
+                        <button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <p class="text-small">{{ error }}</p>
+                    </div>
+                {% endif %}
+                {% if m is defined and m == true %}
+                    <div class="alert alert-success">
+                        <button class="close" type="button" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <p class="text-small">{{ 'Your contact message was created successfully' | trans({}, 'contactus') }}</p>
+                    </div>
+                {% endif %}
+                <form class="mt30" name="daiquiri_sitebundle_contact" method="post" action="{{ path('contact_create') }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                {{ form_widget(form.name, {'attr':{'class': 'form-control','required': 'required' }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>E-mail</label>
+                                {{ form_widget(form.email, {'attr':{'class': 'form-control','required': 'required' }}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Contact Cause</label>
+                                {{ form_widget(form.contactCause, {'attr':{'class': 'form-control','required': 'required' }}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        {{ form_widget(form.message, {'attr':{'class': 'form-control','required': 'required' }}) }}
+                    </div>
+                    {{ form_rest(form) }}
+                    <div class="text-right mt10">
+                        <input class="btn btn-primary" type="submit" value="{{ 'Send Message' | trans({}, 'hoteldetails') }}" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <aside class="sidebar-right">
+                    <ul class="address-list list">
+                        <li>
+                            <h5>{{ 'Email' | trans({}, 'contactus') }}</h5><a href="#">reservas@daiquiricuba.com</a>
+                        </li>
+                        <li>
+                            <h5>{{ 'Phone Number' | trans({}, 'contactus') }}</h5><a href="#">+(53) 72045101</a>
+                        </li>
+                        <li>
+                            <h5>Skype</h5><a href="#">contact_traveller</a>
+                        </li>
+                        <li>
+                            <h5>{{ 'Address' | trans({}, 'contactus') }}</h5><address>Daiquirí Tours Cuba.<br />{{ 'Miramar Trade Center' | trans({}, 'contactus') }}<br />{{ 'Barcelona Building 5th. Ave. B/76 & 78, Miramar' | trans({}, 'contactus') }}<br />{{ 'Havana, Cuba' | trans({}, 'contactus') }}<br /></address>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+{% endblock %}

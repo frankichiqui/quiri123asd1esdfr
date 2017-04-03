@@ -1,0 +1,46 @@
+<ul class="dropdown-menu" style="width: 300px; max-height:250px; position: relative">
+    {% if app.session.get('cart',{}) | length ==  0 %}      
+        <li class="header"><i class="fa fa-shopping-cart text-aqua"></i> Shppping Cart.</li>
+        <li class="margin"><i class="fa fa-info"></i> Not have item. Please add.</li>
+        {% else %}
+        <li class="header"><i class="fa fa-shopping-cart text-aqua"></i> Shppping Cart.
+            <div class="pull-right text-success">
+                <b>               
+                    {{ app.session.get('cart_total',0)  | price | raw }} 
+                </b>
+            </div>
+        </li>
+        {% for item in app.session.get('cart',{}) %}
+            {% set it = item | unserialize %}    
+            {% render(controller('DaiquiriReservationBundle:CartItem:getItemCartMin',{'it':it}))%}
+        {%  endfor %}
+        <li class="user-footer">
+            <div class="pull-left margin">
+                <a id="empty_cart" href="{{ path ('reservation_cart_new_cart') }}" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i> Empty Cart</a>
+            </div>
+            <div class="pull-right margin">
+                <a href="{{ path('admin_daiquiri_reservation_sale_shopping-cart-detail')}}" class="btn btn-success btn-flat"><i class="fa fa-check"></i> Check Out</a>
+            </div>
+        </li>
+    {% endif %}
+</ul>
+<script>
+    $('#empty_cart').click(function (e) {
+        e.preventDefault();
+        showConfirDialog('{{ path('reservation_cart_empty_cart') }}', "Are you sure you want to delete all item shopping cart?");
+    });
+    $('.item_cart a').each(function (index, element) {
+        i = $('<i/>').addClass('fa fa-close fa-lg text-danger');
+        a = $('<a/>').html(' ').append(i);
+        a.click(function (e) {
+            e.preventDefault();
+            showConfirDialog(
+                    Routing.generate('reservation_cart_delete_item_by_id', {
+                id: $(element).parent().attr('id')}),
+                    "Are you sure want to delete item shopping cart?");
+        });
+        $(element).find('.pull-right.text-success').append(a);
+    });
+
+
+</script>

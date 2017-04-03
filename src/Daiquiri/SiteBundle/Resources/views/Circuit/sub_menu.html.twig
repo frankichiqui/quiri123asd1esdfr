@@ -1,0 +1,3 @@
+{% for circuit in list %}
+    <li><a href="{{ path('circuit_show',{'slug': circuit['slug']}) }}">{{ circuit['title'] }}</a></li>
+{% endfor %}

@@ -1,0 +1,59 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Purchase Confirmation and Voucher' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    {% if sale.client.getFullname() != " " %}
+
+        {{ sale.client.getFullname() | upper }} 
+    {% else %}
+
+        {{ sale.client.username | upper }} 
+    {% endif %}
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'A new sale has just been completed, please start actions.' | trans({}, 'email') }}      
+    </div>
+    {% for service in sale.services %}
+        {% include 'DaiquiriReservationBundle:'~ service.cartitem.getRootFolder()~':reservation_detail.html.twig'  with {'caritem': service.cartitem} %}
+        <div class="row margin fa-"></div>
+    {% endfor %}
+
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase"> </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Payment Status' | trans({}, 'index') }}</span>
+                <div style="margin-top: 5px;">
+                    {% if sale.response is not null %}
+                        {% set response = sale.response + 0 %}
+                        {% if response < 99 %} 
+                            {{ sale. description }}
+                        {% else %}
+                            {{ sale. description }}
+                        {% endif %}
+                    {% else %}
+                        {{ 'No payment was made ' | trans({}, 'index') }}
+                    {% endif %}
+                </div>
+            </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Total purchase' | trans({}, 'index') }}</span>
+                <div style="margin-top: 5px;">{{ sale.amount }} {{ sale.currency | upper }}</div>
+            </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Market' | trans({}, 'index') }}</span>
+                <div style="margin-top: 5px;">{{ sale.market }}({{ sale.market.increment}}%)</div>
+            </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Client' | trans({}, 'index') }}</span>
+                <div style="margin-top: 5px;"><a href="mailto:{{ sale.client.email }}">{{ sale.client.fullName }}</a></div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+services:
+#    daiquiri_site.example:
+#        class: Daiquiri\SiteBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    twig.extension.seo_extension:
+        class: Daiquiri\SiteBundle\Twig\SEOExtension
+        tags:
+            - { name: twig.extension }
+        arguments:
+            em: "@doctrine.orm.entity_manager"

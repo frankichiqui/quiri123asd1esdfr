@@ -1,0 +1,282 @@
+<!-- FACEBOOK WIDGET -->
+<div id="fb-root"></div>
+<!-- <script>
+     (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s);
+         js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+         fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+ </script>--!>
+<!-- /FACEBOOK WIDGET -->
+
+<div class="global-wrap">    
+    <header id="main-header">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a class="logo" href="{{ url('daiquiri_site_homepage') }}">
+                            <img src="{{ asset('bundles/daiquirisite/img/logo-invert.png') }}" alt="Image Alternative text" title="Image Title" />
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        <form class="main-header-search">
+                            <div class="form-group form-group-icon-left">
+                                <i class="fa fa-search input-icon"></i>
+                                <input type="text" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="top-user-area clearfix">
+                            <ul class="top-user-area-list list list-horizontal list-border">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li class="top-user-area-avatar">
+                                        <a href="{{ path('fos_user_profile_show') }}">
+                                            <img class="origin round" {% if app.user.avatar is not null %} src="{{ app.user.avatar }}" {% elseif app.user.picture is not null %} src="{{ asset('uploads/user/profilepics/' ~ app.user.picture) }}" {% else %} src="{{ asset('bundles/daiquirisite/img/300x300.png') }}" {% endif %} {% set firstname = app.user.firstname | split(' ')%}  {% set lastname = app.user.lastname | split(' ')%} {% set fullname = firstname[0] ~" "~ lastname[0]  %} alt="Avatar" title="{{ fullname }}" />{{ fullname }}</a>
+                                    </li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'Sign Out' | trans({}, 'header') }}</a>
+                                    </li>
+                                {% else %}
+                                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'Login' | trans({}, 'header') }} / {{ 'Register' | trans({}, 'header') }}</a>
+                                    </li>
+                                {% endif %}
+                                {% if app.session.get('currency') == null %}
+                                    {{ app.session.set('currency', 'usd') }}
+                                {% endif %}
+                                {% if app.session.get('currency') == 'usd'  %}
+                                    <li class="nav-drop"><a href="#" id="cu-1">USD $<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="list nav-drop-menu">
+                                            <li><a onclick="currency_change('eur');" href="#" id="cu-2">EUR<span class="right">€</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-drop"><a href="#" id="cu-1">EUR €<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="list nav-drop-menu">
+                                            <li><a onclick="currency_change('usd');" href="#" id="cu-2">USD<span class="right">$</span></a>
+                                            </li>
+                                        </ul>
+                                    </li> 
+                                {% endif %}
+
+                                {% if app.request.locale == 'en' %}
+                                    <li class="top-user-area-lang nav-drop">
+                                        <a href="#">
+                                            <img src="{{ asset('bundles/daiquirisite/img/flags/32/uk.png') }}" alt="{{ 'ENG' | trans({}, 'header') }}" title="{{ 'English' | trans({}, 'header') }}" />{{ 'ENG' | trans({}, 'header') }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+                                        </a>
+                                        <ul class="list nav-drop-menu">
+                                            <li>
+                                                <a onclick="lang_change('es');"title="{{ 'Spanish' | trans({}, 'header') }}" href="#">
+                                                    <img src="{{ asset('bundles/daiquirisite/img/flags/32/es.png') }}" alt="{{ 'ESP' | trans({}, 'header') }}" title="{{ 'Spanish' | trans({}, 'header') }}" /><span class="right">{{ 'ESP' | trans({}, 'header') }}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a onclick="lang_change('it');"title="{{ 'Italian' | trans({}, 'header') }}" href="#">
+                                                    <img src="{{ asset('bundles/daiquirisite/img/flags/32/it.png') }}" alt="{{ 'ITA' | trans({}, 'header') }}" title="{{ 'Italian' | trans({}, 'header') }}" /><span class="right">{{ 'ITA' | trans({}, 'header') }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% elseif app.request.locale == 'es' %}
+                                    <li class="top-user-area-lang nav-drop">
+                                        <a href="#">
+                                            <img src="{{ asset('bundles/daiquirisite/img/flags/32/es.png') }}" alt="{{ 'ESP' | trans({}, 'header') }}" title="{{ 'Spanish' | trans({}, 'header') }}" />{{ 'ESP' | trans({}, 'header') }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+                                        </a>
+                                        <ul class="list nav-drop-menu">
+                                            <li>
+                                                <a onclick="lang_change('en');" title="{{ 'English' | trans({}, 'header') }}" href="#">
+                                                    <img src="{{ asset('bundles/daiquirisite/img/flags/32/uk.png') }}" alt="{{ 'ENG' | trans({}, 'header') }}" title="{{ 'English' | trans({}, 'header') }}" /><span class="right">{{ 'ENG' | trans({}, 'header') }}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a onclick="lang_change('it');"title="{{ 'Italian' | trans({}, 'header') }}" href="#">
+                                                    <img src="{{ asset('bundles/daiquirisite/img/flags/32/it.png') }}" alt="{{ 'ITA' | trans({}, 'header') }}" title="{{ 'Italian' | trans({}, 'header') }}" /><span class="right">{{ 'ITA' | trans({}, 'header') }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>   
+                                {% else %}
+                                    <li class="top-user-area-lang nav-drop">
+                                        <a href="#">
+                                            <img src="{{ asset('bundles/daiquirisite/img/flags/32/it.png') }}" alt="{{ 'ITA' | trans({}, 'header') }}" title="{{ 'Italian' | trans({}, 'header') }}" />{{ 'ITA' | trans({}, 'header') }}<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
+                                        </a>
+                                        <ul class="list nav-drop-menu">
+                                            <li>
+                                                <a onclick="lang_change('en');" title="{{ 'English' | trans({}, 'header') }}" href="#">
+                                                    <img src="{{ asset('bundles/daiquirisite/img/flags/32/uk.png') }}" alt="{{ 'ENG' | trans({}, 'header') }}" title="{{ 'English' | trans({}, 'header') }}" /><span class="right">{{ 'ENG' | trans({}, 'header') }}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a onclick="lang_change('es');"title="{{ 'Spanish' | trans({}, 'header') }}" href="#">
+                                                    <img src="{{ asset('bundles/daiquirisite/img/flags/32/es.png') }}" alt="{{ 'ESP' | trans({}, 'header') }}" title="{{ 'Spanish' | trans({}, 'header') }}" /><span class="right">{{ 'ESP' | trans({}, 'header') }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>                                   
+                                {% endif %}                                
+                                <li><a href="{{ path('show_cart') }}"><i class="fa fa-shopping-cart"></i> {{ 'Show Cart' | trans({}, 'header') }} (<span id="cart">0</span>) </a>
+                                </li> 
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'DaiquiriSiteBundle:Default:menu.html.twig' %}
+       {#  { dump(app.request.get('_route_params')) }#}
+    </header>
+    {% block other_js %}
+        <script>
+            function lang_change(lang) {
+
+                if ('{{ app.request.get('_route_params') | length }}' < 1 && '{{ app.request.locale }}' === 'en') {
+                    window.location = "{{ path('daiquiri_site_homepage1') }}";
+                } else if ('{{ app.request.get('_route_params') | length }}' < 1 && '{{ app.request.locale }}' === 'es') {
+                    window.location = "{{ path('daiquiri_site_homepage1') }}";
+                } else if ('{{ app.request.get('_route_params') | length }}' < 1 && '{{ app.request.locale }}' === 'it') {
+                    window.location = "{{ path('daiquiri_site_homepage1') }}";
+                } else {
+                    switch (lang) {
+                        case "en":
+                            window.location = '{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}';
+                            break;
+                        case "es":
+                            window.location = '{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}';
+                            break;
+                        case "it":
+                            window.location = '{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'it'})) }}';
+                            break;
+                        default:
+                            window.location = '{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}';
+                    }
+                }
+            }
+            function currency_change(currency) {
+                if (currency === 'usd') {
+                    $.ajax({
+                        // la URL para la petición
+                        url: '{{ path('change_currency_usd') }}',
+                        // especifica si será una petición POST o GET
+                        type: 'POST',
+                        // el tipo de información que se espera de respuesta
+                        dataType: 'json',
+                        // código a ejecutar si la petición es satisfactoria;
+                        // la respuesta es pasada como argumento a la función
+                        success: function (data) {
+                            if (data.success) {
+                                window.location = "{{ path('daiquiri_site_homepage1')}}";
+                            }
+                        },
+                        // código a ejecutar si la petición falla;
+                        // son pasados como argumentos a la función
+                        // el objeto de la petición en crudo y código de estatus de la petición
+                        error: function (xhr, status) {
+                            setContentByError();
+                            console.log('xhr: ' + xhr);
+                            console.log('status: ' + status);
+                        },
+                        complete: function (xhr, status) {
+
+                        }
+                    });
+                } else if (currency === 'eur') {
+                    $.ajax({
+                        // la URL para la petición
+                        url: '{{ path('change_currency_eur') }}',
+                        // especifica si será una petición POST o GET
+                        type: 'POST',
+                        // el tipo de información que se espera de respuesta
+                        dataType: 'json',
+                        // código a ejecutar si la petición es satisfactoria;
+                        // la respuesta es pasada como argumento a la función
+                        success: function (data) {
+                            if (data.success) {
+                                window.location = "{{ path('daiquiri_site_homepage1')}}";
+                            }
+                        },
+                        // código a ejecutar si la petición falla;
+                        // son pasados como argumentos a la función
+                        // el objeto de la petición en crudo y código de estatus de la petición
+                        error: function (xhr, status) {
+                            setContentByError();
+                            console.log('xhr: ' + xhr);
+                            console.log('status: ' + status);
+                        },
+                        complete: function (xhr, status) {
+
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        // la URL para la petición
+                        url: '{{ path('change_currency_usd') }}',
+                        // especifica si será una petición POST o GET
+                        type: 'POST',
+                        // el tipo de información que se espera de respuesta
+                        dataType: 'json',
+                        // código a ejecutar si la petición es satisfactoria;
+                        // la respuesta es pasada como argumento a la función
+                        success: function (data) {
+                            if (data.success) {
+                                window.location = "{{ path('daiquiri_site_homepage1')}}";
+                            }
+                        },
+                        // código a ejecutar si la petición falla;
+                        // son pasados como argumentos a la función
+                        // el objeto de la petición en crudo y código de estatus de la petición
+                        error: function (xhr, status) {
+                            setContentByError();
+                            console.log('xhr: ' + xhr);
+                            console.log('status: ' + status);
+                        },
+                        complete: function (xhr, status) {
+
+                        }
+                    });
+                }
+            }
+
+            function UpdateCartFront() {
+                span = $('#cart');
+                $.ajax({
+                    // la URL para la petición
+                    url: '{{ path('reservation_cart_get_count') }}',
+                    // especifica si será una petición POST o GET
+                    type: 'POST',
+                    // el tipo de información que se espera de respuesta
+                    dataType: 'json',
+                    // código a ejecutar si la petición es satisfactoria;
+                    // la respuesta es pasada como argumento a la función
+                    success: function (data) {
+                        if (data.success) {
+                            span.html(data.value);
+                            if (data.value > 0) {
+                                span.attr('color', '#ed8323 !important');
+                            } else
+                            {
+                                span.attr('color', '#ffffff !important');
+                            }
+                        }
+                    },
+                    // código a ejecutar si la petición falla;
+                    // son pasados como argumentos a la función
+                    // el objeto de la petición en crudo y código de estatus de la petición
+                    error: function (xhr, status) {
+                        setContentByError();
+                        console.log('xhr: ' + xhr);
+                        console.log('status: ' + status);
+                    },
+                    complete: function (xhr, status) {
+
+                    }
+                });
+                //console.log($('#cart_content_front'));
+            {#$('#cart_content_front').load('{{ path('reservation_cart_get_min_view_cart')}}');#}
+                }
+                $(document).ready(function () {
+                });
+    </script> {%endblock  %}

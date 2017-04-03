@@ -1,0 +1,80 @@
+
+{% block findautocomplete_widget%}
+    <div class="typeahead__container">
+        <div class="typeahead__field">
+
+            <span class="typeahead__query">
+                <input  name="q"  class="form-control"  type="search" id="{{ form.vars.id }}_item" autocomplete="off">
+                <input type="hidden" name="{{ form.vars.full_name }}" id="{{form.vars.id}}"/>
+
+            </span>
+        </div>
+    </div>
+    <script>
+        $.typeahead({
+                input: '#{{ form.vars.id }}_item',
+                minLength: 1,
+                order: "asc",
+                dynamic: true,
+                minLength: 0,
+                maxItem: 5,
+                hint: true,
+                delay: 500,
+                backdrop: {
+                "background-color": "#fff"
+                },
+                emptyTemplate: function (query) {
+                return 'no hay na para ' + query + ' param';
+                },
+                source: {
+        {% for entity in form.vars.entities %}
+            {{ entity.class }}: {
+                        display: "title",
+                                ajax: function (query) {
+                                return {
+                                data: {
+                                q: query,
+                                        class : '{{ entity.class }}'
+                                },
+                                        type: "GET",
+                                        url: '{{ path(entity.route)}}',
+                                        path: "data.location",
+                                        callback: {
+                                        done: function (data) {
+                                        return data;
+                                        }
+                                        }
+                                }
+                                },
+                                template: function (query, item) {
+                                //console.log(item);
+
+                                return '<div class="row">' +
+                                        '<div class="col-md-3">' +
+                                        '<img src="' + item.pic + '" class="thumbnail_result_findautocompletetype">' +
+                                        '</div>' +
+                                        '<div class="col-md-9"> <i class="{{ entity.icon }}"></i> ' +
+                                        '<small>' + item.title.toUpperCase() + '</small>' +
+                                        '<div class="description_result_findautocompletetype">' + item.description.toLowerCase() + '</div>' +
+                                        '</div>' +
+                                        '</div>';
+                                }
+                        },
+        {% endfor%}
+                    },
+                    callback: {
+                    onClickAfter: function (node, a, item, event) {
+
+                    event.preventDefault;
+                    $('#{{form.vars.id}}').val(item.type + '-' + item.id);
+                    $('#{{ form.vars.id }}_item').next().attr('class', item.icon);
+                    // href key gets added inside item from options.href configuration
+
+                    }
+                    },
+                    debug: true
+            });
+    </script>    
+
+
+{% endblock %}

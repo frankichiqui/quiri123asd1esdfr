@@ -1,0 +1,50 @@
+<div class="bg-darken">
+    <div class="container">
+        <div class="gap"></div>                
+        <h2>{{ block.title | title}}</h2>
+        <div class="row row-wrap">
+            {% set cant = 0 %}
+            {% for c in campaigns  %}
+                {% if cant < block.mincampaign %}
+                    <div class="col-md-4">
+                        <div class="thumb">
+                            <header class="thumb-header">
+                                <a class="hover-img" href="#">
+                                    {% if c.picture.galleryHasMedias is defined %}
+                                        <img src="{% path c.picture, 'reference' %}" alt="{{ c }}" title="{{ c }}" />
+                                    {% else %}
+                                        <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ c }}" title="{{ c }}" />
+                                    {% endif %}
+                                    <h5 class="hover-title-center">{{ c.caption }}</h5>
+                                </a>
+                            </header>
+                            <div class="thumb-caption">
+                                <ul class="icon-group text-tiny text-color">
+                                    {% for k in  1..c.calification %}
+                                        <li><i class="fa fa-star"></i>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                {% if c.product is  iterable %}
+                                    {% for p in c.product %}
+                                        <h5 class="thumb-title"><a class="text-darken" href="#">{{ p }}</a></h5>
+                                        {% endfor %}
+                                    {% else %}
+                                    <h5 class="thumb-title"><a class="text-darken" href="#">{{ c.product }}</a></h5>
+                                    {% endif %}
+                                <p class="mb0"><small>{{ c.title }}</small>
+                                </p>
+                                <p class="mb0 text-darken"><span class="text-lg lh1em text-color">{{ c.subtitle }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% set cant = cant + 1 %}
+            {% endfor %}
+
+
+        </div>
+        <div class="gap gap-small"></div>
+    </div>
+</div>

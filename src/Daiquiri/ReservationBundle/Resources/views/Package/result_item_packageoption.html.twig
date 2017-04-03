@@ -1,0 +1,71 @@
+
+{% for s in salida %}
+    <div class="row">
+        {{ form_start(s.form, {'name':'name_'~ s.obj.id ,'attr':{'id':'form_' ~ s.obj.id },'action': admin.generateUrl('add-to-cart'), 'method': 'POST'}) }}
+        <div class="col-md-1">
+            <a href="#" class="thumbnail">
+                {% thumbnail s.obj.picture, 'small' %}
+            </a>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>{{ s.obj }} </b></p>
+
+                    <p>{{ (s.obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Price</p>
+                    <small><b>{{ s.obj.totalprice(searcher.adults,searcher.kids,searcher.infant) | price | raw }}</b></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                {{ form_label(s.form.pickupplace) }}
+                <div class="col-md-12">
+                    {{ form_widget(s.form.pickupplace) }}
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                &nbsp;
+                <div class="col-md-12">            
+                    <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="btn btn-warning"><i class="fa fa-shopping-cart"></i>&nbsp;Add to Cart</button> 
+                </div>
+            </div>
+        </div>          
+
+        <div class="hidden">    
+            
+            {{ form_widget(s.form.quantity,{'attr':{'value':1}}) }}
+            {{ form_widget(s.form.kids,{'attr':{'value':searcher.kids}}) }}
+            {{ form_widget(s.form.adults,{'attr':{'value': searcher.adults }}) }}
+            {{ form_widget(s.form.infants,{'attr':{'value': searcher.infant }}) }}
+            {{ form_widget(s.form.title,{'attr':{'value':'Package'}}) }}
+            {{ form_widget(s.form.unitariprice,{'attr':{'value':s.obj.totalprice(searcher.adults,searcher.kids,searcher.infant)}}) }}
+            {{ form_widget(s.form.product,{'attr':{'value':s.obj.id}}) }}
+            {{ form_widget(s.form.totalprice,{'attr':{'value':s.obj.totalprice(searcher.adults,searcher.kids,searcher.infant)}}) }}
+            {{ form_widget(s.form.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d")}}) }}
+
+        </div>
+        {{ form_end(s.form)}} 
+
+        <script>
+            $('form[name="name_{{s.obj.id}}"]').on('submit', function (e) {
+                formAjax(e, $(this));
+            });
+
+
+        </script>
+    </div>
+    {% if not loop.last == loop.index %}
+        <div class="border-top-gray margin"></div>
+    {% endif %}
+{% endfor %}

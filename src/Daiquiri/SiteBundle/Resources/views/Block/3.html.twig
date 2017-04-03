@@ -1,0 +1,42 @@
+<div class="col-md-4">
+    <h3>{{ block.title  }} <small ><a href="#">view all</a></small></h3>
+    <ul class="booking-list">
+        {% set cant = 0 %}
+        {% for c in campaigns %}
+            {% if cant < block.mincampaign %}
+                <li>
+                    <div class="booking-item booking-item-small">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                {% if c.picture.galleryHasMedias is defined %}
+                                    <img src="{% path c.picture, 'reference' %}" alt="{{ c }}" title="{{ c }}" />
+                                {% else %}
+                                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ c }}" title="{{ c }}" />
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-5">
+                                <h5 class="booking-item-title">{{ c.title }}</h5>
+                                <ul class="icon-group booking-item-rating-stars">
+                                    <li><i class="fa fa-star"></i>
+                                    </li>
+                                    <li><i class="fa fa-star"></i>
+                                    </li>
+                                    <li><i class="fa fa-star"></i>
+                                    </li>
+                                    <li><i class="fa fa-star"></i>
+                                    </li>
+                                    <li><i class="fa fa-star-o"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">$387</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endif %}
+            {% set cant = cant + 1 %}
+        {% endfor %}
+
+    </ul>
+</div>

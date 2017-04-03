@@ -1,0 +1,8 @@
+{# empty Twig template #}
+{% if sale is not null %}
+   
+    {% for service in sale.services %}       
+        {% render(controller('DaiquiriReservationBundle:Service:showServicesDetail',{'_sonata_admin':'admin.service', 'id':service.id, 'view_service': view_service})) %}
+        <div class="row margin"></div>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,38 @@
+Adult: Adult   # FIXME
+'Are you sure want to delete this item from shopping cart?': 'Are you sure want to delete this item from shopping cart?'   # FIXME
+'Are you sure you want to delete all item from the shopping cart?': 'Are you sure you want to delete all item from the shopping cart?'   # FIXME
+'Birth Date': 'Birth Date'   # FIXME
+Cars: Cars   # FIXME
+'Check Out': 'Check Out'   # FIXME
+'Continue Adding': 'Continue Adding'   # FIXME
+'Delete All Items': 'Delete All Items'   # FIXME
+'Delete Item': 'Delete Item'   # FIXME
+'Empty Cart': 'Empty Cart'   # FIXME
+Excursions: Excursions   # FIXME
+Gender: Gender   # FIXME
+Hotels: Hotels   # FIXME
+Identification: Identification   # FIXME
+Infant: Infant   # FIXME
+Kid: Kid   # FIXME
+'Last Name': 'Last Name'   # FIXME
+Name: Name   # FIXME
+
+'Not have items':
+    ' Please add':
+        '': 'Not have items. Please add.'   # FIXME
+
+Passenger: Passenger   # FIXME
+Pax(s): Pax(s)   # FIXME
+'Paxs for': 'Paxs for'   # FIXME
+Payment: Payment   # FIXME
+Rentlas: Rentlas   # FIXME
+
+'Shopping cart is empty':
+    ' Please add a Product':
+        '': 'Shopping cart is empty. Please add a Product.'   # FIXME
+
+'Total Price': 'Total Price'   # FIXME
+Transfers: Transfers   # FIXME
+'You might also wish see': 'You might also wish see'   # FIXME
+'items in the shoping cart': 'items in the shoping cart'   # FIXME
+'items in the shopping cart': 'items in the shopping cart'   # FIXME

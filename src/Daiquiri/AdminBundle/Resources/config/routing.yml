@@ -1,0 +1,64 @@
+
+daiquiri_admin_transfercolective:
+    resource: "@DaiquiriAdminBundle/Resources/config/routing/transfercolective.yml"
+    prefix:   /transfercolective
+
+
+daiquiri_admin_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DaiquiriAdminBundle:Default:index }
+
+
+daiquiri_admin_autocomplete_get_location:
+    path:     /get-location
+    defaults: { _controller: DaiquiriAdminBundle:Default:getLocation }
+    
+daiquiri_admin_get_currency_availables:
+    path:     /currency/get-all
+    defaults: { _controller: DaiquiriAdminBundle:Default:getAllCurrency } 
+    
+daiquiri_admin_get_current_currency:
+    path:     /currency/get-current
+    defaults: { _controller: DaiquiriAdminBundle:Default:getCurrentCurrency }  
+   
+daiquiri_admin_get_actually_currency:
+    path:     /currency/get-actually-current
+    defaults: { _controller: DaiquiriAdminBundle:Default:getCurrentCurrency }  
+    
+daiquiri_admin_set_current_currency:
+    path:     /currency/set-current/{currency}
+    defaults: { _controller: DaiquiriAdminBundle:Default:setCurrentCurrency }  
+    
+    
+daiquiri_admin_get_market_availables:
+    path:     /market/get-all
+    defaults: { _controller: DaiquiriAdminBundle:Default:getAllMarket } 
+    
+daiquiri_admin_get_current_market:
+    path:     /market/get-current
+    defaults: { _controller: DaiquiriAdminBundle:Default:getCurrentMarket }  
+    
+daiquiri_admin_set_current_market:
+    path:     /market/set-current/{market}
+    defaults: { _controller: DaiquiriAdminBundle:Default:setCurrentMarket }    
+    
+daiquiri_admin_load_form_hotel_price:
+    path:     /hotelprice/load-form-by-id/{id_room}/{id_season}/{id_season_to_load}
+    defaults: { _controller: DaiquiriAdminBundle:HotelPrice:getFormByHotelPriceAndId, _sonata_admin:admin.hotel.price }  
+    
+daiquiri_admin_get_all_season_by_room:
+    path:     /hotelprice/get-all-season-by-room/{id_room}
+    defaults: { _controller: DaiquiriAdminBundle:HotelPrice:getSeasonByRoom, _sonata_admin:admin.hotel.price } 
+    
+daiquiri_admin_get_block_info:
+    path:     /admin/block-info
+    defaults: { _controller: DaiquiriAdminBundle:Default:DataInfoBlock }
+    
+daiquiri_getcampaign_in_block:
+    path:     /get-campaign-in-block-{number}
+    defaults: { _controller: DaiquiriAdminBundle:Campaign:getCampaignInBlock }
+ 
+set_hotel_price_to_campaign_hotel:
+    path:     /set_hotel_price_to_campaign_hotel/{id}/{hp_id}
+    defaults: { _controller: DaiquiriAdminBundle:CampaignHotel:formSetPrice, _sonata_admin: admin.campaign.hotel }
+

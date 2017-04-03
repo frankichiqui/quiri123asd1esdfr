@@ -1,0 +1,109 @@
+<li class="booking-item" style="margin-bottom: 2%">   
+    {{ form_start(form_item, {'name':'name_'~ obj.id ,'attr':{'id':'form_' ~ obj.id },'action': admin.generateUrl('add-to-cart',{id:obj.hotel.id}), 'method': 'POST'}) }} 
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="booking-item-img-wrap">
+                {% if obj.picture.galleryHasMedias is defined %}
+                    <img src="{% path obj.picture, 'reference' %}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+                {% else %}
+                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+                {% endif %}
+                {% if obj.gallery.galleryHasMedias is defined %}
+                    <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>{{ obj.gallery | length }}</div>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="booking-item-title"><b>{{ obj.title }}</b></h6>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i><small> {{ obj.hotel.address }} ({{ obj.hotel.zone.province }})</small></p>
+                </div>
+                <div class="col-md-4">
+                    <p class="booking-item-address form-inline"><i class="fa fa-calendar"></i>
+                        <small><b>{{ 'Day(s)' | trans({}, 'hotel') }}:</b> {{ searcher.getDiffDays() }}</small>
+                    </p>
+                    <small>
+                        <p class="booking-item-destination form-inline"><i class="fa fa-cutlery"></i><b> {{ 'Plan' | trans({}, 'hotel') }}:</b>
+                            {{ form_widget(form_item.plan,{'id':'plan_'~ obj.id, 'attr':{ 'class':'form-control inline small'}}) }}
+                        </p>
+                    </small>
+                    <p class="booking-item-address form-inline"><i class="fa fa-plus"></i>
+                        <small><b>{{ 'Plus for Diets' | trans({}, 'hotel') }}:</b></small>    
+                        <span class="col-md-12" id="plus_diet_{{obj.id }}"></span>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <span class="booking-item-price">{{ price | price | raw }}</span><button type="submit" class="btn btn-primary">{{ 'Book Now' | trans({}, 'hotel') }}</button>
+        </div>
+    </div>
+    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a>
+    <div class="hidden">    
+        {{ form_widget(form_item.quantity,{'id':'quantity_'~ obj.id,'attr':{'value':1 }}) }}
+        {{ form_widget(form_item.hotel,{'attr':{'value':obj.hotel.id }}) }}
+        {{ form_widget(form_item.room,{'attr':{'value':obj.id }}) }}
+        {{ form_widget(form_item.kids,{'attr':{'value':ocupation.kids}}) }}
+        {{ form_widget(form_item.adults,{'attr':{'value': ocupation.adults }}) }}
+        {{ form_widget(form_item.infants,{'attr':{'value': infants }}) }}
+        {{ form_widget(form_item.title,{'attr':{'value':obj.hotel | upper ~' '~ ocupation}}) }}
+        {{ form_widget(form_item.unitariprice,{'attr':{'value':price}}) }}
+        {{ form_widget(form_item.product,{'attr':{'value':ocupation.id}}) }}
+        {{ form_widget(form_item.totalprice,{'attr':{'value':price}}) }}
+        {{ form_widget(form_item.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.enddate,{'attr':{'value':searcher.enddate | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.front,{'attr':{'value':1}}) }}
+    </div>
+
+    {{ form_end(form_item)}} 
+
+    <script>
+        $('form[name="name_{{obj.id}}"]').on('submit', function (e) {
+            formAjaxFront(e, $(this));
+        });
+        var url = '{{ path('daiquiri_reservation_plus_for_by_hotel_and_diet',{'id': obj.hotel.id,'diet': plans[0]['nomenclator'] }) }}';
+
+        $.post(
+                url, $('form[name="name_{{obj.id}}"]').serialize(),
+                function (data) {
+                    //console.log(form);
+                    if (data.success) {
+                        $('#plus_diet_{{ obj.id }}').html('+ ' + data.value);
+                    } else {
+                        console.log("error");
+                    }
+                }, 'JSON');
+
+
+
+
+        $('#plan_' + '{{ obj.id }}').on("change", function (e) {
+
+            var diet = $('#plan_' + '{{ obj.id }}').val();
+            var url_part = url.split("/");
+
+            urln = "";
+            for (var i = 0; i < url_part.length - 1; i++)
+            {
+                urln += url_part[i] + "/";
+            }
+            urln = urln + diet;
+            console.log(urln);
+
+            $.post(urln, $('form[name="name_{{obj.id}}"]').serialize(),
+                    function (data) {
+                        //console.log(form);
+                        if (data.success) {
+                            $('#plus_diet_{{ obj.id }}').html('+ ' + data.value);
+                        } else {
+                            console.log("error");
+                        }
+                    }, 'JSON');
+        });
+    </script>
+
+</li>

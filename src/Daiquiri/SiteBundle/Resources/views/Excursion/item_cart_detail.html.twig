@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="pull-right box-tools">
+        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div style="margin-top: 4%;">
+        <div class="col-md-3">
+            {% if product.picture is defined %}
+                <img src="{% path product.picture, 'reference' %}" alt="{{ it.title }}" title="{{ it.title }}" />
+            {% else %}
+                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ it.title }}" title="{{ it.title }}" />
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+            {{ it.product.description | truncate(190) | raw }}
+        </div>
+        <div class="col-md-4">
+            <h5 class="booking-item-title">{{ 'Service' | trans({}, 'excursion') }}: {{ it.title }} x {{ it.quantity }} </h5>
+            <p class="booking-item-address"><i class="fa fa-map-marker"></i>                
+                <small><b>{{ 'Pickup Place' | trans({}, 'excursion') }}:</b> {{ it.pickupplace }}</small>
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-male"></i>
+                <small><b>{{ 'Adult(s)' | trans({}, 'excursion') }}:</b></small> {{ it.adult }}
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-child"></i>
+                <small><b>{{ 'Kid(s)' | trans({}, 'excursion') }}:</b></small> {{ it.kid }}
+            </p>
+            <p class="booking-item-address form-inline"><i class="fa fa-calendar"></i>
+                <small><b>{{ 'Departure' | trans({}, 'excursion') }}:</b></small> {{ it.startdate | date('M j, Y ') }}
+            </p>              
+        </div>
+        <div class="col-md-2">
+            <p class="booking-item-address form-inline"><i class="fa fa-dollar"></i>
+                {{ 'Price' | trans({}, 'excursion') }}: <span class="booking-item-price">{{ it.totalprice | price | raw }}</span>
+            </p> 
+        </div>
+    </div>
+</div>

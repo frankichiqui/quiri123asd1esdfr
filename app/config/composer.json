@@ -1,0 +1,6 @@
+{
+    "require": {
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "a2lix/translation-form-bundle": "^2.1"
+    }
+}

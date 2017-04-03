@@ -1,0 +1,521 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+
+    <div class="container">
+        {% include 'breadcrumb/breadcrumb.html.twig'%}
+        <div class="booking-item-details">
+            <header class="booking-item-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2 class="lh1em">{{ hotel.title }}</h2>
+                        <p class="lh1em text-small"><i class="fa fa-map-marker"></i> {{ hotel.address }}</p>
+                        <ul class="list list-inline text-small">
+                            <li><a href="mailto:{{ hotel.email }}"><i class="fa fa-envelope"></i> {{ 'Hotel E-mail' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="{{ hotel.website }}"><i class="fa fa-home"></i>{{ 'Hotel Website' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><i class="fa fa-phone"></i> {{ hotel.phone }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="booking-item-header-price"><small>{{ 'from' | trans({}, 'hoteldetails') }}</small>  <span class="text-lg">{{ hotel.getFromprice() | price | raw }}</span>/{{ 'night' | trans({}, 'hoteldetails') }}</p>
+                    </div>
+
+            </header>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="tabbable booking-details-tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#tab-1" data-toggle="tab"><i class="fa fa-camera"></i>{{ 'Photos' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-2" data-toggle="tab"><i class="fa fa-info-circle"></i>{{ 'About' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#google-map-tab" data-toggle="tab"><i class="fa fa-map-marker"></i>{{ 'On the Map' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+
+                            <li><a href="#tab-5" data-toggle="tab"><i class="fa fa-asterisk"></i>{{ 'Facilities' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-6" data-toggle="tab"><i class="fa fa-bars"></i>{{ 'Similar' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-7" data-toggle="tab"><i class="fa fa-comments"></i>{{ 'Reviews' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-1">
+                                <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
+                                    {% if hotel.picture.galleryHasMedias is defined %}
+                                        <img src="{% path hotel.picture, 'reference' %}" alt="{{ hotel.title }}" title="{{ hotel.title }}" />
+                                    {% else %}
+                                        <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ hotel.title }}" title="{{ hotel.title }}" />
+                                    {% endif %}
+                                    {% if hotel.gallery.galleryHasMedias is defined %}
+
+                                        {% for img in hotel.gallery.galleryHasMedias %}
+                                            <img src="{% path img.media, 'reference' %}" alt="{{ hotel.title }}" title="{{ hotel.title }}" />
+                                        {% else %}
+                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ hotel.title }}" title="{{ hotel.title }}"  /> 
+                                        {% endfor %} 
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-2">
+                                <div class="mt20">
+                                    <p>{{ hotel.description | raw }}</p>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="google-map-tab">
+                                {% if hotel.hasGoogleLocation %}
+                                    <div id="map-canvas" style="width:100%; height:400px;">
+                                        <input type="hidden" id="latitude" value="{{ hotel.latitude }}" />
+                                        <input type="hidden" id="longitude" value="{{ hotel.longitude }}" />
+                                    </div>
+                                {% else %}
+
+                                {% endif %}
+                            </div>
+                            <div class="tab-pane fade" id="tab-5">
+                                <div class="row mt20">
+
+                                    <div class="col-md-4">
+                                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                                            {% for type in hotel.getHotelFacilitys()  %}
+                                                {% if loop.index < 5 %}
+                                                    <li data-toggle="tooltip" data-html="true" title="<div>{{ type.description }}</div>"><i class="{{ type.hotelfacilitytype.icon }}"></i><span class="booking-item-feature-title">{{ type.title }}</span> </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                        </ul>
+                                    </div> 
+                                    <div class="col-md-4">
+                                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                                            {% for type in hotel.getHotelFacilitys()  %}
+                                                {% if loop.index >=5  and loop.index < 9 %}
+                                                    <li data-toggle="tooltip" data-html="true" title="<div>{{ type.description }}</div>"><i class="{{ type.hotelfacilitytype.icon }}"></i><span class="booking-item-feature-title">{{ type.title }}</span> </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                                            {% for type in hotel.getHotelFacilitys()  %}
+                                                {% if loop.index >=9  and loop.index < 13 %}
+                                                    <li data-toggle="tooltip" data-html="true" title="<div>{{ type.description }}</div>"><i class="{{ type.hotelfacilitytype.icon }}"></i><span class="booking-item-feature-title">{{ type.title }}</span> </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-6">
+                                <div class="mt20">
+                                    <ul class="booking-list">
+                                        {% for s in similar %}
+                                            <li>
+                                                <a class="booking-item" href="#">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="booking-item-img-wrap">
+                                                                {% if hotel.picture.galleryHasMedias is defined %}
+                                                                    <img src="{% path s.picture, 'reference' %}" alt="{{ s.title }}" title="{{ s.title }}" />
+                                                                {% else %}
+                                                                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ s.title }}" title="{{ s.title }}" />
+                                                                {% endif %}
+                                                                {% if hotel.gallery.galleryHasMedias is defined %}
+                                                                    <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>{{ hotel.gallery }}</div>
+                                                                    {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="booking-item-rating">
+                                                                <ul class="icon-group booking-item-rating-stars">
+                                                                    {% for n in 0..s.stars %}
+                                                                        <li>
+                                                                            <i class="fa fa-star"></i>
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                </ul><span class="booking-item-rating-number"><b >3.5</b> of 5</span><small>(478 reviews)</small>
+                                                            </div>
+                                                            <h5 class="booking-item-title">{{ s }}</h5>
+                                                            <p class="booking-item-address"><i class="fa fa-map-marker"></i> {{ s.address }}</p><small class="booking-item-last-booked"></small>
+                                                        </div>
+                                                        <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">{{ s.getFromprice()| price | raw }}</span><span>/night</span><span class="btn btn-primary">Book Now</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-7">
+                                <div class="row hidden " id="load_form">
+
+                                </div>
+                                <div class="mt20">
+                                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        <div class="text-right mb10">
+                                            <smal>{{ 'You must be logged to write a review' | trans({}, 'hoteldetails') }}</smal>
+                                            <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">{{ 'Login' | trans({}, 'header') }}</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="text-right mb10">
+                                            <a class="btn btn-primary" href="{{ path('get-form-to-new-review-hotel',{'slug':hotel.slug}) }}" onclick="loadform(this); return false;">{{ 'Write a Review' | trans({}, 'hoteldetails') }}</a>
+                                        </div>
+
+
+                                    {% endif %}
+
+
+                                    <ul class="booking-item-reviews list">
+                                        {% for review in  hotel.reviews %}
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="booking-item-review-person">
+                                                            <a class="booking-item-review-person-avatar round" href="#">
+                                                                {% if review.user.picture.galleryHasMedias is defined %}
+                                                                    <img src="{% path review.picture, 'reference' %}" alt="{{ review.title }}" title="{{ review.title }}" />
+                                                                {% else %}
+                                                                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ review.title }}" title="{{ review.title }}" />
+                                                                {% endif %}
+                                                            </a>
+                                                            <p class="booking-item-review-person-name"><a href="#">{{ review.user }}</a>
+                                                            </p>
+                                                            <p class="booking-item-review-person-loc"><small><a href="#">{{ review.user.reviews | length }} {{ 'Review(s)' | trans({}, 'hoteldetails') }} </a></small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="booking-item-review-content">
+                                                            <h5>{{ review.title }}</h5>
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                {{ review.printStart() | raw }}
+                                                            </ul>
+                                                            <p><span class="booking-item-review-more"> {{ review.description[:250] | raw }}</span>
+                                                            </p>
+                                                            <div class="booking-item-review-more-content">
+                                                                {{ review.description[250:] | raw }}
+                                                                <p class="text-small mt20"> {{ 'Stayed' | trans({}, 'hoteldetails') }} {{ review.getCreatedAt | date('M j, Y')}}</p>
+                                                                <div class="row">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
+                                                            </div>
+                                                            <p class="booking-item-review-rate">{{ 'Was this review helpful?' | trans({}, 'hoteldetails') }}
+                                                                <a class="plususefull fa fa-thumbs-o-up box-icon-inline round" href="{{ path('review_plus_usefull',{'id':review.id}) }}" onclick="pulsusefull(this);
+                                                                    return false;" ></a><b class="text-color"> {{ review.usefull }}</b>
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+
+
+
+                                    </ul>
+                                </div>
+                                <div class="row wrap">
+                                    <div class="col-md-5">
+                                        <p><small>{{ hotel.reviews | length }} reviews on this hotel.</small>
+                                        </p>
+
+                                    </div>{#
+                                    <div class="col-md-7">
+
+                                        <ul class="pagination">
+                                            <li class="active"><a href="#">1</a>
+                                            </li>
+                                            <li><a href="#">2</a>
+                                            </li>
+                                            <li><a href="#">3</a>
+                                            </li>
+                                            <li><a href="#">4</a>
+                                            </li>
+                                            <li><a href="#">5</a>
+                                            </li>
+                                            <li><a href="#">6</a>
+                                            </li>
+                                            <li><a href="#">7</a>
+                                            </li>
+                                            <li class="dots">...</li>
+                                            <li><a href="#">43</a>
+                                            </li>
+                                            <li class="next"><a href="#">Next Page</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    #}
+                                </div>
+
+
+                                <div class="gap gap-small"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="booking-item-meta">
+                        <h2 class="lh1em mt40">Exeptional!</h2>
+                        <h3>{{ hotel.getReviewEvaluation() }}% <small >of guests recommend</small></h3>
+                        <div class="booking-item-rating">
+                            <ul class="icon-list icon-group booking-item-rating-stars">
+                                {{ hotel.printStart() | raw }}
+                            </ul><span class="booking-item-rating-number"><b >{{ hotel.getAverageVotes() }}</b> of 5 <small class="text-smaller">guest rating</small></span>
+                            <p><a class="text-default" href="#">based on {{ hotel.reviews | length}} reviews</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="booking-item-dates-change">
+                        <form action="{{ path('hotel_search_into_show',{'slug':hotel.slug}) }}" method="POST">
+                            <div class="input-daterange" data-date-format="MM d, yyyy">
+                                <div class="form-group form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-hightlight"></i>
+                                    <label>{{ 'Check-in' | trans({}, 'hotel') }}</label>                                 
+                                    {{ form_widget(form_search.startdate, {'attr':{'class': 'form-control ', 'idm': 'd-s-h','ename':'start' }}) }}
+                                </div>
+                                <div class="form-group form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-hightlight"></i>
+                                    <label>{{ 'Check-out' | trans({}, 'hotel') }}</label>       
+                                    
+                                    {{ form_widget(form_search.enddate, {'attr':{'ename':'end','class': 'form-control ', 'idm': 'd-e-h' }}) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-lg form-group-select-plus">
+
+                                        <label>{{ 'Adults' | trans({}, 'form') }}</label>
+                                        <div class="btn-group btn-group-select-num adults" data-toggle="buttons">
+                                            <label class="btn btn-primary {% if salida is not defined %}active{% endif %}" value="1" onclick="checkRHotelAdults(this);">
+                                                <input type="radio" name="rhotel_adults" />1</label>
+                                            <label class="btn btn-primary" value="2" onclick="checkRHotelAdults(this);">
+                                                <input type="radio" name="rhotel_adults" />2</label>
+                                            <label class="btn btn-primary" value="3" onclick="checkRHotelAdults(this);">
+                                                <input type="radio" name="rhotel_adults" />3</label>
+                                            <label class="btn btn-primary" onclick="checkRHotelAdults(this);">
+                                                <input type="radio" name="rhotel_adults" />3+</label>
+                                        </div>
+                                        {{ form_widget(form_search.adults, {'attr':{'class': 'form-control hidden', 'idm': 'rh_adults' }}) }}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group form-group-lg form-group-select-plus">
+                                        <label>{{ 'Kids' | trans({}, 'form') }}</label>
+                                        <div class="btn-group btn-group-select-num kids" data-toggle="buttons">
+                                            <label class="btn btn-primary {% if salida is not defined %}active{% endif %}" value="0" onclick="checkRHotelKids(this);">
+                                                <input type="radio" name="rhotel_kids" />0</label>
+                                            <label class="btn btn-primary" value="1" onclick="checkRHotelKids(this);">
+                                                <input type="radio" name="rhotel_kids" />1</label>
+                                            <label class="btn btn-primary " value="2" onclick="checkRHotelKids(this);">
+                                                <input type="radio" name="rhotel_kids" />2</label>
+                                            <label class="btn btn-primary" onclick="checkRHotelKids(this);">
+                                                <input type="radio" name="rhotel_kids" />3</label>
+                                        </div>
+                                        {{ form_widget(form_search.kids, {'attr':{'class': 'form-control hidden', 'idm': 'rh_kids' }}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-lg form-group-select-plus">
+                                        <label>{{ 'Infants' | trans({}, 'hotel') }}</label>
+                                        <div class="btn-group btn-group-select-num infants" data-toggle="buttons">
+                                            <label class="btn btn-primary {% if salida is not defined %}active{% endif %}" value="0" onclick="checkRHotelInfants(this);">
+                                                <input type="radio" name="rhotel_infants" />0</label>
+                                            <label class="btn btn-primary" onclick="checkRHotelInfants(this);">
+                                                <input type="radio" name="rhotel_infants" />1+</label>                               
+                                        </div>
+                                        {{ form_widget(form_search.infants, {'attr':{'class': 'form-control hidden', 'idm': 'rh_infants' }}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt20">
+                                    <button class="btn btn-primary btn-lg" type="submit" name="btn_create_and_edit">{{ 'Search Room' | trans({}, 'search') }}</button>
+                                </div>
+                            </div>
+
+                            <div class="hidden">
+                                {{form_widget(form_search.hotel,{'attr':{'value':hotel.id}})}}
+                                {{ form_rest(form_search)}}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="gap gap-small"></div>
+        {% if salida is not defined %}
+            <h3>{{ 'Available Rooms' | trans({}, 'hoteldetails') }}</h3>
+        {% else %}
+            <h4>{{ 'Available Rooms in ' | trans({}, 'hoteldetails') }}{{ startdate | date('F d, l') }}  <b>{{ 'to'| trans({}, 'hoteldetails') }} </b> {{ enddate | date('F d, l') }}  </h4>
+        {% endif %}
+        <div class="row">
+
+
+            <div class="col-md-9">
+                <ul class="booking-list">
+                    {% if salida is not defined %}
+
+                        {% for room in hotel.rooms %}
+                            <li>
+                                <a class="booking-item">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {% if room.picture.galleryHasMedias is defined %}
+                                                <img src="{% path room.picture, 'reference' %}" alt="{{ room.title }}" title="{{ room.title }}" />
+                                            {% else %}
+                                                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ room.title }}" title="{{ room.title }}" />
+                                            {% endif %}                                        
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5 class="booking-item-title">{{ room.title }}</h5>
+                                            <p class="text-small">{{ room.description | truncate(50)}}</p>
+                                            <ul class="booking-item-features booking-item-features-sign clearfix">
+                                                <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x {{ room.maxAdultOcup() }}</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x {{ room.numberofbeds }}</span>
+                                                </li>
+                                                <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">{{ room.area }}</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="booking-item-features booking-item-features-small clearfix">
+                                                {% for a in room.getRoomFacilities()%}
+                                                    <li rel="tooltip" data-placement="top" title="{{ a }}"><i class="{{a.faicon }}"></i>
+                                                    </li>
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3">{{ 'from' | trans({}, 'hoteldetails') }} <span class="booking-item-price"> {{ room.getFromprice() | price | raw }}</span><span>/{{ 'night' | trans({}, 'hoteldetails') }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        {# aki se tiene qque poner los intem result del front #}
+
+                        {% for hotel in salida.currentPageResults %}
+                            {% for room in hotel.availableroom %}
+                                {% render(controller('DaiquiriSiteBundle:OcupationSearcher:renderResultOcupationItem',{ '_sonata_admin' : 'admin.hotel','item':room})) %}     
+                            {% endfor %}
+                        {% else %}
+
+                            <div class="alert alert-info">                            
+                                <p class="text-bigger"> {{ 'No rooms to show' | trans({}, 'hotel') }}</p>
+                            </div>
+
+
+                        {% endfor %}
+
+                    {% endif%}
+
+                </ul>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="gap gap-small"></div>
+
+</div>
+</div>
+
+{% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+{% endblock %}
+
+{% block other_js %}
+
+
+
+    <script>
+        {% if salida is defined %}
+            $(document).ready(function () {
+            $('.adults').children('label').each(function (index, element) {
+            if ($(element).attr('value') == {{ searcher.adults }}) {
+            $(element).addClass('active');
+            }
+            });
+            $('.kids').children('label').each(function (index, element) {
+            if ($(element).attr('value') == {{ searcher.kids }}) {
+            $(element).addClass('active');
+            }
+            });
+            $('.infants').children('label').each(function (index, element) {
+            if ($(element).attr('value') == {{ searcher.infants }}) {
+            $(element).addClass('active');
+            }
+            });
+            })
+        {% endif %}
+
+                    function pulsusefull(a) {
+                    a = $(a);
+                    if (a.attr('href') != '#') {
+                    $.ajax({
+                    url: a.attr('href'),
+                            dataType: "json",
+                            success: function (data) {
+                            if (data.success) {
+                            a.removeClass('fa-thumbs-o-up');
+                            a.addClass('fa-check');
+                            a.attr('href', '#');
+                            a.next().html(' ' + data.cant);
+                            } else {
+
+                            }
+
+                            }
+
+
+                    });
+                    }
+                    }
+            function loadform(element) {
+
+            $('#load_form').load('{{ path('get-form-to-new-review-hotel',{'slug':hotel.slug}) }}', function () {
+            $('#load_form').removeClass('hidden');
+            $('#load_form').slideDown();
+            $(element).addClass('hidden');
+            });
+            }
+
+            var flip = 0;
+            $(".advanced_hotel").on("click", function () {
+            $("#divadv_hotel").toggle(flip++ % 2 === 0);
+            });
+            var flip1 = 0;
+            $(".check").on("ifChecked", function () {
+            $("#divadv_hotel").toggle(flip1++ % 2 === 0);
+            });
+            $(".check").on("ifUnchecked", function () {
+            $("#divadv_hotel").toggle(flip1++ % 2 === 0);
+            });
+                   // $("#date-start-hotel").on("changeDate", function () {
+                   // $('input[idm="d-s-h"]').val(
+                  ///          $("#date-start-hotel").datepicker('getFormattedDate')
+                 //           );
+                 //   });
+                 //   $("#date-end-hotel").on("changeDate", function () {
+                 //   $('input[idm="d-e-h"]').val(
+                 //           $("#date-end-hotel").datepicker('getFormattedDate')
+                //            );
+                //    });
+            function checkRHotelAdults(obj) {
+            $('#daiquiri_sitebundle_ocupationsearcher_adults').val($(obj)[0].innerText);
+            }
+            function checkRHotelKids(obj) {
+            $('select[idm="rh_kids"]').val($(obj)[0].innerText);
+            }
+
+            function checkRHotelInfants(obj) {
+            $('select[idm="rh_infants"]').val($(obj)[0].innerText);
+            }
+
+    </script>
+{% endblock %}

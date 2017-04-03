@@ -1,0 +1,12 @@
+{# empty Twig template #}
+{% extends "SonataAdminBundle:CRUD:base_list.html.twig" %}
+
+{% block tab_menu %} 
+   {% if admin.hasRoute('list') %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ admin.generateUrl('form-package-option-item') }}" class="sonata-action-element">
+                <i class="fa fa-search"></i> 
+                Searcher Package</a></li>
+    </ul>
+       {% endif %}
+{% endblock %}

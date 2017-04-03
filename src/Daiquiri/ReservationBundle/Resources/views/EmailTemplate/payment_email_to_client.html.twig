@@ -1,0 +1,36 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Payment Confirmation' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    {{ payment.client.getFullName() }}
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'Your payment has been recibed.' | trans({}, 'email') }}            
+    </div>    
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Detail</div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Amount' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.amount }}</div>
+            </div>    
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Currency' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.currency | upper }}</div>
+            </div>    
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Description' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.description | upper }}</div>
+            </div> 
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Order ID' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.getOrderId() | upper }}</div>
+            </div> 
+            <div style="clear: both"></div>
+        </div>
+    </div>   
+
+
+{% endblock %}

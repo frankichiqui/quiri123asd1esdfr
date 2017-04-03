@@ -1,0 +1,840 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="{{ url('daiquiri_site_homepage') }}">Home</a>
+            </li>
+            <li><a href="#">United States</a>
+            </li>
+            <li><a href="#">New York (NY)</a>
+            </li>
+            <li><a href="#">New York City</a>
+            </li>
+            <li><a href="#">New York City Hotels</a>
+            </li>
+            <li class="active">InterContinental New York Barclay</li>
+        </ul>
+        <div class="booking-item-details">
+            <header class="booking-item-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2 class="lh1em">{{ hotel.title }}</h2>
+                        <p class="lh1em text-small"><i class="fa fa-map-marker"></i> {{ hotel.address }}</p>
+                        <ul class="list list-inline text-small">
+                            <li><a href="mailto:{{ hotel.email }}"><i class="fa fa-envelope"></i> {{ 'Hotel E-mail' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="{{ hotel.website }}"><i class="fa fa-home"></i>{{ 'Hotel Website' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><i class="fa fa-phone"></i> {{ hotel.phone }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="booking-item-header-price"><small>{{ 'price from' | trans({}, 'hoteldetails') }}</small>  <span class="text-lg">$350</span>/{{ 'night' | trans({}, 'hoteldetails') }}</p>
+                    </div>
+
+            </header>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="tabbable booking-details-tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#tab-1" data-toggle="tab"><i class="fa fa-camera"></i>{{ 'Photos' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-2" data-toggle="tab"><i class="fa fa-info-circle"></i>{{ 'About' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#google-map-tab" data-toggle="tab"><i class="fa fa-map-marker"></i>{{ 'On the Map' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-4" data-toggle="tab"><i class="fa fa-signal"></i>{{ 'Rating' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-5" data-toggle="tab"><i class="fa fa-asterisk"></i>{{ 'Facilities' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-6" data-toggle="tab"><i class="fa fa-bars"></i>{{ 'Similar' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                            <li><a href="#tab-7" data-toggle="tab"><i class="fa fa-comments"></i>{{ 'Reviews' | trans({}, 'hoteldetails') }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-1">
+                                <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
+                                    {% if hotel.picture.galleryHasMedias is defined %}
+                                        <img src="{% path hotel.picture, 'reference' %}" alt="{{ hotel.title }}" title="{{ hotel.title }}" />
+                                    {% else %}
+                                        <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ hotel.title }}" title="{{ hotel.title }}" />
+                                    {% endif %}
+                                    {% if hotel.gallery.galleryHasMedias is defined %}
+
+                                        {% for img in hotel.gallery.galleryHasMedias %}
+                                            <img src="{% path img.media, 'reference' %}" alt="{{ hotel.title }}" title="{{ hotel.title }}" />
+                                        {% else %}
+                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ hotel.title }}" title="{{ hotel.title }}"  /> 
+                                        {% endfor %} 
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-2">
+                                <div class="mt20">
+                                    <p>{{ hotel.description | raw }}</p>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="google-map-tab">
+                                <div id="map-canvas1" style="width:100%; height:400px;">
+                                    <input type="hidden" id="latitude" value="{{ hotel.latitude }}" />
+                                    <input type="hidden" id="longitude" value="{{ hotel.longitude }}" />
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-4">
+                                <div class="mt20">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h4 class="lhem">Traveler rating</h4>
+                                            <ul class="list booking-item-raiting-list">
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Exellent</div>
+                                                    <div class="booking-item-raiting-list-bar">
+                                                        <div style="width:88%;"></div>
+                                                    </div>
+                                                    <div class="booking-item-raiting-list-number">1343</div>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Very Good</div>
+                                                    <div class="booking-item-raiting-list-bar">
+                                                        <div style="width:6%;"></div>
+                                                    </div>
+                                                    <div class="booking-item-raiting-list-number">70</div>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Average</div>
+                                                    <div class="booking-item-raiting-list-bar">
+                                                        <div style="width:2%;"></div>
+                                                    </div>
+                                                    <div class="booking-item-raiting-list-number">27</div>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Poor</div>
+                                                    <div class="booking-item-raiting-list-bar">
+                                                        <div style="width:2%;"></div>
+                                                    </div>
+                                                    <div class="booking-item-raiting-list-number">12</div>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Terrible</div>
+                                                    <div class="booking-item-raiting-list-bar">
+                                                        <div style="width:1%;"></div>
+                                                    </div>
+                                                    <div class="booking-item-raiting-list-number">8</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h4 class="lhem">Summary</h4>
+                                            <ul class="list booking-item-raiting-summary-list">
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Sleep</div>
+                                                    <ul class="icon-group booking-item-rating-stars">
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Location</div>
+                                                    <ul class="icon-group booking-item-rating-stars">
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o text-gray"></i>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Service</div>
+                                                    <ul class="icon-group booking-item-rating-stars">
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Clearness</div>
+                                                    <ul class="icon-group booking-item-rating-stars">
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="booking-item-raiting-list-title">Rooms</div>
+                                                    <ul class="icon-group booking-item-rating-stars">
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                        <li><i class="fa fa-smile-o"></i>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>{#<a class="btn btn-primary" href="#">Write a Review</a>#}
+                            </div>
+                            <div class="tab-pane fade" id="tab-5">
+                                <div class="row mt20">
+                                    <div class="col-md-4">
+                                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                                            <li><i class="im im-wi-fi"></i><span class="booking-item-feature-title">Wi-Fi Internet</span>
+                                            </li>
+                                            <li><i class="im im-parking"></i><span class="booking-item-feature-title">Parking</span>
+                                            </li>
+                                            <li><i class="im im-plane"></i><span class="booking-item-feature-title">Airport Transport</span>
+                                            </li>
+                                            <li><i class="im im-bus"></i><span class="booking-item-feature-title">Shuttle Bus Service</span>
+                                            </li>
+                                            <li><i class="im im-fitness"></i><span class="booking-item-feature-title">Fitness Center</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                                            <li><i class="im im-pool"></i><span class="booking-item-feature-title">Pool</span>
+                                            </li>
+                                            <li><i class="im im-spa"></i><span class="booking-item-feature-title">SPA</span>
+                                            </li>
+                                            <li><i class="im im-restaurant"></i><span class="booking-item-feature-title">Restaurant</span>
+                                            </li>
+                                            <li><i class="im im-wheel-chair"></i><span class="booking-item-feature-title">Wheelchair Access</span>
+                                            </li>
+                                            <li><i class="im im-business-person"></i><span class="booking-item-feature-title">Business Center</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                                            <li><i class="im im-children"></i><span class="booking-item-feature-title">Children Activites</span>
+                                            </li>
+                                            <li><i class="im im-casino"></i><span class="booking-item-feature-title">Casino & Gambling</span>
+                                            </li>
+                                            <li><i class="im im-bar"></i><span class="booking-item-feature-title">Bar/Lounge</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-6">
+                                <div class="mt20">
+                                    <ul class="booking-list">
+                                        <li>
+                                            <a class="booking-item" href="#">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="booking-item-img-wrap">
+                                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="Image Alternative text" title="hotel PORTO BAY SERRA GOLF suite2" />
+                                                            <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>17</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="booking-item-rating">
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star-half-empty"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star-o"></i>
+                                                                </li>
+                                                            </ul><span class="booking-item-rating-number"><b >3.5</b> of 5</span><small>(478 reviews)</small>
+                                                        </div>
+                                                        <h5 class="booking-item-title">Affinia Shelburne</h5>
+                                                        <p class="booking-item-address"><i class="fa fa-map-marker"></i> East Elmhurst, NY (LaGuardia Airport (LGA))</p><small class="booking-item-last-booked">Latest booking: 4 hours ago</small>
+                                                    </div>
+                                                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">$476</span><span>/night</span><span class="btn btn-primary">Book Now</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="booking-item" href="#">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="booking-item-img-wrap">
+                                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="Image Alternative text" title="hotel PORTO BAY SERRA GOLF living room" />
+                                                            <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>5</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="booking-item-rating">
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star-half-empty"></i>
+                                                                </li>
+                                                            </ul><span class="booking-item-rating-number"><b >4.6</b> of 5</span><small>(447 reviews)</small>
+                                                        </div>
+                                                        <h5 class="booking-item-title">Waldorf Astoria New York</h5>
+                                                        <p class="booking-item-address"><i class="fa fa-map-marker"></i> Queens (LaGuardia Airport (LGA))</p><small class="booking-item-last-booked">Latest booking: 46 minutes ago</small>
+                                                    </div>
+                                                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">$218</span><span>/night</span><span class="btn btn-primary">Book Now</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="booking-item" href="#">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="booking-item-img-wrap">
+                                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="Image Alternative text" title="hotel PORTO BAY SERRA GOLF suite" />
+                                                            <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>25</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="booking-item-rating">
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                            </ul><span class="booking-item-rating-number"><b >5</b> of 5</span><small>(1276 reviews)</small>
+                                                        </div>
+                                                        <h5 class="booking-item-title">The Kimberly Hotel</h5>
+                                                        <p class="booking-item-address"><i class="fa fa-map-marker"></i> East Elmhurst, NY (LaGuardia Airport (LGA))</p><small class="booking-item-last-booked">Latest booking: 26 minutes ago</small>
+                                                    </div>
+                                                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">$150</span><span>/night</span><span class="btn btn-primary">Book Now</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="booking-item" href="#">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="booking-item-img-wrap">
+                                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="Image Alternative text" title="LHOTEL PORTO BAY SAO PAULO luxury suite" />
+                                                            <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>8</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="booking-item-rating">
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star-o"></i>
+                                                                </li>
+                                                            </ul><span class="booking-item-rating-number"><b >3.8</b> of 5</span><small>(243 reviews)</small>
+                                                        </div>
+                                                        <h5 class="booking-item-title">Wyndham Garden Chinatown</h5>
+                                                        <p class="booking-item-address"><i class="fa fa-map-marker"></i> Bronx (Bronx)</p><small class="booking-item-last-booked">Latest booking: 45 minutes ago</small>
+                                                    </div>
+                                                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">$332</span><span>/night</span><span class="btn btn-primary">Book Now</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="booking-item" href="#">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="booking-item-img-wrap">
+                                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="Image Alternative text" title="hotel PORTO BAY LIBERDADE" />
+                                                            <div class="booking-item-img-num"><i class="fa fa-picture-o"></i>29</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="booking-item-rating">
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star-half-empty"></i>
+                                                                </li>
+                                                            </ul><span class="booking-item-rating-number"><b >4.3</b> of 5</span><small>(767 reviews)</small>
+                                                        </div>
+                                                        <h5 class="booking-item-title">Holiday Inn Express Kennedy</h5>
+                                                        <p class="booking-item-address"><i class="fa fa-map-marker"></i> Jamaica, NY (Kennedy Airport (JFK))</p><small class="booking-item-last-booked">Latest booking: 28 minutes ago</small>
+                                                    </div>
+                                                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">$337</span><span>/night</span><span class="btn btn-primary">Book Now</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-7">
+                                <div class="mt20">
+                                    <div class="text-right mb10"><a class="btn btn-primary" href="#review">{{ 'Write a Review' | trans({}, 'hoteldetails') }}</a>
+                                    </div>
+                                    <ul class="booking-item-reviews list">
+                                        {% for review in reviews %}   
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="booking-item-review-person">
+                                                            <a class="booking-item-review-person-avatar round" href="#">
+                                                                <img class="origin round" {% if review.userReview.avatar is not null %} src="{{ app.user.avatar }}" {% elseif review.userReview.picture is not null %} src="{{ asset('uploads/user/profilepics/' ~ review.userReview.picture) }}" {% else %} src="{{ asset('bundles/daiquirisite/img/300x300.png') }}" {% endif %} {% set firstname = review.userReview.firstname | split(' ')%}  {% set lastname = review.userReview.lastname | split(' ')%} {% set fullname = firstname[0] ~" "~ lastname[0]  %} alt="Avatar" title="{{ fullname }}" /></a>
+                                                            <p class="booking-item-review-person-name"><a href="#">{{ fullname }}</a>
+                                                            </p>
+                                                            <p class="booking-item-review-person-loc">{{ review.userReview.city ~', '~ review.userReview.country }}</p><small><a href="#">{{ review.userReview.reviews | length }} {{ 'Reviews' | trans({}, 'hoteldetails') }}</a></small>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="booking-item-review-content">                                                         
+                                                            <h5>"{{ review.title }}"</h5>
+                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                                <li><i class="fa fa-star"></i>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="description">
+                                                                {% set description = nl2p(review.description) %}
+                                                                {{ description | raw }}
+                                                            </div>
+                                                            <p class="text-small mt20">{{ 'Created At' | trans({}, 'profile') }}  {{ review.createdAt | date('M j, Y') }}</p>
+                                                            {#<div class="row">
+                                                                <div class="col-md-4">
+                                                                    <ul class="list booking-item-raiting-summary-list">
+                                                                        <li>
+                                                                            <div class="booking-item-raiting-list-title">Sleep</div>
+                                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="booking-item-raiting-list-title">Location</div>
+                                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="booking-item-raiting-list-title">Service</div>
+                                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <ul class="list booking-item-raiting-summary-list">
+                                                                        <li>
+                                                                            <div class="booking-item-raiting-list-title">Clearness</div>
+                                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="booking-item-raiting-list-title">Rooms</div>
+                                                                            <ul class="icon-group booking-item-rating-stars">
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                                <li><i class="fa fa-smile-o"></i>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>#}
+                                                        </div>
+                                                        <div class="booking-item-review-expand"><span class="booking-item-review-expand-more">More <i class="fa fa-angle-down"></i></span><span class="booking-item-review-expand-less">Less <i class="fa fa-angle-up"></i></span>
+                                                        </div>
+                                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                                            <p class="booking-item-review-rate">{{ 'Was this review helpful?' | trans({}, 'hoteldetails') }}
+                                                                <a class="fa fa-thumbs-o-up box-icon-inline round" href="#" onclick="setPositiveVote({{ review.id }});
+                                                                        return false;"></a><b id="{{ review.id }}_positiveVotes" class="text-color">{% if review.positiveVotes is null %} 0 {% else %} {{ review.positiveVotes }} {% endif %}</b>
+                                                                <a class="fa fa-thumbs-o-down box-icon-inline round" href="#" onclick="setNegativeVote({{ review.id }});
+                                                                        return false;"></a><b id="{{ review.id }}_negativeVotes" class="text-color">{% if review.negativeVotes is null %} 0 {% else %} {{ review.negativeVotes }} {% endif %}</b>
+                                                            </p>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}                                        
+                                    </ul>
+                                </div>
+                                <div class="row wrap">
+                                    <div class="col-md-5">
+                                        <p><small>{{ reviews | length }} reviews on this hotel. &nbsp;&nbsp;Showing 1 to 7</small>
+                                        </p>
+
+                                    </div>
+                                    <div class="col-md-7">
+                                        <ul class="pagination">
+                                            <li class="active"><a href="#">1</a>
+                                            </li>
+                                            <li><a href="#">2</a>
+                                            </li>
+                                            <li><a href="#">3</a>
+                                            </li>
+                                            <li><a href="#">4</a>
+                                            </li>
+                                            <li><a href="#">5</a>
+                                            </li>
+                                            <li><a href="#">6</a>
+                                            </li>
+                                            <li><a href="#">7</a>
+                                            </li>
+                                            <li class="dots">...</li>
+                                            <li><a href="#">43</a>
+                                            </li>
+                                            <li class="next"><a href="#">Next Page</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="gap gap-small"></div>
+                                {% if hotel.reviewAvailable and is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <div id="review"  class="box bg-gray">
+
+                                        <h3>Write a Review</h3>
+
+                                        <form name="daiquiri_sitebundle_review" method="post" action="{{ path('review_create') }}">
+                                            {{ form_errors(form) }}
+                                            <div class="row">
+                                                <div class="col-md-12">                                                    
+                                                    <div class="form-group">
+                                                        <label>Review Title</label>
+                                                        {{ form_widget(form.title, {'attr':{'class': 'form-control','required': 'required' }}) }}
+                                                    </div>
+                                                </div>  
+                                                <div class="col-md-12">                                                    
+                                                    <div class="form-group">
+                                                        <label>Review Text</label>
+                                                        {{ form_widget(form.description, {'attr':{'class': 'form-control', 'rows': '6','required': 'required'  }}) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_widget(form.entitySlug, {'attr':{'class': 'hidden', 'value':  hotel.slug }}) }}
+                                                {{ form_widget(form.entityUniqueSlug, {'attr':{'class': 'hidden', 'value':  hotel.uniqueSlug }}) }}
+                                                {{ form_rest(form) }}
+                                                <div class="text-right mt10">
+                                                    <input class="btn btn-primary" type="submit" value="{{ 'Leave a Review' | trans({}, 'hoteldetails') }}" />
+                                                </div>
+                                            </div>                                            
+                                        </form>                                   
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="booking-item-meta">
+                        <h2 class="lh1em mt40">Exeptional!</h2>
+                        <h3>97% <small >of guests recommend</small></h3>
+                        <div class="booking-item-rating">
+                            <ul class="icon-list icon-group booking-item-rating-stars">
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                            </ul><span class="booking-item-rating-number"><b >4.7</b> of 5 <small class="text-smaller">guest rating</small></span>
+                            <p><a class="text-default" href="#">based on 1535 reviews</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="gap gap-small"></div>
+        <h3>{{ 'Available Rooms' | trans({}, 'hoteldetails') }}</h3>
+        <div class="row">
+
+
+            <div class="col-md-9">
+                <ul class="booking-list">
+                    {% for room in hotel.rooms %}
+                        <li>
+                            <a class="booking-item">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {% if room.picture.galleryHasMedias is defined %}
+                                            <img src="{% path room.picture, 'reference' %}" alt="{{ room.title }}" title="{{ room.title }}" />
+                                        {% else %}
+                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ room.title }}" title="{{ room.title }}" />
+                                        {% endif %}                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="booking-item-title">{{ room.title }}</h5>
+                                        <p class="text-small">{{ room.description | truncate(50)}}</p>
+                                        <ul class="booking-item-features booking-item-features-sign clearfix">
+                                            <li rel="tooltip" data-placement="top" title="Adults Occupancy"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x 2</span>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Beds"><i class="im im-bed"></i><span class="booking-item-feature-sign">x 1</span>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Room footage (square feet)"><i class="im im-width"></i><span class="booking-item-feature-sign">470</span>
+                                            </li>
+                                        </ul>
+                                        <ul class="booking-item-features booking-item-features-small clearfix">
+                                            <li rel="tooltip" data-placement="top" title="Air Conditioning"><i class="im im-air"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Flat Screen TV"><i class="im im-tv"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Mini Bar"><i class="im im-bar"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Bathtub"><i class="im im-bathtub"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Kitchen"><i class="im im-kitchen"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Patio"><i class="im im-patio"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Soundproof"><i class="im im-soundproof"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="SPA tub"><i class="im im-spa"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Terrace"><i class="im im-terrace"></i>
+                                            </li>
+                                            <li rel="tooltip" data-placement="top" title="Washing Machine"><i class="im im-washing-machine"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">{{ 'from' | trans({}, 'hoteldetails') }} <span class="booking-item-price"> $284</span><span>/{{ 'night' | trans({}, 'hoteldetails') }}</span><span class="btn btn-primary">{{ 'Book' | trans({}, 'hoteldetails') }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <div class="booking-item-dates-change">
+                    <form>
+                        <div class="input-daterange" data-date-format="MM d, DD">
+                            <div class="form-group form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-hightlight"></i>
+                                <label>Check in</label>
+                                <input class="form-control" name="start" type="text" />
+                            </div>
+                            <div class="form-group form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-hightlight"></i>
+                                <label>Check out</label>
+                                <input class="form-control" name="end" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-group form-group-select-plus">
+                            <label>Adults</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                    <input type="radio" name="options" />1</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />2</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />3</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />4</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />5</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />5+</label>
+                            </div>
+                            <select class="form-control hidden">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option selected="selected">6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-select-plus">
+                            <label>Children</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                    <input type="radio" name="options" />0</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />1</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />2</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />3</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />4</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />4+</label>
+                            </div>
+                            <select class="form-control hidden">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option selected="selected">5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-group-select-plus">
+                            <label>Rooms</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                    <input type="radio" name="options" />1</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />2</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />3</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />4</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />5</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="options" />5+</label>
+                            </div>
+                            <select class="form-control hidden">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option selected="selected">6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="gap gap-small"></div>
+
+</div>
+</div>
+
+{% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+{% endblock %}
+

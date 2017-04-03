@@ -1,0 +1,1067 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class=" is-copy-enabled is-u2f-enabled">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+    
+
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-b5b2bdade1c8f08cb8817cb4e73677eec388f755aebad89e0d686904a0492b84.css" integrity="sha256-tbK9reHI8Iy4gXy05zZ37sOI91WuutieDWhpBKBJK4Q=" media="all" rel="stylesheet" />
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-2e72871df0dc404bd4d28dd7992b6dd299e03526cff5bb6455db8a9ef10fcb26.css" integrity="sha256-LnKHHfDcQEvU0o3XmStt0pngNSbP9btkVduKnvEPyyY=" media="all" rel="stylesheet" />
+    
+    
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-9e0f35305336555b58884b07a160747fc1f6dbd79e13e18820a598a9abcb2662.css" integrity="sha256-ng81MFM2VVtYiEsHoWB0f8H229eeE+GIIKWYqavLJmI=" media="all" rel="stylesheet" />
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width">
+    
+    <title>bootstrap-select/bootstrap-select.js.map at master · silviomoreto/bootstrap-select · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <meta property="fb:app_id" content="1401488693436528">
+
+      <meta content="https://avatars2.githubusercontent.com/u/2363151?v=3&amp;s=400" name="twitter:image:src" /><meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="silviomoreto/bootstrap-select" name="twitter:title" /><meta content="bootstrap-select - Bootstrap-select is a jQuery plugin that utilizes Bootstrap&#39;s dropdown.js to style and bring additional functionality to standard select elements." name="twitter:description" />
+      <meta content="https://avatars2.githubusercontent.com/u/2363151?v=3&amp;s=400" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="silviomoreto/bootstrap-select" property="og:title" /><meta content="https://github.com/silviomoreto/bootstrap-select" property="og:url" /><meta content="bootstrap-select - Bootstrap-select is a jQuery plugin that utilizes Bootstrap&#39;s dropdown.js to style and bring additional functionality to standard select elements." property="og:description" />
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
+    <meta name="request-id" content="C837BEDA:1A1A:9E28C56:585966A5" data-pjax-transient>
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_source" data-pjax-transient>
+
+    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="C837BEDA:1A1A:9E28C56:585966A5" name="octolytics-dimension-request_id" />
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" />
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+
+        <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+        <meta name="expected-hostname" content="github.com">
+      <meta name="js-proxy-site-detection-payload" content="M2Y2ZGRhOTE3OWJjMTcyZTBkOGFiNWE5OGU2MWUwOTY3MjBlYTM2OWY3ZGY3NTEyNmM0MDUxY2Y2N2MxNDQ4N3x7InJlbW90ZV9hZGRyZXNzIjoiMjAwLjU1LjE5MC4yMTgiLCJyZXF1ZXN0X2lkIjoiQzgzN0JFREE6MUExQTo5RTI4QzU2OjU4NTk2NkE1IiwidGltZXN0YW1wIjoxNDgyMjUzOTkwLCJob3N0IjoiZ2l0aHViLmNvbSJ9">
+
+
+      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
+      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <meta name="html-safe-nonce" content="a3719bb9d13141a8ab0845587e0948d2bdd77ca0">
+    <meta content="692908d6f52ab9367b0b6467c92b78a7a3bb05ba" name="form-nonce" />
+
+    <meta http-equiv="x-pjax-version" content="368512edfa449304577e4f32dd10c1cd">
+    
+
+      
+  <meta name="description" content="bootstrap-select - Bootstrap-select is a jQuery plugin that utilizes Bootstrap&#39;s dropdown.js to style and bring additional functionality to standard select elements.">
+  <meta name="go-import" content="github.com/silviomoreto/bootstrap-select git https://github.com/silviomoreto/bootstrap-select.git">
+
+  <meta content="2363151" name="octolytics-dimension-user_id" /><meta content="silviomoreto" name="octolytics-dimension-user_login" /><meta content="5972219" name="octolytics-dimension-repository_id" /><meta content="silviomoreto/bootstrap-select" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="5972219" name="octolytics-dimension-repository_network_root_id" /><meta content="silviomoreto/bootstrap-select" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/silviomoreto/bootstrap-select/commits/master.atom" rel="alternate" title="Recent Commits to bootstrap-select:master" type="application/atom+xml">
+
+
+      <link rel="canonical" href="https://github.com/silviomoreto/bootstrap-select/blob/master/dist/js/bootstrap-select.js.map" data-pjax-transient>
+  </head>
+
+
+  <body class="logged-out  env-production linux vis-public page-blob">
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+
+    
+    
+    
+
+
+
+          <header class="site-header js-details-container" role="banner">
+  <div class="container-responsive">
+    <a class="header-logo-invertocat" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+    </a>
+
+    <button class="btn-link float-right site-header-toggle js-details-target" type="button" aria-label="Toggle navigation">
+      <svg aria-hidden="true" class="octicon octicon-three-bars" height="24" version="1.1" viewBox="0 0 12 16" width="18"><path fill-rule="evenodd" d="M11.41 9H.59C0 9 0 8.59 0 8c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zm0-4H.59C0 5 0 4.59 0 4c0-.59 0-1 .59-1H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1h.01zM.59 11H11.4c.59 0 .59.41.59 1 0 .59 0 1-.59 1H.59C0 13 0 12.59 0 12c0-.59 0-1 .59-1z"/></svg>
+    </button>
+
+    <div class="site-header-menu">
+      <nav class="site-header-nav site-header-nav-main">
+        <a href="/personal" class="js-selected-navigation-item nav-item nav-item-personal" data-ga-click="Header, click, Nav menu - item:personal" data-selected-links="/personal /personal">
+          Personal
+</a>        <a href="/open-source" class="js-selected-navigation-item nav-item nav-item-opensource" data-ga-click="Header, click, Nav menu - item:opensource" data-selected-links="/open-source /open-source">
+          Open source
+</a>        <a href="/business" class="js-selected-navigation-item nav-item nav-item-business" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/partners /business/features /business/customers /business">
+          Business
+</a>        <a href="/explore" class="js-selected-navigation-item nav-item nav-item-explore" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /showcases /explore">
+          Explore
+</a>      </nav>
+
+      <div class="site-header-actions">
+            <a class="btn btn-primary site-header-actions-btn" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+          <a class="btn site-header-actions-btn mr-1" href="/login?return_to=%2Fsilviomoreto%2Fbootstrap-select%2Fblob%2Fmaster%2Fdist%2Fjs%2Fbootstrap-select.js.map" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+      </div>
+
+        <nav class="site-header-nav site-header-nav-secondary mr-md-3">
+          <a class="nav-item" href="/pricing">Pricing</a>
+          <a class="nav-item" href="/blog">Blog</a>
+          <a class="nav-item" href="https://help.github.com">Support</a>
+          <a class="nav-item header-search-link" href="https://github.com/search">Search GitHub</a>
+              <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
+  <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/silviomoreto/bootstrap-select/search" class="js-site-search-form" data-scoped-search-url="/silviomoreto/bootstrap-select/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <label class="form-control header-search-wrapper js-chromeless-input-container">
+      <div class="header-search-scope">This repository</div>
+      <input type="text"
+        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
+        data-hotkey="s"
+        name="q"
+        placeholder="Search"
+        aria-label="Search this repository"
+        data-unscoped-placeholder="Search GitHub"
+        data-scoped-placeholder="Search"
+        autocapitalize="off">
+    </label>
+</form></div>
+
+        </nav>
+    </div>
+  </div>
+</header>
+
+
+
+    <div id="start-of-content" class="accessibility-aid"></div>
+
+      <div id="js-flash-container">
+</div>
+
+
+    <div role="main">
+        <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
+    <div id="js-repo-pjax-container" data-pjax-container>
+      
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+  <div class="container repohead-details-container">
+
+    
+
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="/login?return_to=%2Fsilviomoreto%2Fbootstrap-select"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
+    Watch
+  </a>
+  <a class="social-count" href="/silviomoreto/bootstrap-select/watchers"
+     aria-label="277 users are watching this repository">
+    277
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fsilviomoreto%2Fbootstrap-select"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"/></svg>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/silviomoreto/bootstrap-select/stargazers"
+      aria-label="5399 users starred this repository">
+      5,399
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fsilviomoreto%2Fbootstrap-select"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+        Fork
+      </a>
+
+    <a href="/silviomoreto/bootstrap-select/network" class="social-count"
+       aria-label="1586 users forked this repository">
+      1,586
+    </a>
+  </li>
+</ul>
+
+    <h1 class="public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"/></svg>
+  <span class="author" itemprop="author"><a href="/silviomoreto" class="url fn" rel="author">silviomoreto</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a href="/silviomoreto/bootstrap-select" data-pjax="#js-repo-pjax-container">bootstrap-select</a></strong>
+
+</h1>
+
+  </div>
+  <div class="container">
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax"
+     itemscope
+     itemtype="http://schema.org/BreadcrumbList"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container">
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/silviomoreto/bootstrap-select" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /silviomoreto/bootstrap-select" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"/></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+    <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+      <a href="/silviomoreto/bootstrap-select/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /silviomoreto/bootstrap-select/issues" itemprop="url">
+        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"/></svg>
+        <span itemprop="name">Issues</span>
+        <span class="counter">242</span>
+        <meta itemprop="position" content="2">
+</a>    </span>
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/silviomoreto/bootstrap-select/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /silviomoreto/bootstrap-select/pulls" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="counter">45</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+  <a href="/silviomoreto/bootstrap-select/projects" class="js-selected-navigation-item reponav-item" data-selected-links="repo_projects new_repo_project repo_project /silviomoreto/bootstrap-select/projects">
+    <svg aria-hidden="true" class="octicon octicon-project" height="16" version="1.1" viewBox="0 0 15 16" width="15"><path fill-rule="evenodd" d="M10 12h3V2h-3v10zm-4-2h3V2H6v8zm-4 4h3V2H2v12zm-1 1h13V1H1v14zM14 0H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/></svg>
+    Projects
+    <span class="counter">0</span>
+</a>
+
+
+  <a href="/silviomoreto/bootstrap-select/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /silviomoreto/bootstrap-select/pulse">
+    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8z"/></svg>
+    Pulse
+</a>
+  <a href="/silviomoreto/bootstrap-select/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /silviomoreto/bootstrap-select/graphs">
+    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"/></svg>
+    Graphs
+</a>
+
+</nav>
+
+  </div>
+</div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+
+<a href="/silviomoreto/bootstrap-select/blob/bd42554ef2c08ca0325bef908919711312e882bc/dist/js/bootstrap-select.js.map" class="d-none js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+<!-- blob contrib key: blob_contributors:v21:f9422734634107f45787e60eb0888821 -->
+
+<div class="file-navigation js-zeroclipboard-container">
+  
+<div class="select-menu branch-select-menu js-menu-container js-select-menu float-left">
+  <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    
+    type="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <i>Branch:</i>
+    <span class="js-select-button css-truncate-target">master</span>
+  </button>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+        <span class="select-menu-title">Switch branches/tags</span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="form-control js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+               href="/silviomoreto/bootstrap-select/blob/gh-pages/dist/js/bootstrap-select.js.map"
+               data-name="gh-pages"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                gh-pages
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/silviomoreto/bootstrap-select/blob/master/dist/js/bootstrap-select.js.map"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text">
+                master
+              </span>
+            </a>
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v2.0.0-beta1/dist/js/bootstrap-select.js.map"
+              data-name="v2.0.0-beta1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v2.0.0-beta1">
+                v2.0.0-beta1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.12.1/dist/js/bootstrap-select.js.map"
+              data-name="v1.12.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.12.1">
+                v1.12.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.12.0/dist/js/bootstrap-select.js.map"
+              data-name="v1.12.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.12.0">
+                v1.12.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.11.2/dist/js/bootstrap-select.js.map"
+              data-name="v1.11.2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.11.2">
+                v1.11.2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.11.1/dist/js/bootstrap-select.js.map"
+              data-name="v1.11.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.11.1">
+                v1.11.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.11.0/dist/js/bootstrap-select.js.map"
+              data-name="v1.11.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.11.0">
+                v1.11.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.10.0/dist/js/bootstrap-select.js.map"
+              data-name="v1.10.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.10.0">
+                v1.10.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.9.4/dist/js/bootstrap-select.js.map"
+              data-name="v1.9.4"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.9.4">
+                v1.9.4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.9.3/dist/js/bootstrap-select.js.map"
+              data-name="v1.9.3"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.9.3">
+                v1.9.3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.9.2/dist/js/bootstrap-select.js.map"
+              data-name="v1.9.2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.9.2">
+                v1.9.2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.8.1/dist/js/bootstrap-select.js.map"
+              data-name="v1.8.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.8.1">
+                v1.8.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.8.0/dist/js/bootstrap-select.js.map"
+              data-name="v1.8.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.8.0">
+                v1.8.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.7/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.7"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.7">
+                v1.7.7
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.5/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.5"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.5">
+                v1.7.5
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.4/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.4"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.4">
+                v1.7.4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.3/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.3"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.3">
+                v1.7.3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.2/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.2">
+                v1.7.2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.1/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.1">
+                v1.7.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0">
+                v1.7.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0-rc6/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0-rc6"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0-rc6">
+                v1.7.0-rc6
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0-rc5/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0-rc5"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0-rc5">
+                v1.7.0-rc5
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0-rc4/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0-rc4"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0-rc4">
+                v1.7.0-rc4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0-rc3/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0-rc3"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0-rc3">
+                v1.7.0-rc3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0-rc2/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0-rc2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0-rc2">
+                v1.7.0-rc2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.7.0-rc1/dist/js/bootstrap-select.js.map"
+              data-name="v1.7.0-rc1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.7.0-rc1">
+                v1.7.0-rc1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.6.5/dist/js/bootstrap-select.js.map"
+              data-name="v1.6.5"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.6.5">
+                v1.6.5
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.6.4/dist/js/bootstrap-select.js.map"
+              data-name="v1.6.4"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.6.4">
+                v1.6.4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.6.3/dist/js/bootstrap-select.js.map"
+              data-name="v1.6.3"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.6.3">
+                v1.6.3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.6.2/dist/js/bootstrap-select.js.map"
+              data-name="v1.6.2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.6.2">
+                v1.6.2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.6.1/dist/js/bootstrap-select.js.map"
+              data-name="v1.6.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.6.1">
+                v1.6.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/v1.6.0/dist/js/bootstrap-select.js.map"
+              data-name="v1.6.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="v1.6.0">
+                v1.6.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.9.1/dist/js/bootstrap-select.js.map"
+              data-name="1.9.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.9.1">
+                1.9.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.9.0/dist/js/bootstrap-select.js.map"
+              data-name="1.9.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.9.0">
+                1.9.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.5.4/dist/js/bootstrap-select.js.map"
+              data-name="1.5.4"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.5.4">
+                1.5.4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.5.2/dist/js/bootstrap-select.js.map"
+              data-name="1.5.2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.5.2">
+                1.5.2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.5.1/dist/js/bootstrap-select.js.map"
+              data-name="1.5.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.5.1">
+                1.5.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.5.0/dist/js/bootstrap-select.js.map"
+              data-name="1.5.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.5.0">
+                1.5.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.4.3/dist/js/bootstrap-select.js.map"
+              data-name="1.4.3"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.4.3">
+                1.4.3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.4.2/dist/js/bootstrap-select.js.map"
+              data-name="1.4.2"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.4.2">
+                1.4.2
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.4.1/dist/js/bootstrap-select.js.map"
+              data-name="1.4.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.4.1">
+                1.4.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.4.0/dist/js/bootstrap-select.js.map"
+              data-name="1.4.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.4.0">
+                1.4.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.7/dist/js/bootstrap-select.js.map"
+              data-name="1.3.7"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.7">
+                1.3.7
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.6/dist/js/bootstrap-select.js.map"
+              data-name="1.3.6"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.6">
+                1.3.6
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.5/dist/js/bootstrap-select.js.map"
+              data-name="1.3.5"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.5">
+                1.3.5
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.4/dist/js/bootstrap-select.js.map"
+              data-name="1.3.4"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.4">
+                1.3.4
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.3/dist/js/bootstrap-select.js.map"
+              data-name="1.3.3"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.3">
+                1.3.3
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.1/dist/js/bootstrap-select.js.map"
+              data-name="1.3.1"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.1">
+                1.3.1
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.3.0/dist/js/bootstrap-select.js.map"
+              data-name="1.3.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.3.0">
+                1.3.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.2.0/dist/js/bootstrap-select.js.map"
+              data-name="1.2.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.2.0">
+                1.2.0
+              </span>
+            </a>
+            <a class="select-menu-item js-navigation-item js-navigation-open "
+              href="/silviomoreto/bootstrap-select/tree/1.0.0/dist/js/bootstrap-select.js.map"
+              data-name="1.0.0"
+              data-skip-pjax="true"
+              rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5z"/></svg>
+              <span class="select-menu-item-text css-truncate-target" title="1.0.0">
+                1.0.0
+              </span>
+            </a>
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  <div class="BtnGroup float-right">
+    <a href="/silviomoreto/bootstrap-select/find/master"
+          class="js-pjax-capture-input btn btn-sm BtnGroup-item"
+          data-pjax
+          data-hotkey="t">
+      Find file
+    </a>
+    <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm BtnGroup-item tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
+  </div>
+  <div class="breadcrumb js-zeroclipboard-target">
+    <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/silviomoreto/bootstrap-select"><span>bootstrap-select</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a href="/silviomoreto/bootstrap-select/tree/master/dist"><span>dist</span></a></span><span class="separator">/</span><span class="js-path-segment"><a href="/silviomoreto/bootstrap-select/tree/master/dist/js"><span>js</span></a></span><span class="separator">/</span><strong class="final-path">bootstrap-select.js.map</strong>
+  </div>
+</div>
+
+
+  <div class="commit-tease">
+      <span class="float-right">
+        <a class="commit-tease-sha" href="/silviomoreto/bootstrap-select/commit/ba65054cc966da18634f14a7215840e3e24edc31" data-pjax>
+          ba65054
+        </a>
+        <relative-time datetime="2016-12-02T20:56:43Z">Dec 3, 2016</relative-time>
+      </span>
+      <div>
+        <img alt="@caseyjhol" class="avatar" height="20" src="https://avatars0.githubusercontent.com/u/2874325?v=3&amp;s=40" width="20" />
+        <a href="/caseyjhol" class="user-mention" rel="contributor">caseyjhol</a>
+          <a href="/silviomoreto/bootstrap-select/commit/ba65054cc966da18634f14a7215840e3e24edc31" class="message" data-pjax="true" title="fix key word searching - broken in #1516. fix #1563.">fix key word searching - broken in</a> <a href="https://github.com/silviomoreto/bootstrap-select/pull/1516" class="issue-link js-issue-link" data-url="https://github.com/silviomoreto/bootstrap-select/issues/1516" data-id="177681712" data-error-text="Failed to load issue title" data-permission-text="Issue title is private">#1516</a><a href="/silviomoreto/bootstrap-select/commit/ba65054cc966da18634f14a7215840e3e24edc31" class="message" data-pjax="true" title="fix key word searching - broken in #1516. fix #1563.">. fix</a> <a href="https://github.com/silviomoreto/bootstrap-select/issues/1563" class="issue-link js-issue-link" data-url="https://github.com/silviomoreto/bootstrap-select/issues/1563" data-id="191733766" data-error-text="Failed to load issue title" data-permission-text="Issue title is private">#1563</a><a href="/silviomoreto/bootstrap-select/commit/ba65054cc966da18634f14a7215840e3e24edc31" class="message" data-pjax="true" title="fix key word searching - broken in #1516. fix #1563.">.</a>
+      </div>
+
+    <div class="commit-tease-contributors">
+      <button type="button" class="btn-link muted-link contributors-toggle" data-facebox="#blob_contributors_box">
+        <strong>7</strong>
+         contributors
+      </button>
+          <a class="avatar-link tooltipped tooltipped-s" aria-label="caseyjhol" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=caseyjhol"><img alt="@caseyjhol" class="avatar" height="20" src="https://avatars0.githubusercontent.com/u/2874325?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="t0xicCode" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=t0xicCode"><img alt="@t0xicCode" class="avatar" height="20" src="https://avatars3.githubusercontent.com/u/1268885?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="vsn4ik" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=vsn4ik"><img alt="@vsn4ik" class="avatar" height="20" src="https://avatars0.githubusercontent.com/u/3757319?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="sweatty1" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=sweatty1"><img alt="@sweatty1" class="avatar" height="20" src="https://avatars0.githubusercontent.com/u/8526024?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="mattbryson" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=mattbryson"><img alt="@mattbryson" class="avatar" height="20" src="https://avatars2.githubusercontent.com/u/548948?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="gkoychev" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=gkoychev"><img alt="@gkoychev" class="avatar" height="20" src="https://avatars2.githubusercontent.com/u/1552204?v=3&amp;s=40" width="20" /> </a>
+    <a class="avatar-link tooltipped tooltipped-s" aria-label="cizar" href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map?author=cizar"><img alt="@cizar" class="avatar" height="20" src="https://avatars2.githubusercontent.com/u/141893?v=3&amp;s=40" width="20" /> </a>
+
+
+    </div>
+
+    <div id="blob_contributors_box" style="display:none">
+      <h2 class="facebox-header" data-facebox-id="facebox-header">Users who have contributed to this file</h2>
+      <ul class="facebox-user-list" data-facebox-id="facebox-description">
+          <li class="facebox-user-list-item">
+            <img alt="@caseyjhol" height="24" src="https://avatars2.githubusercontent.com/u/2874325?v=3&amp;s=48" width="24" />
+            <a href="/caseyjhol">caseyjhol</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@t0xicCode" height="24" src="https://avatars1.githubusercontent.com/u/1268885?v=3&amp;s=48" width="24" />
+            <a href="/t0xicCode">t0xicCode</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@vsn4ik" height="24" src="https://avatars2.githubusercontent.com/u/3757319?v=3&amp;s=48" width="24" />
+            <a href="/vsn4ik">vsn4ik</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@sweatty1" height="24" src="https://avatars2.githubusercontent.com/u/8526024?v=3&amp;s=48" width="24" />
+            <a href="/sweatty1">sweatty1</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@mattbryson" height="24" src="https://avatars0.githubusercontent.com/u/548948?v=3&amp;s=48" width="24" />
+            <a href="/mattbryson">mattbryson</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@gkoychev" height="24" src="https://avatars0.githubusercontent.com/u/1552204?v=3&amp;s=48" width="24" />
+            <a href="/gkoychev">gkoychev</a>
+          </li>
+          <li class="facebox-user-list-item">
+            <img alt="@cizar" height="24" src="https://avatars0.githubusercontent.com/u/141893?v=3&amp;s=48" width="24" />
+            <a href="/cizar">cizar</a>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+
+<div class="file">
+  <div class="file-header">
+  <div class="file-actions">
+
+    <div class="BtnGroup">
+      <a href="/silviomoreto/bootstrap-select/raw/master/dist/js/bootstrap-select.js.map" class="btn btn-sm BtnGroup-item" id="raw-url">Raw</a>
+        <a href="/silviomoreto/bootstrap-select/blame/master/dist/js/bootstrap-select.js.map" class="btn btn-sm js-update-url-with-hash BtnGroup-item">Blame</a>
+      <a href="/silviomoreto/bootstrap-select/commits/master/dist/js/bootstrap-select.js.map" class="btn btn-sm BtnGroup-item" rel="nofollow">History</a>
+    </div>
+
+
+        <button type="button" class="btn-octicon disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg>
+        </button>
+        <button type="button" class="btn-octicon btn-octicon-danger disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"/></svg>
+        </button>
+  </div>
+
+  <div class="file-info">
+      1 lines (1 sloc)
+      <span class="file-info-divider"></span>
+    38.1 KB
+  </div>
+</div>
+
+  
+
+  <div itemprop="text" class="blob-wrapper data type-text">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tr>
+        <td id="L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="LC1" class="blob-code blob-code-inner js-file-line">{&quot;version&quot;:3,&quot;sources&quot;:[&quot;bootstrap-select.js&quot;],&quot;names&quot;:[&quot;root&quot;,&quot;factory&quot;,&quot;define&quot;,&quot;amd&quot;,&quot;a0&quot;,&quot;module&quot;,&quot;exports&quot;,&quot;require&quot;,&quot;this&quot;,&quot;jQuery&quot;,&quot;$&quot;,&quot;normalizeToBase&quot;,&quot;text&quot;,&quot;rExps&quot;,&quot;re&quot;,&quot;ch&quot;,&quot;each&quot;,&quot;replace&quot;,&quot;Plugin&quot;,&quot;option&quot;,&quot;args&quot;,&quot;arguments&quot;,&quot;_option&quot;,&quot;shift&quot;,&quot;apply&quot;,&quot;value&quot;,&quot;chain&quot;,&quot;$this&quot;,&quot;is&quot;,&quot;data&quot;,&quot;options&quot;,&quot;i&quot;,&quot;hasOwnProperty&quot;,&quot;config&quot;,&quot;extend&quot;,&quot;Selectpicker&quot;,&quot;DEFAULTS&quot;,&quot;fn&quot;,&quot;selectpicker&quot;,&quot;defaults&quot;,&quot;template&quot;,&quot;Function&quot;,&quot;String&quot;,&quot;prototype&quot;,&quot;includes&quot;,&quot;toString&quot;,&quot;defineProperty&quot;,&quot;object&quot;,&quot;$defineProperty&quot;,&quot;Object&quot;,&quot;result&quot;,&quot;error&quot;,&quot;indexOf&quot;,&quot;search&quot;,&quot;TypeError&quot;,&quot;string&quot;,&quot;call&quot;,&quot;stringLength&quot;,&quot;length&quot;,&quot;searchString&quot;,&quot;searchLength&quot;,&quot;position&quot;,&quot;undefined&quot;,&quot;pos&quot;,&quot;Number&quot;,&quot;start&quot;,&quot;Math&quot;,&quot;min&quot;,&quot;max&quot;,&quot;configurable&quot;,&quot;writable&quot;,&quot;startsWith&quot;,&quot;index&quot;,&quot;charCodeAt&quot;,&quot;keys&quot;,&quot;o&quot;,&quot;k&quot;,&quot;r&quot;,&quot;push&quot;,&quot;valHooks&quot;,&quot;useDefault&quot;,&quot;_set&quot;,&quot;select&quot;,&quot;set&quot;,&quot;elem&quot;,&quot;changed_arguments&quot;,&quot;triggerNative&quot;,&quot;eventName&quot;,&quot;event&quot;,&quot;el&quot;,&quot;dispatchEvent&quot;,&quot;Event&quot;,&quot;bubbles&quot;,&quot;document&quot;,&quot;createEvent&quot;,&quot;initEvent&quot;,&quot;fireEvent&quot;,&quot;createEventObject&quot;,&quot;eventType&quot;,&quot;trigger&quot;,&quot;expr&quot;,&quot;pseudos&quot;,&quot;icontains&quot;,&quot;obj&quot;,&quot;meta&quot;,&quot;$obj&quot;,&quot;haystack&quot;,&quot;toUpperCase&quot;,&quot;ibegins&quot;,&quot;aicontains&quot;,&quot;aibegins&quot;,&quot;escapeMap&quot;,&quot;&amp;&quot;,&quot;&lt;&quot;,&quot;&gt;&quot;,&quot;\&quot;&quot;,&quot;&#39;&quot;,&quot;`&quot;,&quot;unescapeMap&quot;,&quot;&amp;amp;&quot;,&quot;&amp;lt;&quot;,&quot;&amp;gt;&quot;,&quot;&amp;quot;&quot;,&quot;&amp;#x27;&quot;,&quot;&amp;#x60;&quot;,&quot;createEscaper&quot;,&quot;map&quot;,&quot;escaper&quot;,&quot;match&quot;,&quot;source&quot;,&quot;join&quot;,&quot;testRegexp&quot;,&quot;RegExp&quot;,&quot;replaceRegexp&quot;,&quot;test&quot;,&quot;htmlEscape&quot;,&quot;htmlUnescape&quot;,&quot;element&quot;,&quot;$element&quot;,&quot;$newElement&quot;,&quot;$button&quot;,&quot;$menu&quot;,&quot;$lis&quot;,&quot;title&quot;,&quot;attr&quot;,&quot;winPad&quot;,&quot;windowPadding&quot;,&quot;val&quot;,&quot;render&quot;,&quot;refresh&quot;,&quot;setStyle&quot;,&quot;selectAll&quot;,&quot;deselectAll&quot;,&quot;destroy&quot;,&quot;remove&quot;,&quot;show&quot;,&quot;hide&quot;,&quot;init&quot;,&quot;VERSION&quot;,&quot;noneSelectedText&quot;,&quot;noneResultsText&quot;,&quot;countSelectedText&quot;,&quot;numSelected&quot;,&quot;numTotal&quot;,&quot;maxOptionsText&quot;,&quot;numAll&quot;,&quot;numGroup&quot;,&quot;selectAllText&quot;,&quot;deselectAllText&quot;,&quot;doneButton&quot;,&quot;doneButtonText&quot;,&quot;multipleSeparator&quot;,&quot;styleBase&quot;,&quot;style&quot;,&quot;size&quot;,&quot;selectedTextFormat&quot;,&quot;width&quot;,&quot;container&quot;,&quot;hideDisabled&quot;,&quot;showSubtext&quot;,&quot;showIcon&quot;,&quot;showContent&quot;,&quot;dropupAuto&quot;,&quot;header&quot;,&quot;liveSearch&quot;,&quot;liveSearchPlaceholder&quot;,&quot;liveSearchNormalize&quot;,&quot;liveSearchStyle&quot;,&quot;actionsBox&quot;,&quot;iconBase&quot;,&quot;tickIcon&quot;,&quot;showTick&quot;,&quot;caret&quot;,&quot;maxOptions&quot;,&quot;mobile&quot;,&quot;selectOnTab&quot;,&quot;dropdownAlignRight&quot;,&quot;constructor&quot;,&quot;that&quot;,&quot;id&quot;,&quot;addClass&quot;,&quot;liObj&quot;,&quot;multiple&quot;,&quot;prop&quot;,&quot;autofocus&quot;,&quot;createView&quot;,&quot;after&quot;,&quot;appendTo&quot;,&quot;children&quot;,&quot;$menuInner&quot;,&quot;$searchbox&quot;,&quot;find&quot;,&quot;removeClass&quot;,&quot;click&quot;,&quot;e&quot;,&quot;preventDefault&quot;,&quot;focus&quot;,&quot;checkDisabled&quot;,&quot;clickListener&quot;,&quot;liveSearchListener&quot;,&quot;setWidth&quot;,&quot;selectPosition&quot;,&quot;on&quot;,&quot;hide.bs.dropdown&quot;,&quot;hidden.bs.dropdown&quot;,&quot;show.bs.dropdown&quot;,&quot;shown.bs.dropdown&quot;,&quot;hasAttribute&quot;,&quot;focus.bs.select&quot;,&quot;off&quot;,&quot;shown.bs.select&quot;,&quot;rendered.bs.select&quot;,&quot;validity&quot;,&quot;valid&quot;,&quot;setTimeout&quot;,&quot;createDropdown&quot;,&quot;inputGroup&quot;,&quot;parent&quot;,&quot;hasClass&quot;,&quot;searchbox&quot;,&quot;actionsbox&quot;,&quot;donebutton&quot;,&quot;drop&quot;,&quot;$drop&quot;,&quot;li&quot;,&quot;createLi&quot;,&quot;innerHTML&quot;,&quot;reloadLi&quot;,&quot;_li&quot;,&quot;optID&quot;,&quot;titleOption&quot;,&quot;createElement&quot;,&quot;liIndex&quot;,&quot;generateLI&quot;,&quot;content&quot;,&quot;classes&quot;,&quot;optgroup&quot;,&quot;generateA&quot;,&quot;inline&quot;,&quot;tokens&quot;,&quot;html&quot;,&quot;className&quot;,&quot;insertBefore&quot;,&quot;firstChild&quot;,&quot;$opt&quot;,&quot;selectedIndex&quot;,&quot;selected&quot;,&quot;optionClass&quot;,&quot;cssText&quot;,&quot;subtext&quot;,&quot;icon&quot;,&quot;$parent&quot;,&quot;isOptgroup&quot;,&quot;tagName&quot;,&quot;isOptgroupDisabled&quot;,&quot;disabled&quot;,&quot;isDisabled&quot;,&quot;$options&quot;,&quot;filter&quot;,&quot;optGroupClass&quot;,&quot;label&quot;,&quot;labelSubtext&quot;,&quot;labelIcon&quot;,&quot;showDivider&quot;,&quot;previousElementSibling&quot;,&quot;$prev&quot;,&quot;prevAll&quot;,&quot;optGroupDistance&quot;,&quot;d&quot;,&quot;prevOption&quot;,&quot;eq&quot;,&quot;findLis&quot;,&quot;updateLi&quot;,&quot;notDisabled&quot;,&quot;setDisabled&quot;,&quot;parentNode&quot;,&quot;setSelected&quot;,&quot;togglePlaceholder&quot;,&quot;tabIndex&quot;,&quot;selectedItems&quot;,&quot;toArray&quot;,&quot;split&quot;,&quot;totalCount&quot;,&quot;not&quot;,&quot;tr8nText&quot;,&quot;trim&quot;,&quot;status&quot;,&quot;buttonClass&quot;,&quot;liHeight&quot;,&quot;sizeInfo&quot;,&quot;newElement&quot;,&quot;menu&quot;,&quot;menuInner&quot;,&quot;divider&quot;,&quot;a&quot;,&quot;cloneNode&quot;,&quot;actions&quot;,&quot;appendChild&quot;,&quot;createTextNode&quot;,&quot;input&quot;,&quot;body&quot;,&quot;offsetHeight&quot;,&quot;headerHeight&quot;,&quot;searchHeight&quot;,&quot;actionsHeight&quot;,&quot;doneButtonHeight&quot;,&quot;dividerHeight&quot;,&quot;outerHeight&quot;,&quot;menuStyle&quot;,&quot;getComputedStyle&quot;,&quot;menuPadding&quot;,&quot;vert&quot;,&quot;parseInt&quot;,&quot;paddingTop&quot;,&quot;css&quot;,&quot;paddingBottom&quot;,&quot;borderTopWidth&quot;,&quot;borderBottomWidth&quot;,&quot;horiz&quot;,&quot;paddingLeft&quot;,&quot;paddingRight&quot;,&quot;borderLeftWidth&quot;,&quot;borderRightWidth&quot;,&quot;menuExtras&quot;,&quot;marginTop&quot;,&quot;marginBottom&quot;,&quot;marginLeft&quot;,&quot;marginRight&quot;,&quot;removeChild&quot;,&quot;setSize&quot;,&quot;menuHeight&quot;,&quot;menuWidth&quot;,&quot;getHeight&quot;,&quot;getWidth&quot;,&quot;selectOffsetTop&quot;,&quot;selectOffsetBot&quot;,&quot;selectOffsetLeft&quot;,&quot;selectOffsetRight&quot;,&quot;$window&quot;,&quot;window&quot;,&quot;selectHeight&quot;,&quot;selectWidth&quot;,&quot;offsetWidth&quot;,&quot;divHeight&quot;,&quot;getPos&quot;,&quot;containerPos&quot;,&quot;offset&quot;,&quot;$container&quot;,&quot;top&quot;,&quot;left&quot;,&quot;scrollTop&quot;,&quot;height&quot;,&quot;scrollLeft&quot;,&quot;getSize&quot;,&quot;minHeight&quot;,&quot;include&quot;,&quot;classList&quot;,&quot;contains&quot;,&quot;lis&quot;,&quot;getElementsByTagName&quot;,&quot;lisVisible&quot;,&quot;Array&quot;,&quot;optGroup&quot;,&quot;toggleClass&quot;,&quot;max-height&quot;,&quot;overflow&quot;,&quot;min-height&quot;,&quot;overflow-y&quot;,&quot;optIndex&quot;,&quot;slice&quot;,&quot;last&quot;,&quot;divLength&quot;,&quot;$selectClone&quot;,&quot;clone&quot;,&quot;$selectClone2&quot;,&quot;ulWidth&quot;,&quot;outerWidth&quot;,&quot;btnWidth&quot;,&quot;$bsContainer&quot;,&quot;actualHeight&quot;,&quot;getPlacement&quot;,&quot;append&quot;,&quot;detach&quot;,&quot;removeAttr&quot;,&quot;$document&quot;,&quot;keyCode&quot;,&quot;offsetTop&quot;,&quot;clickedIndex&quot;,&quot;prevValue&quot;,&quot;prevIndex&quot;,&quot;triggerChange&quot;,&quot;stopPropagation&quot;,&quot;$option&quot;,&quot;state&quot;,&quot;$optgroup&quot;,&quot;maxOptionsGrp&quot;,&quot;blur&quot;,&quot;maxReached&quot;,&quot;maxReachedGrp&quot;,&quot;optgroupID&quot;,&quot;maxOptionsArr&quot;,&quot;maxTxt&quot;,&quot;maxTxtGrp&quot;,&quot;$notify&quot;,&quot;delay&quot;,&quot;fadeOut&quot;,&quot;currentTarget&quot;,&quot;target&quot;,&quot;change&quot;,&quot;$no_results&quot;,&quot;$hideItems&quot;,&quot;$searchBase&quot;,&quot;_searchStyle&quot;,&quot;$foundDiv&quot;,&quot;$lisVisible&quot;,&quot;first&quot;,&quot;styles&quot;,&quot;begins&quot;,&quot;changeAll&quot;,&quot;lisVisLen&quot;,&quot;selectedOptions&quot;,&quot;origIndex&quot;,&quot;getAttribute&quot;,&quot;toggle&quot;,&quot;keydown&quot;,&quot;$items&quot;,&quot;next&quot;,&quot;prev&quot;,&quot;nextPrev&quot;,&quot;isActive&quot;,&quot;selector&quot;,&quot;keyCodeMap&quot;,&quot;32&quot;,&quot;48&quot;,&quot;49&quot;,&quot;50&quot;,&quot;51&quot;,&quot;52&quot;,&quot;53&quot;,&quot;54&quot;,&quot;55&quot;,&quot;56&quot;,&quot;57&quot;,&quot;59&quot;,&quot;65&quot;,&quot;66&quot;,&quot;67&quot;,&quot;68&quot;,&quot;69&quot;,&quot;70&quot;,&quot;71&quot;,&quot;72&quot;,&quot;73&quot;,&quot;74&quot;,&quot;75&quot;,&quot;76&quot;,&quot;77&quot;,&quot;78&quot;,&quot;79&quot;,&quot;80&quot;,&quot;81&quot;,&quot;82&quot;,&quot;83&quot;,&quot;84&quot;,&quot;85&quot;,&quot;86&quot;,&quot;87&quot;,&quot;88&quot;,&quot;89&quot;,&quot;90&quot;,&quot;96&quot;,&quot;97&quot;,&quot;98&quot;,&quot;99&quot;,&quot;100&quot;,&quot;101&quot;,&quot;102&quot;,&quot;103&quot;,&quot;104&quot;,&quot;105&quot;,&quot;nextAll&quot;,&quot;count&quot;,&quot;prevKey&quot;,&quot;keyIndex&quot;,&quot;toLowerCase&quot;,&quot;substring&quot;,&quot;before&quot;,&quot;removeData&quot;,&quot;old&quot;,&quot;Constructor&quot;,&quot;noConflict&quot;,&quot;$selectpicker&quot;],&quot;mappings&quot;:&quot;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&quot;,&quot;file&quot;:&quot;bootstrap-select.min.js&quot;}</td>
+      </tr>
+</table>
+
+  </div>
+
+</div>
+
+<button type="button" data-facebox="#jump-to-line" data-facebox-class="linejump" data-hotkey="l" class="d-none">Jump to Line</button>
+<div id="jump-to-line" style="display:none">
+  <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <input class="form-control linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
+    <button type="submit" class="btn">Go</button>
+</form></div>
+
+  </div>
+  <div class="modal-backdrop js-touch-events"></div>
+</div>
+
+
+    </div>
+  </div>
+
+    </div>
+
+        <div class="container site-footer-container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links float-right">
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
+      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage" class="site-footer-mark" title="GitHub">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+</a>
+    <ul class="site-footer-links">
+      <li>&copy; 2016 <span title="0.06973s from github-fe-df0f95a.cp1-iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+    
+
+    <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
+      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+        <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+      </button>
+      You can't perform that action at this time.
+    </div>
+
+
+      
+      <script crossorigin="anonymous" integrity="sha256-qGcOKOeLPwGU3+T/SVUz+lI+fnAAbb9axOapfoqVer0=" src="https://assets-cdn.github.com/assets/frameworks-a8670e28e78b3f0194dfe4ff495533fa523e7e70006dbf5ac4e6a97e8a957abd.js"></script>
+      <script async="async" crossorigin="anonymous" integrity="sha256-i28Sf4dlo1o0664ifALHi3SQSHK/WAdbTtwTTU6ywhg=" src="https://assets-cdn.github.com/assets/github-8b6f127f8765a35a34ebae227c02c78b74904872bf58075b4edc134d4eb2c218.js"></script>
+      
+      
+      
+      
+    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
+      <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
+      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    </div>
+    <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+    </button>
+  </div>
+</div>
+
+  </body>
+</html>
+

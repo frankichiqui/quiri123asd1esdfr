@@ -1,0 +1,301 @@
+daiquiri_site_homepage:
+    path:     /
+    defaults: { _controller: DaiquiriSiteBundle:Default:index }
+    
+daiquiri_site_homepage1:
+    path:    /home/
+    defaults: { _controller: DaiquiriSiteBundle:Default:index }
+    
+daiquiri_site_about_us:
+    path:    /about-us/
+    defaults: {_controller: DaiquiriSiteBundle:Default:about_us}
+    
+daiquiri_site_contact_us:
+    path:   /contact-us/
+    defaults: {_controller: DaiquiriSiteBundle:Default:contact_us}
+    
+daiquiri_site_contact:
+    resource: "@DaiquiriSiteBundle/Resources/config/routing/contact.yml"
+    prefix:   /contact/
+    
+daiquiri_site_faq:
+    path:   /faqs/
+    defaults: {_controller: DaiquiriSiteBundle:Default:faqs, page:1}
+    
+daiquiri_site_faq_paginated:
+    path:   /faqs/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:Default:faqs}
+
+daiquiri_site_review:
+    resource: "@DaiquiriSiteBundle/Resources/config/routing/review.yml"
+    prefix:   /review/
+    
+
+
+######### CIRCUITS ########
+circuit_list:
+    path:   /circuits/
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:list, page: 1}
+    
+circuit_list_paginated:
+    path:   /circuits/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:list}
+    
+circuit_search:
+    path:   /search/circuits/
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:search, page: 1}
+    
+circuit_search_paginated:
+    path:   /search/circuits/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:search}
+    
+circuit_show:
+    path:   /circuit/{slug}/
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:showCircuit} 
+
+circuit_search_into_show:
+    path:   /circuit/{slug}/search
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:searchIntoshow, page: 1}   
+    
+get-form-to-new-review-circuit:
+    path:   /circuit/get-form-to-new-review-circuit/{slug}
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:getFormToNewReview } 
+    
+new-review-circuit:
+    path:   /circuit/review/new-review-circuit
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:createReviewToCircuit }  
+######### END CIRCUITS ########
+    
+######### EXCURSIONS ########
+excursion_list:
+    path:   /excursions/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:list, page: 1}
+ 
+    
+excursion_list_paginated:
+    path:   /excursions/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:list}
+
+excursion_list_polo:
+    path:   /excursions/in/{polo}/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:listByPolo, page: 1}
+    
+excursion_list_polo_paginated:
+    path:   /excursions/in/{polo}/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:listByPolo}
+    
+excursion_search:
+    path:   /search/excursions/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:search, page: 1}
+    
+excursion_search_paginated:
+    path:   /search/excursions/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:search}
+    
+excursion_show:
+    path:   /excursion/{slug}/
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:showExcursion} 
+    
+excrusion_search_into_show:
+    path:   /excursion/{slug}/search
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:searchIntoshow, page: 1}   
+    
+get-form-to-new-review-excursion:
+    path:   /excursion/get-form-to-new-review-excursion/{slug}
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:getFormToNewReview } 
+    
+new-review-excursion:
+    path:   /excursion/review/new-review-excursion
+    defaults: {_controller: DaiquiriSiteBundle:ExcursionSearcher:createReviewToexcursion }     
+    
+######### END EXCURSIONS ########
+
+
+######### CARS ########
+car_list:
+    path:   /cars/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:list, page: 1}
+ 
+    
+car_list_paginated:
+    path:   /cars/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:list}
+
+car_list_category:
+    path:   /cars/by/{category}/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:listByCategory, page: 1}
+    
+car_list_category_paginated:
+    path:   /cars/by/{category}/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:listByCategory}
+  
+car_search:
+    path:   /search/cars/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:search, page: 1}
+    
+car_search_paginated:
+    path:   /search/cars/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:search}
+    
+car_show:
+    path:   /car/{slug}/
+    defaults: {_controller: DaiquiriSiteBundle:CarSearcher:showCar}    
+    
+######### END CARS ########
+
+
+
+    
+    
+    
+######### RENTALS ########
+rental_list:
+    path:   /rentals/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:list, page: 1} 
+    
+rental_list_paginated:
+    path:   /rentals/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:list}
+
+rental_list_province:
+    path:   /rentals/in/{province}/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:listByProvince, page: 1}
+    
+rental_list_province_paginated:
+    path:   /rentals/in/{province}/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:listByProvince}
+    
+rental_search:
+    path:   /search/rentals/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:search, page: 1}
+    
+rental_search_paginated:
+    path:   /search/rentals/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:search}
+    
+rental_show:
+    path:   /rental/{slug}/
+    defaults: {_controller: DaiquiriSiteBundle:RentalHouseRoomSearcher:showRental}    
+    
+######### END RENTALS ########
+
+
+######### HOTELS ########
+hotel_list:
+    path:   /hotels/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:list, page: 1}
+
+hotel_list_ajax:
+    path:   /hotels/ajax/{page}
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:listAjaxByType }
+    
+hotel_list_paginated:
+    path:   /hotels/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:list}
+
+hotel_list_polo:
+    path:   /hotels/in/{polo}/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:listByPolo, page: 1}
+    
+hotel_list_polo_paginated:
+    path:   /hotels/in/{polo}/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:listByPolo}
+    
+hotel_search:
+    path:   /search/hotels/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:search, page: 1}
+    
+hotel_search_into_show:
+    path:   /hotel/{slug}/search
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:searchIntoshow, page: 1}    
+    
+hotel_search_paginated:
+    path:   /search/hotels/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:search}
+    
+hotel_show:
+    path:   /hotel/{slug}/
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:show} 
+
+review_plus_usefull:
+    path:     /review_plus_usefull-{id}
+    defaults: { _controller: DaiquiriAdminBundle:Review:plusUsefull, _sonata_admin: admin.review }    
+
+get-form-to-new-review-hotel:
+    path:   /hotel/get-form-to-new-review-hotel/{slug}
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:getFormToNewReview } 
+    
+new-review-hotel:
+    path:   /hotel/review/new-review-hotel
+    defaults: {_controller: DaiquiriSiteBundle:OcupationSearcher:createReviewToHotel }     
+######### END HOTELS ########
+
+######### TRANSFERS ########
+transfer_list:
+    path:   /transfers/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:list, page: 1} 
+    
+transfer_list_paginated:
+    path:   /transfers/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:list}
+
+transfer_list_polo:
+    path:   /transfers/from/{polo}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:listByPolo, page: 1}
+    
+transfer_list_polo_paginated:
+    path:   /transfers/from/{polo}/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:listByPolo}
+    
+transfer_list_pickupplace:
+    path:   /transfers/pick-up-place/{pickupplace}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:listByPickUpPlace, page: 1}
+    
+transfer_list_pickupplace_paginated:
+    path:   /transfers/pick-up-place/{pickupplace}/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:listByPickUpPlace}
+    
+transfer_search:
+    path:   /search/transfers/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:search, page: 1}
+    
+transfer_search_paginated:
+    path:   /search/transfers/{page}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:search}
+    
+transfer_show:
+    path:   /transfer/{slug}/
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:showTransfer}    
+    
+######### END TRANSFERS ########
+
+
+    
+    
+  ###########routas ajax para los bloques######################
+get-campaign-for-block:
+    path: /get-block-{number}
+    defaults: {_controller: DaiquiriSiteBundle:Block:getCampaignInBlock } 
+
+
+
+######### CART ROUTES #########
+show_cart:
+    path:   /shopping-cart/
+    defaults: {_controller: DaiquiriSiteBundle:Sale:shoppingCartDetail}
+
+######### END CART ROUTES #########
+
+
+
+######### CURRENCY ROUTES #########
+
+change_currency_usd:
+    path:   /change-currency-usd/
+    defaults: {_controller: DaiquiriSiteBundle:Default:changeCurrencyUSD}
+    
+change_currency_eur:
+    path:   /change-currency-eur/
+    defaults: {_controller: DaiquiriSiteBundle:Default:changeCurrencyEUR}
+
+######### END CURRENCY ROUTES #########

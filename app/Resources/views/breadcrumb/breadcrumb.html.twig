@@ -1,0 +1,15 @@
+{% set links = bread_crumb(app.request.pathInfo) %}
+{% if links != "" %} 
+    <ul class="breadcrumb">
+        {% for link in links %}
+            {% if link['url'] != '#' %}
+                <li><a href="{{ path(link['url']) }}">{{ link['title']}}</a></li>
+                {% else%}
+                <li class="active">{{ link['title']}}</li>
+                {% endif %}
+            {% endfor %}
+    </ul>
+{% endif %}
+<script>
+    $("li").last().css("color", "black");
+</script>

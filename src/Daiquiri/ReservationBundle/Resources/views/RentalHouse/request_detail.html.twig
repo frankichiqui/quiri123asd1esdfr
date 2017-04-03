@@ -1,0 +1,28 @@
+{# empty Twig template #}
+<div style="border-top:solid 2px #d2d6de">
+    <div  style="margin:10px;">
+        <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Request Details</div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Room' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ request.rentalhouse  | upper }} {{ request.rentalhouseroom  | upper }}</div>
+        </div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Check in' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ request.startdate  | date('M j, Y') }}</div>
+        </div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Check out' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ request.enddate  | date('M j, Y') }}</div>
+        </div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Adult' | trans({}, 'pdf') }}</span>
+            <div style="margin-top: 5px;">{{ request.adult  }}</div>
+        </div>
+        <div style="width: 20%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Kid' | trans({}, 'pdf') }}</span>
+            <div style="margin-top: 5px;">{{ request.kid  }}</div>
+        </div>
+
+        <div style="clear: both"></div>
+    </div>
+</div>

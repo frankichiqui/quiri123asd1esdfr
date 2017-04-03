@@ -1,0 +1,220 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{% extends base_template %}
+
+
+{#{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}#}
+
+{% block show %}
+
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <div class="margin-bottom">
+        <section class="">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3 class="pull-left">
+                        <i class="fa fa-shopping-cart"></i> Shopping Cart Detail and Paxs
+                        <small class="cart_count"></small><small> item(s)</small>
+                    </h3>
+                </div>
+                <div class="pull-right col-md-3">
+
+                    <h3 class="total-item-load pull-right text-success">
+
+
+                    </h3> 
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <div class="sonata-ba-view">
+        <div class="row">
+            {% if app.session.get('cart',{}) | length > 0 %}
+                {% set id_form = admin.uniqid %}
+                {{ form_start(form, {attr:{'id':'form_'~ id_form}, 'action': admin.generateUrl('create', {'id': admin.id(sale), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}), 'method': 'POST'}) }}
+                {{ form_widget(form.client) }}
+                {% for item in app.session.get('cart',{}) %}
+                    {% set it = item | unserialize %}  
+                    {% set i = loop.index %}
+                    {% render(controller('DaiquiriReservationBundle:CartItem:getItemCartMin',{'it':it,'view_render_name':'item_cart_detail.html.twig','front':0}))%}
+                    <div class="col-md-12" data-id="{{ it.id }}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-warning">
+
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Paxs for {{ it.title}}</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body" style="display: block;">
+                                        <div class="hidden">
+                                            {{ form_widget(form.services[i-1].confirmationcode) }} 
+                                            {{ form_widget(form.services[i-1].servicemanagementstatus) }} 
+                                        </div>
+                                        {% for pax in form.services[i-1].servicepaxs %}
+
+                                            <div class="row">
+
+                                                <div class="col-md-2">
+                                                    <div>
+                                                        &nbsp;
+                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                            {% if it.arraypaxs[loop.index - 1] == 1 %}
+                                                                Adult {{ loop.index }}
+                                                            {% endif%}
+                                                            {% if it.arraypaxs[loop.index - 1] == 2 %}
+                                                                Kid {{ loop.index }}
+                                                            {% endif%}
+                                                            {% if it.arraypaxs[loop.index - 1] == 3 %}
+                                                                Infant {{ loop.index }}
+                                                            {% endif%}
+                                                            {% if it.arraypaxs[loop.index - 1] == 4 %}
+                                                                Passenger {{ loop.index }}
+                                                            {% endif%}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <div>
+                                                        {{ form_label(pax.gender) }}
+                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                            {{ form_widget(pax.gender) }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div>
+                                                        {{ form_label(pax.name) }}
+                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                            {{ form_widget(pax.name) }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div>
+                                                        {{ form_label(pax.lastname) }}
+                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                            {{ form_widget(pax.lastname) }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        {{ form_label(pax.document) }}
+                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                            {{ form_widget(pax.document) }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div>
+                                                        {{ form_label(pax.birthdate) }}
+                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                            {{ form_widget(pax.birthdate) }} 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                {%  endfor %}
+
+            </div>
+        </div>
+        <script>
+
+            $(document).ready(function () {
+
+                updateValues();
+            });
+            function updateValues() {
+                $('.total-item-load').load('{{ path('reservation_cart_get_total') }}');
+            }
+
+            $('button.delete_btn').click(function (e) {
+                e.preventDefault();
+                that = $(this);
+                showConfirDialogCartDetailDeleteItem(
+                        Routing.generate('reservation_cart_delete_item_by_id', {
+                            id: $(this).attr('id')}),
+                        "Are you sure want to delete item shopping cart?", that);
+            }
+
+            );
+        </script>
+
+        <script>
+            $('.empty_cart').click(function (e) {
+                that = $(this);
+                e.preventDefault();
+                showConfirDialogCartDetailDeleteAll('{{ path('reservation_cart_empty_cart') }}', "Are you sure you want to delete all item shopping cart?", that);
+            });
+        </script>
+        <div class="sonata-ba-form-actions well  well-small form-actions">
+            <a  name="btn_delete_all" class="btn btn-danger empty_cart">
+                <i class="fa fa-trash"></i>
+                Delete all Item
+            </a>
+            <a name="continue_adding" class="btn btn-warning" href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-plus-circle"></i> Continue Adding</a>
+            <button name="btn_create_and_list"  class="btn btn-success" type="submit"><i class="fa fa-dollar"></i> Payment</button>
+
+        </div>
+        <input type="hidden" id="front" name="front" value="0" />
+        {{ form_end(form) }}
+        <script>
+            form = $('#form_' + '{{ id_form }}');
+            form.submit(function (e) {
+                e.preventDefault();
+                showDialog(true, 'Processing your request...Please wait');
+
+                var formSerialize = form.serialize();
+                $.post($(form).attr('action'), formSerialize,
+                        function (data) {
+                            if (data.result === 'ok') {
+                                setContentDialog(data.conte, '<b>Redirecting to the Bank</b>');
+                                $('#pan_international').submit();
+                            } else {
+                                console.log("error");
+                            }
+                        }, 'JSON');
+            }
+            )
+
+        </script>
+    {% else %}
+        <div class="col-md-12">
+            <div class="row item_cart">
+                <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header">
+                            <h4 class="box-title">
+                                <b>Shopping cart is empty </b>
+                            </h4>
+                        </div>
+                        <div class="box-body">  
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-home"></i> Please Add a Product
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

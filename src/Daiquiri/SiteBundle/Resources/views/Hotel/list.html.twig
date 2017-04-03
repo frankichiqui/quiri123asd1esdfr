@@ -1,0 +1,139 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    {#{ dump(salida) }#}
+    <div class="container">
+        {% include 'breadcrumb/breadcrumb.html.twig'%}
+        <div class="mfp-with-anim mfp-hide mfp-dialog mfp-search-dialog" id="search-dialog">
+            <h3>{{ 'Search for Hotels' | trans({}, 'hotel') }}</h3>
+            {{ render(controller('DaiquiriSiteBundle:OcupationSearcher:new')) }}
+        </div>
+
+        {% if salida.haveToPaginate %}
+            <h3 class="booking-title">{{ salida | length }} {{ 'Hotels availables' | trans({}, 'hotel') }}<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Change search' | trans({}, 'hotel') }}</a></small></h3>
+                {% else %}
+            <h3 class="booking-title">{% if salida | length < 0 %}{{ salida | length }} {{ 'Hotels' | trans({}, 'hotel') }}{% else %}{{ salida | length }} {{ 'Hotels availables' | trans({}, 'hotel') }}{% endif %}<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Change search' | trans({}, 'hotel') }}</a></small></h3>
+                {% endif %}
+        <div class="row">
+            <div class="col-md-3">
+                <aside class="booking-filters text-white">
+                    <h3>Filter By:</h3>
+                    <ul class="list booking-filters-list">
+                        <li>
+                            <h5 class="booking-filters-title">Star Rating</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />5 star (220)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />4 star (112)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />3 star (75)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />2 star (60)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />1 star (20)</label>
+                            </div>
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Attractions</h5>
+                            {% for filter in filters %}
+                                <div class="checkbox">
+                                    <label>
+                                        <input data-idType="{{ filter.type.id }}" class="i-check" type="checkbox" />{{ filter.type~' ('~filter.cantType~')' }}</label>
+                                </div>
+                            {% endfor %}
+
+                            <button class="btn btn-default" id="exec-filter">Filter</button>
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Activities</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Sightseeing Tours (184)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Wellness & Spas (130)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Food & Drink (40)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Adventure (15)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Classes (34)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Gear Rentals (10)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Ranch & Farm (1)</label>
+                            </div>
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Nightlife</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Bars (115)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Clubs (63)</label>
+                            </div>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+            <div class="col-md-9">
+                <div id="ajax-hoteles">
+                    {% include 'DaiquiriSiteBundle:Hotel:ajax_hotels.html.twig' %}
+                </div>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+
+    <script>
+        jQuery(document).ready(function () {
+            $('#exec-filter').on("click", function () {
+                var data = {"idType": 1};
+                var url = '{{ path('hotel_list_ajax', { page:1 }) }}';
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: data,
+                    success: function (response) {
+                        ajaxLoadPage(response);
+                    }
+                });
+            });
+        });
+
+        function ajaxLoadPage(html) {
+
+            $('#ajax-hoteles').html(html);
+
+        }
+    </script>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,30 @@
+review:
+    path:     /
+    defaults: { _controller: "DaiquiriSiteBundle:Review:index" }
+
+review_show:
+    path:     /{id}/show
+    defaults: { _controller: "DaiquiriSiteBundle:Review:show" }
+
+review_new:
+    path:     /new
+    defaults: { _controller: "DaiquiriSiteBundle:Review:new" }
+
+review_create:
+    path:     /create
+    defaults: { _controller: "DaiquiriSiteBundle:Review:create" }
+    methods:  POST
+
+review_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DaiquiriSiteBundle:Review:edit" }
+
+review_update:
+    path:     /{id}/update
+    defaults: { _controller: "DaiquiriSiteBundle:Review:update" }
+    methods:  [POST, PUT]
+
+review_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DaiquiriSiteBundle:Review:delete" }
+    methods:  [POST, DELETE]

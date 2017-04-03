@@ -1,0 +1,11 @@
+{# empty Twig template #}
+{% extends "SonataAdminBundle:CRUD:base_list.html.twig" %}
+
+{% block tab_menu %} 
+   {% if admin.hasRoute('list') %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{ admin.generateUrl('form-create-transfer-colective-by-polo-and-type') }}" class="sonata-action-element"><i class="fa fa-plus-circle"></i>
+                Add Transfer By Polo and Type</a></li>
+    </ul>
+       {% endif %}
+{% endblock %}

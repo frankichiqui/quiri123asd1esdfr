@@ -1,0 +1,278 @@
+{% if colective %}
+    {{ form_start(form_item, {'attr':{'id':'colective_oneway_'~ obj.id},'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+{% else %}
+    {{ form_start(form_item,{'attr':{'id':'exclusive_oneway_'~ obj.id} ,'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+{% endif %}
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><span class="label label-warning">
+
+                    {% if obj.getTypeTransfer() == 1 %} IN {% elseif obj.getTypeTransfer() == 2 %} OUT {% elseif obj.getTypeTransfer()==3 %} INTER {% endif %}
+                </span>   {{ obj }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b><i class="fa fa-user"> </i> Passengers</b></p>
+            <small> {{ searcher.passengers }}</small>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b><i class="fa fa-calendar"> </i> Going</b></p>
+            <small> {{ searcher.date | date('M j, Y') }}</small>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Price </b></p>
+            <small>{{ (obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )) | price | raw }}</small>
+            <p><small>{% if obj.current_offert %}({{ obj.current_offert.getTitle() }}){% endif %}</small></p>
+        </div>
+    </div>
+</div>
+{% if obj.getTypeTransfer() == 1 or obj.getTypeTransfer() == 2 %}
+    {% if colective %}
+        <div class="col-md-2">
+            <div>
+                {{ form_label(form_item.flight) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form_item.flight) }} 
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-md-2">
+            <div>
+                {{ form_label(form_item.flight) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form_item.flight) }} 
+                </div>
+            </div>
+        </div>
+        <div class="hidden">
+            <div>
+                {{ form_label(form_item.pickup_time) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form_item.pickup_time,{'id':obj.id,'attr':{ 'value':searcher.date | date("g:i a")}}) }} 
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% else %}
+    {% if colective %}
+        <div class="hidden">
+            <div>
+                {{ form_label(form_item.flight) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form_item.flight,{'attr':{'value':'-'}}) }} 
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="col-md-3">
+            <div>
+                {{ form_label(form_item.pickup_time) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form_item.pickup_time,{'id':obj.id,'attr':{'value':searcher.date | date("g:i a")}}) }} 
+                </div>
+            </div>
+        </div>
+        <div class="hidden">
+            <div>
+                {{ form_label(form_item.flight) }}
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    {{ form_widget(form_item.flight,{'attr':{'value':'-'}}) }} 
+                </div>
+            </div>
+        </div>
+    {% endif %}             
+{% endif %}
+<div class="col-md-2">
+    <div class="row">
+        &nbsp;
+        <div class="col-md-12">            
+            <button type="submit" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> Add to Cart</button> 
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p></p>
+
+    </div>
+</div>
+<div class="hidden">    
+    {#{ form_widget(form_item.title,{'attr':{'value':obj.getTypeTransfer() ~ ' ' ~ obj.title}}) }#}
+    {{ form_widget(form_item.title,{'attr':{'value':obj.title}}) }}
+    {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+    {{ form_widget(form_item.unitariprice,{'attr':{'value':obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )}}) }}
+    {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+    {{ form_widget(form_item.totalprice,{'attr':{'value':obj.getTransferPrice(searcher.passengers,searcher.date,market.Object )}}) }}
+    {{ form_widget(form_item.startdate,{'attr':{'value':searcher.date | date("Y-m-d")}}) }}
+    {{ form_widget(form_item.pickupplace,{'attr':{'value':obj.placefrom.id }}) }}
+    {{ form_widget(form_item.dropoffplace,{'attr':{'value':obj.placeto.id }}) }}
+    {{ form_widget(form_item.passengers,{'attr':{'value':searcher.passengers}}) }}
+    {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+</div>
+{{ form_end(form_item)}}       
+<script>
+    {% if colective %}        
+    $('#{{'colective_oneway_'~ obj.id}}').on('submit', function (e) {
+        formAjax(e, $(this));
+    });
+    {% else %}        
+    $('#{{'exclusive_oneway_'~ obj.id}}').on('submit', function (e) {
+        formAjax(e, $(this));
+    });
+    {% endif %}
+</script>
+
+{% if searcher.roundtrip and reverse is not null %}
+
+    <div class="border-top-gray padding-top-10px">
+
+        {% if colective %}
+            {{ form_start(form_item_reverse, {'attr':{'id':'colective_reverse_'~ reverse.id},'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+        {% else %}
+            {{ form_start(form_item_reverse,{'attr':{'id':'exclusive_reverse_'~ reverse.id} ,'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+        {% endif %}
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><span class="label label-warning">
+
+                            {% if reverse.getTypeTransfer() == 1 %} IN {% elseif reverse.getTypeTransfer() == 2 %} OUT {% elseif reverse.getTypeTransfer()==3 %} INTER {% endif %}
+                        </span>   {{ reverse }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b><i class="fa fa-user"> </i> Passengers</b></p>
+                    <small> {{ searcher.passengers }}</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b><i class="fa fa-calendar"> </i> Return</b></p>
+                    <small> {{ searcher.dateroundtrip | date('M j, Y') }}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>Price </b></p>
+                    <small>{{ (reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )) | price | raw }}</small>
+                    <p><small>{% if reverse.current_offert %}({{ reverse.current_offert.getTitle() }}){% endif %}</small></p>
+                </div>
+            </div>
+        </div>
+        {% if reverse.getTypeTransfer() == 1 or reverse.getTypeTransfer() == 2 %}
+            <div class="col-md-2">
+                <div>
+                    {{ form_label(form_item_reverse.flight) }}
+                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                        {{ form_widget(form_item_reverse.flight) }} 
+                    </div>
+                </div>
+            </div>
+            {% if not colective %}       
+                <div class="hidden">
+                    <div>
+                        {{ form_label(form_item_reverse.pickup_time) }}
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            {{ form_widget(form_item_reverse.pickup_time,{'id':obj.id~'reverse_input_time', 'value':searcher.date | date("g:i a") }) }} 
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            {% if colective %}
+                <div class="hidden">
+                    <div>
+                        {{ form_label(form_item_reverse.flight) }}
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            {{ form_widget(form_item_reverse.flight,{'attr':{'value':'-'}}) }} 
+                        </div>
+                    </div>
+                </div>
+
+            {% else %}
+                <div class="col-md-3">
+                    <div>
+                        {{ form_label(form_item_reverse.pickup_time) }}
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            {{ form_widget(form_item_reverse.pickup_time,{'id':obj.id~'reverse_input_time','value':searcher.date | date("g:i a")}) }} 
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden">
+                    <div>
+                        {{ form_label(form_item_reverse.flight) }}
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            {{ form_widget(form_item_reverse.flight,{'attr':{'value':'-'}}) }} 
+                        </div>
+                    </div>
+                </div>
+            {% endif %}             
+        {% endif %}
+        <div class="col-md-2">
+            <div class="row">
+                &nbsp;
+                <div class="col-md-12">            
+                    <button type="submit" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> Add to Cart</button> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p></p>
+            </div>
+        </div>
+        <div class="hidden">    
+            {#{ form_widget(form_item_reverse.title,{'attr':{'value':reverse.getTypeTransfer() ~ ' ' ~ reverse.title}}) }#}
+            {{ form_widget(form_item_reverse.title,{'attr':{'value':reverse.title}}) }}
+            {{ form_widget(form_item_reverse.quantity,{'attr':{'value':1}}) }}
+            {{ form_widget(form_item_reverse.unitariprice,{'attr':{'value':reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )}}) }}
+            {{ form_widget(form_item_reverse.product,{'attr':{'value':reverse.id}}) }}
+            {{ form_widget(form_item_reverse.totalprice,{'attr':{'value':reverse.getTransferPrice(searcher.passengers,searcher.dateroundtrip,market.Object )}}) }}
+            {{ form_widget(form_item_reverse.startdate,{'attr':{'value':searcher.dateroundtrip | date("Y-m-d")}}) }}
+            {{ form_widget(form_item_reverse.pickupplace,{'attr':{'value':reverse.placefrom.id}}) }}
+            {{ form_widget(form_item_reverse.dropoffplace,{'attr':{'value':reverse.placeto.id}}) }}
+            {{ form_widget(form_item_reverse.passengers,{'attr':{'value':searcher.passengers}}) }}
+            {{ form_widget(form_item_reverse.front,{'attr':{'value':0}}) }}
+        </div>
+        {{ form_end(form_item_reverse)}}       
+        <script>
+            {% if colective %}
+                $('#{{'colective_reverse_'~ reverse.id}}').on('submit', function (e) {
+                    formAjax(e, $(this));
+                });
+            {% else %}
+
+                $('#{{'exclusive_reverse_'~ reverse.id}}').on('submit', function (e) {
+                    formAjax(e, $(this));
+                });
+            {% endif %}
+        </script>
+
+    </div>
+{% endif %}

@@ -1,0 +1,44 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_pgsql
+    database_host: 127.0.0.1
+    database_port: 5432
+    database_name: daiqui6_daiquiri3
+    database_user: postgres
+    database_password: postgres
+    locale: en
+    languages: (en|es|it)
+    secret: f976e7279f64f21a67105a3bc14d7e1b3
+    mailer_host: mail.daiquiricuba.com
+    mailer_user: no-reply@daiquiricuba.com
+    mailer_password: no-reply2015
+    mailer_encryption: null
+    mailer_port: 587
+    mailer_auth_mode: login
+    mailer_subject: Subject
+    mailer_body: Body
+    mailer_transport: smtp
+    usd_symbol: $
+    eur_symbol: €
+    clave_pam_usd: clave_en_usd
+    moneda_usd: 840
+    clave_pam_eur: clave_en_eur
+    moneda_eur: 978
+    url_recibir: /payment/response
+    url_ko: /payment/fail
+    url_ok: /payment/ok
+    pasarela: 'http://localhost:9000/index.php'
+    absolutedir: 'http://localhost:8090/app_dev.php/'
+    comercio: 'Daiquiri Tours Cuba'
+    site_status: 1
+    change: 0.95
+    facebook_app_id: 1104651349581527
+    facebook_app_secret: 57ee7de6516ba5d854f5eb76ac6327e9
+    google_app_id: daiquiri-tours-cuba
+    google_app_secret: AIzaSyAXl7gdTT6sXdeWvjAruLpEUr12mRhffv8
+    twitter_app_id: BEi7xAKpBa89vvwhZw607S474
+    twitter_app_secret: dBzyLoEwBGhB578JHFtcuQaqKqHDIlXnuU0hhH6CekWVv2LiJ9
+    pictures_directory: '%kernel.root_dir%/../web/uploads/user/profilepics'
+    
+    ip_api_test: 200.8.7.4
+    ip_api: http://ip-api.com/php/

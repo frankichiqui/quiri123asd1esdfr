@@ -1,0 +1,76 @@
+
+{{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+
+<div class="col-md-1">
+    <a href="#" class="thumbnail">
+        {% thumbnail obj.picture, 'small' %}
+    </a>
+</div>
+<div class="col-md-4">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>{{ obj }} </b>    [{{searcher.getDiffDays() }} Day(s) ]</p>
+
+            <p class="description">{{ (obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Pickuplace</b></p>
+            <p class="description">{{searcher.pickupplace}}({{ searcher.startdate | date('M j, Y g:i a') }})</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>DropoffPlace</b></p>
+            <p class="description">{{searcher.dropoffplace}}({{ searcher.enddate | date('M j, Y g:i a') }})</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-1">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Per Day</b></p>
+            <p class="description">
+                {% set price = obj.getTotalPrice(searcher.startdate, searcher.enddate, market.Object) %}
+                {{ price | price | raw }}</p>
+            <p><small>{% if obj.getMinCampaign() %}({{ obj.getMinCampaign().getTitle() }}){% endif %}</small></p>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-2">
+    <div class="row">
+        &nbsp;
+        <div class="col-md-12">            
+            <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="btn btn-warning"><i class="fa fa-save"></i>Add to Cart</button> 
+        </div>
+    </div>
+</div>           
+
+<div class="hidden">    
+    {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+    {{ form_widget(form_item.title,{'attr':{'value':'Car ' ~ obj.title}}) }}
+    {{ form_widget(form_item.unitariprice,{'attr':{'value':price}}) }}
+    {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+    {{ form_widget(form_item.totalprice,{'attr':{'value':price}}) }}
+    {{ form_widget(form_item.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d h:m")}}) }}
+    {{ form_widget(form_item.enddate,{'attr':{'value':searcher.enddate | date("Y-m-d h:m" )}}) }}
+    {{ form_widget(form_item.pickupplace,{'attr':{'value':searcher.pickupplace.id}}) }}
+    {{ form_widget(form_item.dropoffplace,{'attr':{'value':searcher.dropoffplace.id}}) }}
+    {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+</div>
+{{ form_end(form_item)}}       
+<script>
+
+    $('form[name="item_result{{ obj.id }}"]').on('submit', function (e) {
+        formAjax(e, $('form[name="item_result{{ obj.id }}"]'));
+
+    });
+</script>

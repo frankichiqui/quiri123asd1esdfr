@@ -1,0 +1,36 @@
+services:
+    app.searcher_controller:
+        class: Daiquiri\ReservationBundle\Controller\SearcherController
+        calls:
+            - [setContainer, ["@service_container"]]
+   
+    reservation.twig.unserialize_extension:
+        class: Daiquiri\ReservationBundle\Twig\UnserializeExtension
+        tags:
+                - { name: twig.extension }
+                
+    reservation.twig.serialize_extension:
+        class: Daiquiri\ReservationBundle\Twig\SerializeExtension
+        tags:
+                - { name: twig.extension }
+    
+    reservation.twig.price_extension:
+        class: Daiquiri\ReservationBundle\Twig\PriceExtension
+        arguments:
+            doctrine: "@doctrine"             
+            container: "@service_container"
+        tags:
+            - { name: twig.extension }     
+                
+    event.generate.orderid.to.sale:
+        class: Daiquiri\ReservationBundle\EventListener\GenerateOrderIdToSale
+        tags:
+            - { name: doctrine.event_listener, event: postPersist, connection: default }
+            
+    reservation.cartitem:
+        class: Daiquiri\ReservationBundle\Controller\CartItemController
+        
+   
+       
+            #<argument type="service" id="request" on-invalid="null" />
+           

@@ -1,0 +1,65 @@
+
+
+{{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+
+<div class="col-md-1">
+    <a href="#" class="thumbnail">
+        {% thumbnail obj.picture, 'small' %}
+    </a>
+</div>
+<div class="col-md-4">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>{{ obj }} </b>  </p>
+
+            <p class="description">{{ (obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>Price</b></p>
+            <p class="description">{{ price | price | raw }}</p>
+            <p><small>{% if obj.current_offert %}({{ obj.current_offert.getTitle() }}){% endif %}</small></p>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div>
+        {{ form_label(form_item.pickupplace) }}
+        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+            {{ form_widget(form_item.pickupplace) }} 
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-2">
+    <div class="row">
+        &nbsp;
+        <div class="col-md-12">            
+            <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="btn btn-warning"><i class="fa fa-save"></i>Add to Cart</button> 
+        </div>
+    </div>
+</div>           
+
+<div class="hidden">    
+    {{ form_widget(form_item.title,{'attr':{'value':obj.type ~ ' ' ~ obj.title}}) }}
+    {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+    {{ form_widget(form_item.unitariprice,{'attr':{'value':price}}) }}
+    {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+    {{ form_widget(form_item.totalprice,{'attr':{'value':price}}) }}
+    {{ form_widget(form_item.startdate,{'attr':{'value':searcher.date | date("Y-m-d")}}) }}
+    {{ form_widget(form_item.dropoffplace) }}
+    {{ form_widget(form_item.adult,{'attr':{'value':searcher.adults}}) }}
+    {{ form_widget(form_item.kid,{'attr':{'value':searcher.kids}}) }}
+    {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+</div>
+{{ form_end(form_item)}}       
+<script>
+
+    $('form[name="item_result{{ obj.id }}"]').on('submit', function (e) {
+        formAjax(e, $('form[name="item_result{{ obj.id }}"]'), true);
+    });
+</script>

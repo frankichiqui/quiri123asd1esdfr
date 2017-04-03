@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{# empty Twig template #}
+{% extends base_template %}
+
+
+{% block show %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row PEP">
+                        <div class="col-md-8"> <h1><i class="fa fa-check-circle fa-lg text-green"></i> The Payment Was Successful</h1></div>
+                        <div class="col-md-4 text-right"><h1>{{ payment.amount }}<small> {{payment.currency.nomenclator | upper }} </small> </h1></div>
+                        <div class="col-md-12 ">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h4>Description</h4>
+
+                                </div>
+                                <div class="box-body">
+                                    <div class="description">
+                                        {{ payment.description | raw }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sonata-ba-form-actions well  well-small form-actions " >    
+
+        <a name="btn_create_and_create" class="btn btn-warning" href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-plus-circle"></i> Continue </a>
+
+
+    </div>
+
+
+{% endblock %}

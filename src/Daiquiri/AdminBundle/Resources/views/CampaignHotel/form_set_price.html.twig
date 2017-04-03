@@ -1,0 +1,245 @@
+{# empty Twig template #}
+<div class="sonata-ba-view">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul role="tablist" class="nav nav-tabs pull-right">
+                    {% if  object is defined %}
+
+                        <li class="active">
+                            <a data-toggle="tab" href="#tab_{{object.room.id}}" aria-expanded="false">
+                                <i class="fa fa-exclamation-circle has-errors hide"></i>Room {{ object.room | upper }} </a>
+                        </li>                               
+
+                    {% else %}
+                        <li class="active">
+                            <a data-toggle="tab" href="#_not_room_found" aria-expanded="false">
+                                <i class="fa fa-exclamation-circle has-errors hide"></i> Not Rooms Found</a></li>
+                            {% endif %}
+
+                    {% if season is not null and season |length > 0 %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                                Load Price <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for s in season %}
+                                    <li role="presentation"><a class="campaign_load_price_object_{{ object.id }}" role="menuitem" data-price="{{ s.id }}" tabindex="-1" href="{{ path('set_hotel_price_to_campaign_hotel',{'id':object.id, 'hp_id':s.id }) }}"><i class="fa fa-dollar"></i>
+                                            {{ s.season.nameAndDates }}</a></li>
+                                        {% endfor %}
+                                <script>
+                                    $('.campaign_load_price_object_{{ object.id }}').click(function (e) {
+                                        e.preventDefault();
+                                        ali = $(this);
+                                        $('#div_set_campainghotel_price_{{ object.id }}').load(ali.attr('href'));
+                                    });
+
+
+                                </script>
+                            </ul>
+                        </li>
+
+                    {% endif %}
+                </ul>
+                <div class="tab-content">
+                    {% if  form is defined %}
+                        <div id="tab_{{object.room.id}}" class="tab-pane fade active in">
+                            <div class="box-body  container-fluid">
+                                <div class="sonata-ba-collapsed-fields">
+                                    <div class="row">
+                                        {# acordion#}
+
+                                        <div class="sonata-ba-collapsed-fields">
+                                            {{ form_start(form, {'attr':{'id':'form_campaignhotel_senddata_'~ object.id },   'action': admin.generateUrl('edit', {'id': admin.id(object), 'allform':TRUE,'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}), 'method': 'POST'}) }}
+
+                                            {{ form_errors(form) }}
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="box box-primary">  
+                                                        <div class="box-body">
+                                                            {{ form_label(form.base) }}
+
+                                                            <div >
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">$</span> 
+                                                                    {{ form_widget(form.base) }} 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="box box-primary">  
+                                                        <div class="box-body">
+                                                            {{ form_label(form.individual) }}
+                                                            <div >
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">$</span> 
+                                                                    {{ form_widget(form.individual) }} 
+                                                                </div>
+                                                            </div>
+                                                            {{ form_label(form.cHindividual) }}
+                                                            <div >
+                                                                {{ form_widget(form.cHindividual) }}  
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="box box-primary">  
+                                                        <div class="box-body">
+                                                            {{ form_label(form.three) }}
+                                                            <div >
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">$</span> 
+                                                                    {{ form_widget(form.three) }} 
+                                                                </div>
+                                                            </div>
+                                                            {{ form_label(form.cHthree) }}
+                                                            <div >
+                                                                {{ form_widget(form.cHthree) }} 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="box">
+                                                            <div class="box-header">
+                                                                <h3 class="box-title">General Kids Politic( All values are Discount)</h3>                
+                                                            </div>
+                                                            <!-- /.box-header -->
+                                                            <div class="box-body table-responsive no-padding">
+                                                                <table class="table table-hover" style="width: 99% !important">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th>Ocupation</th>
+                                                                            <th>1st Kid</th>
+                                                                            <th>2nd Kid</th>
+                                                                            <th>3th Kid</th>
+                                                                            <th>4th kid</th>
+                                                                            <th>Price</th>
+                                                                        </tr>
+                                                                        {% for k in form.kidpolicys if k.vars.data.ocupation.kids > 0 %}
+                                                                            <tr>
+                                                                                <td class="col-md-2">
+                                                                                    <div class="margin">
+                                                                                        {% if k.vars.data.ocupation.adults > 0 %}
+                                                                                            {% for ad in 1..k.vars.data.ocupation.adults %}
+                                                                                                <i class="fa fa-user fa-lg"></i>
+                                                                                            {% endfor %}
+                                                                                        {% endif %}
+                                                                                        {% if k.vars.data.ocupation.kids > 0 %}
+                                                                                            {% for ki in 1..k.vars.data.ocupation.kids %}
+                                                                                                <i class="fa fa-user"></i>
+                                                                                            {% endfor %}
+                                                                                        {% endif %}
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col-md-2">
+                                                                                    <div class="{% if k.vars.data.ocupation.kids >= 1 %}{% else %}hidden{% endif %}">
+                                                                                        {{ form_label(k.kid1) }}
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6 paddingLR5">{{ form_widget(k.kid1) }}</div>
+                                                                                            <div class="col-md-6">{{ form_widget(k.kid1_choice) }}</div>
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col-md-2">
+                                                                                    <div class="{% if k.vars.data.ocupation.kids >= 2 %}{% else %}hidden{% endif %}">
+                                                                                        {{ form_label(k.kid2) }}
+                                                                                        <div class="row" >
+                                                                                            <div class="col-md-6 paddingLR5">{{ form_widget(k.kid2) }}</div>
+                                                                                            <div class="col-md-6 ">{{ form_widget(k.kid2_choice) }}</div>
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col-md-2">
+                                                                                    <div class="{% if k.vars.data.ocupation.kids >= 3 %}{% else %}hidden{% endif %}">
+                                                                                        {{ form_label(k.kid3) }}
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6 paddingLR5">{{ form_widget(k.kid3) }}</div>
+                                                                                            <div class="col-md-6 ">{{ form_widget(k.kid3_choice) }}</div>
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col-md-2">
+                                                                                    <div class="{% if k.vars.data.ocupation.kids == 4 %}{% else %}hidden{% endif %}">
+                                                                                        {{ form_label(k.kid4) }}
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-6 paddingLR5">{{ form_widget(k.kid4) }}</div>
+                                                                                            <div class="col-md-6 ">{{ form_widget(k.kid4_choice) }}</div>
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="col-md-1">
+                                                                                    <div class="">
+
+                                                                                        <div class="row">
+                                                                                            {{ k.vars.data.price | price | raw }}
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {% endfor %}
+
+                                                                    </tbody></table>
+                                                            </div>
+                                                            <!-- /.box-body -->
+                                                        </div>
+                                                        <!-- /.box -->
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class=" well well-small form-actions ">    
+                                                <button name="btn_create_and_edit" id="s" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Create</button>
+                                            </div>
+                                            <div class="hidden">
+                                                {{ form_rest(form)}}
+                                            </div>
+                                            {{ form_end(form) }}   
+
+                                            <script>
+                                                $('#{{'form_campaignhotel_senddata_'~ object.id }}').submit(function (e) {
+                                                    e.preventDefault();
+                                                    $.post($('#{{'form_campaignhotel_senddata_'~ object.id }}').attr('action'), $('#{{'form_campaignhotel_senddata_'~ object.id }}').serialize(),
+                                                            function (data) {
+                                                                if (data.result == 'ok') {
+                                                                    setContentDialog("Item has update", '{{ object }}');
+                                                                } else {
+                                                                    setContentDialog("Error to Comunicate to the server", "Error");
+
+                                                                }
+                                                            }, 'JSON');
+                                                });
+
+
+
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>                             
+
+            {% else %}
+                <div id="_not_room_found" class="tab-pane fade active in">
+                    <div class="box-body  container-fluid">
+                        <div class="sonata-ba-collapsed-fields">
+                            <div class="row">
+                                Form is not Defined
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}                      
+        </div>
+    </div>
+</div>

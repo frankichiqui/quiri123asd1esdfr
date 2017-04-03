@@ -1,0 +1,3 @@
+{% for category in list %}
+    <li><a href="{{ path('car_list_category',{'category': category['slug']}) }}">{{ category['title'] }}</a></li>
+{% endfor %}

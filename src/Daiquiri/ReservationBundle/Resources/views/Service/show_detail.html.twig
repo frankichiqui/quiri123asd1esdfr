@@ -1,0 +1,170 @@
+{# empty Twig template #}
+{% if service is defined %}
+
+    <div class="row">    
+        <div class="col-md-12">
+            <div class="row">     
+                <div class="col-md-12">
+                    {% include 'DaiquiriReservationBundle:'~ service.cartitem.getRootFolder()~':reservation_detail.html.twig'  with {'caritem': service.cartitem} %}
+                </div>
+                {{ form_start(form, {'attr':{'class':'service_form_'~service.id}, 'action': admin.generateUrl('edit', {'id': admin.id(service), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}), 'method': 'POST'}) }}
+                {{ form_errors(form) }}
+                <div class="col-md-12">
+                    <div class="box box-primary service_{{ service.id }}" style="border-top-color: {{ service.servicemanagementstatus.color }} !important">
+
+                        <div class="box-body">  
+
+                            {% for pax in form.servicepaxs %}
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div>
+                                            &nbsp;
+                                            {% set it = service.cartitem %}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {% if it.arraypaxs[loop.index - 1] == 1 %}
+                                                    Adult {{ loop.index }}
+                                                {% endif%}
+                                                {% if it.arraypaxs[loop.index - 1] == 2 %}
+                                                    Kid {{ loop.index }}
+                                                {% endif%}
+                                                {% if it.arraypaxs[loop.index - 1] == 3 %}
+                                                    Infant {{ loop.index }}
+                                                {% endif%}
+                                                {% if it.arraypaxs[loop.index - 1] == 4 %}
+                                                    Passenger {{ loop.index }}
+                                                {% endif%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div>
+                                            {{ form_label(pax.gender) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(pax.gender) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            {{ form_label(pax.name) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(pax.name) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            {{ form_label(pax.lastname) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(pax.lastname) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            <label class="required" >(Pasport/DNI/CI)</label>
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(pax.document) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            {{ form_label(pax.birthdate) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(pax.birthdate) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            {% endfor %}
+                            <div class="col-md-12">
+                                <div class="row padding-bottom-10px service_{{ service.id }}">
+
+                                    <div class="col-md-4">
+                                        <div>
+                                            {{ form_label(form.confirmationcode) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(form.confirmationcode,{'id':'confirmation_'~service.id,'attr':{'class':'form-control' }}) }} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            {{ form_label(form.servicemanagementstatus) }}
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {{ form_widget(form.servicemanagementstatus,{'id':'selest_service_'~service.id }) }} 
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            <label class="" for="">By</label>                                                
+                                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                {% if service.getStatusByUser() is  null %}
+                                                    Not User
+                                                {% else %}
+                                                    {{ service.getStatusByUser().username }} 
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="required" >   &nbsp;</label>
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            <button name="btn_update" type="submit" class="btn btn-warning"><i class="fa fa-check"></i> Update</button> 
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <script>
+
+
+
+                        $('form.service_form_' + {{service.id}}).submit(function (event) {
+                            event.preventDefault();
+                            form = $(this);
+
+
+
+                            var formSerialize = form.serialize();
+                            $.post($(form).attr('action'), formSerialize,
+                                    function (data) {
+                                        if (data.result == 'ok') {
+                                            $('#alert' + '_{{ service.id}}').append(data.objectName + " is update success");
+                                            $('#alert' + '_{{ service.id}}').removeClass('hidden');
+                                        } else {
+                                            console.log("error");
+                                        }
+                                    }, 'JSON');
+
+                        });
+                    </script>
+
+                    {{ form_end(form)}}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-success alert-dismissible hidden" id="alert_{{ service.id}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> Alert!</h4>
+
+    </div>
+
+
+
+{% endif %}

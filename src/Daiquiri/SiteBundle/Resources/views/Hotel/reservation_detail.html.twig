@@ -1,0 +1,71 @@
+<li class="booking-item" >
+    <div class="row">
+        <div class="col-md-3">
+            <div class="booking-item-car-img">
+                {% if caritem.product.picture.galleryHasMedias is defined %}
+                    <img src="{% path caritem.product.picture, 'reference' %}" alt="{{ caritem.product.title }}" title="{{ caritem.product.title }}" />
+                {% else %}
+                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ caritem.product.title }}" title="{{ caritem.product.title }}" />
+                {% endif %}                
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-8">
+                    <h6 class="booking-item-title"><b> {{ caritem.title }} x {{ caritem.quantity }} </b></h6>
+                    <p class="booking-item-address"><i class="fa fa-cutlery"></i>
+                        <small><b> {{ 'Plan' | trans({}, 'hotel') }}:</b> {{ caritem.plan }}</small>
+                    </p>
+                    <p class="booking-item-address"><i class="fa fa-calendar-times-o"></i>
+                        <small><b>{{ 'Check-in' | trans({}, 'hotel') }}:</b> {{ caritem.startdate | date('M j, Y') }}</small>
+                    </p>                    
+                    <p class="booking-item-address"><i class="fa fa-calendar-times-o"></i>
+                        <small><b>{{ 'Check-out' | trans({}, 'hotel') }}:</b> {{ caritem.enddate | date('M j, Y') }}</small>
+                    </p>   
+                    <p class="booking-item-address"><i class="fa fa-bed"></i>
+                        <small><b>{{ 'Ocupation' | trans({}, 'hotel') }}:</b></small> 
+                        {% if caritem.adults != 0 and caritem.kids != 0 %}
+                            {% for adult in 1..caritem.adults %}                            
+                                <i class="fa fa-male"></i>
+                            {% endfor %} -                             
+                            {% for child in 1..caritem.kids %}
+                                <i class="fa fa-child"></i>
+                            {% endfor %}
+                        {% elseif caritem.adults == 0 %}
+                            0 -
+                            {% for child in 1..caritem.kids %}
+                                <i class="fa fa-child"></i>
+                            {% endfor %}
+                        {% elseif  caritem.kids == 0 %}
+                            {% for adult in 1..caritem.adults %}                            
+                                <i class="fa fa-male"></i>
+                            {% endfor %} - 0
+                        {% endif %}
+
+                        <small>
+                            ({{ caritem.adults }} - {{ caritem.kids }})
+                        </small>
+                    <p class="booking-item-address"><i class="fa fa-child"></i>
+                        <small><b>{{ 'Infants' | trans({}, 'hotel') }}:</b>  </small>
+                        {{ caritem.infants }}
+                    </p>
+
+                    </p>
+                </div>
+                <div class="col-md-4">                    
+                    <ul class="booking-item-features booking-item-features-sign clearfix">
+                        {% for facility in caritem.product.room.getRoomFacilities() %}
+                            <li rel="tooltip" data-placement="top" title="{{ facility.title | trans({}, 'car') }}"><i class="{{ facility.faicon }}"></i>
+                            {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <p class="booking-item-address form-inline">
+                {{ 'Price' | trans({}, 'hotel') }}: <small><span class="booking-item-price">{{ caritem.totalprice | price | raw }}</span></small>
+            </p> 
+        </div>
+    </div>
+</li>

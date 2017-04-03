@@ -1,0 +1,33 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}  
+    <div id="cart_content_front">
+        <div class="gap"></div>
+
+        <div class="container">
+            <h1 class="page-title">FAQs</h1>
+        </div>
+
+        <div class="container">  
+
+            <ul class="order-payment-list list mb30">
+                {% for faq in salida %} 
+
+                    <li>                             
+                        <h3>{{ loop.index }}. {{faq.title | capitalize }}</h3>
+                        {{ faq.description | raw }}
+                    </li>
+                {% endfor %}
+            </ul> 
+
+            {% if salida.haveToPaginate %}
+                <p><small>{{ salida | length }} {{ 'FAQs' | trans({}, 'faq') }}  {{ 'Showing' | trans({}, 'faq') }} {{ salida.getCurrentPage }} – {{ salida.getNbPages }}</small>
+                </p>
+
+                {{ pagerfanta(salida, 'page_view', {'routeName': 'daiquiri_site_faq_paginated'}, pagerfanta_opts) }}
+            {% endif %}
+        </div>
+        <div class="gap"></div>
+    </div>
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}   
+{% endblock %}

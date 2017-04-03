@@ -1,0 +1,134 @@
+/*YOUR CUSTOM STYLES*/
+
+.top-area,
+.special-area{
+    height: 450px;
+}
+
+ul.slimmenu li ul li a{
+    text-transform:none  !important;
+}
+
+label.required:before {
+    content: "* ";
+    color: #ed8323;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option{
+    padding-left: 11% !important;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"]{
+    height: 100% !important;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover{
+    height: 100% !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover{
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+
+.orange{
+    color: #ed8323;
+}
+
+.mfp-close{
+    height: 44px !important;
+}
+
+.booking-item-price {
+    font-size: 22px !important;
+}
+.mfp-search-dialog {
+    max-width: 1150px !important;
+}
+
+ul.slimmenu li > ul{
+    width: 100% !important;
+}
+
+form-group.form-group-lg.form-group-icon-left .form-control {
+    padding-left: 40px !important;
+}
+
+.bootstrap-select > .btn:first-child {
+    margin-left: 0;
+    padding-left: 9% !important;
+}
+
+.fa, .im {
+    display: inline-block;
+    /*font-family: FontAwesome;*/
+    font-style: normal;
+    font-weight: normal;
+    /*line-height: 1;*/
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+row-pax{
+    margin-top: 2% !important;
+}
+
+.modal_footer button {
+    margin-left: 10px;
+}
+
+
+/*.btn, .dropdown-toggle, .btn-default{
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;    
+}*/
+
+/*.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover{
+    background-color: initial !important;
+    
+}*/
+/*[data-tip] {
+        position:relative;
+
+}
+[data-tip]:before {
+        content:'';
+         hides the tooltip when not hovered 
+        display:none;
+        content:'';
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #1a1a1a;	
+        position:absolute;
+        top:30px;
+        left:35px;
+        z-index:8;
+        font-size:0;
+        line-height:0;
+        width:0;
+        height:0;
+}
+[data-tip]:after {
+        display:none;
+        content:attr(data-tip);
+        position:absolute;
+        top:35px;
+        left:50%;
+        padding:5px 8px;
+        background:#1a1a1a;
+        color:#fff;
+        z-index:9;
+        font-size: 0.75em;
+        height:25px;
+        line-height:18px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        white-space:nowrap;
+        word-wrap:normal;
+}
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+        display:block;
+}*/

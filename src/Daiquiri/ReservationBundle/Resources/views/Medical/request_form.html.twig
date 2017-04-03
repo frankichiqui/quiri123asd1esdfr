@@ -1,0 +1,171 @@
+{# empty Twig template #}
+{{ form_start(form, {'attr':{'class':'sendrequest', 'data-id':object.id }}) }}
+{{ form_errors(form) }}
+<div id="conte-{{ object.id}}" class="margin-bottom"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    {{ 'Request Medical Service' | trans({}, 'email') }}: {{ object.title | upper }}
+                </h4>
+            </div>
+            <div class="box-body">               
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div>
+                            {{ form_label(form.startdate) }}
+                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                {{ form_widget(form.startdate, {'attr':{'class':'form-control datepiker' }})}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div>
+                            {{ form_label(form.remark) }}
+                            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                {{ form_widget(form.remarks)}}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h4>Client Data</h4>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div>
+                                {{ form_label(form.gender) }}
+                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                    {{ form_widget(form.gender) }} 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                {{ form_label(form.paxname) }}
+                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                    {{ form_widget(form.paxname) }} 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                {{ form_label(form.paxlastname) }}
+                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                    {{ form_widget(form.paxlastname) }} 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                {{ form_label(form.paxemail) }}
+                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                    {{ form_widget(form.paxemail) }} 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div>
+                                {{ form_label(form.birthdate) }}
+                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                    {{ form_widget(form.birthdate) }} 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="hidden">
+        {{ form_widget(form.paxname, {'value':app.user.firstname } ) }} 
+        {{ form_widget(form.paxemail,{'value':app.user.email}) }} 
+        {{ form_widget(form.paxlastname, {'value':app.user.lastname}) }} 
+        {{ form_widget(form.gender, {'value':null}) }} 
+
+    </div>
+{% endif %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-body">
+
+                <div class="col-md-3">
+                    <div>
+                        <label>Im not robot</label>
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            {% include 'DaiquiriReservationBundle:Default:captcha.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div>
+                        {{ form_label(form.captcha) }}
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            {{ form_widget(form.captcha) }} 
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right col-md-2 margin-right-10">
+                    <div>
+                        &nbsp;
+                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                            <button name="btn_create_and_edit" type="submit" class="btn btn-success"><i class="fa fa-search"></i> Request Service</button> 
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="clear">&nbsp;</div>
+
+<div class="hidden"> 
+    {{ form_rest(form)}}
+</div>
+{{ form_end(form)}}
+<script>
+    $('.sendrequest').on('submit', function (e) {
+        e.preventDefault();
+        form = $(this);
+        $.post(form.attr('action'), form.serialize(), function (data) {
+            if (data.success) {
+                $('#conte-{{object.id}}').css('background-color', '#00a65a');
+                $('#conte-{{object.id}}').css('color', '#fff');
+                $('#conte-{{object.id}}').css('padding', '5px');
+                $('#conte-{{object.id}}').html(data.content);
+                setTimeout(function () {
+                    hideDialog();
+                }, 2000);
+            } else {
+                $('#conte-{{object.id}}').css('background-color', '#dd4b39');
+                $('#conte-{{object.id}}').css('color', '#fff');
+                $('#conte-{{object.id}}').css('padding', '5px');
+                $('#conte-{{object.id}}').html(data.content);
+            }
+        }, 'json');
+    });
+</script>
+

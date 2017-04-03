@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="pull-right box-tools">
+        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div class="col-md-3">
+        <div class="booking-item-car-img">
+            {% if product.picture.galleryHasMedias is defined %}
+                <img src="{% path product.picture, 'reference' %}" alt="{{ it.title }}" title="{{ it.title }}" />
+            {% else %}
+                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ it.title }}" title="{{ it.title }}" />
+            {% endif %}                
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-8">
+                <h6 class="booking-item-title"><b> {{ it.title }} x {{ it.quantity }} </b></h6>
+                <p class="booking-item-address"><i class="fa fa-cutlery"></i>
+                    <small><b> {{ 'Plan' | trans({}, 'hotel') }}:</b> {{ it.plan }}</small>
+                </p>
+                <p class="booking-item-address"><i class="fa fa-calendar-times-o"></i>
+                    <small><b>{{ 'Check-in' | trans({}, 'hotel') }}:</b> {{ it.startdate | date('M j, Y') }}</small>
+                </p>                    
+                <p class="booking-item-address"><i class="fa fa-calendar-times-o"></i>
+                    <small><b>{{ 'Check-out' | trans({}, 'hotel') }}:</b> {{ it.enddate | date('M j, Y') }}</small>
+                </p>   
+                <p class="booking-item-address"><i class="fa fa-bed"></i>
+                    <small><b>{{ 'Ocupation' | trans({}, 'hotel') }}:</b></small> 
+                    {% if it.adults != 0 and it.kids != 0 %}
+                        {% for adult in 1..it.adults %}                            
+                            <i class="fa fa-male"></i>
+                        {% endfor %} -                             
+                        {% for child in 1..it.kids %}
+                            <i class="fa fa-child"></i>
+                        {% endfor %}
+                    {% elseif it.adults == 0 %}
+                        0 -
+                        {% for child in 1..it.kids %}
+                            <i class="fa fa-child"></i>
+                        {% endfor %}
+                    {% elseif  it.kids == 0 %}
+                        {% for adult in 1..it.adults %}                            
+                            <i class="fa fa-male"></i>
+                        {% endfor %} - 0
+                    {% endif %}
+
+                    <small>
+                        ({{ it.adults }} - {{ it.kids }})
+                    </small>
+                <p class="booking-item-address"><i class="fa fa-child"></i>
+                    <small><b>{{ 'Infants' | trans({}, 'hotel') }}:</b>  </small>
+                    {{ it.infants }}
+                </p>
+
+                </p>
+            </div>
+            <div class="col-md-4">                    
+                <ul class="booking-item-features booking-item-features-sign clearfix">
+                    {% for facility in product.room.getRoomFacilities() %}
+                        <li rel="tooltip" data-placement="top" title="{{ facility.title | trans({}, 'car') }}"><i class="{{ facility.faicon }}"></i>
+                        {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        <p class="booking-item-address form-inline">
+            {{ 'Price' | trans({}, 'hotel') }}: <small><span class="booking-item-price">{{ it.totalprice | price | raw }}</span></small>
+        </p> 
+    </div>
+</div>

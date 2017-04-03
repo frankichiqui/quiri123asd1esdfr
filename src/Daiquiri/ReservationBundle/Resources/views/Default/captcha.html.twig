@@ -1,0 +1,16 @@
+{# empty Twig template #}
+<div class="row border-solid">
+    <div class="" style="float: left; line-height: 30px; ">
+        <img src="{{ path('get-captcha')}}" id="captcha_img"/>
+        <script>
+            function refreshC() {
+                $("#captcha_img").attr("src", "{{ path('get-captcha') }}?" + (new Date()).getTime());
+            }
+        </script>
+    </div>
+    <div style="line-height: 32px;float: left;border-left:1px solid #ccc;">
+        <div style="padding-left: 10px;padding-right:7px;" class="hover-background"><a href="#" onclick="refreshC();
+                return false;"><i class="fa fa-refresh"></i></a></div>
+    </div>
+    <div class="clear"></div>
+</div>

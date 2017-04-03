@@ -1,0 +1,35 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{# empty Twig template #}
+{# empty Twig template #}
+{% extends base_template %}
+
+
+{% block show %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8"> <h1><i class="fa fa-times-circle fa-lg text-danger"></i> Payment is not Complete</h1></div>
+                    
+                    </div>
+                    <div class="alert alert-danger alert-dismissible ">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> Message!</h4>
+                        {{ sale.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sonata-ba-form-actions well  well-small form-actions " >    
+
+        <a name="btn_create_and_create" class="btn btn-warning" href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-plus-circle"></i> Continue Adding</a>
+
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,209 @@
+{% extends base_template %}
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    {% endblock %}
+
+{#{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}#}
+
+{% block show %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <div class="sonata-ba-view">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">      
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    Transfer Exclusive
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="sonata-ba-collapsed-fields">
+                                     form_start(form, {'action': admin.generateUrl('create-transfer-exclusive-by-polo-and-type'), 'method': 'POST'}) }}
+                                    {{ form_errors(form) }}
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.polofrom) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.polofrom) }} 
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.placetypefrom) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.placetypefrom) }}  
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.poloto) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.poloto) }}  
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.placetypeto) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.placetypeto) }} 
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price0102) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price0102) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price0304) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price0304) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price0507) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price0507) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price0812) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price0812) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price1319) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price1319) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price2030) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price2030) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sonata-ba-field-container-s575f69f4878c5_price" class="form-group">
+                                                {{ form_label(form.price3140) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">$</span> 
+                                                        {{ form_widget(form.price3140) }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                                {{ form_label(form.reverse) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    {{ form_widget(form.reverse) }} 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class=" well well-small form-actions ">    
+                                        <button name="btn_create_and_edit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Create</button>
+                                    </div>
+                                    {{ form_end(form) }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    {% if new is defined and exist is defined%}
+                        <div class="col-md-6">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h4 class="box-title">
+                                        Result
+                                    </h4>
+                                </div>
+                                <div class="box-body">
+                                    <div class="sonata-ba-collapsed-fields">
+
+                                        <div><span class="label label-success">Create New</span></div>
+                                        {% if new | length != 0 %}
+                                            {% for n in new %}
+                                                <div>
+                                                    <a href="{{ admin.generateUrl('edit',{id:n.id}) }}">
+                                                        <b> 
+                                                            {% for type in  n.placefrom.placetypes  %} ({{ type}}) {% endfor %}
+                                                            {{ n.placefrom }}</b> --- <b>
+                                                            {% for type in  n.placeto.placetypes  %} ({{ type}}) {% endfor %}{{ n.placeto }}</b>
+                                                    </a>
+
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}
+
+                                        <div><span class="label label-danger">No Update</span></div>
+                                        {% if exist | length != 0 %}
+                                            {% for n in exist %}
+                                                <div>
+                                                    <a href="{{ admin.generateUrl('edit',{id:n.id}) }}">                                                
+                                                        <b> 
+                                                            {% for type in  n.placefrom.placetypes  %} ({{ type}}) {% endfor %}
+                                                            {{ n.placefrom }}</b> --- <b>
+                                                            {% for type in  n.placeto.placetypes  %} ({{ type}}) {% endfor %}{{ n.placeto }}</b>
+                                                    </a> 
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}
+
+                                        <div><span class="label label-info">Update Price</span></div>
+                                        {% if update_price | length != 0 %}
+                                            {% for n in update_price %}
+                                                <div>                                                
+                                                    <a href="{{ admin.generateUrl('edit',{id:n.id}) }}">
+                                                        <b> 
+                                                            {% for type in  n.placefrom.placetypes  %} ({{ type}}) {% endfor %}
+                                                            {{ n.placefrom }}</b> --- <b>
+                                                            {% for type in  n.placeto.placetypes  %} ({{ type}}) {% endfor %}{{ n.placeto }}</b>
+                                                    </a>
+
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

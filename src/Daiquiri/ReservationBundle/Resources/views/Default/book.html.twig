@@ -1,0 +1,9 @@
+{# empty Twig template #}
+
+{% if object.getPayonline() %}
+    <a title="Book" class="btn btn-sm btn-warning" href="{{ admin.generateObjectUrl(admin.routeitem, object) }}">
+        <i class="fa  fa-pencil-square-o"></i> 
+        Book
+    </a>
+{% endif%}
+

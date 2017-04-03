@@ -1,0 +1,110 @@
+
+<div class="row">
+
+    {{ form_start(form_item, {'name':'name_'~ obj.id ,'attr':{'id':'form_' ~ obj.id },'action': admin.generateUrl('add-to-cart',{id:obj.hotel.id}), 'method': 'POST'}) }}
+    <div class="col-md-1">
+        <a href="#" class="thumbnail">
+            {% thumbnail obj.picture, 'small' %}
+        </a>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <p><b>{{ obj | upper }} </b>[{{searcher.getDiffDays() }} Day(s) ]</p>
+
+                <p class="description">{{ (obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="row">
+            <div class="col-md-12">
+                <p><b>Price</b></p>
+                <p class="description">{{ price | price | raw }}</p>               
+                <p><small>{% if ocupation.getMinCampaign() %}({{ ocupation.getMinCampaign().getTitle() }}){% endif %}</small></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-2">
+        <div class="row">
+            {{ form_label(form_item.plan) }}
+            <div class="col-md-12">
+                {{ form_widget(form_item.plan,{'id':'plan_'~ obj.id }) }}
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="row">
+            <p>Plus for Diets</p>
+            <smal class="col-md-12" id="plus_diet_{{obj.id }}">
+
+            </smal>
+        </div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="row">
+            &nbsp;
+            <div class="col-md-12">            
+                <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="btn btn-warning"><i class="fa fa-shopping-cart"></i>&nbsp;Add to Cart</button> 
+            </div>
+        </div>
+    </div>           
+
+    <div class="hidden"> 
+        {% if price is null %}{% set p = 0 %}{% else %}{% set p = price %}{% endif %}
+        {{ form_widget(form_item.quantity,{'id':'quantity_'~ obj.id,'attr':{'value':1 }}) }}
+        {{ form_widget(form_item.hotel,{'attr':{'value':obj.hotel.id }}) }}
+        {{ form_widget(form_item.room,{'attr':{'value':obj.id }}) }}
+        {{ form_widget(form_item.kids,{'attr':{'value':ocupation.kids}}) }}
+        {{ form_widget(form_item.adults,{'attr':{'value': ocupation.adults }}) }}
+        {{ form_widget(form_item.infants,{'attr':{'value': infants }}) }}
+        {{ form_widget(form_item.title,{'attr':{'value':obj.hotel | upper ~' '~ ocupation}}) }}
+        {{ form_widget(form_item.unitariprice,{'attr':{'value':p }}) }}
+        {{ form_widget(form_item.product,{'attr':{'value':ocupation.id}}) }}
+        {{ form_widget(form_item.totalprice,{'attr':{'value':p }}) }}
+        {{ form_widget(form_item.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.enddate,{'attr':{'value':searcher.enddate | date("Y-m-d")}}) }}
+        {{ form_widget(form_item.front,{'attr':{'value':0}}) }}
+    </div>
+
+    {{ form_end(form_item)}} 
+
+    <script>
+        $('form[name="name_{{obj.id}}"]').on('submit', function (e) {
+        formAjax(e, $(this));
+        });
+                $.post(
+                        Routing.generate('daiquiri_reservation_plus_for_by_hotel_and_diet', {
+                        id:{{obj.hotel.id}}, diet: $('#plan_' + '{{ obj.id }}').val()}), $('form[name="name_{{obj.id}}"]').serialize(),
+                        function (data) {
+                        //console.log(form);
+                        if (data.success){
+                        $('#plus_diet_{{ obj.id }}').html('+ ' + data.value);
+                        } else {
+                        console.log("error");
+                        }
+                        }, 'JSON');
+                $('#plan_' + '{{obj.id }}').on("change", function (e) {
+        $.post(Routing.generate('daiquiri_reservation_plus_for_by_hotel_and_diet', {
+        id:{{obj.hotel.id}},
+                diet: $('#plan_' + '{{ obj.id }}').val()}), $('form[name="name_{{obj.id}}"]').serialize(),
+                function (data) {
+                //console.log(form);
+                if (data.success) {
+                $('#plus_diet_{{ obj.id }}').html('+ ' + data.value);
+                } else {
+                console.log("error");
+                }
+                }, 'JSON');
+        });
+    </script>
+</div>
+<br>
+
+

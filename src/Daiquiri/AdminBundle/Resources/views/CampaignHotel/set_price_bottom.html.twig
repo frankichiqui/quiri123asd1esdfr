@@ -1,0 +1,5 @@
+{# empty Twig template #}
+<a title="Set Price" id="set_campainghotel_price_{{ object.id }}"class="btn btn-sm  {% if object.hasPrice() %} btn-success {% else %} btn-default {% endif %} delete_link campaign_set_price_bottom" href="{{ admin.generateUrl('form-set-price',{id:object.id}) }}">
+    <i class="fa fa-dollar"></i>
+    Price
+</a>

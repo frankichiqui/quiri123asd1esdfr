@@ -1,0 +1,45 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Purchase Confirmation and Voucher' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    {% if sale.client.fullName != " " %}
+
+        {{ sale.client.fullName | upper }} 
+    {% else %}
+
+        {{ sale.client.username | upper }} 
+    {% endif %}
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'Thank you very much for choose DAIQUIRI TOURS CUBA
+He has successfully made the payment of the requested services to our agency, attached to this email we send the corresponding services Vaucher, it must be presented with them at the time of receiving the same.' | trans({}, 'email') }}       
+    </div>
+    {% for service in sale.services %}
+        {% include 'DaiquiriReservationBundle:'~ service.cartitem.getRootFolder()~':reservation_detail.html.twig'  with {'caritem': service.cartitem} %}
+        <div class="row margin"></div>
+    {% endfor %}
+   
+
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">{{ 'Details' | trans({}, 'index') }}</div>
+            <div style="width: 33.33333%;float: left">
+
+                <div style="margin-top: 5px;">{{ 'Total purchase' | trans({}, 'index') }}</div>
+            </div>
+            <div style="width: 33.333333%;float: left">
+
+                <div style="margin-top: 5px;"><h4>....................................</h4></div>
+            </div>        
+            <div style="width: 33.33333%;float: left">
+
+                <div style="margin-top: 5px;">{{ sale.amount }} {{ sale.currency.nomenclator | upper}}</div>
+            </div>
+
+
+            <div style="clear: both"></div>
+        </div>
+    </div>
+
+{% endblock %}

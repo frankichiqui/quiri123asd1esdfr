@@ -1,0 +1,202 @@
+fos_user:
+    db_driver:        orm # can be orm or mongodb (support is also available within FOSUser for couchdb, propel but none is given for SonataUserBundle)
+    firewall_name:    main
+    #user_class:       Application\Sonata\UserBundle\Entity\User
+    user_class:       Daiquiri\AdminBundle\Entity\DUser
+
+    group:
+        group_class:  Application\Sonata\UserBundle\Entity\Group
+
+           
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.block.service.searcher: ~
+        sonata.block.service.info: ~
+        # enable the SonataAdminBundle block        
+        sonata.admin.block.admin_list:       
+           contexts: [admin]
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
+        sonata.admin.block.search_result:
+            contexts: [admin]
+
+sonata_user:
+    security_acl: true
+
+    manager_type: orm # Can be orm or mongodb
+
+    #table:
+        #user_group: "my_custom_user_group_association_table_name"
+
+    impersonating:
+        route:                daiquiri_site_homepage #page_slug
+        parameters:           { path: / }
+
+    class:                  # Entity Classes
+        #user:               Application\Sonata\UserBundle\Entity\User
+        user:               Daiquiri\AdminBundle\Entity\DUser
+        group:              Application\Sonata\UserBundle\Entity\Group
+
+    admin:                  # Admin Classes
+        user:
+            class:          Daiquiri\AdminBundle\Admin\DUserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+
+        group:
+            class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+            
+    google_authenticator:
+            enabled: true
+            server:  localhost
+
+    profile:
+         # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               application_user_profile #sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default #sonata_user.form.handler.profile
+            name:               application_user_profile #sonata_user_profile_form
+            validation_groups:  [Profile]
+            
+        default_avatar: 'bundles/sonatauser/default_avatar.png' # Default avatar displayed if user doesn't have one
+        # As in SonataAdminBundle's dashboard
+        dashboard:
+            groups:
+                # Prototype
+                id:
+                    label:                ~
+                    label_catalogue:      ~
+                    items:                []
+                    item_adds:            []
+                    roles:                []
+            
+        register:
+            # You may customize the registration forms over here
+            form:
+                type:                 application_user_registration #sonata_user_registration
+                handler:              sonata.user.registration.form.handler.default
+                name:                 application_user_registration_form #sonata_user_registration_form
+                validation_groups:
+
+                    # Defaults:
+                    - Registration
+                    - Default
+            # This allows you to specify where you want your user redirected once he activated his account
+            confirm:
+                redirect:
+                    # Set it to false to disable redirection
+                    route: 'sonata_user_profile_show'
+                    route_parameters: ~
+
+        # Customize user portal menu by setting links
+        menu:
+            - { route: 'sonata_user_profile_show', label: 'sonata_profile_title', domain: 'SonataUserBundle'}
+            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+            #- { route: 'sonata_customer_addresses', label: 'link_list_addresses', domain: 'SonataCustomerBundle'}
+            - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
+            #- { route: 'sonata_order_index', label: 'order_list', domain: 'SonataOrderBundle'}
+
+
+            
+
+# override FOSUser default serialization
+jms_serializer:
+    metadata:
+        directories:
+            -
+                path: "%kernel.root_dir%/../vendor/sonata-project/user-bundle/Sonata/UserBundle/Resources/config/serializer/FOSUserBundle"
+                namespace_prefix: 'FOS\UserBundle'
+
+# Enable Doctrine to map the provided entities
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    FOSUserBundle: ~
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+                    
+                    
+#Para la estructura de la plantilla
+
+            
+sonata_admin:
+    dashboard:
+        blocks:
+            - { position: top, type: sonata.block.service.info, class: col-md-12 }
+            #- { position: left, type: sonata.admin.block.admin_list }
+            - { position: top, type: sonata.block.service.searcher, class: col-md-12 }
+           
+    title:      Daiquirí Admin
+    title_logo: bundles/daiquiriadmin/images/logo64.png
+    templates:
+        # default global templates
+        layout:                     DaiquiriAdminBundle:Default:standard_layout.html.twig
+        list:                       SonataAdminBundle:CRUD:list.html.twig
+        action:                     SonataAdminBundle:CRUD:action.html.twig
+        select:                     SonataAdminBundle:CRUD:list__select.html.twig
+        list_block:                 SonataAdminBundle:Block:block_admin_list.html.twig
+        short_object_description:   SonataAdminBundle:Helper:short-object-description.html.twig
+        batch:                      SonataAdminBundle:CRUD:list__batch.html.twig
+        inner_list_row:             SonataAdminBundle:CRUD:list_inner_row.html.twig
+        base_list_field:            SonataAdminBundle:CRUD:base_list_field.html.twig
+        pager_links:                SonataAdminBundle:Pager:links.html.twig
+        pager_results:              SonataAdminBundle:Pager:results.html.twig
+        show:                       SonataAdminBundle::base_show.html.twig
+        dashboard:                  SonataAdminBundle:Core:dashboard.html.twig
+
+
+sonata_doctrine_orm_admin:
+    # default value is null, so doctrine uses the value defined in the configuration
+    entity_manager: ~
+
+    audit:
+        force: true
+
+    templates:
+        form:
+            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
+        filter:
+            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
+        types:
+            list:
+                array:      SonataAdminBundle:CRUD:list_array.html.twig
+                boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
+                date:       SonataAdminBundle:CRUD:list_date.html.twig
+                time:       SonataAdminBundle:CRUD:list_time.html.twig
+                datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
+                text:       SonataAdminBundle:CRUD:base_list_field.html.twig
+                trans:      SonataAdminBundle:CRUD:list_trans.html.twig
+                string:     SonataAdminBundle:CRUD:base_list_field.html.twig
+                smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
+                bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
+                integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
+                currency:   SonataAdminBundle:CRUD:list_currency.html.twig
+                percent:    SonataAdminBundle:CRUD:list_percent.html.twig
+                choice:     SonataAdminBundle:CRUD:list_choice.html.twig
+                url:        SonataAdminBundle:CRUD:list_url.html.twig
+
+            show:
+                array:      SonataAdminBundle:CRUD:show_array.html.twig
+                boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
+                date:       SonataAdminBundle:CRUD:show_date.html.twig
+                time:       SonataAdminBundle:CRUD:show_time.html.twig
+                datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
+                text:       SonataAdminBundle:CRUD:base_show_field.html.twig
+                trans:      SonataAdminBundle:CRUD:show_trans.html.twig
+                string:     SonataAdminBundle:CRUD:base_show_field.html.twig
+                smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
+                bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
+                integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                currency:   SonataAdminBundle:CRUD:base_currency.html.twig
+                percent:    SonataAdminBundle:CRUD:base_percent.html.twig
+                choice:     SonataAdminBundle:CRUD:show_choice.html.twig
+                url:        SonataAdminBundle:CRUD:show_url.html.twig

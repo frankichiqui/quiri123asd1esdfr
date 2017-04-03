@@ -1,0 +1,70 @@
+{#{ dump(it) }#}
+{% set type = it.product.getTypeTransfer() %}
+{% set colective = it.product.getColective() %}
+
+<div class="row">
+    <div class="pull-right box-tools">
+        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+            <div style="margin-top: 4%;">
+    <div class="col-md-2">
+        {#<h5 class="booking-item-title">{{ 'Service' | trans({}, 'car') }}: {{ it.title }} x {{ it.quantity }} </h5>#}
+        <div class="booking-item-airline-logo">                        
+            {% if product.provider.picture is defined %}
+                <img src="{% path product.provider.picture, 'reference' %}" alt="{{ it.product }}" title="{{ it.product }}" />
+            {% else %}
+                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ it.product }}" title="{{ it.product }}" />
+            {% endif %}
+
+            <p>{{ it.product.provider }}</p>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="booking-item-flight-details">
+            <div class="booking-item-arrival">
+                {% if it.product.getColective() == false %}
+                    <p><i class="fa fa-taxi fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b></p>
+                {% else %}
+                    <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b><p>
+                    {% endif %}                                                   
+                <p class="booking-item-destination"><i class="fa fa-calendar"></i> {{ it.startdate | date('M j, Y')}}({{ it.startdate | date('g:i a') }})</p>
+                <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ it.pickupplace }}</p>
+            </div>
+            <div class="booking-item-arrival">
+                {% if it.product.getColective() == false %}
+                    <p> <i class="fa fa-taxi fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b></p>
+                {% else %}
+                    <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b><p>
+                    {% endif %}                                                   
+                <p class="booking-item-destination"><i class="fa fa-clock-o"></i> {{ it.product.endtime | date('g:i a') }}</p>
+                <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ it.dropoffplace }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <p><i class="fa fa-user fa-2x"></i> <b>{{ 'Passengers' | trans({}, 'transfer') }}</b></p>
+        <p class="booking-item-destination"><i class="fa fa-male"></i><small>{% if it.passengers == 1 %} {{ it.passengers }} {{ 'passenger'}}{% else %} {{ it.passengers }} {{ 'passengers'}} {% endif %} </small></p>
+                {% if colective %}    
+                    {% if type == 2 or type == 1%}
+                <p class="booking-item-destination"><i class="fa fa-plane"></i> {{ it.flight }}</p>
+            {% endif %}
+        {% else %}
+            {% if type == 2 or type == 1%}
+                <p class="booking-item-destination"><i class="fa fa-plane"></i> {{ it.flight }}</p>
+            {% else %}
+                <p class="booking-item-destination"><i class="fa fa-clock-o"></i> {{ it.getPickupTime() | date('g:i a') }}</p>                   
+            {% endif%}
+        {% endif %}
+    </div>
+    <div class="col-md-3">
+        <span class="booking-item-price">{{ it.totalprice | price | raw }}</span><span>/{{ 'total' | trans({}, 'transfer') }}</span>
+            {% if colective %}
+            <p style="margin-top: 5%"><i class="fa fa-bus fa-2x"></i> {{ 'Colective Transfer' | trans({}, 'transfer') }}</p>
+        {% else %}
+            <p style="margin-top: 5%"><i class="fa fa-taxi fa-2x"></i> {{ 'Exclusive Transfer ' | trans({}, 'transfer') }}</p>
+        {% endif %}
+    </div>
+</div>
+</div>

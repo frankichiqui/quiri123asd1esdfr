@@ -1,0 +1,150 @@
+<form action="{{ path('hotel_search') }}" method="POST">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                <label>{{ 'Where are you going?' | trans({}, 'hotel') }}</label>
+                {{ form_widget(form.ubication, {'attr':{'class': 'form-control', 'placeholder': 'Where are you going?' }}) }}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="input-daterange" data-date-format="M d, yyyy">
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                            <label>{{ 'Check-in' | trans({}, 'hotel') }}</label>                        
+                            <input type="text" class="form-control" name="start" id="date-start-hotel" />
+                            {{ form_widget(form.startdate, {'attr':{'class': 'form-control hidden', 'idm': 'd-s-h' }}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                            <label>{{ 'Check-out' | trans({}, 'hotel') }}</label>                        
+                            <input type="text" class="form-control" name="end" id="date-end-hotel"/>
+                            {{ form_widget(form.enddate, {'attr':{'class': 'form-control hidden', 'idm': 'd-e-h' }}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-group-lg form-group-select-plus">
+                        <label>{{ 'Adults' | trans({}, 'form') }}</label>
+                        <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                            <label class="btn btn-primary active" onclick="checkRHotelAdults(this);">
+                                <input type="radio" name="rhotel_adults" />1</label>
+                            <label class="btn btn-primary" onclick="checkRHotelAdults(this);">
+                                <input type="radio" name="rhotel_adults" />2</label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="rhotel_adults" />2+</label>
+                        </div>
+                        {{ form_widget(form.adults, {'attr':{'class': 'form-control hidden', 'idm': 'rh_adults' }}) }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-group-lg form-group-select-plus">
+                        <label>{{ 'Kids' | trans({}, 'form') }}</label>
+                        <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                            <label class="btn btn-primary active" onclick="checkRHotelKids(this);">
+                                <input type="radio" name="rhotel_kids" />0</label>
+                            <label class="btn btn-primary" onclick="checkRHotelKids(this);">
+                                <input type="radio" name="rhotel_kids" />1</label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="rhotel_kids" />1+</label>
+                        </div>
+                        {{ form_widget(form.kids, {'attr':{'class': 'form-control hidden', 'idm': 'rh_kids' }}) }}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group form-group-lg form-group-select-plus">
+                        <label>{{ 'Infants' | trans({}, 'hotel') }}</label>
+                        <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                            <label class="btn btn-primary active" onclick="checkRHotelInfants(this);">
+                                <input type="radio" name="rhotel_infants" />0</label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="rhotel_infants" />1+</label>                               
+                        </div>
+                        {{ form_widget(form.infants, {'attr':{'class': 'form-control hidden', 'idm': 'rh_infants' }}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="checkbox" >
+        <label class="orange advanced_hotel">
+            <input class="i-check check" type="checkbox" />{{ 'Advanced' | trans({}, 'form') }}
+        </label>
+    </div>
+    <div id="divadv_hotel" class="row" style="display: none">
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                <label>{{ 'Province' | trans({}, 'hotel') }}</label>
+                {{ form_widget(form.province, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true',  }}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-chain input-icon"></i>
+                <label>{{ 'Chain' | trans({}, 'hotel') }}</label>
+                {{ form_widget(form.chain, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true',  }}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-plus-circle input-icon"></i>
+                <label>{{ 'Facilities' | trans({}, 'hotel') }}</label>
+                {{ form_widget(form.facilities, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true', 'multiple':'multiple' }}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-plus-square input-icon"></i>
+                <label>{{ 'Rooms Facilities' | trans({}, 'form') }}</label>
+                {{ form_widget(form.facilities_room, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true', 'multiple':'multiple' }}) }}
+            </div>
+        </div>
+    </div>
+    <div class="hidden">    
+        {{ form_widget(form.polo, {'attr':{'class': 'form-control hidden' }}) }}
+        {{ form_rest(form) }}
+    </div>
+
+    <button class="btn btn-primary btn-lg" type="submit" name="btn_create_and_edit">{{ 'Search for Hotels' | trans({}, 'search') }}</button>
+
+
+    <script>
+        var flip = 0;
+        $(".advanced_hotel").on("click", function () {
+            $("#divadv_hotel").toggle(flip++ % 2 === 0);
+        });
+        var flip1 = 0;
+        $(".check").on("ifChecked", function () {
+            $("#divadv_hotel").toggle(flip1++ % 2 === 0);
+        });
+        $(".check").on("ifUnchecked", function () {
+            $("#divadv_hotel").toggle(flip1++ % 2 === 0);
+        });
+
+
+        $("#date-start-hotel").on("changeDate", function () {
+            $('input[idm="d-s-h"]').val(
+                    $("#date-start-hotel").datepicker('getFormattedDate')
+                    );
+        });
+
+        $("#date-end-hotel").on("changeDate", function () {
+            $('input[idm="d-e-h"]').val(
+                    $("#date-end-hotel").datepicker('getFormattedDate')
+                    );
+        });
+        
+        function checkRHotelAdults(obj) {
+            $('select[idm="rh_adults"]').val($(obj)[0].innerText);
+        }
+        function checkRHotelKids(obj) {
+            $('select[idm="rh_kids"]').val($(obj)[0].innerText);
+        }
+        
+        function checkRHotelInfants(obj) {
+            $('select[idm="rh_infants"]').val($(obj)[0].innerText);
+        }
+
+    </script>
+
+</form>

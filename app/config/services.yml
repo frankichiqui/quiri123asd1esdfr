@@ -1,0 +1,85 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+
+
+imports:
+     - { resource: "@DaiquiriReservationBundle/Resources/config/services.yml" }
+     - { resource: "@DaiquiriAdminBundle/Resources/config/services.yml" }   
+     - { resource: "@DaiquiriSiteBundle/Resources/config/services.yml" }
+
+services:
+   
+
+    twig.extension.text:
+            class: Twig_Extensions_Extension_Text
+            tags:
+                - { name: twig.extension }
+
+    twig.extension.i18n:
+            class: Twig_Extensions_Extension_I18n
+            tags:
+                - { name: twig.extension }
+
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }
+
+    twig.extension.array:
+            class: Twig_Extensions_Extension_Array
+            tags:
+                - { name: twig.extension }
+
+    twig.extension.date:
+            class: Twig_Extensions_Extension_Date
+            tags:
+                - { name: twig.extension }
+
+
+    application_user.registration.form.type:
+            class:      Application\Sonata\UserBundle\Form\Type\RegistrationFormType
+            arguments:     [%fos_user.model.user.class%]
+            tags:
+                - { name:     form.type, alias:     application_user_registration }
+            
+    application_user.profile.form.type:
+            class:      Application\Sonata\UserBundle\Form\Type\ProfileType
+            arguments:     [%fos_user.model.user.class%]
+            tags:
+                - { name: form.type, alias: application_user_profile }
+
+                
+#    daiquiri.comments.vote_persistence_listener:
+#            class: Daiquiri\AdminBundle\Listener\CommentVotePersistenceListener
+#            arguments: ["@fos_comment.manager.vote.default", "@security.context"]
+#            tags:
+#                - { name: kernel.event_subscriber }
+                
+    my_user_provider:
+            class: Application\Sonata\UserBundle\Security\Core\User\FOSUBUserProvider
+            #this is the place where the properties are passed to the UserProvider - see config.yml
+            arguments: ["@fos_user.user_manager",{facebook: facebook_id, twitter: twitter_id, google: google_id}]
+            
+
+    application.pictures_uploader:
+        class: Daiquiri\AdminBundle\Uploads\FileUploader
+        arguments: ['%pictures_directory%']
+        
+    application.doctrine_picture_listener:
+        class: Daiquiri\AdminBundle\EventListener\PictureUploadListener
+        arguments: ['@application.pictures_uploader']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            
+            
+    pagerfanta.view.default:
+        class: Pagerfanta\View\DefaultView
+        public: false
+        tags: [{ name: pagerfanta.view, alias: default }]
+        
+    pagerfanta.view.page_view:
+        class: Daiquiri\SiteBundle\View\PageView
+        public: false
+        tags:
+            - { name: 'pagerfanta.view', alias: 'page_view' }

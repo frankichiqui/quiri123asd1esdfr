@@ -1,0 +1,149 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    <div class="container">
+        <h1 class="page-title">About Us</h1>
+    </div>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <p class="text-bigger">
+                    {{ 'We promote and commercialize the goodnesses and attractions of Cuba as a travel destination, with the advantages granted by an experience of many years of presence on the international tourist market and by the close links with all the providers of tourist services throughout the country.' | trans({}, 'aboutus')}}
+                </p>
+
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+    <div class="bg-holder">
+        <div class="bg-parallax" style="background-image:url({{ asset('bundles/daiquirisite/img/daiquiri_agency.jpg')}});"></div>
+        <div class="bg-mask"></div>
+        <div class="bg-holder-content">
+            <div class="container">
+                <div class="gap gap-big text-white">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h2>Work hard. Play hard.</h2>
+                            <p class="text-bigger">
+                                {{ 'Beautiful beaches, blue sea, unique colonial cities, joyful people, music and a charming atmosphere everywhere.Cuba can make your most precious dreams come true by the design of very special programs from Daiquirí Tours, coming out from the hands of skillful hosts.Daiquirí Tours as Tour Operator has received tourists in Cuba for more than 10 years and has paved the way for success with its unique efficient and friendly style.We have contributed to the creation and development of the Cuban tourist product and that is why we have a great knowledge to meet the clients demands.We promote and commercialize the goodnesses and attractions of Cuba as a travel destination, with the advantages granted by an experience of many years of presence on the international tourist market and by the close links with all the providers of tourist services throughout the country.' | trans({}, 'aboutus')}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {# <div class="gap"></div>
+         <h2>Our Approach</h2>
+         <div class="row">
+             <div class="col-md-8">
+                 <p class="text-bigger">Cubilia gravida mus senectus donec consectetur dis ac vel quis a suscipit potenti purus aptent nibh gravida aliquet vestibulum varius dictum consectetur semper consectetur at varius donec sociis habitasse vivamus eget faucibus tempus donec lorem etiam volutpat blandit aliquam varius molestie nibh mattis adipiscing sodales dictumst volutpat quam rhoncus sodales</p>
+             </div>
+         </div>#}
+        <div class="gap"></div>
+        <h2>Rockstar Team</h2>
+        <div class="row">
+            <div class="col-md-10">
+                <p class="text-bigger mb30">Auctor sit parturient aenean sodales maecenas fusce potenti tristique lectus dapibus hendrerit habitant tristique vulputate vehicula quisque nisl curabitur varius enim quam maecenas facilisis inceptos auctor gravida massa facilisis risus</p>
+            </div>
+        </div>
+        <div class="row row-wrap" data-gutter="60">
+            <div class="col-md-3">
+                <div class="thumb text-center">
+                    <header class="thumb-header">
+                        <img class="round" src="{{ asset('bundles/daiquirisite/img/team/gustavo.jpg') }}" alt="Gustavo de la Fe" title="Gustavo de la Fe" />
+                    </header>
+                    <div class="thumb-caption">
+                        <h5 class="thumb-title">Gustavo de la Fe</h5>
+                        <p class="thumb-meta text-small">{{ 'Managing Director' | trans({}, 'aboutus') }}</p>
+                        <p class="thumb-meta text-small">{{ 'Email' | trans({}, 'aboutus') }}: <a href="mailto:gustavo@daiquiricuba.com">gustavo@daiquiricuba.com</a></p>
+                        <p class="thumb-meta text-small">{{ 'Phone' | trans({}, 'aboutus') }}: +(53)52094580</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="thumb text-center">
+                    <header class="thumb-header">
+                        <img class="round" src="{{ asset('bundles/daiquirisite/img/team/ivonne.jpg') }}" alt="Ivonne Mujica" title="Ivonne Mujica" />
+                    </header>
+                    <div class="thumb-caption">
+                        <h5 class="thumb-title">Ivonne Mujica</h5>
+                        <p class="thumb-meta text-small">{{ 'Sales Agent' | trans({}, 'aboutus') }}</p>
+                        <p class="thumb-meta text-small">{{ 'Email' | trans({}, 'aboutus') }}: <a href="mailto:ivonne@daiquiricuba.com">ivonne@daiquiricuba.com</a></p>
+                        <p class="thumb-meta text-small">{{ 'Phone' | trans({}, 'aboutus') }}: +(53) 52170606</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="thumb text-center">
+                    <header class="thumb-header">
+                        <img class="round" src="{{ asset('bundles/daiquirisite/img/team/adriana.jpg') }}" alt="Adriana Smith" title="Adriana Smith" />
+                    </header>
+                    <div class="thumb-caption">
+                        <h5 class="thumb-title">Adriana Smith</h5>
+                        <p class="thumb-meta text-small">{{ 'Sales Agent' | trans({}, 'aboutus') }}</p>
+                        <p class="thumb-meta text-small">{{ 'Email' | trans({}, 'aboutus') }}: <a href="mailto:adriana@daiquiricuba.com">adriana@daiquiricuba.com</a></p>
+                        <p class="thumb-meta text-small">{{ 'Phone' | trans({}, 'aboutus') }}: +(53) 72045101</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="thumb text-center">
+                    <header class="thumb-header">
+                        <img class="round" src="{{ asset('bundles/daiquirisite/img/300x300.png') }}" alt="Image Alternative text" title="Gamer Chick" />
+                    </header>
+                    <div class="thumb-caption">
+                        <h5 class="thumb-title">Sarah Slater</h5>
+                        <p class="thumb-meta text-small">{{ 'Sales Agent' | trans({}, 'aboutus') }}</p>
+                        <p class="thumb-meta text-small">{{ 'Email' | trans({}, 'aboutus') }}: email@daiquiricuba.com</p>
+                        <p class="thumb-meta text-small">{{ 'Phone' | trans({}, 'aboutus') }}: +(53) 72045101</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {#<h4>Want to Join Our Team</h4>
+        <div class="row">
+            <div class="col-md-10">
+                <p>Nascetur metus morbi nibh magnis semper elit proin vivamus hac vivamus ultricies hac nulla sodales himenaeos luctus nascetur lacus sed placerat penatibus sociosqu lectus semper tincidunt pellentesque volutpat egestas porttitor</p>
+                <a href="#">Explore open positions</a>
+            </div>
+        </div>
+        <div class="gap"></div>
+        <h2 class="mb20">Behing the Scenes</h2>
+    </div>
+    <div class="row row-no-gutter">
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="The Big Showoff-Take 2" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="Gaviota en el Top" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="Street" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="Playstation controller" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="Branding  iPad Interactive Design" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="Old No7" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="Going out tonight" />
+        </div>
+        <div class="col-md-3">
+            <img src="img/800x600.png" alt="Image Alternative text" title="me" />
+        </div>#}
+    </div>
+    <div class="container">
+    </div>
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+{% endblock %}

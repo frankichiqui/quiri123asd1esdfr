@@ -1,0 +1,62 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Payment Confirmation' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    AGENT
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'A new payment has just been completed, please start actions.' | trans({}, 'email') }}      
+    </div>
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Client</div>
+            <div style="width: 100%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Name' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.client.fullName | upper }}</div>
+            </div>          
+            <div style="clear: both"></div>
+        </div>
+    </div>   
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Detail</div>
+            <div style="width: 33.33333%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Amount' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.amount }}</div>
+            </div>    
+            <div style="width: 33.33333%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Currency' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.currency | upper }}</div>
+            </div>    
+            <div style="width: 33.33333%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Description' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ payment.description | upper }}</div>
+            </div>    
+            <div style="clear: both"></div>
+        </div>
+    </div>   
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Other Detail</div>
+            <div style="width: 20%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">Order ID</span>
+                <div style="margin-top: 5px;">{{ payment.getOrderId() | upper }}</div>
+            </div> 
+            <div style="width: 20%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">Date</span>
+                <div style="margin-top: 5px;">{{ payment.getDateCreated() | date('M j Y g:i a') }}</div>
+            </div> 
+            <div style="width: 20%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">Ip</span>
+                <div style="margin-top: 5px;">{{ payment.getCreatedFromIp() }}</div>
+            </div> 
+            <div style="width: 20%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">Error</span>
+                <div style="margin-top: 5px;">{{ payment.error  }}</div>
+            </div> 
+            <div style="clear: both"></div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,119 @@
+<li class="booking-item" >
+    <div class="row">
+        <div class="col-md-3">
+            <div class="booking-item-car-img">
+                {% if caritem.product.picture.galleryHasMedias is defined %}
+                    <img src="{% path caritem.product.picture, 'reference' %}" alt="{{ caritem.product.title }}" title="{{ caritem.product.title }}" />
+                {% else %}
+                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ caritem.product.title }}" title="{{ caritem.product.title }}" />
+                {% endif %}
+                <p class="booking-item-car-title">{{ caritem.product.title }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="booking-item-features booking-item-features-sign clearfix">
+                        <li rel="tooltip" data-placement="top" title="{{ 'Passengers' | trans({}, 'car') }}"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x {{ caritem.product.capacity }}</span>
+                        </li>
+                        <li rel="tooltip" data-placement="top" title="{{ 'Doors' | trans({}, 'car') }}"><i class="im im-car-doors"></i><span class="booking-item-feature-sign">x {{ caritem.product.doors }}</span>
+                        </li>
+                        <li rel="tooltip" data-placement="top" title="{{ 'Baggage Quantity' | trans({}, 'car') }}"><i class="fa fa-briefcase"></i><span class="booking-item-feature-sign">x {{ caritem.product.luggagecapacity }}</span>
+                        </li>
+                        {% if caritem.product.transsmission == 0 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Automatic Transmission' | trans({}, 'car') }}"><i class="im im-shift-auto"></i><span class="booking-item-feature-sign">{{ 'auto' | trans({}, 'car') }}</span>
+                            </li>
+                        {% else %}     
+                            <li rel="tooltip" data-placement="top" title="{{ 'Manual Transmission' | trans({}, 'car') }}"><i class="im im-shift"></i><span class="booking-item-feature-sign">{{ 'manual' | trans({}, 'car') }}</span>
+
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.power == 0 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Disel Vehicle' | trans({}, 'car') }}"><i class="im im-diesel"></i><span class="booking-item-feature-sign">diesel</span></li>
+                                {% elseif  caritem.product.power == 1 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Hybrid Vehicle' | trans({}, 'car') }}"><i class="im im-diesel"></i><span class="booking-item-feature-sign">hybrid</span>
+                            </li>
+                        {% else %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Electric Vehicle' | trans({}, 'car') }}"><i class="im im-electric"></i><span class="booking-item-feature-sign">electric</span>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.engine is defined and not null %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Engine' | trans({}, 'car') }}"><i class="fa fa-gears"></i><span class="booking-item-feature-sign">{{ caritem.product.engine }}</span>
+                                {% endif %}
+                        </li>
+                    </ul>
+                    <ul class="booking-item-features booking-item-features-small clearfix">
+                        {% if caritem.product.clima == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Climate Control' | trans({}, 'car') }}"><i class="im im-climate-control"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.airConditioner == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Air Conditioning' | trans({}, 'car') }}"><i class="im im-air"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.satellite == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Satellite Navigation' | trans({}, 'car') }}"><i class="im im-satellite"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.powerdoorslock == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Power Door Locks' | trans({}, 'car') }}"><i class="im im-lock"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.radio == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'FM Radio' | trans({}, 'car') }}"><i class="im im-fm"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.cdPlayer == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Stereo CD/MP3' | trans({}, 'car') }}"><i class="im im-stereo"></i>
+                            </li>
+                        {% endif %}                              
+                        {% if caritem.product.tilt == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Tilt Steering Wheel' | trans({}, 'car') }}"><i class="im im-car-wheel"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.powerwindow == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Power Windows' | trans({}, 'car') }}"><i class="im im-car-window"></i>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="booking-item-features booking-item-features-dark">
+                        {% if caritem.product.terminalpickup == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Terminal Pickup' | trans({}, 'car') }}"><i class="fa fa-plane"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.shuttlebus == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Shuttle Bus to Car' | trans({}, 'car') }}"><i class="im im-bus"></i>
+                            </li>
+                        {% endif %}
+                        {% if caritem.product.drivers | length > 0 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Car with Driver' | trans({}, 'car') }}"><i class="im im-driver"></i>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="booking-item-title"><b>{{ 'Service' | trans({}, 'car') }}: {{ caritem.title }} x {{ caritem.quantity }}</b></h6>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i>                
+                        <small><b>{{ 'Pick-up Place' | trans({}, 'car') }}:</b> {{ caritem.pickupplace }}</small>
+                    </p>
+                    <p class="booking-item-address form-inline"><i class="fa fa-calendar-times-o"></i>
+                        <small><b>{{ 'Pick-up Date & Time' | trans({}, 'car') }}:</b> {{ caritem.startdate | date('M j, Y g:i a') }}</small>
+                    </p>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i>                
+                        <small><b>{{ 'Drop-off Place' | trans({}, 'car') }}:</b> {{ caritem.dropoffplace }}</small>
+                    </p>
+                    <p class="booking-item-address form-inline"><i class="fa fa-calendar-times-o"></i>
+                        <small><b>{{ 'Drop-off Date & Time' | trans({}, 'car') }}:</b> {{ caritem.enddate | date('M j, Y g:i a') }}</small>
+                    </p>   
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <p class="booking-item-address form-inline">
+                {{ 'Price' | trans({}, 'car') }}: <small><span class="booking-item-price">{{ caritem.totalprice | price | raw }}</span></small>
+            </p> 
+        </div>
+    </div>
+</li>

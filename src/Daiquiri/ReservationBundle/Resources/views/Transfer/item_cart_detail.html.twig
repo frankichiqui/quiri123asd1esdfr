@@ -1,0 +1,83 @@
+{% set type = it.product.getTypeTransfer() %}
+<div class="col-md-12" data-id="{{ it.id }}">
+    <div class="row item_cart">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+                            <i class="fa fa-times"></i></button>
+                    </div>
+                    <h4 class="box-title">
+                        <b> {% if it.product.type == 'Transfer Colective' %}
+                            Colective Transfer
+                            {% else %}
+                                Exclusive Transfer 
+                                {% endif %}</b> 
+                                x {{ it.quantity }}
+                            </h4>
+                        </div>
+                        <div class="box-body">  
+                            <div class="row">
+                                <div class="col-md-2">
+                                    {% if it.product.type == 'Transfer Colective' %}
+                                        <i class="fa fa-bus fa-2x"></i>
+                                    {% else %}
+                                        <i class="fa fa-car fa-2x"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="label label-success">Departure</span>
+                                    <div> {{ it.startdate | date('M j, Y ') }}</div>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="label label-success">Pikup Place</span>
+                                    <div>{{ it.pickupplace }}</div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="label label-success">Droppoff Place</span>
+                                    <div>{{ it.dropoffplace }}</div>
+                                </div>    
+                                {% if it.product.type == 'Transfer Colective' %}
+                                    {% if type == 2 or type == 1%}
+                                        <div class="col-md-1">
+                                            <span class="label label-success">Flight</span>
+                                            <div>{{ it.flight }}</div>
+                                        </div>
+                                    {% endif %}
+                                {% else %}
+                                    {% if type == 2 or type == 1%}
+                                        <div class="col-md-1">
+                                            <span class="label label-success">Flight</span>
+                                            <div>{{ it.flight }}</div>
+                                        </div>
+                                    {% else %}
+                                        <div class="col-md-1">
+                                            <span class="label label-success">Time</span>
+                                            <div>{{ it.getPickupTime() | date('g:i a') }}</div>
+                                        </div>
+                                    {% endif%}
+                                {% endif %}
+
+                                <div class="col-md-1">
+                                    <span class="label label-success">Passengers</span>
+                                    <div>{{ it.passengers}}</div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="label label-success">Price</span>
+                                    <div>{{ it.totalprice | price | raw }}</div>
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

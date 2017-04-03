@@ -1,0 +1,630 @@
+services:
+    admin.result:
+        class: Daiquiri\ReservationBundle\Admin\ResultAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\Result, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher, show_in_dashboard: true, icon: '<i class="fa fa-check"> </i>', label:  Result }
+       
+    sonata.block.service.searcher:
+        class: Daiquiri\AdminBundle\Block\SearcherBlock
+        arguments:
+            - sonata.block.service.searcher
+            - "@templating"
+            - "@doctrine"   
+        tags:
+            - { name: sonata.block }
+    sonata.block.service.info:
+        class: Daiquiri\AdminBundle\Block\InfoBlock
+        arguments:
+            - sonata.block.service.info
+            - "@templating"            
+        tags:
+            - { name: sonata.block }        
+            
+    admin.request:
+        class: Daiquiri\ReservationBundle\Admin\RequestAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\Request, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Sale, show_in_dashboard: true, icon: '<i class="fa fa-search-plus"> </i>', label:  Request }
+            
+    ## campaign
+    admin.campaign.block:
+        class: Daiquiri\AdminBundle\Admin\BlockAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Block, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Block }
+    
+    admin.campaign:
+        class: Daiquiri\AdminBundle\Admin\CampaignAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Campaign, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: false, icon: '<i class="fa fa-flag"> </i>', label:  Campaign }
+    
+    admin.campaign.car:
+        class: Daiquiri\AdminBundle\Admin\CampaignCarAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignCar, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Car }
+    
+     
+    admin.campaign.rentalhose:
+        class: Daiquiri\AdminBundle\Admin\CampaignRentalHouseAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignRentalHouse, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign RentalHouse }
+    
+    
+    admin.campaign.circuit:
+        class: Daiquiri\AdminBundle\Admin\CampaignCircuitAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignCircuit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Circuit }
+    
+    admin.campaign.excursion.colective:
+        class: Daiquiri\AdminBundle\Admin\CampaignExcursionColectiveAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignExcursionColective, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Excursion Colective}
+    
+    admin.campaign.excursion.exclusive:
+        class: Daiquiri\AdminBundle\Admin\CampaignExcursionExclusiveAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignExcursionExclusive, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Excursion Exclusive}
+   
+    
+    admin.campaign.package:
+        class: Daiquiri\AdminBundle\Admin\CampaignPackageAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignPackage, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Package }
+    
+    admin.campaign.transferexclusive:
+        class: Daiquiri\AdminBundle\Admin\CampaignTransferExclusiveAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignTransferExclusive, DaiquiriAdminBundle:CampaignTransferExclusive]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Transfer Exclusive }
+    
+    admin.campaign.transfercolective:
+        class: Daiquiri\AdminBundle\Admin\CampaignTransferColectiveAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignTransferColective, DaiquiriAdminBundle:CampaignTransferColective]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Transfer Colective }
+    
+    admin.campaign.hotel:
+        class: Daiquiri\AdminBundle\Admin\CampaignHotelAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignHotel, DaiquiriAdminBundle:CampaignHotel]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Hotel }
+    
+    admin.campaign.medical:
+        class: Daiquiri\AdminBundle\Admin\CampaignMedicalAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CampaignMedical, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Campaign Medical }
+    
+    
+    #new hotel price        
+    admin.hotel.price:
+        class: Daiquiri\AdminBundle\Admin\HotelPriceAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\HotelPrice, DaiquiriAdminBundle:HotelPrice]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, show_in_dashboard: false, icon: '<i class="fa fa-search-plus"> </i>', label:  HotelPrice }
+            
+    admin.kid.policy:
+        class: Daiquiri\AdminBundle\Admin\KidPolicyAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\KidPolicy, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, show_in_dashboard: false, icon: '<i class="fa fa-search-plus"> </i>', label:  HotelPrice }       
+    
+    ##################
+    admin.ocupation.searcher:
+        class: Daiquiri\ReservationBundle\Admin\OcupationSearcherAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\OcupationSearcher, DaiquiriReservationBundle:OcupationSearcher]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher, show_in_dashboard: true, icon: '<i class="fa fa-search-plus"> </i>', label:  Hotel }
+    
+    admin.rentalhouseroom.searcher:
+        class: Daiquiri\ReservationBundle\Admin\RentalHouseRoomSearcherAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\RentalHouseRoomSearcher, DaiquiriReservationBundle:RentalHouseRoomSearcher]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher,show_in_dashboard: true, icon: '<i class="fa fa-seacher"> </i>', label:  Rental House }
+    
+    admin.car.searcher:
+        class: Daiquiri\ReservationBundle\Admin\CarSearcherAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\CarSearcher, DaiquiriReservationBundle:CarSearcher]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher,show_in_dashboard: true, icon: '<i class="fa fa-search-plus"> </i>', label:  Car }
+    
+    
+    admin.excursion.searcher:
+        class: Daiquiri\ReservationBundle\Admin\ExcursionSearcherAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\ExcursionSearcher, DaiquiriReservationBundle:ExcursionSearcher]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher, show_in_dashboard: true,icon: '<i class="fa fa-search-plus"> </i>', label:  Excursion }
+    
+    admin.circuit.searcher:
+        class: Daiquiri\ReservationBundle\Admin\CircuitSearcherAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\CircuitSearcher, DaiquiriReservationBundle:CircuitSearcher]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher,show_in_dashboard: true, icon: '<i class="fa fa-search-plus"> </i>', label:  Circuit }
+            
+    admin.transfer.searcher:
+        class: Daiquiri\ReservationBundle\Admin\TransferSearcherAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\TransferSearcher, DaiquiriReservationBundle:TransferSearcher]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Searcher,show_in_dashboard: true, icon: '<i class="fa fa-search-plus"> </i>', label:  Transfer }
+#fin de las busquedas
+
+
+    admin.sale:
+        class: Daiquiri\ReservationBundle\Admin\SaleAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\Sale, DaiquiriReservationBundle:Sale]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Sale, icon: '<i class="fa fa-line-chart"> </i>', label:  Sale }
+            
+    admin.service:
+        class: Daiquiri\ReservationBundle\Admin\ServiceAdmin
+        arguments: [null, Daiquiri\ReservationBundle\Entity\Service, DaiquiriReservationBundle:Service]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Sale, label: Service , show_in_dashboard: false}         
+            
+    admin.servicepax:
+        class: Daiquiri\ReservationBundle\Admin\ServicePaxAdmin
+        arguments: [null, Daiquiri\ReservationBundle\Entity\ServicePax,null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Sale, label: ServicePax , show_in_dashboard: false}   
+            
+    admin.servicemanagementstatus:
+        class: Daiquiri\ReservationBundle\Admin\ServiceManagementStatusAdmin
+        arguments: [null, Daiquiri\ReservationBundle\Entity\ServiceManagementStatus,null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Sale, label: Management Status , }             
+    
+    
+    
+            
+#    admin.promotionblock:
+#        class: Daiquiri\AdminBundle\Admin\PromotionBlockAdmin
+#        arguments: [~, ~, DaiquiriAdminBundle:PromotionBlock]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: General Configuration, label: Promotion Block }
+#            
+    
+    
+    admin.sale:
+        class: Daiquiri\ReservationBundle\Admin\SaleAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\Sale, DaiquiriReservationBundle:Sale]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Sale, icon: '<i class="fa fa-line-chart fa-lg"></i>', label: Sale }
+
+    admin.package:
+        class: Daiquiri\AdminBundle\Admin\PackageAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Package, DaiquiriAdminBundle:Package]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Package, icon: '<i class="fa fa-archive"></i>', label: Package (FA) }
+    
+    admin.packageoption:
+        class: Daiquiri\AdminBundle\Admin\PackageOptionAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\PackageOption, DaiquiriAdminBundle:PackageOption]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Package,  label: Package Option (FA) }
+
+    admin.rentalhouse:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouse, DaiquiriAdminBundle:RentalHouse]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, icon: '<i class="fa fa-home"></i>', label: House }
+    
+    admin.rentalhousefacilitytype:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseFacilityTypeAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseFacilityType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, icon: '<i class="fa fa-home"></i>', label: Facility Type (N) }
+                    
+            
+    admin.rentalhouseroom:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseRoomAdmin
+        arguments: 
+            - null
+            - Daiquiri\AdminBundle\Entity\RentalHouseRoom
+            - DaiquiriAdminBundle:RentalHouseRoom
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, label: Room (FA) }
+            
+    admin.rentalhouseowner:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseOwnerAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseOwner, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, label: House Owner (FA) }
+            
+            
+    admin.rentalhousefacility:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseFacilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseFacility, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, label: House Facility (FA)}
+            
+    admin.rentalhousetype:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseTypeAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, label: House Type (N) }  
+            
+    admin.rentalhouseroomocupation:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseRoomOcupationAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseRoomOcupation, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, label: Max Room Ocupation (N) }        
+            
+    admin.rentalhouseroomfacility:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseRoomFacilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseRoomFacility, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: House, label: Room Facility (N)}        
+            
+    admin.rentalhouseroomavailability:
+        class: Daiquiri\AdminBundle\Admin\RentalHouseRoomAvailabilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RentalHouseRoomAvailability, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,show_in_dashboard: false ,group: House, label: Room Availa. Dat. Rang. (FA) }
+            
+    admin.car:
+        class: Daiquiri\AdminBundle\Admin\CarAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Car, DaiquiriAdminBundle:Car]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, icon: '<i class="fa fa-car"></i>', label: Car (FA)}
+   
+    admin.carseason:
+        class: Daiquiri\AdminBundle\Admin\CarSeasonAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CarSeason, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, show_in_dashboard: true, icon: '<i class="fa fa-flag"> </i>', label:  Car Season }
+   
+    admin.caravailability:
+        class: Daiquiri\AdminBundle\Admin\CarAvailabilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CarAvailability, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, label: Car Availability (FA)}
+    
+    admin.driver:
+        class: Daiquiri\AdminBundle\Admin\DriverAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Driver, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, label: Driver (FA) }
+            
+    admin.carclass:
+        class: Daiquiri\AdminBundle\Admin\CarClassAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CarClass, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, label: Car Class (N) } 
+            
+    admin.carcategory:
+        class: Daiquiri\AdminBundle\Admin\CarCategoryAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CarCategory, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, label: Car Category (N)}    
+            
+    admin.luggagecapacity:
+        class: Daiquiri\AdminBundle\Admin\LuggageCapacityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\LuggageCapacity, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Car, label: Luggage Capacity (N)}   
+    
+    admin.hotel:
+        class: Daiquiri\AdminBundle\Admin\HotelAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Hotel, DaiquiriAdminBundle:Hotel]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, icon: '<i class="fa fa-building"></i>', label: Hotel (FA)} 
+ 
+    admin.hoteltype:
+        class: Daiquiri\AdminBundle\Admin\HotelTypeAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\HotelType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Hotel Type (N)} 
+            
+    admin.hotelfacility:
+        class: Daiquiri\AdminBundle\Admin\HotelFacilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\HotelFacility, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Hotel Facility } 
+            
+    admin.hotelsalesagent:
+        class: Daiquiri\AdminBundle\Admin\HotelSalesAgentAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\HotelSalesAgent, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Hotel Sales Agent } 
+            
+    admin.suplement:
+        class: Daiquiri\AdminBundle\Admin\SuplementAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Suplement, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, show_in_dashboard: true, label: Suplement } 
+
+    admin.room:
+        class: Daiquiri\AdminBundle\Admin\RoomAdmin
+        arguments:
+            - null
+            - Daiquiri\AdminBundle\Entity\Room
+            - DaiquiriAdminBundle:Room
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Room (FA)}  
+            
+    admin.roomavailability:
+        class: Daiquiri\AdminBundle\Admin\RoomAvailabilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\RoomAvailability, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Room Availability } 
+ 
+  
+    admin.chain:
+        class: Daiquiri\AdminBundle\Admin\ChainAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Chain, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Chain (N)} 
+            
+
+    admin.season:
+        class: Daiquiri\AdminBundle\Admin\SeasonAdmin
+        arguments: [null, Daiquiri\AdminBundle\Entity\Season, DaiquiriAdminBundle:Season]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Season } 
+            
+   
+    admin.ocupation:
+        class: Daiquiri\AdminBundle\Admin\OcupationAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Ocupation, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Hotel, label: Ocupation }   
+                  
+   
+    admin.transfercolective:
+        class: Daiquiri\AdminBundle\Admin\TransferColectiveAdmin       
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Transfer, icon: '<i class="fa fa-bus"></i>', label: Transfer Colective}
+        arguments:
+            - null
+            - Daiquiri\AdminBundle\Entity\TransferColective
+            - DaiquiriAdminBundle:TransferColective    
+            
+            
+    admin.transferexclusive:
+        class: Daiquiri\AdminBundle\Admin\TransferExclusiveAdmin
+        arguments:
+            - null
+            - Daiquiri\AdminBundle\Entity\TransferExclusive
+            - DaiquiriAdminBundle:TransferExclusive
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Transfer, label: Transfer Exclusive} 
+            
+    admin.excursionType:
+        class: Daiquiri\AdminBundle\Admin\ExcursionTypeAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ExcursionType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Excursion, icon: '<i class="fa fa-tree"></i>', label: Excursion Type }
+            
+    admin.excursioncolective:
+        class: Daiquiri\AdminBundle\Admin\ExcursionColectiveAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ExcursionColective, DaiquiriAdminBundle:ExcursionColective]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Excursion, label: Excursion Colective }
+            
+    admin.excursionexclusive:
+        class: Daiquiri\AdminBundle\Admin\ExcursionExclusiveAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ExcursionExclusive, DaiquiriAdminBundle:ExcursionExclusive]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Excursion, label: Excursion Exclusive }
+                    
+    admin.circuit:
+        class: Daiquiri\AdminBundle\Admin\CircuitAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Circuit, DaiquiriAdminBundle:Circuit]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Circuit, icon: '<i class="fa fa-refresh"></i>', label: Circuit (FA)}
+            
+    admin.circuitday:
+        class: Daiquiri\AdminBundle\Admin\CircuitDayAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CircuitDay, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Circuit,  label: Circuit Day }
+            
+    admin.circuitavailability:
+        class: Daiquiri\AdminBundle\Admin\CircuitAvailabilityAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CircuitAvailability, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Circuit,  label: Circuit Check Out Day }
+            
+    admin.circuitseason:
+        class: Daiquiri\AdminBundle\Admin\CircuitSeasonAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CircuitSeason, DaiquiriAdminBundle:CircuitSeason]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Circuit,  label: Circuit Season }
+            
+    
+    admin.country:
+        class: Daiquiri\AdminBundle\Admin\CountryAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Country, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, icon: '<i class="fa fa-globe"></i>', label: Country (N)}
+            
+    admin.market:
+        class: Daiquiri\AdminBundle\Admin\MarketAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Market, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Market (N)}
+            
+    admin.province:
+        class: Daiquiri\AdminBundle\Admin\ProvinceAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Province, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Province (N)}
+    admin.place:
+        class: Daiquiri\AdminBundle\Admin\PlaceAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Place, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Place (N)}
+            
+    admin.placetype:
+        class: Daiquiri\AdminBundle\Admin\PlaceTypeAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\PlaceType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Place Type (N) }            
+            
+    admin.polo:
+        class: Daiquiri\AdminBundle\Admin\PoloAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Polo, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Polo (N) }
+    admin.zone:
+        class: Daiquiri\AdminBundle\Admin\ZoneAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Zone, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Zone (N)}
+    
+            
+    admin.review:
+        class: Daiquiri\AdminBundle\Admin\ReviewAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Review, DaiquiriAdminBundle:Review]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false ,group: Reviews, icon: '<i class="fa  fa-comments-o"></i>', label: Reviews }            
+
+    admin.reviewhotel:
+        class: Daiquiri\AdminBundle\Admin\ReviewHotelAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ReviewHotel,DaiquiriAdminBundle:ReviewHotel ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Reviews, icon: '<i class="fa  fa-comments-o"></i>', label: Reviews Hotel}            
+    
+    admin.reviewproduct:
+        class: Daiquiri\AdminBundle\Admin\ReviewProductAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ReviewProduct,~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Reviews, icon: '<i class="fa  fa-comments-o"></i>', label: Reviews Product}            
+    
+    admin.reviewrentalhouse:
+        class: Daiquiri\AdminBundle\Admin\ReviewRentalHouseAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ReviewRentalHouse,DaiquiriAdminBundle:ReviewRentalHouse]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Reviews, icon: '<i class="fa  fa-comments-o"></i>', label: Reviews Rental House}            
+        
+   
+    admin.contact:
+        class: Daiquiri\AdminBundle\Admin\ContactAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Contact, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Contact, icon: '<i class="fa fa-comment"></i>', label: Contact } 
+    admin.contact_cause:
+        class: Daiquiri\AdminBundle\Admin\ContactCauseAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ContactCause, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Contact, label: Contact Cause (N) } 
+    
+    admin.provider:
+        class: Daiquiri\AdminBundle\Admin\ProviderAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Provider, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Provider, icon: '<i class="fa fa-cart-plus"></i>', label: Provider (N)} 
+            
+    
+           
+    admin.medicalprogram:
+        class: Daiquiri\AdminBundle\Admin\MedicalProgramAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\MedicalProgram, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medical, icon: '<i class="fa fa-medkit"></i>', label: Medical Program (N) }
+            
+    admin.medicalservice:
+        class: Daiquiri\AdminBundle\Admin\MedicalServiceAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\MedicalService, DaiquiriAdminBundle:MedicalService]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medical, label: Medical Service }
+            
+    
+            
+    admin.termconditionproduct:
+        class: Daiquiri\AdminBundle\Admin\TermConditionProductAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\TermConditionProduct, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Politic, label: Term & Condition }
+ 
+ 
+    admin.cancelationproduct:
+        class: Daiquiri\AdminBundle\Admin\CancelationProductAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\CancelationProduct, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Politic, label: Cancelation }           
+       
+           
+    admin.document:
+        class: Daiquiri\AdminBundle\Admin\DocumentAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Document, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Politic, label: Required Document } 
+            
+    admin.faq:
+        class: Daiquiri\AdminBundle\Admin\FaqAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Faq, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Politic, label: FAQs } 
+  
+    admin.payment:
+        class: Daiquiri\AdminBundle\Admin\PaymentAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Payment, DaiquiriAdminBundle:Payment]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Payment, icon: '<i class="fa fa-credit-card"></i>', label: Payment }
+            
+    
+
+ 
+            
+   
+    admin.productseo:
+        class: Daiquiri\AdminBundle\Admin\ProductSeoAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ProductSeo, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: General Configuration, label: Product SEO }
+            
+    admin.tag:
+        class: Daiquiri\AdminBundle\Admin\TagAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Tag, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: General Configuration, label: Tag } 
+            
+    admin.gender:
+        class: Daiquiri\ReservationBundle\Admin\GenderAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\Gender, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: General Configuration, icon: '<i class="fa fa-users"></i>', label: Gender (N) }        
+    
+    admin.airport:
+        class: Daiquiri\AdminBundle\Admin\AirportAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Airport, DaiquiriAdminBundle:Airport]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, icon: '<i class="fa fa-plane"></i>', label: Airport }
+            
+    admin.airline:
+        class: Daiquiri\AdminBundle\Admin\AirlineAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Airline, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Airline }
+    admin.flight:
+        class: Daiquiri\AdminBundle\Admin\FlightAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Flight, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Flight }       
+            
+    admin.currency:
+        class: Daiquiri\AdminBundle\Admin\CurrencyAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\Currency, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: General Configuration, icon: '<i class="fa fa-dollar"></i>', label: Currency }
+            
+    admin.productincrement:
+        class: Daiquiri\AdminBundle\Admin\ProductIncrementAdmin
+        arguments: [~, Daiquiri\AdminBundle\Entity\ProductIncrement, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: General Configuration, label: Product Increment }
+            
+    admin.configurationpam:
+        class: Daiquiri\ReservationBundle\Admin\ConfigurationPamAdmin
+        arguments: [~, Daiquiri\ReservationBundle\Entity\ConfigurationPam, DaiquiriReservationBundle:ConfigurationPam]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: General Configuration, label: Configuration PAM }        

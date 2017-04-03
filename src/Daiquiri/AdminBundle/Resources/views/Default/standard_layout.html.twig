@@ -1,0 +1,379 @@
+
+
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+    {% for stylesheet in sonata_admin.adminPool.getOption('stylesheets', []) %}
+        <link rel="stylesheet" href="{{ asset(stylesheet) }}">
+    {% endfor %}
+    {% stylesheets '@DaiquiriAdminBundle/Resources/public/css/override.css'%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
+    {% endstylesheets %}
+
+
+
+    {% stylesheets '@DaiquiriAdminBundle/Resources/public/css/jquery.typeahead.min.css'%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
+    {% endstylesheets %}
+
+    {% stylesheets '@DaiquiriAdminBundle/Resources/public/css/animate.min.css'%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
+    {% endstylesheets %}
+
+
+
+    {% stylesheets '@DaiquiriReservationBundle/Resources/public/css/style.css'%}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
+    {% endstylesheets %}
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {% for javascript in sonata_admin.adminPool.getOption('javascripts', []) %}
+        <script src="{{ asset(javascript) }}"></script>
+    {% endfor %}
+
+    {% set locale = app.request.locale %}
+    {# localize moment #}
+    {% if locale[:2] != 'en' %}
+        <script src="{{ asset('bundles/sonatacore/vendor/moment/locale/' ~ locale|replace({'_':'-'}) ~ '.js') }}"></script>
+    {% endif %}
+
+    {# localize select2 #}
+    {% if sonata_admin.adminPool.getOption('use_select2') %}
+    {% if locale == 'pt' %}{% set locale = 'pt_PT' %}{% endif %}
+
+    {# omit default EN locale #}
+    {% if locale[:2] != 'en' %}
+        <script src="{{ asset('bundles/sonatacore/vendor/select2/select2_locale_' ~ locale|replace({'_':'-'}) ~ '.js') }}"></script>
+    {% endif %}
+{% endif %}
+{% javascripts '@DaiquiriReservationBundle/Resources/public/js/main.js'%}
+<script src="{{ asset_url }}" type="text/javascript"></script>    
+{% endjavascripts %}
+{% javascripts '@DaiquiriAdminBundle/Resources/public/js/minmaxinput.js'%}
+<script src="{{ asset_url }}" type="text/javascript"></script>    
+{% endjavascripts %}
+{% javascripts '@DaiquiriAdminBundle/Resources/public/js/jquery.typeahead.min.js'%}
+<script src="{{ asset_url }}" type="text/javascript"></script>    
+{% endjavascripts %}
+
+
+<script>
+
+    $(document).ready(function () {
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () {
+                $body.addClass("loading");
+            },
+            ajaxStop: function () {
+                $body.removeClass("loading");
+            }
+        });
+        UpdateCart();
+        LoadAllCurrency();
+        LoadAllMarket();
+
+    })
+    function UpdateCart() {
+        span = $('.cart_count');
+        span.addClass('animated rotateIn');
+        $.ajax({
+            // la URL para la petición
+            url: '{{ path('reservation_cart_get_count') }}',
+            // especifica si será una petición POST o GET
+            type: 'POST',
+            // el tipo de información que se espera de respuesta
+            dataType: 'json',
+            // código a ejecutar si la petición es satisfactoria;
+            // la respuesta es pasada como argumento a la función
+            success: function (data) {
+                if (data.success) {
+                    span.html(data.value);
+                    if (data.value > 0) {
+                        span.addClass('bg-green');
+                    } else
+                    {
+                        span.removeClass('bg-green');
+                    }
+                }
+            },
+            // código a ejecutar si la petición falla;
+            // son pasados como argumentos a la función
+            // el objeto de la petición en crudo y código de estatus de la petición
+            error: function (xhr, status) {
+                setContentByError();
+                console.log('xhr: ' + xhr);
+                console.log('status: ' + status);
+            },
+            complete: function () {
+                span.removeClass('animated rotateIn');
+            }
+        });
+        $('#cart_content').load('{{ path('reservation_cart_get_min_view_cart')}}');
+    }
+
+    function LoadAllCurrency() {
+        $.ajax({
+            // la URL para la petición
+            url: '{{ path('daiquiri_admin_get_currency_availables') }}',
+            // especifica si será una petición POST o GET
+            type: 'POST',
+            // el tipo de información que se espera de respuesta
+            dataType: 'json',
+            // código a ejecutar si la petición es satisfactoria;
+            // la respuesta es pasada como argumento a la función
+            success: function (data) {
+                var ul = $('<ul/>').addClass('dropdown-menu');
+
+                ul.css('width', '180px');
+                $.each(data, function (i, item) {
+                    if (data[i].current == true) {
+                        $('.current_currency').empty();
+                        $('.current_currency').append('<i class="fa ' + data[i].favicon + '"></i>');
+                        $('.current_currency').append(data[i].nomenclator.toUpperCase() + ' ' + data[i].change);
+                    } else {
+                        a = $('<a/>').attr('href', Routing.generate('daiquiri_admin_set_current_currency', {currency: data[i].nomenclator}));
+                        a.html('<i class="fa ' + data[i].favicon + '"></i> ' + data[i].nomenclator.toUpperCase() + ' ' + data[i].change);
+                        a.click(function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                url: Routing.generate('daiquiri_admin_set_current_currency', {currency: data[i].nomenclator}),
+                                dataType: 'json',
+                                type: 'POST',
+                                success: function (data, textStatus, jqXHR) {
+                                    $('.rest_currency').empty();
+                                    location.reload();
+                                }
+                            });
+                        });
+                        li = $('<li/>').append(a);
+                        ul.append(li);
+                    }
+                });
+                $('.rest_currency').append(ul);
+            },
+            // código a ejecutar si la petición falla;
+            // son pasados como argumentos a la función
+            // el objeto de la petición en crudo y código de estatus de la petición
+            error: function (xhr, status) {
+                setContentByError();
+                console.log('xhr: ' + xhr);
+                console.log('status: ' + status);
+            },
+            complete: function () {
+                //span.removeClass('animated rotateIn');
+            }
+        });
+
+
+    }
+
+    function LoadAllMarket() {
+        $.ajax({
+            // la URL para la petición
+            url: '{{ path('daiquiri_admin_get_market_availables') }}',
+            // especifica si será una petición POST o GET
+            type: 'POST',
+            // el tipo de información que se espera de respuesta
+            dataType: 'json',
+            // código a ejecutar si la petición es satisfactoria;
+            // la respuesta es pasada como argumento a la función
+            success: function (data) {
+
+                var ul = $('<ul/>').addClass('dropdown-menu');
+                $('.current_market').empty();
+                $('.current_market').append('<i class="fa fa-map-marker"></i>  ');
+                $('.current_market').append(data.current_title.toUpperCase() + ' ' + data.current_increment + ' %');
+
+                ul.css('width', '180px');
+                $.each(data.all, function (i, item) {
+                    a = $('<a/>').attr('href', Routing.generate('daiquiri_admin_set_current_market', {market: data.all[i].title}));
+                    a.html('<i class="fa fa-map-marker"></i>  ' + data.all[i].title.toUpperCase() + ' ' + data.all[i].increment.toString() + ' %');
+                    a.click(function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            url: Routing.generate('daiquiri_admin_set_current_market', {market: data.all[i].title}),
+                            dataType: 'json',
+                            type: 'POST',
+                            success: function (data, textStatus, jqXHR) {
+                                $('.rest_market').empty();
+                                location.reload();
+                            }
+                        });
+                    });
+                    li = $('<li/>').append(a);
+                    ul.append(li);
+                });
+
+
+                //}
+
+                $('.rest_market').append(ul);
+            },
+            // código a ejecutar si la petición falla;
+            // son pasados como argumentos a la función
+            // el objeto de la petición en crudo y código de estatus de la petición
+            error: function (xhr, status) {
+                setContentByError();
+                console.log('xhr: ' + xhr);
+                console.log('status: ' + status);
+            },
+            complete: function () {
+                //span.removeClass('animated rotateIn');
+            }
+        });
+
+
+    }
+
+    window.SONATA_CONFIG = {
+        CONFIRM_EXIT: {% if sonata_admin.adminPool.getOption('confirm_exit') %}true{% else %}false{% endif %},
+        USE_SELECT2: {% if sonata_admin.adminPool.getOption('use_select2') %}true{% else %}false{% endif %},
+        USE_ICHECK: {% if sonata_admin.adminPool.getOption('use_icheck') %}true{% else %}false{% endif %},
+        USE_STICKYFORMS: {% if sonata_admin.adminPool.getOption('use_stickyforms') %}true{% else %}false{% endif %}
+    };
+    window.SONATA_TRANSLATIONS = {
+        CONFIRM_EXIT: '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'
+    };
+    // http://getbootstrap.com/getting-started/#support-ie10-width
+    if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+        var msViewportStyle = document.createElement('style');
+        msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
+        document.querySelector('head').appendChild(msViewportStyle);
+    }
+</script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/skins/sonata/style.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/markdown/style.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/html/style.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/sonataformatter/markitup/sets/textile/style.css') }}" type="text/css" media="all" />
+
+<script src="{{ asset('bundles/ivoryckeditor/ckeditor.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/sonataformatter/markitup/sets/markdown/set.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/sonataformatter/markitup/sets/html/set.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/sonataformatter/markitup/sets/textile/set.js') }}" type="text/javascript"></script>
+
+{% endblock javascripts %}
+
+
+
+
+{% block sonata_header %}
+    <script>
+    $(document).ready(function () {
+        $('.alert').delay(2000).fadeOut(3000);
+    })
+    </script>
+    <div class="loading-modal"><!-- Place at bottom of page --></div>
+
+
+
+    <div class="modal fade" id="generic_modal" tabindex="-1" role="dialog"  aria-labelledby="basicModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"   aria-hidden="true"><i class="fa fa-close"></i></button>
+                    <h4 class="modal-title" id="title-modal">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ parent() }}
+{% endblock %}
+{% block sonata_top_nav_menu %}    
+    {#{ dump(sonata_admin.adminPool.getOption('javascripts', [])) }#}
+
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <span class="badge bg-fuchsia" >
+                        <i class="fa fa-plus"> </i> New
+                    </span>
+
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-menu multi-column dropdown-add slimScrollDiv" style="overflow-y: scroll">
+                    <ul class="dropdown-menu" style="width: 180px;">
+                        <li><a href="{{ path('create-new-payment-form') }}"><i class="fa fa-credit-card"></i> Payment</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+
+                    <span class="badge bg-aqua current_currency" >
+
+                    </span>
+                    <i class="fa fa-caret-down"></i>
+
+                </a>
+                <div class="dropdown-menu multi-column dropdown-add slimScrollDiv rest_currency" style="max-height: 250px; width: 200px ;overflow-y: scroll" >
+
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+
+                    <span class="badge bg-blue current_market" >
+
+                    </span>
+                    <i class="fa fa-caret-down"></i>
+
+                </a>
+                <div class="dropdown-menu multi-column dropdown-add slimScrollDiv rest_market" style="max-height: 250px; width: 200px ;overflow-y: scroll" >
+
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <span class="badge cart_count" >
+                    </span>
+                    <i class="fa fa-shopping-cart"></i> 
+                    <i class="fa fa-caret-down"></i>
+                </a>
+                <div class="dropdown-menu multi-column dropdown-add slimScrollDiv" style="max-height: 250px; width: 320px ;overflow-y: scroll" id="cart_content">
+                </div>
+            </li>
+            {#<li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-plus-square fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                {% include sonata_admin.adminPool.getTemplate('add_block') %}
+            </li>#}
+            <li class="dropdown user-menu">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    {% include sonata_admin.adminPool.getTemplate('user_block') %}
+                </ul>
+            </li>
+        </ul>
+    </div>    
+    {#{ dump(sonata_admin.adminPool.getOption('javascripts', []))}#}
+
+    {#{ dump(app.session.get('market'))}#}
+{% endblock %}
+{% block side_bar_after_nav %}
+    <p class="text-center small" style="border-top: 1px solid #444444; padding-top: 10px">
+        {% block side_bar_after_nav_content %}
+            <a href="http://www.daiquiricuba.com" rel="noreferrer" target="_blank">Daiquiri Tours Cuba</a>
+        {% endblock %}
+    </p>
+{% endblock %}
+

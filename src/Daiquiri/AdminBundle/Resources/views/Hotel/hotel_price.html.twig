@@ -1,0 +1,117 @@
+
+{# empty Twig template #}
+{% extends base_template %}
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    {% endblock %}
+    {% block show %}
+        {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <script>
+        function LoadSeason(a) {
+            route = $(a).attr('href');
+            room = $(a).attr('data-room');
+            season = $(a).attr('data-season');
+            $('#room_' + room + '_season_' + season).load(route);
+
+        }
+        function sendForm(button) {
+            room = $(button).attr('data-room');
+            season = $(button).attr('data-season');
+            showDialog(true, 'Processing your request...Please wait');
+            form = $(button).parents('form');
+            $.post($(form).attr('action'), $(form).serialize(), function (data) {
+                if (data.success) {
+                    setContentDialog(data.content, 'Successfull');
+                    route = Routing.generate('daiquiri_admin_load_form_hotel_price', {id_room: room, id_season: season, id_season_to_load: 0});
+                    $('#room_' + room + '_season_' + season).load(route);
+                } else {
+                    div = $('<div/>');
+                    $.each(data.errors, function (index, item) {
+                        d = $('<div/>');
+                        i = $('<i/>').addClass('fa fa-info');
+                        span = $('<spam/>').addClass('text-danger').html(' ' + data.errors[index] + '.');
+                        span.prepend(i);
+                        d.append(span);
+                        div.append(d);
+                    });
+                    setContentDialog(div.html(), 'Errors Detected');
+                }
+            });
+
+
+        }
+    </script>
+
+
+    {# empty Twig template#} 
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            {% for d in data %}
+                <li class="{% if loop.index == 1%}active{% endif %}"><a href="#room_{{ d.room. id }}" data-toggle="tab" aria-expanded="false">{{ d.room | upper }}</a></li>           
+                {% endfor %}
+        </ul>
+        <div class="tab-content">
+            {% for d in data %}            
+                <div class="tab-pane {% if loop.index == 1%}active{% endif %}" id="room_{{ d.room.id }}">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Set Pice for hotel: {{ d.room.hotel | upper }} in Room: {{ d.room | upper }}</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="box-group" id="accordion">
+                                        <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                                        {% if d.room.ocupations | length > 0 %}
+                                            {% for s in d.seasons %}
+                                                <div class="panel box box-primary">
+                                                    <div class="box-header with-border">
+                                                        <h4 class="box-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#room_{{ d.room.id }}_season_{{ s.season.id}}">
+                                                                Season {{ s.season }}
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+
+                                                    <div id="room_{{ d.room.id }}_season_{{ s.season.id}}" class="panel-collapse collapse in">
+
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $('#room_{{ d.room.id }}_season_{{ s.season.id}}').load(
+                                                                Routing.generate('daiquiri_admin_load_form_hotel_price', {
+                                                                id_room:{{ d.room.id }},
+                                                                        id_season:{{ s.season.id}},
+                                                                        id_season_to_load: 0
+                                                            }));
+                                                    });
+
+
+                                                </script>
+
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="alert alert-danger alert-dismissible ">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                                <h4><i class="icon fa fa-warning"></i> Not found ocupation!</h4>
+                                                Not found ocupation for room {{ d.room | upper }} in Hotel: {{ d.room.hotel | upper }}.<h3><a href="{{ path('admin_daiquiri_admin_hotel_form-ocupation',{'id':d.room.hotel.id}) }}"> Please create new ocupations. </a></h3>
+                                            </div>
+                                        {% endif%}
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}       
+            <!-- /.tab-pane -->
+        </div>
+        <!-- /.tab-content -->
+    </div>
+
+{% endblock %}

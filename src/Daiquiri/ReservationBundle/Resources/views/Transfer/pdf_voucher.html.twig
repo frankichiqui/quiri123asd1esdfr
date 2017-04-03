@@ -1,0 +1,78 @@
+{# empty Twig template #}
+{% extends '::pdf_voucher.html.twig' %}
+
+{% block tabla %}
+    <tr>
+        <td colspan="2" align="left" style="border-bottom: solid 1px #ccc">
+            {% set colective = service.cartitem.product.getColective() %}
+            {% set type = service.cartitem.product.getTypeTransfer() %}
+            <div style="font-size: 13px;">{% if colective %}{{ 'Shared' | trans({}, 'pdf') }}{% else %} {{ 'Private' | trans({}, 'pdf') }}{% endif %} {{ 'Transfer Voucher' | trans({}, 'pdf') }}  </div>
+        </td>
+        <td colspan="2" align="right" style="border-bottom: solid 1px #ccc">
+            <div style=""><span style="font-size: 8px; font-style: italic">{{ 'Client' | trans({}, 'pdf') }}: </span>{{ service.sale.client.getFullName() | upper }}</div>
+        </td>
+    </tr>
+    <tr>
+
+        <td style="border-right: solid 1px #ccc">
+            <div>  <span style="font-size: 8px; font-style: italic">{{ 'From' | trans({}, 'pdf') }}: </span>{{ service.cartitem.product.placefrom | upper }}</div>
+            <div><span style="font-size: 8px; font-style: italic">{{ 'Destination' | trans({}, 'pdf') }}:{{ service.cartitem.product.placefrom.polo | upper }}</span></div>
+        </td>
+
+        <td style="border-right: solid 1px #ccc">
+            <div><span style="font-size: 8px; font-style: italic">{{ 'To' | trans({}, 'pdf') }}: </span>{{ service.cartitem.product.placeto | upper }}</div>
+            <div><span style="font-size: 8px; font-style: italic">{{ 'Destination' | trans({}, 'pdf') }}:{{ service.cartitem.product.placeto.polo | upper }}</span></div>
+        </td>
+        <td style="border-right: solid 1px #ccc">
+            <div><span style="font-size: 8px; font-style: italic">{{ 'Departure' | trans({}, 'pdf') }}: </span>{{ service.cartitem.startdate | date('M j, Y') }}</div>
+            {% if colective %}    
+                {% if type == 2 or type == 1%}
+                    <div><span style="font-size: 8px; font-style: italic">{{ 'Fligth' | trans({}, 'pdf') }}: </span>{{ service.cartitem.flight | upper }}  </div>                  
+                {% endif %}
+            {% else %}
+                {% if type == 2 or type == 1%}
+                    <div><span style="font-size: 8px; font-style: italic">{{ 'Fligth' | trans({}, 'pdf') }}: </span>{{ service.cartitem.flight | upper }}  </div>  
+                {% else %}
+                    <div><span style="font-size: 8px; font-style: italic">{{ 'Time' | trans({}, 'pdf') }}: </span>{{ service.cartitem.getPickupTime() | date('g:i a') }}   </div>                    
+                {% endif%}
+            {% endif %}
+        </td>
+        <td style="border-right: solid 1px #ccc">
+            <span style="font-size: 8px; font-style: italic">{{ 'Passenger(s)' | trans({}, 'pdf') }} </span>{{ service.cartitem.passengers | upper }} 
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+    </tr>
+
+
+{% endblock %}
+{% block pax %}
+    <tr>
+        {% if service.confirmationcode is not null %}
+            <td colspan="2" align="left" style="border-bottom: solid 1px #ccc">
+                <div style="font-size: 10px; "> {{ 'Passenger(s)' | trans({}, 'pdf') }} </div>
+            </td>
+            <td colspan="2" align="right" style="border-bottom: solid 1px #ccc">
+                <div style="font-size: 10px; "><span style="font-size: 8px; font-style: italic">{{ 'Passenger(s)' | trans({}, 'pdf') }} Codigo de confirmacion:</span> {{ service.confirmationcode | upper}} </div>
+            </td>
+        {% else %}
+
+            <td colspan="4" align="left" style="border-bottom: solid 1px #ccc">
+                <div style="font-size: 10px; "> {{ 'Passenger(s)' | trans({}, 'pdf') }} </div>
+            </td>
+        {% endif %}
+
+    </tr>
+
+    {% for pax in service.servicepaxs %}
+        <tr>
+            <td style="border-right: solid 1px #ccc"><span style="font-size: 8px; font-style: italic">{{ 'Passenger' | trans({}, 'pdf') }} {{ loop.index }} </span></td>
+            <td style="border-right: solid 1px #ccc"><span style="font-size: 8px; font-style: italic">{{ pax.gender }}. {{ pax.name | upper }} {{ pax.lastname | upper }}</span></td>
+            <td style="border-right: solid 1px #ccc"><span style="font-size: 8px; font-style: italic">ID: {{ pax.document | upper }}   </span></td>
+            <td style="border-right: solid 1px #ccc"><span style="font-size: 8px; font-style: italic">{{ pax.age }} {{ 'Years' | trans({}, 'pdf') }}  </span></td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}
+

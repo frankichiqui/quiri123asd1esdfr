@@ -1,0 +1,26 @@
+services:
+ acme_demo.type.entity_hidden:
+   class: Daiquiri\AdminBundle\Form\Type\EntityHiddenType
+   arguments: ["@doctrine.orm.entity_manager"]
+   tags:
+   - { name: form.type, alias: entity_hidden }
+   
+ validate:
+   class: Daiquiri\AdminBundle\Entity\Validate
+ market:
+   class: Daiquiri\AdminBundle\Controller\MarketController
+   arguments:
+       doctrine: "@doctrine"             
+       container: "@service_container"
+   tags:
+   - { name: form.type, alias: market }
+   
+ campaign:
+   class: Daiquiri\AdminBundle\Controller\CampaignController   
+   tags:
+   - { name: form.type, alias: campaign }  
+     
+   
+
+   
+

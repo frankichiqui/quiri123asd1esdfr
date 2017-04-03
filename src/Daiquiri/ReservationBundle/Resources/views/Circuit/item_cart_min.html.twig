@@ -1,0 +1,31 @@
+<li id="{{ it.id }}" class="item_cart">
+    <a href="#" class="cart">
+
+        <div class="pull-left"> 
+            <i class="fa fa-refresh fa-2x img-circle thumbnail_cart"> </i>
+
+        </div> 
+        <div class="margin-left-40">
+            <div>
+                <h4><span class="text-blue">Circuit</span><small class="pull-right text-success">{{ it.getTotalprice() | price | raw }}</small></h4>
+            </div>
+            <div>
+                <small><i class="fa fa-refresh"></i> {{ it.title }} x {{ it.quantity }}</small>
+            </div>
+            <div>
+                <small><i class="fa fa-calendar"></i> {{ it.startdate | date('M j, Y') }}</small>                 
+                <small><i class="fa fa-map-marker"></i> {{ it.pickupplace }}</small>
+            </div>
+            <div>
+                <small><i class="fa fa-user fa-lg"></i> Adult(s) :{{ it.adults }}</small> 
+                <small><i class="fa fa-user"></i> Kid(s) : {{ it.kids }}</small>
+
+            </div>
+            <div>
+                <small><i class="fa fa-user fa-lg"></i> Room:{% if it.ocupation == 1 %}{{ 'Single Room' | trans({}, 'email') }}{% else %}{{ 'Doble Room' | trans({}, 'email') }}{% endif %}</small> 
+
+
+            </div>
+        </div>
+    </a>
+</li>

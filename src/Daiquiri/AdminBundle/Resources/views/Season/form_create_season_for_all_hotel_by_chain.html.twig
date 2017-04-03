@@ -1,0 +1,139 @@
+{# empty Twig template #}
+{% extends base_template %}
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    {% endblock %}
+
+{#{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}#}
+
+{% block show %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <div class="sonata-ba-view">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">      
+
+                    <div class="col-md-8">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    Create a new Season for all hotels
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="sonata-ba-collapsed-fields">
+                                    {{ form_start(form, {'action': admin.generateUrl('create-season-for-all-hotel-by-chain'), 'method': 'POST'}) }}
+                                    {{ form_errors(form) }}
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.chain) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.chain) }} 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                                {{ form_label(form.startdate) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    {{ form_widget(form.startdate) }}  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                                {{ form_label(form.enddate) }}
+                                                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                    {{ form_widget(form.enddate) }}  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.title) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.title) }} 
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.description) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.description) }} 
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class=" well well-small form-actions ">    
+                                        <button name="btn_create_and_edit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Create</button>
+                                    </div>
+                                    {{ form_end(form) }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {% if new is defined and exist is defined%}
+                        <div class="col-md-4">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h4 class="box-title">
+                                        Result
+                                    </h4>
+                                </div>
+                                <div class="box-body">
+                                    <div class="sonata-ba-collapsed-fields">
+
+                                        <div><span class="label label-success">Create New</span></div>
+                                        {% if new | length != 0 %}
+                                            {% for n in new %}
+                                                <div>
+
+                                                    <a href="{{ admin.generateUrl('edit',{id:n.season.id}) }}">
+                                                        <b>  
+                                                            {{ n.season }} </b>
+                                                    </a> 
+                                                    in 
+                                                    <a href="{{ path('admin_daiquiri_admin_hotel_edit',{id:n.hotel.id}) }}">
+                                                        <b>  
+                                                            {{ n.hotel }} </b>
+                                                    </a>
+
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}
+
+                                        <div><span class="label label-danger">No Update</span></div>
+                                        {% if exist | length != 0 %}
+                                            {% for n in exist %}
+                                                <div>
+
+                                                    <b>  
+                                                        {{ n.season }} </b>
+
+                                                    in 
+                                                    <a href="{{ path('admin_daiquiri_admin_hotel_edit',{id:n.hotel.id}) }}">
+                                                        <b>  
+                                                            {{ n.hotel }} </b>
+                                                    </a>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}

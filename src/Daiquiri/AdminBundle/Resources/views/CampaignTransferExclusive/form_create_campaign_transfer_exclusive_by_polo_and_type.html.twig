@@ -1,0 +1,137 @@
+{# empty Twig template #}
+{% extends base_template %}
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    {% endblock %}
+
+{#{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}#}
+
+{% block show %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <div class="sonata-ba-view">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">      
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h4 class="box-title">
+                                    Asocied Campaign to Transfer Exclusive
+                                </h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="sonata-ba-collapsed-fields">
+                                    {{ form_start(form, {'action': path('admin_daiquiri_admin_campaigntransferexclusive_create-campaign-transfer-exclusive-by-polo-and-type'), 'method': 'POST'}) }}
+                                    {{ form_errors(form) }}
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.polofrom) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.polofrom) }} 
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.placetypefrom) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.placetypefrom) }}  
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.poloto) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.poloto) }}  
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.placetypeto) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.placetypeto) }} 
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.campaign) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.campaign) }} 
+                                        </div>
+                                    </div>
+                                    <div id="sonata-ba-field-container-s575ce33021daf_favicon" class="form-group">
+                                        {{ form_label(form.reverse) }}
+                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                            {{ form_widget(form.reverse) }} 
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class=" well well-small form-actions ">    
+                                        <button name="btn_create_and_edit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Create</button>
+                                    </div>
+                                    {{ form_end(form) }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    {% if new is defined and asocied is defined%}
+                        <div class="col-md-6">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h4 class="box-title">
+                                        Result
+                                    </h4>
+                                </div>
+                                <div class="box-body">
+                                    <div class="sonata-ba-collapsed-fields">
+
+                                        <div><span class="label label-success">Create New</span></div>
+                                        {% if new | length != 0 %}
+                                            {% for n in new %}
+                                                <div>
+                                                    <a href="{{ admin.generateUrl('edit',{id:n.id}) }}">
+                                                        <b> 
+                                                            {% for type in  n.placefrom.placetypes  %} ({{ type}}) {% endfor %}
+                                                            {{ n.placefrom }}</b> --- <b>
+                                                            {% for type in  n.placeto.placetypes  %} ({{ type}}) {% endfor %}{{ n.placeto }}</b>
+                                                            {% for c in  n.campaigns  %} ({{ c}}) {% endfor %}</b>
+
+                                                    </a>
+
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}
+
+                                        <div><span class="label label-danger">Connect</span></div>
+                                        {% if asocied | length != 0 %}
+                                            {% for n in asocied %}
+                                                <div>
+                                                    <a href="{{ admin.generateUrl('edit',{id:n.id}) }}">                                                
+                                                        <b> 
+                                                            {% for type in  n.placefrom.placetypes  %} ({{ type}}) {% endfor %}
+                                                            {{ n.placefrom }}</b> --- <b>
+                                                            {% for type in  n.placeto.placetypes  %} ({{ type}}) {% endfor %}{{ n.placeto }}</b>
+                                                            {% for c in  n.campaigns  %} ({{ c}}) {% endfor %}</b>
+                                                           
+                                                    </a> 
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div>0 item </div>
+                                        {% endif %}
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

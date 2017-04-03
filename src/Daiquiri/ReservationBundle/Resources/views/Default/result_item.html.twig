@@ -1,0 +1,63 @@
+
+<div class="col-md-1">
+    <a href="#" class="thumbnail">
+        {% thumbnail obj.picture, 'small' %}
+    </a>
+</div>
+<div class="col-md-7">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>{{ obj }}</b></p>
+            <p>{{ (obj.description | striptags) | truncate(100, true, ' ...') }}</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>{{ 12 | price | raw }}</b></p>
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form_item, {'action': admin.generateUrl('find-into-car-searcher'), 'method': 'POST'}) }}
+            <div class="hidden">
+
+                {{ form_widget(form_item.title) }}
+                {{ form_widget(form_item.unitariprice) }}
+                {{ form_widget(form_item.quantity) }}
+                {{ form_widget(form_item.product) }}
+                {{ form_widget(form_item.startdate) }}
+                {{ form_widget(form_item.enddate) }}
+                {{ form_widget(form_item.pickupplace) }}
+                {{ form_widget(form_item.dropoffplace) }}
+            </div>
+            <div>
+                &nbsp;
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                    <button name="btn_create_and_edit" type="submit" class="btn btn-info"><i class="fa fa-save"></i>Passengers & Book</button> 
+                </div>
+            </div>
+            {{ form_end(form_item)}}       
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-2">
+
+</div>
+
+
+
+

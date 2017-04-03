@@ -1,0 +1,46 @@
+<title>{% block title %}{% set var = title(app.request.pathInfo) %}{% if var != "" %} {{ var }} | Daiquir&iacute; Tours Cuba{% else %}Daiquir&iacute; Tours Cuba{% endif %}{% endblock %}</title>
+
+
+
+{# En vez de estas variables se llamaria a la entity correspondiente #}
+{% set title = "Titulo Prueba" %}
+{#{% set description = "<p>Description Prueba de una descripcion larga y con muchas palabras, qeremos probar si tofo funciona como es correcto o siesto falla.Description Prueba de una descripcion larga y con muchas palabras, qeremos probar si tofo funciona como es correcto o siesto falla.Description Prueba de una descripcion larga y con muchas palabras, qeremos probar si tofo funciona como es correcto o siesto falla.Description Prueba de una descripcion larga y con muchas palabras, qeremos probar si tofo funciona como es <h1>correcto o siesto falla</h1>.</p>Description Prueba de una descripcion larga y con muchas palabras, qeremos probar si tofo funciona como es correcto o siesto falla.Description Prueba de una descripcion larga y con muchas palabras, qeremos probar si tofo funciona como es correcto o siesto falla.<img>Description Prueba de una descripcion larga y con muchas palabras</img>, qeremos probar si tofo funciona como es correcto o siesto falla." %}#}
+
+{% set description = "" %}
+{# {% set title = seo_entity_title(entity.title) %} #}
+{% set title = seo_entity_title(title) %}
+
+{# {% set title = seo_entity_title(entity.description) %} #}   
+{% set description = seo_entity_description(description) %}
+{% if description == "" %}
+    {#{% set description = seo_description({{ entity.productType }}) %}#}
+    {% set description = seo_description('Excursion Exclusive') %}
+{% endif %}
+
+
+{% block meta_description %}    
+    <meta name="encoding" charset="utf-8">
+    {#{% set keywords = seo_keywords({{ entity.productType }}) %}#}
+    {#{% set keywords = seo_keywords('Excursion Exclusive') %}#}
+    {% set keywords = "excursion,exclusive,travel,nature" %}
+    {% if keywords == -1 %}
+        <meta name="keywords" content="{% set keywords = ((description|striptags) | truncate(50)) |split(' ') %}{% for word in keywords %}{{ word }},{% endfor %}">{% else %}
+        <meta name="keywords" content="{{ keywords }}">
+    {% endif %}
+    <meta name="keywords" content="{% set keywords = ((keywords|striptags) | truncate(50)) %}" >
+    <meta name="robots" content="index, follow">
+    <meta name="organization" content="Daiquirí Tours Cuba" >
+    <meta name="author" content="Daiquirí Tours Cuba" >
+    <meta name="description" content="{{ title }}: {{ (description|striptags) | truncate(500)  }}">
+    <meta name="og:site_name" content="Daiquirí Tours Cuba">
+    <meta name="og:title" content="{% set var = title(app.request.pathInfo) %}{% if var != "" %} {{ var }} | Daiquirí Tours Cuba{% else %}Daiquirí Tours Cuba{% endif %}">
+    <meta name="og:url" content="{% set path = app.request.pathInfo %}{{ absolute_url(path) }}">
+    <meta name="og:description" content="{{ title }}: {{ (description|striptags) | truncate(500)  }}">
+    <meta name="application-name" content="Daiquirí Tours Cuba Web Site" />
+    <meta name="apple-mobile-web-app-capable" content="yes">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+{% endblock %}
+
+
+

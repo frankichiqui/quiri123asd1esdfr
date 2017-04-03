@@ -1,0 +1,32 @@
+<div style="border-top:solid 2px #d2d6de">
+    <div  style="margin:10px;">
+        <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase"> {{ 'Service' | trans({}, 'email') }}:{{ caritem.title }} x {{ caritem.quantity }}</div>
+        <div style="width: 16.6666667%;float: left">
+            <div style="margin-top: 5px;">
+                <a href="#" class="thumbnail">
+                    {% thumbnail caritem.product.picture, 'small' %}
+                </a></div>
+        </div>
+        <div style="width: 16.6666667%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Check in Date & Time' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ caritem.startdate | date('M j, Y g:i a') }}</div>
+        </div>
+        <div style="width: 16.6666667%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Pickup Place' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ caritem.pickupplace }}</div>
+        </div>
+        <div style="width: 16.6666667%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Check out Date & Time' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ caritem.enddate | date('M j, Y g:i a') }}</div>
+        </div>
+        <div style="width: 16.6666667%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Dropoff Place' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ caritem.dropoffplace }}</div>
+        </div>
+        <div style="width: 8.3333334%;float: left">
+            <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Price' | trans({}, 'email') }}</span>
+            <div style="margin-top: 5px;">{{ caritem.totalprice | price | raw }}</div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>

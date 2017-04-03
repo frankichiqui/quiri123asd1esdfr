@@ -1,0 +1,25 @@
+{# empty Twig template #}
+{% if not object.getPayonline() %}
+    <a title="Apply" class="btn btn-sm btn-warning" id="apply_{{object.id}}" data-b="Reservation" data-folder="RentalHouse" data-id="{{object.id}}" href="#">
+        <i class="fa  fa-pencil-square-o"></i> 
+        Apply
+    </a>
+{% endif %}
+
+
+
+<script>
+    $('#apply_{{object.id}}').click(function (e) {
+        e.preventDefault();
+        id_o = $(this).attr('data-id');
+        f_o = $(this).attr('data-folder');
+        b_o = $(this).attr('data-b');
+        showDialog(true, 'Processing your request...Please wait');
+        route = Routing.generate('apply-rentalhouse', {id: id_o, f: f_o, b: b_o});
+        div = $('<div/>');
+        div.load(route);
+        setContentDialog(div, 'Successfull');
+        OnlyCancelBotton();
+
+    });
+</script>

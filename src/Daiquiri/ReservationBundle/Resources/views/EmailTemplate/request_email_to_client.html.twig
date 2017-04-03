@@ -1,0 +1,14 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Request Confirmation' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    {{ request.getFullClientName() }}
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'Your request has been sent, you will be shortly contacted.' | trans({}, 'email') }}      
+    </div>
+
+
+    {% include 'DaiquiriReservationBundle:'~ request.getRootViewFolder() ~':request_detail.html.twig'  with {'request': request } %}
+{% endblock %}

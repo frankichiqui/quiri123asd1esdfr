@@ -1,0 +1,26 @@
+<li id="{{ it.id }}" class="item_cart">
+    <a href="#" class="cart">
+
+        <div class="pull-left"> 
+            <i class="fa fa-home fa-2x img-circle thumbnail_cart"> </i>
+
+        </div> 
+        <div class="margin-left-40">
+            <div>
+                <h4><span class="text-blue">{{ it.product.type }}</span><small class="pull-right text-success">{{ it.getTotalprice() | price | raw }}</small></h4>
+            </div>
+            <div>
+                <small><i class="fa fa-home"></i> {{ product.rentalhouse.getTitle() }}:{{ product }} x {{ it.quantity }}</small>
+            </div>
+            <div>
+                <small><i class="fa fa-calendar"></i> {{ it.startdate | date('M j, Y') }}</small> - 
+                <small><i class="fa fa-calendar"></i> {{ it.enddate | date('M j, Y') }}</small>                   
+            </div>
+
+            <div>
+                <small><i class="fa fa-user fa-lg"></i> Adult(s) :{{ it.adult }}</small> 
+                <small><i class="fa fa-user"></i> Kid(s) : {{ it.kid }}</small>
+            </div>
+        </div>
+    </a>
+</li>

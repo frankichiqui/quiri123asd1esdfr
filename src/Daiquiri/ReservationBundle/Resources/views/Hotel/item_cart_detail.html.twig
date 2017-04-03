@@ -1,0 +1,52 @@
+
+<div class="col-md-12" data-id="{{ it.id }}">
+
+    <div class="row item_cart">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-info btn-danger delete_btn" id="{{ it.id }}">
+                            <i class="fa fa-times"></i></button>
+                    </div>
+                    <h4 class="box-title">
+                        {{ it.title }} x {{ it.quantity }}
+                    </h4>
+                </div>
+                <div class="box-body">  
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="#" class="thumbnail">
+                                {% thumbnail it.product.picture, 'small' %}
+                            </a>
+                        </div>                   
+                        <div class="col-md-1">
+                            <span class="label label-success">Plan</span>
+                            <div>{{ it.plan }}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="label label-success">Check in</span>
+                            <div> {{ it.startdate | date('M j, Y') }}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="label label-success">Check out</span>
+                            <div>{{ it.enddate | date('M j, Y') }}</div>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="label label-success">Ocupation</span>
+                            <div>({{ it.adults }}-{{ it.kids }})<i class="fa fa-child"></i> {{ it.infants }}</div>
+                        </div> 
+
+                        <div class="col-md-2">
+                            <span class="label label-success">Price</span>
+                            <div>{{ it.totalprice | price | raw}}</div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

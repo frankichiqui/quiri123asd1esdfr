@@ -1,0 +1,245 @@
+{% extends base_template %}
+{% block actions %}
+    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
+    {% endblock %}
+    {% block tab_menu %}
+    <ul class="nav navbar-nav navbar-left"  style="margin-top: 15px;">
+        <li>
+            Create ocupations by room to hotel: <b>{{ hotel }}</b>  
+        </li>
+    </ul>
+{% endblock %}
+
+{% block show %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    <div class="sonata-ba-view">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">      
+                    <div class="col-md-12">
+                        <div class="nav-tabs-custom">
+                            <ul role="tablist" class="nav nav-tabs">
+                                {% if  hotel is defined %}
+                                    {% for f in forms %}
+                                       
+                                        <li class="{% if loop.index == 1 %}active{% endif %}">
+                                            <a data-toggle="tab" href="#tab_{{f.room.id}}" aria-expanded="false">
+                                                <i class="fa fa-exclamation-circle has-errors hide"></i> {{ f.room | upper }} </a>
+                                        </li>                               
+                                    {% endfor %}
+                                {% else %}
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#_not_room_found" aria-expanded="false">
+                                            <i class="fa fa-exclamation-circle has-errors hide"></i> Not Rooms Found</a></li>
+                                        {% endif %}
+                            </ul>
+                            <div class="tab-content">
+                                {% for form in forms %}
+                                    <div id="tab_{{ form.room.id}}" class="tab-pane fade {% if loop.index == 1 %}active in{% endif %}">
+                                        <div class="box-body  container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    {{ form_start(form.form, {'id': form.room.id,'action': admin.generateUrl('create-ocupation-for-room'), 'method': 'POST'}) }}
+                                                    {{ form_errors(form.form) }}
+
+                                                    <div class="col-md-3">
+                                                        <div class="box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    Ocupation 1 Adult & n Childs
+                                                                </h4>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="sonata-ba-collapsed-fields">
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation10) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            ({{ form_label(form.form.ocupation10) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation11) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user"></i> 
+                                                                            ({{ form_label(form.form.ocupation11) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation12) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user"></i> 
+                                                                            <i class="fa fa-user"></i> 
+                                                                            ({{ form_label(form.form.ocupation12) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation13) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user"></i> 
+                                                                            <i class="fa fa-user"></i> 
+                                                                            <i class="fa fa-user"></i> 
+                                                                            ({{ form_label(form.form.ocupation13) }})
+                                                                        </div>
+                                                                    </div>                                                   
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-3">
+                                                        <div class="box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    Ocupation 2 Adults & n Childs
+                                                                </h4>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="sonata-ba-collapsed-fields">                                                   
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation20) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            ({{ form_label(form.form.ocupation20) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation21) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            <i class="fa fa-user fa"></i>
+                                                                            ({{ form_label(form.form.ocupation21) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation22) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            <i class="fa fa-user fa"></i>
+                                                                            <i class="fa fa-user fa"></i>
+                                                                            ({{ form_label(form.form.ocupation22) }})
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-3">
+                                                        <div class="box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    Ocupation 3 Adults & n Childs
+                                                                </h4>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="sonata-ba-collapsed-fields">                                                   
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation30) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            ({{ form_label(form.form.ocupation30) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation31) }} 
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important; margin-left: 5px;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            <i class="fa fa-user fa-lg" style="vertical-align: 0px !important;"></i>
+                                                                            <i class="fa fa-user fa"></i>
+                                                                            ({{ form_label(form.form.ocupation31) }})
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-3">
+                                                        <div class="box box-primary">
+                                                            <div class="box-header">
+                                                                <h4 class="box-title">
+                                                                    Ocupation Only n Childs 
+                                                                </h4>
+                                                            </div>
+                                                            <div class="box-body">
+                                                                <div class="sonata-ba-collapsed-fields">                                                   
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation01) }} 
+                                                                            <i class="fa fa-user"></i>
+                                                                            ({{ form_label(form.form.ocupation01) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation02) }} 
+                                                                            <i class="fa fa-user"></i>
+                                                                            <i class="fa fa-user"></i>
+                                                                            ({{ form_label(form.form.ocupation02) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation03) }} 
+                                                                            <i class="fa fa-user"></i>
+                                                                            <i class="fa fa-user"></i>
+                                                                            <i class="fa fa-user"></i>
+                                                                            ({{ form_label(form.form.ocupation03) }})
+                                                                        </div>
+                                                                    </div>
+                                                                    <div  class="form-group">
+                                                                        <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                                                            {{ form_widget(form.form.ocupation04) }} 
+                                                                            <i class="fa fa-user"></i>
+                                                                            <i class="fa fa-user"></i>
+                                                                            <i class="fa fa-user"></i>
+                                                                            <i class="fa fa-user"></i>
+                                                                            ({{ form_label(form.form.ocupation04) }})
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="sonata-ba-form-actions well well-small form-actions stuck">
+                                            <input type='hidden'  id='room' name ='room' value='{{ form.room.id }}' />
+                                           
+                                            <input type='hidden'  id='hotelid' name ='hotel' value='{{ hotel.id }}' />
+
+                                            <button name="btn_create_and_edit" type="submit" class="btn btn-success"><i class="fa fa-save"></i> Create</button>                            
+                                            {#<button type="submit" class="btn btn-success" name="btn_create_and_list"><i class="fa fa-save"></i> <i class="fa fa-list"></i> Create and return to list</button>#}
+                                            <a class="btn btn-success" href="{{ admin.generateUrl('list') }}">
+                                                <i class="fa fa-th-list"></i> Return to list</a>
+                                        </div>
+                                        {{ form_end(form.form) }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

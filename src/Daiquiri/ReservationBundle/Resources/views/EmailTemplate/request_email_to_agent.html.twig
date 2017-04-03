@@ -1,0 +1,45 @@
+{# empty Twig template #}
+{% extends "DaiquiriReservationBundle:EmailTemplate:email.html.twig" %}
+{% block title %} {{ 'Request Confirmation' | trans({}, 'email') }}{% endblock %}
+{% block client %}   
+    AGENT
+{% endblock %}
+{% block conte %}
+    <div style="font-style: italic; font-size: 1em; margin-bottom: 10px; text-align: justify">
+        {{ 'A new request has just been completed, please start actions.' | trans({}, 'email') }}      
+    </div>
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Client</div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Name' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ request.paxname | upper }}</div>
+            </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'LastName' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ request.paxlastname | upper }}</div>
+            </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Email' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;"><a href="mailto:{{ request.paxemail }}">{{ request.paxemail }}</a></div>
+            </div>
+            <div style="width: 25%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;">{{ 'Age' | trans({}, 'email') }}</span>
+                <div style="margin-top: 5px;">{{ request.paxage }} Years </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    {% include 'DaiquiriReservationBundle:'~ request.getRootViewFolder() ~':request_detail.html.twig'  with {'request': request } %}
+    <div style="border-top:solid 2px #d2d6de">
+        <div  style="margin:10px;">
+            <div style="display: block; margin-bottom: 10px; font-size: 1.2em; text-transform: uppercase">Remark</div>
+            <div style="width: 100%;float: left">
+                <span style="color: #fff;background-color: #00a157;border-radius: 5px; font-size: 0.8em; padding: 2px;"></span>
+                <div style="margin-top: 5px;">{{ request.remarks | upper }}</div>
+            </div>           
+            <div style="clear: both"></div>
+        </div>
+    </div>
+
+{% endblock %}

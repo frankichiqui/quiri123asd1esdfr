@@ -1,0 +1,104 @@
+{# empty Twig template #}
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/daiquiriadmin/images/favicon.ico') }}" />
+    </head>
+    <body>
+        {% block header %}    
+            <table style="width: 100%; " cellspacing="5" cellpadding="5"  >
+                <tr>
+                    <td align="left" colspan="1">
+                        <div style="font-family: fantasy;margin-bottom: 20px;">
+                            <img style="margin-left: 20px; width: 60px; height: 60px" src="{{ asset('bundles/daiquiriadmin/images/logo.png') }}" />
+                        </div>         
+                    </td>
+                    <td colspan="3">
+                        <div style="font-size: 8px; line-height: 5px; text-align: right">
+                            <div style="font-weight:bold; font-style: italic; color: darkblue">Daiquiri Tours Cuba</div>
+                            <div  style="">{{ 'Miramar Trade Center | Barcelona Building 5th. Avenue B/76 and 78, Miramar' | trans({}, 'index') }}</div>
+                            <div  style="">{{ 'Havana' | trans({}, 'pdf') }}, Cuba</div>
+                            <div  style="">{{ 'Phones' | trans({}, 'pdf') }} : (+53) 7 204 5101 – 204 5097</div>
+                            <div>{{ 'Email' | trans({}, 'pdf') }} : <span style="color: darkblue">booking@daiquiricuba.com </span></div>
+                        </div> 
+                    </td>
+                </tr>
+                <tr><td colspan="4" align="right"><div style="width: 100%; ">{{ 'ID reservation' | trans({}, 'pdf') }} :<span style="font-weight: bold"> {{ service.sale.orderid}}</span></div></td></tr>
+
+            {% endblock %}
+            {% block tabla %}
+
+
+
+            {% endblock %}
+
+            {% block pax %}
+                <tr>  
+                    <td><div style=""></div></td>
+                    <td ><div style=""></div></td>
+                    <td colspan="2"><div style=""></div></td>
+                </tr>    
+            {% endblock %}
+
+            {% block condition %}
+
+                {% if service.cartitem.product.termconditionproduct is not null %}
+                    <tr>
+                        <td colspan="1" align="left" style="border-bottom: solid 1px #ccc">
+                            <div style="font-size: 10px; "> {{ 'Cancellation policy' | trans({}, 'pdf') }} </div>
+                        </td>
+                        <td colspan="3" align="left" style="border-bottom: solid 1px #ccc">
+                            <div style="font-size: 8px; text-align: justify"> {{ service.cartitem.product.termconditionproduct.description }} </div>
+                        </td>
+
+                    </tr>
+                {% endif %}
+
+                {% if service.cartitem.product.cancelationproduct is not null %}
+                    <tr>
+                        <td colspan="1" align="left" style="border-bottom: solid 1px #ccc">
+                            <div style="font-size: 10px; "> {{ 'Terms and Conditions' | trans({}, 'pdf') }} </div>
+                        </td>
+                        <td colspan="3" align="left" style="border-bottom: solid 1px #ccc">
+                            <div style="font-size: 8px; text-align: justify"> {{ service.cartitem.product.cancelationproduct.description }} </div>
+                        </td>
+
+                    </tr>
+                {% endif %}
+
+
+                <tr>
+                    <td colspan="1" align="left" style="border-bottom: solid 1px #ccc">
+                        <div >{{ 'Required documents' | trans({}, 'pdf') }}
+                        </div>
+                    </td>
+                    <td colspan="3" align="left" style="border-bottom: solid 1px #ccc">
+                        <div style="font-size: 8px; text-align: justify">
+                            {% if service.cartitem.product.documents | length > 0 %}
+                                {% for d in service.cartitem.product.documents%}
+                                    <span style="font-size: 8px; font-style: italic">{{ d.description }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span style="font-size: 8px; font-style: italic">{{ 'No document required' | trans({}, 'pdf') }}</span>
+                            {% endif %}
+                        </div>
+                    </td>
+
+                </tr>
+            {% endblock %}
+
+
+
+            {% block pie %}       
+                <tr>
+                    <td colspan="4" style="font-family: fantasy;text-align: center;  line-height: 10px;font-size: 9px; width: 100%">
+                        <div> <span style="float: left; margin-left: 20px"> {{ 'ID Service' | trans({}, 'pdf') }}: {{ service.sale.orderid }}{{ service.id}}</span></div>
+                        <div> <span style="float: left; margin-left: 20px">Voucher No. {{ service.id}}</span></div>
+                        {{ 'Emitted by' | trans({}, 'pdf') }}: DAIQUIRI TOURS CUBA  
+                        <a style="color: #F3B300;text-decoration: none" href="http://www.daiquiricuba.com">www.daiquiricuba.com</a>          
+
+                    </td>
+                </tr>
+            </table>
+        {% endblock %}
+    <body>
+</html>

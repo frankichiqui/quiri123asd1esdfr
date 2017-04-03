@@ -1,0 +1,267 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    <style>
+        .order-payment-list > li small {
+            margin-left: 0px !important;
+        }
+    </style>   
+    <div id="cart_content_front">
+        {% if app.session.get('cart',{}) | length ==  0 %}        
+            <div class="gap"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p class="text-center"><i class="fa fa-shopping-cart round box-icon-large box-icon-center box-icon-warning mb30 text-center"></i></p>
+                        <h3 class="text-center">{{ 'Shopping cart is empty. Please add a Product.' | trans({}, 'cart') }}</h3>
+                        {#<h5 class="text-center mb30">Booking details has been send to johndoe@gmail.com</h5>#}
+                        <div class="gap"></div>
+                        <h4 class="text-center">{{ 'You might also wish see'| trans({}, 'cart') }}</h4>
+                        <ul class="list list-inline list-center">
+                            <li><a class="btn btn-primary" href="{{ path('transfer_list') }}"><i class="fa fa-taxi"></i> {{ 'Transfers' | trans({}, 'cart') }}</a>
+                                {#<p class="text-center lh1em mt5"><small>398 offers<br /> from $139</small>
+                                </p>#}
+                            </li>
+                            <li><a class="btn btn-primary" href="{{ path('hotel_list') }}"><i class="fa fa-building-o"></i> {{ 'Hotels'| trans({}, 'cart') }}</a>
+                                {#<p class="text-center lh1em mt5"><small>398 offers<br /> from $139</small>
+                                </p>#}
+                            </li>
+                            <li><a class="btn btn-primary" href="{{ path('excursion_list') }}"><i class="fa fa-picture-o"></i> {{ 'Excursions'| trans({}, 'cart') }}</a>
+                                {#<p class="text-center lh1em mt5"><small>398 offers<br /> from $139</small>
+                                </p>#}
+                            </li>
+                            <li><a class="btn btn-primary" href="{{ path('rental_list') }}"><i class="fa fa-home"></i> {{ 'Rentlas' | trans({}, 'cart') }}</a>
+                                {#<p class="text-center lh1em mt5"><small>229 offers<br /> from $143</small>
+                                </p>#}
+                            </li>
+                            <li><a class="btn btn-primary" href="{{ path('car_list') }}"><i class="fa fa-car"></i> {{ 'Cars' | trans({}, 'cart') }}</a>
+                                {#<p class="text-center lh1em mt5"><small>180 offers<br /> from $73</small>
+                                </p>#}
+                            </li>
+                            <li><a class="btn btn-primary" href="{{ path('excursion_list') }}"><i class="fa fa-refresh"></i> {{ 'Excursions' | trans({},'cart') }}</a>
+                                {#<p class="text-center lh1em mt5"><small>274 offers<br /> from $131</small>
+                                </p>#}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gap"></div>
+            </div>
+        {% else %}
+            <div class="gap"></div>
+            <div class="container">
+                <div class="col-md-10 col-md-offset-1">
+                    <p class="text-center"><i class="fa fa-shopping-cart round box-icon-large box-icon-center box-icon-success mb30 text-center"></i></p>                            
+                    <h2 class="text-center">{{ app.session.get('cart',{}) | length }} {{ 'items in the shopping cart' | trans({}, 'cart') }}</h2>
+                    <h4 class="text-center mb30">{{ 'Total Price' | trans({}, 'cart') }}: {{ app.session.get('cart_total',0)  | price | raw }} </h4>
+                    {# Comienza el form #}
+                    {% set id_form = admin.uniqid %}
+                    {{ form_start(form, {attr:{'id':'form_'~ id_form}, 'action': admin.generateUrl('create', {'id': admin.id(sale), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}), 'method': 'POST'}) }}
+                    {{ form_widget(form.client) }}
+                    {% for item in app.session.get('cart',{}) %}
+
+                        {% set it = item | unserialize %}  
+                        {% set i = loop.index %}
+                        <ul class="order-payment-list list mb30">
+                            <li style="border-color: #ed8323;">
+                                {% render(controller('DaiquiriReservationBundle:CartItem:getItemCartMin',{'it':it,'view_render_name':'item_cart_detail.html.twig','front':1}))%}
+
+                                <div class="row"> 
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="box box-warning">
+
+                                                <div>
+                                                    <h5 class="box-title">{{ 'Paxs for'| trans({}, 'cart') }} {{ it.title}}</h5>   
+                                                    <div class="box-tools pull-right">
+                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="gap-border box-body" style="display: block; padding-top: 2%;">
+
+                                                    <div class="hidden">
+                                                        {{ form_widget(form.services[i-1].confirmationcode) }} 
+                                                        {{ form_widget(form.services[i-1].servicemanagementstatus) }} 
+                                                    </div>
+                                                    {#{ dump(form.services[i-1].servicepaxs) }#}
+                                                    {% for pax in form.services[i-1].servicepaxs %}
+
+                                                        <div class="row  row-pax" style="margin-top: 2%;">
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label><b>{{ 'Pax(s)' | trans({}, 'cart') }}:</b></label>
+                                                                    {% if it.arraypaxs[loop.index - 1] == 1 %}
+                                                                        {{ 'Adult' | trans({}, 'cart') }} {{ loop.index }}
+                                                                    {% endif%}
+                                                                    {% if it.arraypaxs[loop.index - 1] == 2 %}
+                                                                        {{ 'Kid' | trans({}, 'cart') }} {{ loop.index }}
+                                                                    {% endif%}
+                                                                    {% if it.arraypaxs[loop.index - 1] == 3 %}
+                                                                        {{ 'Infant' | trans({}, 'cart') }} {{ loop.index }}
+                                                                    {% endif%}
+                                                                    {% if it.arraypaxs[loop.index - 1] == 4 %}
+                                                                        {{ 'Passenger' | trans({}, 'cart') }} {{ loop.index }}
+                                                                    {% endif%}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label><b>{{ 'Gender' | trans({}, 'cart') }}:</b></label>
+                                                                    {{ form_widget(pax.gender, {'attr':{'class': 'form-control'}}) }} 
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label><b>{{ 'Name' | trans({}, 'cart') }}:</b></label>
+                                                                    {{ form_widget(pax.name, {'attr':{'class': 'form-control','placeholder': 'John'}}) }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label><b>{{ 'Last Name' | trans({}, 'cart') }}:</b></label>
+                                                                    {{ form_widget(pax.lastname, {'attr':{'class': 'form-control','placeholder': 'Doe'}}) }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label><b>{{ 'Identification' | trans({}, 'cart') }}:</b></label>
+                                                                    {{ form_widget(pax.document, {'attr':{'class': 'form-control','placeholder': 'Passport'}}) }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label><b>{{ 'Birth Date' | trans({}, 'cart') }}:</b></label>                                                                            
+                                                                    {{ form_widget(pax.birthdate, {'attr':{'class': 'date-mio form-control'}}) }} 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="gap-border" style="padding-top: 0.5%;"></div>
+                                                    {% endfor %}
+                                                </div>
+                                                <!-- /.box-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>                        
+                    {% endfor %}
+                    <a id="c_modal" class="popup-text" href="#confirmation_modal" data-effect="mfp-zoom-out"></a>
+                    <div class="col-md-10 col-md-offset-1 sonata-ba-form-actions well  well-small form-actions">
+                        <ul class="list list-inline list-center">
+                            <li>
+                                <a  name="btn_delete_all" class="btn btn-danger empty_cart">
+                                    <i class="fa fa-trash"></i>
+                                    {{ 'Empty Cart' | trans({}, 'cart') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a name="continue_adding" class="btn btn-warning" href="{{ path('daiquiri_site_homepage1') }}">
+                                    <i class="fa fa-plus-circle"></i>
+                                    {{ 'Continue Adding' | trans({}, 'cart') }}
+                                </a>
+                            </li>
+                            <li>
+                                <button name="btn_create_and_list"  class="btn btn-success" type="submit"><i class="fa fa-dollar"></i> {{ 'Payment' | trans({}, 'cart') }}</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="hidden" id="front" name="front" value="1" />
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <h4 class="text-center">{{ 'You might also wish see'| trans({}, 'cart') }}</h4>
+            <ul class="list list-inline list-center">
+                <li><a class="btn btn-primary" href="{{ path('transfer_list') }}"><i class="fa fa-taxi"></i> {{ 'Transfers' | trans({}, 'cart') }}</a>
+                    {#<p class="text-center lh1em mt5"><small>398 offers<br /> from $139</small>
+                    </p>#}
+                </li>
+                <li><a class="btn btn-primary" href="{{ path('hotel_list') }}"><i class="fa fa-building-o"></i> {{ 'Hotels'| trans({}, 'cart') }}</a>
+                    {#<p class="text-center lh1em mt5"><small>398 offers<br /> from $139</small>
+                    </p>#}
+                </li>
+                <li><a class="btn btn-primary" href="{{ path('excursion_list') }}"><i class="fa fa-picture-o"></i> {{ 'Excursions'| trans({}, 'cart') }}</a>
+                    {#<p class="text-center lh1em mt5"><small>398 offers<br /> from $139</small>
+                    </p>#}
+                </li>
+                <li><a class="btn btn-primary" href="{{ path('rental_list') }}"><i class="fa fa-home"></i> {{ 'Rentlas' | trans({}, 'cart') }}</a>
+                    {#<p class="text-center lh1em mt5"><small>229 offers<br /> from $143</small>
+                    </p>#}
+                </li>
+                <li><a class="btn btn-primary" href="{{ path('car_list') }}"><i class="fa fa-car"></i> {{ 'Cars' | trans({}, 'cart') }}</a>
+                    {#<p class="text-center lh1em mt5"><small>180 offers<br /> from $73</small>
+                    </p>#}
+                </li>
+                <li><a class="btn btn-primary" href="{{ path('excursion_list') }}"><i class="fa fa-refresh"></i> {{ 'Excursions' | trans({},'cart') }}</a>
+                    {#<p class="text-center lh1em mt5"><small>274 offers<br /> from $131</small>
+                    </p>#}
+                </li>
+            </ul>
+            <div class="gap"></div>
+            <script>
+                $(".input-group-addon").remove();
+
+                form = $('#form_' + '{{ id_form }}');
+                {#form.submit(function (e) {
+                    e.preventDefault();
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        genericModal(true, "{{ 'Processing' | trans({}, 'cart') }}", "{{ 'Processing your request...Please wait' | trans({}, 'cart') }}");
+
+                        var formSerialize = form.serialize();
+                        $.post($(form).attr('action'), formSerialize,
+                                function (data) {
+                                    if (data.result === 'ok') {
+                                        setContentDialog(data.conte, "{{ 'Redirecting to the Bank' | trans({}, 'cart') }}");
+                                        $('#pan_international').submit();
+                                    } else {
+                                        console.log("error");
+                                    }
+                                }, 'JSON');
+                {% else %}                   
+                        window.location = "{{ path('fos_user_security_login') }}" + "?error=1";
+                {% endif %}
+                    });#}
+                    $(".date-mio").each(function () {
+                        $(this).datepicker({
+                            language: "{{ app.request.locale }}",
+                            format: 'M d, yyyy'
+                        });
+                    });
+
+                    $(document).ready(function () {
+
+                        updateValues();
+                    });
+                    function updateValues() {
+                        $('.total-item-load').load('{{ path('reservation_cart_get_total') }}');
+                    }
+
+                    $('button.delete_btn').click(function (e) {
+                        e.preventDefault();
+                        that = $(this);
+                        showConfirDialogCartDetailDeleteItemFront(
+                                Routing.generate('reservation_cart_delete_item_by_id', {id: $(this).attr('id')}),
+                                "{{ 'Delete Item' | trans({}, 'cart') }}",
+                                "{{ 'Are you sure want to delete this item from shopping cart?' | trans({}, 'cart') }}",
+                                that);
+
+                    });
+
+                    $('.empty_cart').click(function (e) {
+                        that = $(this);
+                        e.preventDefault();
+                        showConfirDialogCartDetailDeleteAllFront(
+                                "{{ path('reservation_cart_empty_cart') }}",
+                                "{{ 'Delete All Items' | trans({}, 'cart') }}",
+                                "{{ 'Are you sure you want to delete all item from the shopping cart?' | trans({}, 'cart') }}",
+                                that,
+                                "{{ path('daiquiri_site_homepage1') }}");
+                    });
+            </script>
+        {% endif %}
+    </div>
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}   
+{% endblock %}

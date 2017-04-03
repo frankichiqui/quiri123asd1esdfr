@@ -1,0 +1,156 @@
+<form action="{{ path('circuit_search') }}" method="POST">
+    <div class="row">      
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                        <label>{{ 'Place' | trans({}, 'circuit') }}</label>
+                        {{ form_widget(form.places, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true' }}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                        <label>{{ 'Polo' | trans({}, 'circuit') }}</label>
+                        {{ form_widget(form.polofrom, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true' }}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                        <label>{{ 'Departing' | trans({}, 'circuit') }}</label> 
+                        <input type="text" class="form-control" idm="date-circuit" />
+                        {{ form_widget(form.date, {'attr':{'class': 'hidden', 'idm': 'date-c', 'widget': 'single_text' }}) }}              
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group form-group-lg form-group-select-plus">
+                        <label>{{ 'Adults' | trans({}, 'circuit') }}</label>
+                        <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                            <label class="btn btn-primary active" onclick="checkRCircuitAdults(this);" > 
+                                <input type="radio" name="rcircuit_adults" />1</label>
+                            <label class="btn btn-primary" onclick="checkRCircuitAdults(this);">
+                                <input type="radio" name="rcircuit_adults" />2</label>
+                            <label class="btn btn-primary" onclick="checkRCircuitAdults(this);">
+                                <input type="radio" name="rcircuit_adults" />3</label>
+                            <label class="btn btn-primary" >
+                                <input type="radio" name="rcircuit_adults" />3+</label>
+                        </div>
+                        {{ form_widget(form.adults,{'attr':{'class': 'form-control hidden', 'idm': 'rc_adults' }}) }}      
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group form-group-lg form-group-select-plus">
+                        <label>{{ 'Kids' | trans({}, 'circuit') }}</label>
+                        <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                            <label class="btn btn-primary active" onclick="checkRCircuitKids(this);">
+                                <input type="radio" name="rcircuit_kids" value="0">0</label>
+                            <label class="btn btn-primary" onclick="checkRCircuitKids(this);">
+                                <input type="radio" name="rcircuit_kids" value="1">1</label>
+                            <label class="btn btn-primary" onclick="checkRCircuitKids(this);">
+                                <input type="radio" name="rcircuit_kids" value="2">2</label>
+                            <label class="btn btn-primary">
+                                <input type="radio" name="rcircuit_kids">2+</label>
+                        </div>
+                        {{ form_widget(form.kids,{'attr':{'class': 'form-control hidden', 'idm': 'rc_kids' }}) }}      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkbox">
+        <label class="orange advanced_circuit">
+            <input class="i-check check" type="checkbox">{{ 'Advanced' | trans({}, 'circuit') }}
+        </label>
+    </div>
+    <div id="divadv_circuit" class="row" style="display: none">
+        <div class="col-md-2">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-moon-o input-icon"></i>
+                <label>Nights</label>
+                {{ form_widget(form.nights,{'attr':{'class': 'form-control' }}) }}      
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-sun-o input-icon"></i>
+                <label>Days</label>
+                {{ form_widget(form.days,{'attr':{'class': 'form-control' }}) }}      
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden">
+        {{ form_widget(form.title) }}
+        {{ form_widget(form.circuit) }}
+        {{ form_rest(form) }}
+    </div>
+
+    <button class="btn btn-primary btn-lg" name="btn_create_and_edit" type="submit">{{ 'Search for Circuits' | trans({}, 'circuit') }}</button>
+
+
+    <script>
+        $(".input-group-addon").remove();
+
+
+        {% if pickupdays is defined and pickupdays|length > 0 %}
+        $('input[idm="date-c"]').val("{{ pickupdays[0] | date('M j, Y') }}");
+        {% endif %}
+
+
+
+        function checkRCircuitAdults(obj) {
+            $('select[idm="rc_adults"]').val($(obj)[0].innerText);
+        }
+        function checkRCircuitKids(obj) {
+            $('select[idm="rc_kids"]').val($(obj)[0].innerText);
+        }
+
+        var availableDates = new Array();
+
+        {% for day in pickupdays %}
+            availableDates.push({{ day | date('j') }}+"/" + {{ day | date('m') }}    +"/" + {{ day | date('Y') }}   );
+        {% endfor %}       
+
+            $('input[idm="date-circuit"]').datepicker({
+                language: "{{ app.request.locale }}",
+                format: 'M d, yyyy',
+                startDate: "{% if pickupdays is defined and pickupdays|length > 0 %}{{ pickupdays[0] | date('M j, Y') }}{% endif %}",
+                beforeShowDay: function (date) {
+                    var dt_ddmmyyyy = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+                    if (availableDates.indexOf(dt_ddmmyyyy) !== -1) {
+                        return {
+                            tooltip: "{{ 'This date is enabled' | trans({}, 'circuit') }}",
+                            classes: 'active-date'
+                        };
+                    } else {
+                        return false;
+                    }
+                }
+
+            });
+
+
+            $('input[idm="date-circuit"]').on("changeDate", function () {
+                $('input[idm="date-c"]').val(
+                        $('input[idm="date-circuit"]').datepicker('getFormattedDate')
+                        );
+            });
+
+            $('input[idm="date-circuit"]').val("{% if pickupdays is defined and pickupdays|length > 0 %}{{ pickupdays[0] | date('M j, Y') }}{% endif %}");
+
+            var flip = 0;
+            $(".advanced_circuit").on("click", function () {
+                $("#divadv_circuit").toggle(flip++ % 2 === 0);
+            });
+            var flip5 = 0;
+            $(".check").on("ifChecked", function () {
+                $("#divadv_circuit").toggle(flip5++ % 2 === 0);
+            });
+            $(".check").on("ifUnchecked", function () {
+                $("#divadv_circuit").toggle(flip5++ % 2 === 0);
+            });
+    </script>
+</form>

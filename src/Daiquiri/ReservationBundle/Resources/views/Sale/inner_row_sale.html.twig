@@ -1,0 +1,6 @@
+
+{% for object in admin.datagrid.results %}
+    <tr class="{% if object.hasServiceWithStatusBySystem() %} {% endif %}">
+        {% include admin.getTemplate('inner_list_row') %}
+    </tr>
+{% endfor %}

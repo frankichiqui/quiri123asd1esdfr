@@ -1,0 +1,136 @@
+<li class="booking-item" style="margin-bottom: 2%">
+    {{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="booking-item-car-img">
+                {% if obj.picture.galleryHasMedias is defined %}
+                    <img src="{% path obj.picture, 'reference' %}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+                {% else %}
+                    <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ obj.title }}" title="{{ obj.title }}" />
+                {% endif %}
+                <p class="booking-item-car-title">{{ obj.title }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-5">
+                    <ul class="booking-item-features booking-item-features-sign clearfix">
+                        <li rel="tooltip" data-placement="top" title="{{ 'Passengers' | trans({}, 'car') }}"><i class="fa fa-male"></i><span class="booking-item-feature-sign">x {{ obj.capacity }}</span>
+                        </li>
+                        <li rel="tooltip" data-placement="top" title="{{ 'Doors' | trans({}, 'car') }}"><i class="im im-car-doors"></i><span class="booking-item-feature-sign">x {{ obj.doors }}</span>
+                        </li>
+                        <li rel="tooltip" data-placement="top" title="{{ 'Baggage Quantity' | trans({}, 'car') }}"><i class="fa fa-briefcase"></i><span class="booking-item-feature-sign">x {{ obj.luggagecapacity }}</span>
+                        </li>
+                        {% if obj.transsmission == 0 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Automatic Transmission' | trans({}, 'car') }}"><i class="im im-shift-auto"></i><span class="booking-item-feature-sign">{{ 'auto' | trans({}, 'car') }}</span>
+                            </li>
+                        {% else %}     
+                            <li rel="tooltip" data-placement="top" title="{{ 'Manual Transmission' | trans({}, 'car') }}"><i class="im im-shift"></i><span class="booking-item-feature-sign">{{ 'manual' | trans({}, 'car') }}</span>
+
+                            </li>
+                        {% endif %}
+                        {% if obj.power == 0 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Disel Vehicle' | trans({}, 'car') }}"><i class="im im-diesel"></i><span class="booking-item-feature-sign">diesel</span></li>
+                                {% elseif  obj.power == 1 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Hybrid Vehicle' | trans({}, 'car') }}"><i class="im im-diesel"></i><span class="booking-item-feature-sign">hybrid</span>
+                            </li>
+                        {% else %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Electric Vehicle' | trans({}, 'car') }}"><i class="im im-electric"></i><span class="booking-item-feature-sign">electric</span>
+                            </li>
+                        {% endif %}
+                        {% if obj.engine is defined and not null %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Engine' | trans({}, 'car') }}"><i class="fa fa-gears"></i><span class="booking-item-feature-sign">{{ obj.engine }}</span>
+                                {% endif %}
+                        </li>
+                    </ul>
+                    <ul class="booking-item-features booking-item-features-small clearfix">
+                        {% if obj.clima == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Climate Control' | trans({}, 'car') }}"><i class="im im-climate-control"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.airConditioner == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Air Conditioning' | trans({}, 'car') }}"><i class="im im-air"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.satellite == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Satellite Navigation' | trans({}, 'car') }}"><i class="im im-satellite"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.powerdoorslock == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Power Door Locks' | trans({}, 'car') }}"><i class="im im-lock"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.radio == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'FM Radio' | trans({}, 'car') }}"><i class="im im-fm"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.cdPlayer == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Stereo CD/MP3' | trans({}, 'car') }}"><i class="im im-stereo"></i>
+                            </li>
+                        {% endif %}                              
+                        {% if obj.tilt == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Tilt Steering Wheel' | trans({}, 'car') }}"><i class="im im-car-wheel"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.powerwindow == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Power Windows' | trans({}, 'car') }}"><i class="im im-car-window"></i>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <ul class="booking-item-features booking-item-features-dark">
+                        {% if obj.terminalpickup == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Terminal Pickup' | trans({}, 'car') }}"><i class="fa fa-plane"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.shuttlebus == true %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Shuttle Bus to Car' | trans({}, 'car') }}"><i class="im im-bus"></i>
+                            </li>
+                        {% endif %}
+                        {% if obj.drivers | length > 0 %}
+                            <li rel="tooltip" data-placement="top" title="{{ 'Car with Driver' | trans({}, 'car') }}"><i class="im im-driver"></i>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-5">
+                    <p class="booking-item-address form-inline"><i class="fa fa-calendar"></i>
+                        <small><b>{{ 'Day(s)' | trans({}, 'car') }}:</b> {{ searcher.getDiffDays() }}</small>
+                    </p>
+                    <p class="booking-item-address form-inline"><i class="fa fa-map-marker"></i>
+                        <small><b>{{ 'Pick-up Place' | trans({}, 'car') }}:</b> {{searcher.pickupplace}}({{ searcher.startdate | date('M j, Y g:i a') }})</small>
+                    </p> 
+                    <p class="booking-item-address form-inline"><i class="fa fa-map-marker"></i>
+                        <small><b>{{ 'Drop-off Place' | trans({}, 'car') }}:</b> {{searcher.dropoffplace}}({{ searcher.enddate | date('M j, Y g:i a') }})</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% set price = obj.getTotalPrice(searcher.startdate, searcher.enddate, market.Object) %}
+        <div class="col-md-3"><span class="booking-item-price">{{ price | price | raw }}</span><span>/{{ 'day' | trans({}, 'car') }}</span>
+            <p class="booking-item-flight-class">{{ obj.carCategory }}</p><button type="submit" class="btn btn-primary">{{ 'Add to Cart' | trans({}, 'car') }}</button>
+        </div>
+    </div>
+
+   <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a>  
+    <div class="hidden">    
+        {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
+        {{ form_widget(form_item.title,{'attr':{'value':'Car ' ~ obj.title}}) }}
+        {{ form_widget(form_item.unitariprice,{'attr':{'value':price}}) }}
+        {{ form_widget(form_item.product,{'attr':{'value':obj.id}}) }}
+        {{ form_widget(form_item.totalprice,{'attr':{'value':price}}) }}
+        {{ form_widget(form_item.startdate,{'attr':{'value':searcher.startdate | date("Y-m-d h:m")}}) }}
+        {{ form_widget(form_item.enddate,{'attr':{'value':searcher.enddate | date("Y-m-d h:m" )}}) }}
+        {{ form_widget(form_item.pickupplace,{'attr':{'value':searcher.pickupplace.id}}) }}
+        {{ form_widget(form_item.dropoffplace,{'attr':{'value':searcher.dropoffplace.id}}) }}
+        {{ form_widget(form_item.front,{'attr':{'value':1}}) }}
+    </div>
+    {{ form_end(form_item)}}       
+    <script>
+        $('form[name="item_result{{ obj.id }}"]').on('submit', function (e) {
+            formAjaxFront(e, $('form[name="item_result{{ obj.id }}"]'));
+
+        });
+    </script>
+</li>

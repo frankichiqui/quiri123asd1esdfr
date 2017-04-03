@@ -1,0 +1,148 @@
+<form action="{{ path('transfer_search') }}" method="POST" >
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                        <label>{{ 'Pick-up Place' | trans({}, 'transfer') }}</label>
+                        {{ form_widget(form.placefrom, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true' }}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                        <label>{{ 'Drop-off Place' | trans({}, 'transfer') }}</label>
+                        {{ form_widget(form.placeto, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true'  }}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-daterange" data-date-format="M dd, yyyy">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                            <label>{{ 'Departing' | trans({}, 'transfer') }}</label>
+                            <input class="form-control" name="start" type="text" id="date-start-transfer" />
+                            {{ form_widget(form.date, {'attr':{'class': 'form-control hidden', 'idm': 'd-s-transfer' }}) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-check-circle input-icon input-icon-highlight"></i>
+                            <label>{{ 'Type' | trans({}, 'transfer') }}</label>
+                            {{ form_widget(form.exclusive, {'attr':{'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-group-lg form-group-select-plus">
+                            <label>{{ 'Passengers' | trans({}, 'transfer') }}</label>
+                            <div class="btn-group btn-group-select-num" data-toggle="buttons">
+                                <label class="btn btn-primary active" onclick="checkRTransfersPax(this);">
+                                    <input type="radio" name="rtransfers_pax" />1</label>
+                                <label class="btn btn-primary" onclick="checkRTransfersPax(this);">
+                                    <input type="radio" name="rtransfers_pax" />2</label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="rtransfers_pax" />2+</label>
+                            </div>
+                            {{ form_widget(form.passengers, {'attr':{'class': 'form-control hidden', 'idm': 'rt_pax' }}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="input-daterange" data-date-format="M dd, yyyy">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group form-group-lg form-group-icon-left">
+                    <label>{{ 'Round Trip' | trans({}, 'transfer') }}</label>
+                    <div class="checkbox" >
+                        <label class="roundtrip">
+                            {{ form_widget(form.roundtrip, {'attr':{'class': 'i-check round' }} ) }}{{ "It\'s a round trip?" | trans({}, 'transfer') }} 
+                        </label>
+                    </div>
+                </div>
+            </div>    
+            <div class="col-md-2" style="display: none" id="div_roundtrip">            
+                <div class="form-group form-group-lg form-group-icon-left" id="roundtrip"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                    <label>{{ 'Returning' | trans({}, 'transfer') }}</label>
+                    <input class="form-control" name="end" type="text" id="date-end-transfer" />
+                    {{ form_widget(form.dateroundtrip, {'attr':{'class': 'form-control hidden', 'idm': 'd-e-transfer' }}) }}               
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="checkbox" >
+        <label class="orange advanced_transfer">
+            <input class="i-check check" type="checkbox" />{{ 'Advanced' | trans({}, 'transfer') }}
+        </label>
+    </div>
+    <div id="divadv_transfer" class="row" style="display: none">
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-map-marker input-icon"></i>
+                <label>{{ 'Polo From' | trans({}, 'transfer') }}</label>
+                {{ form_widget(form.polofrom, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true' }}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group form-group-lg form-group-icon-left"><i class="fa  fa-map-marker input-icon"></i>
+                <label>{{ 'Polo To' | trans({}, 'transfer') }}</label>
+                {{ form_widget(form.poloto, {'attr':{'class': 'form-control selectpicker', 'data-live-search':'true' }}) }}
+            </div>
+        </div>
+
+    </div>
+    <div class="hidden"> 
+        {{ form_rest(form) }}
+    </div>
+
+    <button class="btn btn-primary btn-lg" type="submit">{{ 'Search for Transfers' | trans({}, 'transfer') }}</button>
+
+    <script>
+        var flip = 0;
+        $(".advanced_transfer").on("click", function () {
+            $("#divadv_transfer").toggle(flip++ % 2 === 0);
+        });
+        $(".roundtrip").on("click", function () {
+            $("#div_roundtrip").toggle(flip++ % 2 === 0);
+        });
+
+        var flipo = 0;
+        $(".check").on("ifChecked", function () {
+            $("#divadv_transfer").toggle(flipo++ % 2 === 0);
+        });
+        $(".check").on("ifUnchecked", function () {
+            $("#divadv_transfer").toggle(flipo++ % 2 === 0);
+        });
+
+        var flipe = 0;
+        $(".round").on("ifChecked", function () {
+            $("#div_roundtrip").toggle(flipe++ % 2 === 0);
+        });
+        $(".round").on("ifUnchecked", function () {
+            $("#div_roundtrip").toggle(flipe++ % 2 === 0);
+        });
+
+
+        function checkRTransfersPax(obj) {
+            $('select[idm="rt_pax"]').val($(obj)[0].innerText);
+        }
+
+
+        $("#date-start-transfer").on("changeDate", function () {
+            $('input[idm="d-s-transfer"]').val(
+                    $("#date-start-transfer").datepicker('getFormattedDate')
+                    );
+
+        });
+
+        $("#date-end-transfer").on("changeDate", function () {
+            $('input[idm="d-e-transfer"]').val(
+                    $("#date-end-transfer").datepicker('getFormattedDate')
+                    );
+        });
+
+    </script>
+
+</form>

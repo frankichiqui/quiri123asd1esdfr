@@ -1,0 +1,177 @@
+daiquiri_reservation_searcher_get_find_all:
+    path:     /searcher/get-find-all
+    defaults: { _controller: DaiquiriReservationBundle:Searcher:getFindAll }
+daiquiri_reservation_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DaiquiriReservationBundle:Default:index }
+    
+daiquiri_reservation_plus_for_by_hotel_and_diet:
+    path:     /hotel/{id}/get-plus-for-diet/{diet}
+    defaults: { _controller: DaiquiriAdminBundle:Hotel:getPlusForDiet , _sonata_admin:admin.hotel}
+
+daiquiri_reservation_cartitem:
+    path:     /shopping-cart/add-to-cart/car
+    defaults: { _controller: reservation.cartitem:addCarItem }
+    
+
+    
+daiquiri_reservation_rentalhouseroomtitem:
+    path:     /shopping-cart/add-to-cart/rental-house-room
+    defaults: { _controller: reservation.cartitem:addRentalHouseRoomItem }   
+    
+daiquiri_reservation_excursioncolectiveitem:
+    path:     /shopping-cart/add-to-cart/excursion-colective
+    defaults: { _controller: reservation.cartitem:addExcursionColective }  
+    
+reservation_cart_deleteItem:
+    path:     /shopping-cart/delete-item/{index}
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:deleteItem } 
+    
+reservation_cart_delete_item_by_id:
+    path:     /shopping-cart/delete-item-by-id/{id}
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:deleteItemById }     
+    
+reservation_cart_get_count:
+    path:     /shopping-cart/get-count
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:getCountCart}
+    
+reservation_cart_get_total:
+    path:     /shopping-cart/get-total
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:getTotalCart}    
+    
+reservation_cart_get_min_view_cart:
+    path:     /shopping-cart/get-min-view-cart
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:getMinViewCart }  
+    
+ 
+   
+reservation_cart_new_cart:
+    path:     /shopping-cart/new-cart
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:createNew }     
+    
+reservation_cart_empty_cart:
+    path:     /shopping-cart/empty-cart
+    defaults: { _controller: DaiquiriReservationBundle:CartItem:emptyCart }  
+    
+    
+#para la venta    
+daiquiri_pam_response:
+    path:   /{_locale}/sale-payment/response/{orderid}
+    defaults: {_controller: DaiquiriReservationBundle:ConfigurationPam:ResponsePam, _sonata_admin: admin.configurationpam } 
+    
+daiquiri_pam_ok:
+    path:   /{_locale}/sale-payment/ok/{orderid}
+    defaults: {_controller: DaiquiriReservationBundle:ConfigurationPam:PaymentOk, _sonata_admin: admin.configurationpam }
+    
+daiquiri_pam_fail:
+    path:   /{_locale}/sale-payment/fail/{orderid}
+    defaults: {_controller: DaiquiriReservationBundle:ConfigurationPam:PaymentFail, _sonata_admin: admin.configurationpam }
+    
+#para el  pago 
+daiquiri_pam_response_payment:
+    path:   /{_locale}/payment/response/{orderid}
+    defaults: {_controller: DaiquiriReservationBundle:ConfigurationPam:PaymentResponsePam, _sonata_admin: admin.configurationpam } 
+    
+daiquiri_pam_ok_payment:
+    path:   /{_locale}/payment/ok/{orderid}
+    defaults: {_controller: DaiquiriReservationBundle:ConfigurationPam:PaymentOkPayment, _sonata_admin: admin.configurationpam }
+    
+daiquiri_pam_fail_payment:
+    path:   /{_locale}/payment/fail/{orderid}
+    defaults: {_controller: DaiquiriReservationBundle:ConfigurationPam:PaymentFailPayment, _sonata_admin: admin.configurationpam }    
+    
+
+
+    
+apply-rentalhouse:
+    path:   /{_locale}/apply-rentalhouse/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:RentalHouse:Apply, _sonata_admin: admin.rentalhouse ,_locale:en}
+    
+create-request-for-rentalhouse:
+    path:   /{_locale}/create-request-for-rentalhouse
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestRentalHouse}
+    
+apply-package:
+    path:   /{_locale}/apply-package/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:Package:Apply, _sonata_admin: admin.package ,_locale:en}    
+    
+create-request-for-package:
+    path:   /{_locale}/create-request-for-package
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestPackage}
+    
+apply-circuit:
+    path:   /{_locale}/apply-circuit/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:Circuit:Apply, _sonata_admin: admin.circuit ,_locale:en}    
+    
+create-request-for-circuit:
+    path:   /{_locale}/create-request-for-circuit
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestCircuit}    
+
+
+apply-medical:
+    path:   /{_locale}/apply-medical/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:MedicalService:Apply, _sonata_admin: admin.circuit ,_locale:en}    
+    
+    
+create-request-for-medical:
+    path:   /{_locale}/create-request-for-medical
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestMedical }     
+
+    
+    
+    
+apply-transfer-exclusive:
+    path:   /{_locale}/apply-transfer-exclusive/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:TransferExclusive:Apply, _sonata_admin: admin.transferexclusive ,_locale:en}    
+    
+    
+create-request-for-transfer-exclusive:
+    path:   /{_locale}/create-request-for-transfer-exclusive
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestTransferExclusive }    
+    
+create-request-for-transfer-colective:
+    path:   /{_locale}/create-request-for-transfer-colective
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestTransferColective }      
+    
+apply-transfer-colective:
+    path:   /{_locale}/apply-transfer-colective/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:TransferColective:Apply, _sonata_admin: admin.transfercolective ,_locale:en}    
+    
+apply-car:
+    path:   /{_locale}/apply-car/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:Car:Apply, _sonata_admin: admin.car ,_locale:en}        
+    
+    
+create-request-for-car:
+    path:   /{_locale}/create-request-for-car
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestCar }    
+    
+    
+apply-excursion-colective:
+    path:   /{_locale}/apply-excursion-colective/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:ExcursionColective:Apply, _sonata_admin: admin.excursioncolective ,_locale:en}      
+    
+apply-excursion-exclusive:
+    path:   /{_locale}/apply-excursion-exclusive/{id}/{f}/{b}
+    defaults: {_controller: DaiquiriAdminBundle:ExcursionExclusive:Apply, _sonata_admin: admin.excursionexclusive ,_locale:en}     
+    
+create-request-for-excursion-colective:
+    path:   /{_locale}/create-request-for-excursion-colective
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestExcursionColective }  
+    
+create-request-for-excursion-exclusive:
+    path:   /{_locale}/create-request-for-excursion-exclusive
+    defaults: {_controller: DaiquiriReservationBundle:OnRequest:RequestExcursionExclusive}       
+       
+    
+get-captcha:
+    path:   /get-captcha
+    defaults: {_controller: DaiquiriReservationBundle:Default:getImageCaptcha}    
+    
+create-new-payment-form:
+    path:   /create-new-payment-form
+    defaults: {_controller: DaiquiriAdminBundle:Payment:createNewPaymentForm, _sonata_admin: admin.payment, _locale:en }
+    
+create-new-payment:
+    path:   /create-new-payment
+    defaults: {_controller: DaiquiriAdminBundle:Payment:createNewPayment,_sonata_admin: admin.payment, _locale:en}    

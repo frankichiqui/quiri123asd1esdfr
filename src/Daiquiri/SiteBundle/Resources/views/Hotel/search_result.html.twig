@@ -1,0 +1,178 @@
+{% extends "base.html.twig"%}
+{% block body %}
+    {% include 'DaiquiriSiteBundle:Default:header.html.twig' %}
+    {#{ dump(salida) }#}
+    <div class="container">
+       {% include 'breadcrumb/breadcrumb.html.twig'%}
+        <div class="mfp-with-anim mfp-hide mfp-dialog mfp-search-dialog" id="search-dialog">
+            <h3>{{ 'Search for Hotels' | trans({}, 'hotel') }}</h3>
+            {{ render(controller('DaiquiriSiteBundle:OcupationSearcher:new')) }}
+        </div>
+        {% if salida.haveToPaginate %}
+            <h3 class="booking-title">{{ rooms }} {{ 'Rooms on' | trans({}, 'hotel') }} {{ startdate | date('M j, Y') }} - {{ enddate | date('M j, Y') }}<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Change search' | trans({}, 'hotel') }}</a></small></h3>
+                {% else %}
+            <h3 class="booking-title">{% if rooms < 0 %}{{ rooms }} {{ 'Rooms on this date' | trans({}, 'hotel') }}{% else %} {{ rooms }} {{ 'Rooms on' | trans({}, 'hotel') }} {{ startdate|date('M j, Y')}} - {{ enddate|date('M j, Y')}}{% endif %}<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Change search' | trans({}, 'hotel') }}</a></small></h3>
+                {% endif %}
+        <div class="row">
+            <div class="col-md-3">
+                <aside class="booking-filters text-white">
+                    <h3>Filter By:</h3>
+                    <ul class="list booking-filters-list">
+                        <li>
+                            <h5 class="booking-filters-title">Star Rating</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />5 star (220)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />4 star (112)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />3 star (75)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />2 star (60)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />1 star (20)</label>
+                            </div>
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Attractions</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Perfomances (126)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Cultural (80)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Museums (130)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Landmarks (52)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Outdoors (62)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Amusement (22)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Sports (32)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Zoos & Aquariums (7)</label>
+                            </div>
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Activities</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Sightseeing Tours (184)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Wellness & Spas (130)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Food & Drink (40)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Adventure (15)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Classes (34)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Gear Rentals (10)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Ranch & Farm (1)</label>
+                            </div>
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Nightlife</h5>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Bars (115)</label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" />Clubs (63)</label>
+                            </div>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+            <div class="col-md-9">
+                <div class="nav-drop booking-sort">
+                    <h5 class="booking-sort-title"><a href="#">Sort: Aviability<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a></h5>
+                    <ul class="nav-drop-menu">
+                        <li><a href="#">Price (low to high)</a>
+                        </li>
+                        <li><a href="#">Price (hight to low)</a>
+                        </li>
+                        <li><a href="#">Ranking</a>
+                        </li>
+                        <li><a href="#">Distance</a>
+                        </li>
+                        <li><a href="#">Number of Reviews</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="booking-list">
+                   
+                    {% for hotel in salida.currentPageResults %}
+                        {% for room in hotel.availableroom %}
+                            {% render(controller('DaiquiriSiteBundle:OcupationSearcher:renderResultOcupationItem',{ '_sonata_admin' : 'admin.hotel','item':room})) %}     
+                        {% endfor %}
+                    {% else %}
+
+                        <div class="alert alert-info">                            
+                            <p class="text-bigger"> {{ 'No rooms to show' | trans({}, 'hotel') }}</p>
+                        </div>
+
+
+                    {% endfor %}
+
+                </ul>
+                <div class="row">
+
+                    <div class="col-md-7">
+                        {% if salida.haveToPaginate %}
+                            <p><small>{{ rooms }} {{ 'Rooms on' | trans({}, 'hotel') }} {{ startdate | date('M j, Y') }} - {{ enddate | date('M j, Y') }}  {{ 'Showing' | trans({}, 'hotel') }} {{ salida.getCurrentPage }} – {{ salida.getNbPages }}</small>
+                            </p>                            
+
+                            {{ pagerfanta(salida, 'page_view', {'routeName': 'hotel_search_paginated'}, pagerfanta_opts) }}
+
+                        {% endif %}
+                    </div>                   
+                    <div class="col-md-5 text-right">
+                        <p>{{ "Not what you\'re looking for?" | trans({}, 'hotel') }} <a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Try your search again' | trans({}, 'car') }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gap"></div>
+    </div>
+
+    {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+{% endblock %}
