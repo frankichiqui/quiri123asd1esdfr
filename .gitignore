@@ -50,19 +50,12 @@
 # -- Symfony2 -----------------------------------------
 app/bootstrap.php.cache
 app/bootstrap_cache.php.cache
-app/config/parameters.ini
-app/config/parameters.yml
 app/cache/*
 app/logs/*
-plugins/*
 vendor/*
 web/bundles/*
 web/css/*
 web/js/*
-web/uploads/logs/*
-web/uploads/badges/*
-web/uploads/resources/*
-web/uploads/books/*
 .idea/*
 bin/*
 
