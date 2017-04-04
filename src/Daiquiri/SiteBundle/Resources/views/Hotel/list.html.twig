@@ -21,85 +21,101 @@
                     <ul class="list booking-filters-list">
                         <li>
                             <h5 class="booking-filters-title">Star Rating</h5>
-                            <div class="checkbox">
+                            <div id="filter-rating" class="radio-group">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />5 star (220)</label>
+                                    <input class="i-radio" type="radio" />5 star (220)</label>
+                                    <input type="hidden" value="5">
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />4 star (112)</label>
+                                    <input class="i-radio" type="radio" />4 star (112)</label>
+                                    <input type="hidden" value="5">
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />3 star (75)</label>
+                                    <input class="i-radio" type="radio" />3 star (75)</label>
+                                    <input type="hidden" value="5">
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />2 star (60)</label>
+                                    <input class="i-radio" type="radio" />2 star (60)</label>
+                                    <input type="hidden" value="5">
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />1 star (20)</label>
+                                    <input class="i-radio" type="radio" />1 star (20)</label>
+                                    <input type="hidden" value="5">
+                            </div>
+
                             </div>
                         </li>
                         <li>
                             <h5 class="booking-filters-title">Attractions</h5>
+                            <div class="radio-group">
                             {% for filter in filters %}
-                                <div class="checkbox">
+                                <div class="radio">
                                     <label>
-                                        <input data-idType="{{ filter.type.id }}" class="i-check" type="checkbox" />{{ filter.type~' ('~filter.cantType~')' }}</label>
+                                        <input data-idType="{{ filter.type.id }}" class="i-radio" type="radio" />{{ filter.type~' ('~filter.cantType~')' }}</label>
+                                        <input type="hidden" value="{{ filter.type }}">
                                 </div>
                             {% endfor %}
+                            </div>
 
                             <button class="btn btn-default" id="exec-filter">Filter</button>
                         </li>
                         <li>
                             <h5 class="booking-filters-title">Activities</h5>
-                            <div class="checkbox">
+                            <div class="radio-group">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Sightseeing Tours (184)</label>
+                                    <input class="i-radio" type="radio" />Sightseeing Tours (184)</label>
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Wellness & Spas (130)</label>
+                                    <input class="i-radio" type="radio" />Wellness & Spas (130)</label>
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Food & Drink (40)</label>
+                                    <input class="i-radio" type="radio" />Food & Drink (40)</label>
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Adventure (15)</label>
+                                    <input class="i-radio" type="radio" />Adventure (15)</label>
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Classes (34)</label>
+                                    <input class="i-radio" type="radio" />Classes (34)</label>
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Gear Rentals (10)</label>
+                                    <input class="i-radio" type="radio" />Gear Rentals (10)</label>
                             </div>
-                            <div class="checkbox">
+                            <div class="radio">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Ranch & Farm (1)</label>
+                                    <input class="i-radio" type="radio" />Ranch & Farm (1)</label>
                             </div>
+                                </div>
                         </li>
                         <li>
                             <h5 class="booking-filters-title">Nightlife</h5>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Bars (115)</label>
+                            <div class="radio-group">
+                                <div class="radio">
+                                    <label>
+                                        <input class="i-radio" type="radio" />Bars (115)</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input class="i-radio" type="radio" />Clubs (63)</label>
+                                </div>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Clubs (63)</label>
-                            </div>
+
                         </li>
                     </ul>
                 </aside>
             </div>
             <div class="col-md-9">
-                <div id="ajax-hoteles">
+                <div id="ajax-hotels">
                     {% include 'DaiquiriSiteBundle:Hotel:ajax_hotels.html.twig' %}
                 </div>
             </div>
@@ -110,27 +126,13 @@
     {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
 
     <script>
-        jQuery(document).ready(function () {
-            $('#exec-filter').on("click", function () {
-                var data = {"idType": 1};
-                var url = '{{ path('hotel_list_ajax', { page:1 }) }}';
 
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data: data,
-                    success: function (response) {
-                        ajaxLoadPage(response);
-                    }
-                });
-            });
+        jQuery(document).ready(function () {
+            filters.onReady();
+            var url = '{{ path('hotel_list_ajax', { page:1 }) }}';
+            filters.launchFilter('hotels', url);
         });
 
-        function ajaxLoadPage(html) {
-
-            $('#ajax-hoteles').html(html);
-
-        }
     </script>
 {% endblock %}
 
