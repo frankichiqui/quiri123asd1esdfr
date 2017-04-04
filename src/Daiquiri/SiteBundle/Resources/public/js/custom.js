@@ -72,7 +72,7 @@ $('.form-group').each(function () {
  });
  }
  });
- 
+
  */
 $('input.date-pick, .input-daterange, .date-pick-inline').datepicker({
     todayHighlight: true
@@ -390,7 +390,7 @@ $(document).ready(function () {
 
 
 $('.card-select > li').click(function () {
-    self = this;
+    var self = this;
     $(self).addClass('card-item-selected');
     $(self).siblings('li').removeClass('card-item-selected');
     $('.form-group-cc-number input').click(function () {
@@ -465,6 +465,7 @@ $(function ($) {
 });
 
 $(document).ready(function () {
+
     var ul = $('#twitter-ticker').find(".tweet-list");
     var ticker = function () {
         setTimeout(function () {
@@ -561,4 +562,88 @@ function tagline_vertical_slide() {
 
 function abortTimer() { // to be called when you want to stop the timer
     clearInterval(tid);
+}
+
+
+var filters = {
+
+    onReady: function () {
+        this.toggleRadios();
+    },
+
+    /**
+     *
+     * Loading ajax response
+     * @param string page | values ('#ajax-hotels', '#ajax-circuits', '#ajax-transfers')
+     * @param string html
+     *
+     **/
+
+    ajaxLoadPage: function (page, html) {
+        $(page).html(html);
+    },
+
+    /**
+     * Unselecting other radios
+     **/
+    toggleRadios: function () {
+        $('div.radio label').click(function () {
+            $(this).parent().parent().find('.i-radio.checked').removeClass('checked');
+            $(this).children().addClass('checked');
+        });
+
+        $('.iCheck-helper').click(function () {
+            $(this).parent().parent().parent().parent().find('.i-radio.checked').removeClass('checked');
+            $(this).parent().addClass('checked');
+
+        });
+    },
+
+    /**
+     *
+     * Executing filter
+     * @param string entity | values ('hotels', 'circuits', 'transfers')
+     * @param string url
+     *
+     **/
+    launchFilter: function (entity, url) {
+        $('#exec-filter').on("click", function () {
+
+            switch (entity){
+                case 'hotels':
+                    var data = {"idType": 1};
+                    break;
+                case 'circuits':
+
+                    break;
+                case 'transfers':
+
+                    break;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                success: function (response) {
+                    filters.ajaxLoadPage('#ajax-'+entity, response);
+                }
+            });
+        });
+    },
+
+    getHotelsDataFilter: function () {
+        
+    },
+    getCircuitsDataFilter: function () {
+
+    },
+    getTransfersDataFilter: function () {
+
+
+    },
+    getRating: function () {
+        var rating = $('#filter-rating ')
+    }
+    
 }
