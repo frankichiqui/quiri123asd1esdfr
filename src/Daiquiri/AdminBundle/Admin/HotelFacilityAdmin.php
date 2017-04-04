@@ -15,10 +15,7 @@ class HotelFacilityAdmin extends AbstractAdmin {
                 ->add('hotelfacilitytype', 'sonata_type_model', array(
                     'property' => 'title',
                     'class' => 'Daiquiri\AdminBundle\Entity\RentalHouseFacilityType'))
-                ->add('description', 'sonata_simple_formatter_type', array(
-                    'label' => 'Hotel Facility Description',
-                    'format' => 'richhtml'
-                ))
+                
                 ->add('picture', 'sonata_media_type', array(
                     'provider' => 'sonata.media.provider.image',
                     'context' => 'daiquiri'
@@ -47,12 +44,7 @@ class HotelFacilityAdmin extends AbstractAdmin {
         $listMapper
                 ->add('picture', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
                 ->addIdentifier('title', 'text', array('label' => 'Hotel Facility'))
-                ->add('description', 'html', array(
-                    'truncate' => array(
-                        'separator' => ' ...',
-                        'label' => 'Hotel Facility Description'
-                    )
-                ))
+               
                 ->add('hotelfacilitytype', null, array('label' => 'Type'))
                 ->add('_action', 'actions', array(
                     'actions' => array(

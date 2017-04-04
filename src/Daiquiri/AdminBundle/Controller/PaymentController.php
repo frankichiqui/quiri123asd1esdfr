@@ -10,7 +10,6 @@ use \Symfony\Component\HttpFoundation\Response;
 use \Doctrine\Common\Collections\Collection;
 use \Doctrine\ORM\EntityRepository;
 
-
 /**
  * Car controller.
  *
@@ -130,6 +129,9 @@ class PaymentController extends SonataCRUDController {
     }
 
     public function createNewPaymentFormAction() {
+        if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->createAccessDeniedException();
+        }
         $payment = new \Daiquiri\AdminBundle\Entity\Payment();
         $form = $this->createForm(new \Daiquiri\AdminBundle\Form\PaymentType(), $payment, array(
             'action' => $this->generateUrl('create-new-payment')

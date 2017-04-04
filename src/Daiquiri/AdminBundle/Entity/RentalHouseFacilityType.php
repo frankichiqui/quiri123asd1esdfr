@@ -24,7 +24,7 @@ class RentalHouseFacilityType {
 
     /**
      * @var string
-     * @Gedmo\Translatable
+     * 
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -63,14 +63,7 @@ class RentalHouseFacilityType {
      */
     private $uniqueSlug;
 
-    /**
-     * @var string
-     *
-     * @Gedmo\Locale
-     * Used locale to override Translation listener`s locale
-     * this is not a mapped field of entity metadata, just a simple property
-     */
-    protected $locale;
+    
 
     /**
      * Get id
@@ -216,16 +209,7 @@ class RentalHouseFacilityType {
         return $this->uniqueSlug;
     }
 
-    public function setLocale($locale) {
-        $this->locale = $locale;
-
-        return $this;
-    }
-
-    public function getLocale() {
-        return $this->locale;
-    }
-
+    
     public function __toString() {
         return ($this->getTitle()) ? : '';
     }

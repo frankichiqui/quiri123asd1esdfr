@@ -1,12 +1,4 @@
 
-daiquiri_admin_transfercolective:
-    resource: "@DaiquiriAdminBundle/Resources/config/routing/transfercolective.yml"
-    prefix:   /transfercolective
-
-
-daiquiri_admin_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: DaiquiriAdminBundle:Default:index }
 
 
 daiquiri_admin_autocomplete_get_location:
@@ -40,7 +32,7 @@ daiquiri_admin_get_current_market:
     
 daiquiri_admin_set_current_market:
     path:     /market/set-current/{market}
-    defaults: { _controller: DaiquiriAdminBundle:Default:setCurrentMarket }    
+    defaults: { _controller: DaiquiriAdminBundle:Default:setCurrentMarket}    
     
 daiquiri_admin_load_form_hotel_price:
     path:     /hotelprice/load-form-by-id/{id_room}/{id_season}/{id_season_to_load}

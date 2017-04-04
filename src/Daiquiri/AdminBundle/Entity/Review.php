@@ -255,4 +255,8 @@ class Review {
         return $this->usefull;
     }
 
+    public function getProduct() {
+        return null;
+    }
+
 }

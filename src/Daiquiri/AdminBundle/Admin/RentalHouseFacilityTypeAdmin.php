@@ -14,11 +14,7 @@ class RentalHouseFacilityTypeAdmin extends AbstractAdmin {
                 ->add('title', 'text', array('label' => 'Type'))
                 ->add('icon', 'text', array('label' => 'icon'))
                 ->end()
-                ->with('Locale Block')
-                ->add('locale', 'language', array(
-                    'preferred_choices' => array('en', 'es', 'it')
-                ))
-                ->end()
+                
         ;
     }
 

@@ -45,9 +45,7 @@ class PictureUploadListener {
         $entity->setPicture($fileName);
     }
 
-    /**
-     * @ORM\PostRemove()
-     */
+   
     public function removeUpload() {
         if ($file = $this->getAbsolutePath()) {
             unlink($file);

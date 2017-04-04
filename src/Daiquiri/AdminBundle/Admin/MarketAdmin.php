@@ -24,11 +24,7 @@ class MarketAdmin extends AbstractAdmin {
                     
                 ))
                 ->end()
-                ->with('Locale Block')
-                ->add('locale', 'language', array(
-                    'preferred_choices' => array('en', 'es', 'it' )
-                ))
-                ->end()
+               
 
         ;
     }

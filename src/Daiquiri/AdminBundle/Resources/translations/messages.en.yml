@@ -1,0 +1,365 @@
+' Country': ' Country'
+' Title': ' Title'
+' Type': ' Type'
+$: $
+'%': '%'
+0: '0'
+1: '1'
+'1 Star': '1 Star'
+1-2: 1-2
+10: '10'
+10+: 10+
+11: '11'
+12: '12'
+13: '13'
+13-19: 13-19
+14: '14'
+15: '15'
+16: '16'
+17: '17'
+18: '18'
+19: '19'
+'1st Kid': '1st Kid'
+2: '2'
+'2 Star': '2 Star'
+20: '20'
+20-30: 20-30
+21: '21'
+22: '22'
+23: '23'
+24: '24'
+25: '25'
+26: '26'
+27: '27'
+28: '28'
+29: '29'
+'2nd Kid': '2nd Kid'
+3: '3'
+'3 Kid': '3 Kid'
+'3 Star': '3 Star'
+3-4: 3-4
+30: '30'
+31: '31'
+31-40: 31-40
+32: '32'
+33: '33'
+34: '34'
+35: '35'
+36: '36'
+37: '37'
+38: '38'
+39: '39'
+'3th Pax Discount ': '3th Pax Discount '
+4: '4'
+'4 Star': '4 Star'
+40: '40'
+'4th Kid': '4th Kid'
+5: '5'
+'5 Star': '5 Star'
+5-7: 5-7
+6: '6'
+7: '7'
+8: '8'
+8-12: 8-12
+9: '9'
+'AI Hotel': 'AI Hotel'
+'Aditional Remarks': 'Aditional Remarks'
+'Adult Discount': 'Adult Discount'
+'Adult Number': 'Adult Number'
+'Adult Price': 'Adult Price'
+Adults: Adults
+Airline: Airline
+'Airline Description': 'Airline Description'
+'Airline Name': 'Airline Name'
+Airport: Airport
+'Airport Description': 'Airport Description'
+'Airport Name': 'Airport Name'
+'Aldult Price': 'Aldult Price'
+'Aldult Price in dobble': 'Aldult Price in dobble'
+Area(m^2): Area(m^2)
+Automatic: Automatic
+Avatar: Avatar
+'Base Price ': 'Base Price '
+Block: Block
+Campaign: Campaign
+'Campaign Description': 'Campaign Description'
+'Cancelation Product': 'Cancelation Product'
+'Cancelation Product Description': 'Cancelation Product Description'
+'Caption Bottom': 'Caption Bottom'
+Car: Car
+'Car Capacity': 'Car Capacity'
+'Car Category Name': 'Car Category Name'
+'Car Class Name': 'Car Class Name'
+'Car Description': 'Car Description'
+'Car Name': 'Car Name'
+'Car Power': 'Car Power'
+'Car discount per day': 'Car discount per day'
+Category: Category
+Chain: Chain
+'Chain Description': 'Chain Description'
+'Chain Name': 'Chain Name'
+'Check Out Dates': 'Check Out Dates'
+'Check this if you want asocied also reverse Transfer': 'Check this if you want asocied also reverse Transfer'
+'Check this if you want generate reverse Transfer': 'Check this if you want generate reverse Transfer'
+'Child Price': 'Child Price'
+'Childrens Price': 'Childrens Price'
+Circuit: Circuit
+'Circuit Day Description': 'Circuit Day Description'
+'Circuit Day Name': 'Circuit Day Name'
+'Circuit Day Title': 'Circuit Day Title'
+'Circuit Description': 'Circuit Description'
+'Circuit Name': 'Circuit Name'
+'Circuit Season Name': 'Circuit Season Name'
+Class: Class
+'Clima Control': 'Clima Control'
+Code: Code
+'Contact Cause': 'Contact Cause'
+'Contact Cause Description': 'Contact Cause Description'
+Country: Country
+'Country Description': 'Country Description'
+'Currency Name': 'Currency Name'
+Date: Date
+'Date of Birth': 'Date of Birth'
+'Departure Destination': 'Departure Destination'
+'Departure Polo': 'Departure Polo'
+Description: Description
+Destination: Destination
+'Destination Type Place (AirPort | Hotel)': 'Destination Type Place (AirPort | Hotel)'
+Diesel: Diesel
+'Discount per pax': 'Discount per pax'
+'Discount per room': 'Discount per room'
+Driver: Driver
+'Driver Description': 'Driver Description'
+'Driver Experience( Years)': 'Driver Experience( Years)'
+'Driver Title': 'Driver Title'
+'Drivers Description': 'Drivers Description'
+'Drop-off Time': 'Drop-off Time'
+Electric: Electric
+Email: Email
+'End Date': 'End Date'
+'Excursion Colective': 'Excursion Colective'
+'Excursion Exclusive': 'Excursion Exclusive'
+'Excursion Exclusive Description': 'Excursion Exclusive Description'
+'Excursion Exclusive Name': 'Excursion Exclusive Name'
+'Excursion Name': 'Excursion Name'
+'Excursion Type': 'Excursion Type'
+'Excursion Type Description': 'Excursion Type Description'
+Experience: Experience
+'FAQ Description': 'FAQ Description'
+'FOR RENT COMPLETE ': 'FOR RENT COMPLETE '
+'Fa Icon': 'Fa Icon'
+Facilities: Facilities
+Facility: Facility
+'Facility Description': 'Facility Description'
+'Facility Icon': 'Facility Icon'
+'Facility Name': 'Facility Name'
+'Faq Description': 'Faq Description'
+'Faq Title': 'Faq Title'
+'Fav Icon': 'Fav Icon'
+Flight: Flight
+'Flight Description': 'Flight Description'
+'Flight Name': 'Flight Name'
+Flights: Flights
+Fri: Fri
+Glocation: Glocation
+Hotel: Hotel
+'Hotel Address': 'Hotel Address'
+'Hotel Description': 'Hotel Description'
+'Hotel Email': 'Hotel Email'
+'Hotel Facilities': 'Hotel Facilities'
+'Hotel Facility': 'Hotel Facility'
+'Hotel Facility Description': 'Hotel Facility Description'
+'Hotel Name': 'Hotel Name'
+'Hotel Phone Number': 'Hotel Phone Number'
+'Hotel Sales Agent Title': 'Hotel Sales Agent Title'
+'Hotel Suplements': 'Hotel Suplements'
+'Hotel Type': 'Hotel Type'
+'Hotel Type Description': 'Hotel Type Description'
+'Hotel Website': 'Hotel Website'
+Hotels: Hotels
+'Hours Duration': 'Hours Duration'
+'House Description': 'House Description'
+'House Name': 'House Name'
+Hybrid: Hybrid
+'ISO Code': 'ISO Code'
+Id: Id
+Include: Include
+Increment: Increment
+
+'Increment value in range 0 - 100% (e':
+    g:
+        ', 15)': 'Increment value in range 0 - 100% (e.g., 15)'
+
+'Individual Use ': 'Individual Use '
+
+'Keywords values can be separated using "," (e':
+    g:
+        ', beach,hotel,pool)': 'Keywords values can be separated using "," (e.g., beach,hotel,pool)'
+
+'Kid Discount ': 'Kid Discount '
+'Kid Price': 'Kid Price'
+'Kid Price dobble': 'Kid Price dobble'
+Kids: Kids
+'Kids Number': 'Kids Number'
+Lastname: Lastname
+Latitude: Latitude
+Longitude: Longitude
+'Luggage Capacity': 'Luggage Capacity'
+Manual: Manual
+Market: Market
+'Market Increment': 'Market Increment'
+Markets: Markets
+'Max Ocp': 'Max Ocp'
+'Medical Program': 'Medical Program'
+'Medical Program Description': 'Medical Program Description'
+'Medical Program Name': 'Medical Program Name'
+'Medical Service Description': 'Medical Service Description'
+'Medical Service Name': 'Medical Service Name'
+'Medical Services': 'Medical Services'
+Message: Message
+Min: Min
+'Min. Paxs': 'Min. Paxs'
+'Minimun Of Pax': 'Minimun Of Pax'
+Mon: Mon
+Name: Name
+'No': 'No'
+'Not Include': 'Not Include'
+'Number of Day': 'Number of Day'
+'Number of Doors': 'Number of Doors'
+'Ocupation 0-1': 'Ocupation 0-1'
+'Ocupation 0-2': 'Ocupation 0-2'
+'Ocupation 0-3': 'Ocupation 0-3'
+'Ocupation 0-4': 'Ocupation 0-4'
+'Ocupation 1-0': 'Ocupation 1-0'
+'Ocupation 1-1': 'Ocupation 1-1'
+'Ocupation 1-2': 'Ocupation 1-2'
+'Ocupation 1-3': 'Ocupation 1-3'
+'Ocupation 2-0': 'Ocupation 2-0'
+'Ocupation 2-1': 'Ocupation 2-1'
+'Ocupation 2-2': 'Ocupation 2-2'
+'Ocupation 3-0': 'Ocupation 3-0'
+'Ocupation 3-1': 'Ocupation 3-1'
+'Ocupation Name': 'Ocupation Name'
+'Option Description': 'Option Description'
+'Option Include': 'Option Include'
+'Option Not Include': 'Option Not Include'
+'Option Title': 'Option Title'
+Origin: Origin
+'Origin Type Place (AirPort | Hotel)': 'Origin Type Place (AirPort | Hotel)'
+Owners: Owners
+'PDF View': 'PDF View'
+'Package Description': 'Package Description'
+'Package Name': 'Package Name'
+Passport: Passport
+Phone: Phone
+'Phone 1': 'Phone 1'
+'Phone 2': 'Phone 2'
+'Pick Up Place': 'Pick Up Place'
+'Pick Up Place for Circuit': 'Pick Up Place for Circuit'
+'Pick Up Place for Excursion': 'Pick Up Place for Excursion'
+'Pick Up Place for Rent a Car': 'Pick Up Place for Rent a Car'
+'Pick Up Place for Transfer': 'Pick Up Place for Transfer'
+'Pick-up Time': 'Pick-up Time'
+'PkP CIR': 'PkP CIR'
+'PkP Car': 'PkP Car'
+'PkP EXC': 'PkP EXC'
+'PkP TFRS': 'PkP TFRS'
+'Place Description': 'Place Description'
+'Place From': 'Place From'
+'Place Latitude': 'Place Latitude'
+'Place Longitude': 'Place Longitude'
+'Place Name': 'Place Name'
+'Place To': 'Place To'
+'Place Type': 'Place Type'
+'Place Type Name': 'Place Type Name'
+'Plus For Diet FP( Per pax/nigth)': 'Plus For Diet FP( Per pax/nigth)'
+'Plus For Diet MP( Per pax/nigth)': 'Plus For Diet MP( Per pax/nigth)'
+'Polo Description': 'Polo Description'
+'Polo From': 'Polo From'
+'Polo Name': 'Polo Name'
+Polos: Polos
+'Power Doors Lock': 'Power Doors Lock'
+'Power Windows': 'Power Windows'
+'Price By Night': 'Price By Night'
+'Price For 1-2 Paxs': 'Price For 1-2 Paxs'
+'Price For 13-19 Paxs': 'Price For 13-19 Paxs'
+'Price For 20-30 Paxs': 'Price For 20-30 Paxs'
+'Price For 3-4 Paxs': 'Price For 3-4 Paxs'
+'Price For 31-40 Paxs': 'Price For 31-40 Paxs'
+'Price For 5-7 Paxs': 'Price For 5-7 Paxs'
+'Price For 8-12 Paxs': 'Price For 8-12 Paxs'
+'Price for RENT COMPLETE ': 'Price for RENT COMPLETE '
+'Price per day': 'Price per day'
+Priority: Priority
+'Product Name': 'Product Name'
+'Products Name': 'Products Name'
+'Promotion Block Four': 'Promotion Block Four'
+'Promotion Block One': 'Promotion Block One'
+'Promotion Block Three': 'Promotion Block Three'
+'Promotion Block Two': 'Promotion Block Two'
+'Promotion Main Slide': 'Promotion Main Slide'
+'Provider Description': 'Provider Description'
+'Provider Name': 'Provider Name'
+Province: Province
+'Province Description': 'Province Description'
+'Province From': 'Province From'
+'Province Name': 'Province Name'
+'Rental House': 'Rental House'
+'Rental House Room': 'Rental House Room'
+'Rental House Type': 'Rental House Type'
+'Required Document': 'Required Document'
+'Required Document Description': 'Required Document Description'
+'Review Content': 'Review Content'
+Room: Room
+'Room Description': 'Room Description'
+'Room Name': 'Room Name'
+'Room Title': 'Room Title'
+Rooms: Rooms
+'Rooms Facilities': 'Rooms Facilities'
+'Rooms Ocupations': 'Rooms Ocupations'
+Sat: Sat
+'Satart Date': 'Satart Date'
+'Satellite Navigation': 'Satellite Navigation'
+'Season Description': 'Season Description'
+'Season Name': 'Season Name'
+'Shuttle Bus to Car': 'Shuttle Bus to Car'
+Stars: Stars
+'Start Date': 'Start Date'
+'Sub Title': 'Sub Title'
+Sun: Sun
+'Suplement Date': 'Suplement Date'
+'Suplement Name': 'Suplement Name'
+Suplements: Suplements
+Symbol: Symbol
+Tag: Tag
+'Term & Condition': 'Term & Condition'
+'Term & Condition Description': 'Term & Condition Description'
+'Terminal Pickup': 'Terminal Pickup'
+'Terms & Conditions': 'Terms & Conditions'
+'The Excursion Include': 'The Excursion Include'
+'The Excursion Not Include': 'The Excursion Not Include'
+Thu: Thu
+'Tilt Steering Wheel': 'Tilt Steering Wheel'
+Title: Title
+'Title Room': 'Title Room'
+'Transfer Name': 'Transfer Name'
+Transsmission: Transsmission
+Type: Type
+'Value to US Dollar': 'Value to US Dollar'
+'Value to dollar': 'Value to dollar'
+Visible: Visible
+Votes: Votes
+Wed: Wed
+'Yes': 'Yes'
+'Zone Description': 'Zone Description'
+'Zone Name': 'Zone Name'
+address: address
+'adult Price': 'adult Price'
+'adult PriceDoble': 'adult PriceDoble'
+
+form:
+    label_roles: form.label_roles
+
+icon: icon
+'kid Price': 'kid Price'
+'kid PriceDoble': 'kid PriceDoble'

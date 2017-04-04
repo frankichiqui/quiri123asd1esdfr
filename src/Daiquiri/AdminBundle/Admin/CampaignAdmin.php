@@ -22,7 +22,7 @@ class CampaignAdmin extends AbstractAdmin {
 
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
-                ->addIdentifier('title')
+                ->add('title')
                 ->add('priority', null, array(
                     'editable' => true
                 ))
@@ -33,12 +33,7 @@ class CampaignAdmin extends AbstractAdmin {
                 ->add('type')
                 ->add('details')
                 ->add('block')
-                ->add('_action', 'actions', array(
-                    'actions' => array(
-                        'edit' => array(),
-                        'delete' => array(),
-                    )
-                ))
+                
         ;
     }
 

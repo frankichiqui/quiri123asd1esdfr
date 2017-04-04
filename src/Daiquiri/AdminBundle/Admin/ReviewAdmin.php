@@ -10,8 +10,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 class ReviewAdmin extends AbstractAdmin {
 
     public function configure() {
-        
-        $this->setTemplate("base_list_field", "SonataAdminBundle:CRUD:base_list_flat_field.html.twig");
+
+       // $this->setTemplate("base_list_field", "SonataAdminBundle:CRUD:base_list_flat_field.html.twig");
     }
 
     protected function configureFormFields(FormMapper $formMapper) {
@@ -40,7 +40,7 @@ class ReviewAdmin extends AbstractAdmin {
         $datagridMapper
                 ->add('votes')
                 ->add('createdAt')
-                ->add('product')
+                
                 ->add('show')
 
         ;
@@ -49,13 +49,14 @@ class ReviewAdmin extends AbstractAdmin {
     protected function configureListFields(ListMapper $listMapper) {
         $listMapper
                 // ->add('user', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
-                 ->addIdentifier('title')
+                ->addIdentifier('title')
                 ->add('description', 'html', array(
                     'truncate' => array(
                         'separator' => ' ...',
                         'label' => 'Review Content'
                     )
                 ))
+                ->add('product')
                 ->add('votes', null, array('editable' => true))
                 ->add('show', null, array('editable' => true))
                 ->add('createdAt', 'datetime', array('editable' => true))

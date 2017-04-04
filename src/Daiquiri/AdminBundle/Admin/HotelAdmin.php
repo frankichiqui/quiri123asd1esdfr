@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 class HotelAdmin extends AbstractAdmin {
 
     public $routeitem = 'form-ocupation-searcher';
+    protected $translationDomain = 'DaiquiriAdminBundle'; // default is 'messages'
 
     protected function configureRoutes(RouteCollection $collection) {
         $collection->add('form-set-price', $this->getRouterIdParameter() . '/form-set-price');
@@ -22,7 +23,7 @@ class HotelAdmin extends AbstractAdmin {
         $collection->add('create-ocupation-for-room', 'create-ocupation-for-room');
         $collection->add('form-ocupation-searcher', $this->getRouterIdParameter() . '/form-ocupation-searcher');
         $collection->add('find-ocupation-searcher', $this->getRouterIdParameter() . '/find-ocupation-searcher');
-        
+
         $collection->add('add-to-cart', $this->getRouterIdParameter() . '/add-to-cart');
         $collection->add('form-hotel-availability', $this->getRouterIdParameter() . '/form-hotel-availability');
         $collection->add('set-hotel-room-availability', '{room}/{date}/set-hotel-room-availability');
@@ -119,9 +120,7 @@ class HotelAdmin extends AbstractAdmin {
                 ))
                 ->add('priority')
                 ->add('available')
-                
                 ->add('reviewAvailable')
-                
                 ->end()
                 ->with('Terms & Conditions', array('class' => 'col-md-4'))
                 ->add('term_condition_hotel', 'sonata_type_model', array(
@@ -151,7 +150,7 @@ class HotelAdmin extends AbstractAdmin {
                 ->end()
                 ->with('Locale Block')
                 ->add('locale', 'language', array(
-                    'preferred_choices' => array('en', 'es', 'it' )
+                    'preferred_choices' => array('en', 'es', 'it')
                 ))
                 ->end()
         ;
@@ -190,7 +189,6 @@ class HotelAdmin extends AbstractAdmin {
                         'ocupation' => array(
                             'template' => 'DaiquiriAdminBundle:Room:list_action_ocupation.html.twig'
                         ),
-                        
                         'form-ocupation-item' => array(
                             'template' => 'DaiquiriReservationBundle:Default:book.html.twig'
                         ),
@@ -207,6 +205,8 @@ class HotelAdmin extends AbstractAdmin {
     }
 
     public function preUpdate($hotel) {
+//        dump($this);
+//        die;
         $hotel->setSeasons($hotel->getSeasons());
         $hotel->setHotelFacilities($hotel->getHotelFacilitys());
         $hotel->setHotelSalesAgents($hotel->getHotelSalesAgents());

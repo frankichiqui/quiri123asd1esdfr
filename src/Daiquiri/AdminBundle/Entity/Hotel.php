@@ -43,6 +43,18 @@ class Hotel extends Place {
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="checkin", type="string", length=255, nullable=true)
+     */
+    private $checkin;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="checkout", type="string", length=255, nullable=true)
+     */
+    private $checkout;
 
     /**
      * @var string
@@ -1324,4 +1336,52 @@ class Hotel extends Place {
         return $salida;
     }
 
+
+    /**
+     * Set checkin
+     *
+     * @param string $checkin
+     *
+     * @return Hotel
+     */
+    public function setCheckin($checkin)
+    {
+        $this->checkin = $checkin;
+
+        return $this;
+    }
+
+    /**
+     * Get checkin
+     *
+     * @return string
+     */
+    public function getCheckin()
+    {
+        return $this->checkin;
+    }
+
+    /**
+     * Set checkout
+     *
+     * @param string $checkout
+     *
+     * @return Hotel
+     */
+    public function setCheckout($checkout)
+    {
+        $this->checkout = $checkout;
+
+        return $this;
+    }
+
+    /**
+     * Get checkout
+     *
+     * @return string
+     */
+    public function getCheckout()
+    {
+        return $this->checkout;
+    }
 }

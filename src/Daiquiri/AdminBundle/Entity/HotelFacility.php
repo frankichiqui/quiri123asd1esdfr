@@ -31,13 +31,7 @@ class HotelFacility {
      */
     private $title;
 
-    /**
-     * @var string
-     *
-     * @Gedmo\Translatable
-     * @ORM\Column(name="description", type="string", length=2000, nullable=true)
-     */
-    private $description;
+    
 
     /**
      * @var \Daiquiri\AdminBundle\Entity\Hotel
@@ -136,27 +130,7 @@ class HotelFacility {
         return $this->title;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return HotelFacility
-     */
-    public function setDescription($description) {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription() {
-        return $this->description;
-    }
+    
 
     /**
      * Set slug

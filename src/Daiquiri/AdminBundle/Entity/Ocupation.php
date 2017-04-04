@@ -264,13 +264,14 @@ class Ocupation extends Product {
         //dump($this->kidpolicy);die;
         if ($season) {
             foreach ($this->kidpolicy as $kp) {
-                //dump($kp);die;
-                if ($kp->getHotelPrice()->getSeason()->getId() == $season->getId()) {
-                    $suplement = $this->getRoom()->getHotel()->getSuplementByDate($date);
-                    if ($suplement) {
-                        return $kp->getPrice() + $suplement->getTotalValue($this);
+                if ($kp->getHotelPrice()) {
+                    if ($kp->getHotelPrice()->getSeason()->getId() == $season->getId()) {
+                        $suplement = $this->getRoom()->getHotel()->getSuplementByDate($date);
+                        if ($suplement) {
+                            return $kp->getPrice() + $suplement->getTotalValue($this);
+                        }
+                        return $kp->getPrice();
                     }
-                    return $kp->getPrice();
                 }
             }
         } else {
@@ -382,7 +383,5 @@ class Ocupation extends Product {
         }
         return $salida;
     }
-
-   
 
 }

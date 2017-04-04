@@ -4,7 +4,6 @@ namespace Daiquiri\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * Review
  *
@@ -47,6 +46,10 @@ class ReviewRentalHouse extends Review {
      * @return \Daiquiri\AdminBundle\Entity\RentalHouse
      */
     public function getRentalhouse() {
+        return $this->rentalhouse;
+    }
+
+    public function getProduct() {
         return $this->rentalhouse;
     }
 

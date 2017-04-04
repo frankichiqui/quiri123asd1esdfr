@@ -20,8 +20,6 @@
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
     {% endstylesheets %}
 
-
-
     {% stylesheets '@DaiquiriReservationBundle/Resources/public/css/style.css'%}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all"/>
     {% endstylesheets %}
@@ -31,7 +29,6 @@
 {% endblock %}
 
 {% block javascripts %}
-
     {% for javascript in sonata_admin.adminPool.getOption('javascripts', []) %}
         <script src="{{ asset(javascript) }}"></script>
     {% endfor %}

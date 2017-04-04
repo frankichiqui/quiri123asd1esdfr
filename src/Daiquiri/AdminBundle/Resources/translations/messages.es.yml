@@ -1,0 +1,365 @@
+' Country': ' Pais'   
+' Title': ' Titulo'   
+' Type': ' Tipo'  
+$: $   
+'%': '%'   
+0: '0'   
+1: '1'   
+'1 Star': '1 Estrella'   # FIXME
+1-2: 1-2   # FIXME
+10: '10'   # FIXME
+10+: 10+   # FIXME
+11: '11'   # FIXME
+12: '12'   # FIXME
+13: '13'   # FIXME
+13-19: 13-19   # FIXME
+14: '14'   # FIXME
+15: '15'   # FIXME
+16: '16'   # FIXME
+17: '17'   # FIXME
+18: '18'   # FIXME
+19: '19'   # FIXME
+'1st Kid': '1er Nino'   # FIXME
+2: '2'   # FIXME
+'2 Star': '2 Estrellas'   # FIXME
+20: '20'   # FIXME
+20-30: 20-30   # FIXME
+21: '21'   # FIXME
+22: '22'   # FIXME
+23: '23'   # FIXME
+24: '24'   # FIXME
+25: '25'   # FIXME
+26: '26'   # FIXME
+27: '27'   # FIXME
+28: '28'   # FIXME
+29: '29'   # FIXME
+'2nd Kid': '2do Nino'   # FIXME
+3: '3'   # FIXME
+'3 Kid': '3er Nino '   # FIXME
+'3 Star': '3 Estrellas'   # FIXME
+3-4: 3-4   # FIXME
+30: '30'   # FIXME
+31: '31'   # FIXME
+31-40: 31-40   # FIXME
+32: '32'   # FIXME
+33: '33'   # FIXME
+34: '34'   # FIXME
+35: '35'   # FIXME
+36: '36'   # FIXME
+37: '37'   # FIXME
+38: '38'   # FIXME
+39: '39'   # FIXME
+'3th Pax Discount ': 'Descuento 3er pax '   # FIXME
+4: '4'   # FIXME
+'4 Star': '4 Estrellas'   # FIXME
+40: '40'   # FIXME
+'4th Kid': '4th Kid'   # FIXME
+5: '5'   # FIXME
+'5 Star': '5 Estrellas'   # FIXME
+5-7: 5-7   # FIXME
+6: '6'   # FIXME
+7: '7'   # FIXME
+8: '8'   # FIXME
+8-12: 8-12   # FIXME
+9: '9'   # FIXME
+'AI Hotel': 'TI Hotel'   # FIXME
+'Aditional Remarks': 'Observaciones'   # FIXME
+'Adult Discount': 'Descuento de Adulto'   # FIXME
+'Adult Number': 'Numero de Adultos'   # FIXME
+'Adult Price': 'Precio de Adulto'   # FIXME
+Adults: Adulto   # FIXME
+Airline: Aerolinea   # FIXME
+'Airline Description': 'Descripcion de Aerolinea'   # FIXME
+'Airline Name': 'Nombre de Aerolinea'   # FIXME
+Airport: Airport   # FIXME
+'Airport Description': 'Descripcion de Aeropuerto'   # FIXME
+'Airport Name': 'Nombre de Aeropuerto'   # FIXME
+'Aldult Price': 'Precio de Adulto'   # FIXME
+'Aldult Price in dobble': 'Precio de Adulto en Doble'   # FIXME
+Area(m^2): Area(m^2)   # FIXME
+Automatic: Automatico   # FIXME
+Avatar: Avatar   # FIXME
+'Base Price ': 'Precio Base '   # FIXME
+Block: Bloque   # FIXME
+Campaign: Campana   # FIXME
+'Campaign Description': 'Descripcion de Campana'   # FIXME
+'Cancelation Product': 'Politica de Cancelacion'   # FIXME
+'Cancelation Product Description': 'Nombre de Politica de Cancelacion'   # FIXME
+'Caption Bottom': 'Etiqueta de Boton'   # FIXME
+Car: Auto   # FIXME
+'Car Capacity': 'capacidad del Auto'   # FIXME
+'Car Category Name': 'categoria del Auto'   # FIXME
+'Car Class Name': 'Nombre de la Clase'   # FIXME
+'Car Description': 'Descripcion del Auto'   # FIXME
+'Car Name': 'Nombre del Auto'   # FIXME
+'Car Power': 'Car Power'   # FIXME
+'Car discount per day': 'Descuento por dia del Auto'   # FIXME
+Category: Categoria   # FIXME
+Chain: Cadena   # FIXME
+'Chain Description': 'Descripcion de la Cadena'   # FIXME
+'Chain Name': 'Nombre de la Cadena'   # FIXME
+'Check Out Dates': 'Fechas de Salida'   # FIXME
+'Check this if you want asocied also reverse Transfer': 'Activa esta casilla si el traslado es de IDA y Vuelta'   # FIXME
+'Check this if you want generate reverse Transfer': 'Check this if you want generate reverse Transfer'   # FIXME
+'Child Price': 'Child Price'   # FIXME
+'Childrens Price': 'Childrens Price'   # FIXME
+Circuit: Circuit   # FIXME
+'Circuit Day Description': 'Circuit Day Description'   # FIXME
+'Circuit Day Name': 'Circuit Day Name'   # FIXME
+'Circuit Day Title': 'Circuit Day Title'   # FIXME
+'Circuit Description': 'Circuit Description'   # FIXME
+'Circuit Name': 'Circuit Name'   # FIXME
+'Circuit Season Name': 'Circuit Season Name'   # FIXME
+Class: Class   # FIXME
+'Clima Control': 'Clima Control'   # FIXME
+Code: Code   # FIXME
+'Contact Cause': 'Contact Cause'   # FIXME
+'Contact Cause Description': 'Contact Cause Description'   # FIXME
+Country: Country   # FIXME
+'Country Description': 'Country Description'   # FIXME
+'Currency Name': 'Currency Name'   # FIXME
+Date: Date   # FIXME
+'Date of Birth': 'Date of Birth'   # FIXME
+'Departure Destination': 'Departure Destination'   # FIXME
+'Departure Polo': 'Departure Polo'   # FIXME
+Description: Description   # FIXME
+Destination: Destination   # FIXME
+'Destination Type Place (AirPort | Hotel)': 'Destination Type Place (AirPort | Hotel)'   # FIXME
+Diesel: Diesel   # FIXME
+'Discount per pax': 'Discount per pax'   # FIXME
+'Discount per room': 'Discount per room'   # FIXME
+Driver: Driver   # FIXME
+'Driver Description': 'Driver Description'   # FIXME
+'Driver Experience( Years)': 'Driver Experience( Years)'   # FIXME
+'Driver Title': 'Driver Title'   # FIXME
+'Drivers Description': 'Drivers Description'   # FIXME
+'Drop-off Time': 'Drop-off Time'   # FIXME
+Electric: Electric   # FIXME
+Email: Email   # FIXME
+'End Date': 'End Date'   # FIXME
+'Excursion Colective': 'Excursion Colective'   # FIXME
+'Excursion Exclusive': 'Excursion Exclusive'   # FIXME
+'Excursion Exclusive Description': 'Excursion Exclusive Description'   # FIXME
+'Excursion Exclusive Name': 'Excursion Exclusive Name'   # FIXME
+'Excursion Name': 'Excursion Name'   # FIXME
+'Excursion Type': 'Excursion Type'   # FIXME
+'Excursion Type Description': 'Excursion Type Description'   # FIXME
+Experience: Experience   # FIXME
+'FAQ Description': 'FAQ Description'   # FIXME
+'FOR RENT COMPLETE ': 'FOR RENT COMPLETE '   # FIXME
+'Fa Icon': 'Fa Icon'   # FIXME
+Facilities: Facilities   # FIXME
+Facility: Facility   # FIXME
+'Facility Description': 'Facility Description'   # FIXME
+'Facility Icon': 'Facility Icon'   # FIXME
+'Facility Name': 'Facility Name'   # FIXME
+'Faq Description': 'Faq Description'   # FIXME
+'Faq Title': 'Faq Title'   # FIXME
+'Fav Icon': 'Fav Icon'   # FIXME
+Flight: Flight   # FIXME
+'Flight Description': 'Flight Description'   # FIXME
+'Flight Name': 'Flight Name'   # FIXME
+Flights: Flights   # FIXME
+Fri: Fri   # FIXME
+Glocation: Glocation   # FIXME
+Hotel: Hotel   # FIXME
+'Hotel Address': 'Hotel Address'   # FIXME
+'Hotel Description': 'Hotel Description'   # FIXME
+'Hotel Email': 'Hotel Email'   # FIXME
+'Hotel Facilities': 'Hotel Facilities'   # FIXME
+'Hotel Facility': 'Hotel Facility'   # FIXME
+'Hotel Facility Description': 'Hotel Facility Description'   # FIXME
+'Hotel Name': 'Hotel Name'   # FIXME
+'Hotel Phone Number': 'Hotel Phone Number'   # FIXME
+'Hotel Sales Agent Title': 'Hotel Sales Agent Title'   # FIXME
+'Hotel Suplements': 'Hotel Suplements'   # FIXME
+'Hotel Type': 'Hotel Type'   # FIXME
+'Hotel Type Description': 'Hotel Type Description'   # FIXME
+'Hotel Website': 'Hotel Website'   # FIXME
+Hotels: Hotels   # FIXME
+'Hours Duration': 'Hours Duration'   # FIXME
+'House Description': 'House Description'   # FIXME
+'House Name': 'House Name'   # FIXME
+Hybrid: Hybrid   # FIXME
+'ISO Code': 'ISO Code'   # FIXME
+Id: Id   # FIXME
+Include: Include   # FIXME
+Increment: Increment   # FIXME
+
+'Increment value in range 0 - 100% (e':
+    g:
+        ', 15)': 'Increment value in range 0 - 100% (e.g., 15)'   # FIXME
+
+'Individual Use ': 'Individual Use '   # FIXME
+
+'Keywords values can be separated using "," (e':
+    g:
+        ', beach,hotel,pool)': 'Keywords values can be separated using "," (e.g., beach,hotel,pool)'   # FIXME
+
+'Kid Discount ': 'Kid Discount '   # FIXME
+'Kid Price': 'Kid Price'   # FIXME
+'Kid Price dobble': 'Kid Price dobble'   # FIXME
+Kids: Kids   # FIXME
+'Kids Number': 'Kids Number'   # FIXME
+Lastname: Lastname   # FIXME
+Latitude: Latitude   # FIXME
+Longitude: Longitude   # FIXME
+'Luggage Capacity': 'Luggage Capacity'   # FIXME
+Manual: Manual   # FIXME
+Market: Market   # FIXME
+'Market Increment': 'Market Increment'   # FIXME
+Markets: Markets   # FIXME
+'Max Ocp': 'Max Ocp'   # FIXME
+'Medical Program': 'Medical Program'   # FIXME
+'Medical Program Description': 'Medical Program Description'   # FIXME
+'Medical Program Name': 'Medical Program Name'   # FIXME
+'Medical Service Description': 'Medical Service Description'   # FIXME
+'Medical Service Name': 'Medical Service Name'   # FIXME
+'Medical Services': 'Medical Services'   # FIXME
+Message: Message   # FIXME
+Min: Min   # FIXME
+'Min. Paxs': 'Min. Paxs'   # FIXME
+'Minimun Of Pax': 'Minimun Of Pax'   # FIXME
+Mon: Mon   # FIXME
+Name: Name   # FIXME
+'No': 'No'   # FIXME
+'Not Include': 'Not Include'   # FIXME
+'Number of Day': 'Number of Day'   # FIXME
+'Number of Doors': 'Number of Doors'   # FIXME
+'Ocupation 0-1': 'Ocupation 0-1'   # FIXME
+'Ocupation 0-2': 'Ocupation 0-2'   # FIXME
+'Ocupation 0-3': 'Ocupation 0-3'   # FIXME
+'Ocupation 0-4': 'Ocupation 0-4'   # FIXME
+'Ocupation 1-0': 'Ocupation 1-0'   # FIXME
+'Ocupation 1-1': 'Ocupation 1-1'   # FIXME
+'Ocupation 1-2': 'Ocupation 1-2'   # FIXME
+'Ocupation 1-3': 'Ocupation 1-3'   # FIXME
+'Ocupation 2-0': 'Ocupation 2-0'   # FIXME
+'Ocupation 2-1': 'Ocupation 2-1'   # FIXME
+'Ocupation 2-2': 'Ocupation 2-2'   # FIXME
+'Ocupation 3-0': 'Ocupation 3-0'   # FIXME
+'Ocupation 3-1': 'Ocupation 3-1'   # FIXME
+'Ocupation Name': 'Ocupation Name'   # FIXME
+'Option Description': 'Option Description'   # FIXME
+'Option Include': 'Option Include'   # FIXME
+'Option Not Include': 'Option Not Include'   # FIXME
+'Option Title': 'Option Title'   # FIXME
+Origin: Origin   # FIXME
+'Origin Type Place (AirPort | Hotel)': 'Origin Type Place (AirPort | Hotel)'   # FIXME
+Owners: Owners   # FIXME
+'PDF View': 'PDF View'   # FIXME
+'Package Description': 'Package Description'   # FIXME
+'Package Name': 'Package Name'   # FIXME
+Passport: Passport   # FIXME
+Phone: Phone   # FIXME
+'Phone 1': 'Phone 1'   # FIXME
+'Phone 2': 'Phone 2'   # FIXME
+'Pick Up Place': 'Pick Up Place'   # FIXME
+'Pick Up Place for Circuit': 'Pick Up Place for Circuit'   # FIXME
+'Pick Up Place for Excursion': 'Pick Up Place for Excursion'   # FIXME
+'Pick Up Place for Rent a Car': 'Pick Up Place for Rent a Car'   # FIXME
+'Pick Up Place for Transfer': 'Pick Up Place for Transfer'   # FIXME
+'Pick-up Time': 'Pick-up Time'   # FIXME
+'PkP CIR': 'PkP CIR'   # FIXME
+'PkP Car': 'PkP Car'   # FIXME
+'PkP EXC': 'PkP EXC'   # FIXME
+'PkP TFRS': 'PkP TFRS'   # FIXME
+'Place Description': 'Place Description'   # FIXME
+'Place From': 'Place From'   # FIXME
+'Place Latitude': 'Place Latitude'   # FIXME
+'Place Longitude': 'Place Longitude'   # FIXME
+'Place Name': 'Place Name'   # FIXME
+'Place To': 'Place To'   # FIXME
+'Place Type': 'Place Type'   # FIXME
+'Place Type Name': 'Place Type Name'   # FIXME
+'Plus For Diet FP( Per pax/nigth)': 'Plus For Diet FP( Per pax/nigth)'   # FIXME
+'Plus For Diet MP( Per pax/nigth)': 'Plus For Diet MP( Per pax/nigth)'   # FIXME
+'Polo Description': 'Polo Description'   # FIXME
+'Polo From': 'Polo From'   # FIXME
+'Polo Name': 'Polo Name'   # FIXME
+Polos: Polos   # FIXME
+'Power Doors Lock': 'Power Doors Lock'   # FIXME
+'Power Windows': 'Power Windows'   # FIXME
+'Price By Night': 'Price By Night'   # FIXME
+'Price For 1-2 Paxs': 'Price For 1-2 Paxs'   # FIXME
+'Price For 13-19 Paxs': 'Price For 13-19 Paxs'   # FIXME
+'Price For 20-30 Paxs': 'Price For 20-30 Paxs'   # FIXME
+'Price For 3-4 Paxs': 'Price For 3-4 Paxs'   # FIXME
+'Price For 31-40 Paxs': 'Price For 31-40 Paxs'   # FIXME
+'Price For 5-7 Paxs': 'Price For 5-7 Paxs'   # FIXME
+'Price For 8-12 Paxs': 'Price For 8-12 Paxs'   # FIXME
+'Price for RENT COMPLETE ': 'Price for RENT COMPLETE '   # FIXME
+'Price per day': 'Price per day'   # FIXME
+Priority: Priority   # FIXME
+'Product Name': 'Product Name'   # FIXME
+'Products Name': 'Products Name'   # FIXME
+'Promotion Block Four': 'Promotion Block Four'   # FIXME
+'Promotion Block One': 'Promotion Block One'   # FIXME
+'Promotion Block Three': 'Promotion Block Three'   # FIXME
+'Promotion Block Two': 'Promotion Block Two'   # FIXME
+'Promotion Main Slide': 'Promotion Main Slide'   # FIXME
+'Provider Description': 'Provider Description'   # FIXME
+'Provider Name': 'Provider Name'   # FIXME
+Province: Province   # FIXME
+'Province Description': 'Province Description'   # FIXME
+'Province From': 'Province From'   # FIXME
+'Province Name': 'Province Name'   # FIXME
+'Rental House': 'Rental House'   # FIXME
+'Rental House Room': 'Rental House Room'   # FIXME
+'Rental House Type': 'Rental House Type'   # FIXME
+'Required Document': 'Required Document'   # FIXME
+'Required Document Description': 'Required Document Description'   # FIXME
+'Review Content': 'Review Content'   # FIXME
+Room: Room   # FIXME
+'Room Description': 'Room Description'   # FIXME
+'Room Name': 'Room Name'   # FIXME
+'Room Title': 'Room Title'   # FIXME
+Rooms: Rooms   # FIXME
+'Rooms Facilities': 'Rooms Facilities'   # FIXME
+'Rooms Ocupations': 'Rooms Ocupations'   # FIXME
+Sat: Sat   # FIXME
+'Satart Date': 'Satart Date'   # FIXME
+'Satellite Navigation': 'Satellite Navigation'   # FIXME
+'Season Description': 'Season Description'   # FIXME
+'Season Name': 'Season Name'   # FIXME
+'Shuttle Bus to Car': 'Shuttle Bus to Car'   # FIXME
+Stars: Stars   # FIXME
+'Start Date': 'Start Date'   # FIXME
+'Sub Title': 'Sub Title'   # FIXME
+Sun: Sun   # FIXME
+'Suplement Date': 'Suplement Date'   # FIXME
+'Suplement Name': 'Suplement Name'   # FIXME
+Suplements: Suplements   # FIXME
+Symbol: Symbol   # FIXME
+Tag: Tag   # FIXME
+'Term & Condition': 'Term & Condition'   # FIXME
+'Term & Condition Description': 'Term & Condition Description'   # FIXME
+'Terminal Pickup': 'Terminal Pickup'   # FIXME
+'Terms & Conditions': 'Terms & Conditions'   # FIXME
+'The Excursion Include': 'The Excursion Include'   # FIXME
+'The Excursion Not Include': 'The Excursion Not Include'   # FIXME
+Thu: Thu   # FIXME
+'Tilt Steering Wheel': 'Tilt Steering Wheel'   # FIXME
+Title: Title   # FIXME
+'Title Room': 'Title Room'   # FIXME
+'Transfer Name': 'Transfer Name'   # FIXME
+Transsmission: Transsmission   # FIXME
+Type: Type   # FIXME
+'Value to US Dollar': 'Value to US Dollar'   # FIXME
+'Value to dollar': 'Value to dollar'   # FIXME
+Visible: Visible   # FIXME
+Votes: Votes   # FIXME
+Wed: Wed   # FIXME
+'Yes': 'Yes'   # FIXME
+'Zone Description': 'Zone Description'   # FIXME
+'Zone Name': 'Zone Name'   # FIXME
+address: address   # FIXME
+'adult Price': 'adult Price'   # FIXME
+'adult PriceDoble': 'adult PriceDoble'   # FIXME
+
+form:
+    label_roles: form.label_roles   # FIXME
+
+icon: icon   # FIXME
+'kid Price': 'kid Price'   # FIXME
+'kid PriceDoble': 'kid PriceDoble'   # FIXME

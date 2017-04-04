@@ -1,4 +1,4 @@
-services:
+services:    
  acme_demo.type.entity_hidden:
    class: Daiquiri\AdminBundle\Form\Type\EntityHiddenType
    arguments: ["@doctrine.orm.entity_manager"]
@@ -18,7 +18,9 @@ services:
  campaign:
    class: Daiquiri\AdminBundle\Controller\CampaignController   
    tags:
-   - { name: form.type, alias: campaign }  
+   - { name: form.type, alias: campaign } 
+   
+
      
    
 

@@ -63,7 +63,7 @@ class AirportAdmin extends AbstractAdmin {
                 ->add('picture', 'string', array('template' => 'SonataMediaBundle:MediaAdmin:list_image.html.twig'))
                 ->addIdentifier('title')
                 ->add('phone')
-                ->add('adddress')
+                ->add('address')
                 ->add('polo')
                 ->add('description', 'html', array(
                     'truncate' => array(

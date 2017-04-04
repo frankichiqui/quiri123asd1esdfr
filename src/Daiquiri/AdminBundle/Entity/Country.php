@@ -58,7 +58,7 @@ class Country {
     /**
      * @var string
      * @Gedmo\Translatable
-     * @ORM\Column(name="description", type="string", length=2000, nullable=true)
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
