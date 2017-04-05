@@ -15,7 +15,7 @@ $('.countdown').each(function () {
     $(this).countdown({
         zeroCallback: function (options) {
             var newDate = new Date(),
-                    newDate = newDate.setHours(newDate.getHours() + 130);
+                newDate = newDate.setHours(newDate.getHours() + 130);
 
             $(count).attr("data-countdown", newDate);
             $(count).countdown({
@@ -32,7 +32,7 @@ $("[rel='tooltip']").tooltip();
 
 $('.form-group').each(function () {
     var self = $(this),
-            input = self.find('input');
+        input = self.find('input');
 
     input.focus(function () {
         self.addClass('form-group-focus');
@@ -104,38 +104,38 @@ $('input.date-pick-years').datepicker({
 
 $('.booking-item-price-calc .checkbox label').click(function () {
     var checkbox = $(this).find('input'),
-            // checked = $(checkboxDiv).hasClass('checked'),
-            checked = $(checkbox).prop('checked'),
-            price = parseInt($(this).find('span.pull-right').html().replace('$', '')),
-            eqPrice = $('#car-equipment-total'),
-            tPrice = $('#car-total'),
-            eqPriceInt = parseInt(eqPrice.attr('data-value')),
-            tPriceInt = parseInt(tPrice.attr('data-value')),
-            value,
-            animateInt = function (val, el, plus) {
-                value = function () {
-                    if (plus) {
-                        return el.attr('data-value', val + price);
-                    } else {
-                        return el.attr('data-value', val - price);
-                    }
-                };
-                return $({
-                    val: val
-                }).animate({
-                    val: parseInt(value().attr('data-value'))
-                }, {
-                    duration: 500,
-                    easing: 'swing',
-                    step: function () {
-                        if (plus) {
-                            el.text(Math.ceil(this.val));
-                        } else {
-                            el.text(Math.floor(this.val));
-                        }
-                    }
-                });
+    // checked = $(checkboxDiv).hasClass('checked'),
+        checked = $(checkbox).prop('checked'),
+        price = parseInt($(this).find('span.pull-right').html().replace('$', '')),
+        eqPrice = $('#car-equipment-total'),
+        tPrice = $('#car-total'),
+        eqPriceInt = parseInt(eqPrice.attr('data-value')),
+        tPriceInt = parseInt(tPrice.attr('data-value')),
+        value,
+        animateInt = function (val, el, plus) {
+            value = function () {
+                if (plus) {
+                    return el.attr('data-value', val + price);
+                } else {
+                    return el.attr('data-value', val - price);
+                }
             };
+            return $({
+                val: val
+            }).animate({
+                val: parseInt(value().attr('data-value'))
+            }, {
+                duration: 500,
+                easing: 'swing',
+                step: function () {
+                    if (plus) {
+                        el.text(Math.ceil(this.val));
+                    } else {
+                        el.text(Math.floor(this.val));
+                    }
+                }
+            });
+        };
     if (!checked) {
         animateInt(eqPriceInt, eqPrice, true);
         animateInt(tPriceInt, tPrice, true);
@@ -166,65 +166,67 @@ $('div.bg-parallax').each(function () {
 
 
 
+
 $(document).ready(
-        function () {
-            $('html').niceScroll({
-                cursorcolor: "#000",
-                cursorborder: "0px solid #fff",
-                railpadding: {
-                    top: 0,
-                    right: 0,
-                    left: 0,
-                    bottom: 0
-                },
-                cursorwidth: "10px",
-                cursorborderradius: "0px",
-                cursoropacitymin: 0.2,
-                cursoropacitymax: 0.8,
-                boxzoom: true,
-                horizrailenabled: false,
-                zindex: 9999
-            });
-            // Owl Carousel
-            var owlCarousel = $('#owl-carousel'),
-                    owlItems = owlCarousel.attr('data-items'),
-                    owlCarouselSlider = $('#owl-carousel-slider'),
-                    owlNav = owlCarouselSlider.attr('data-nav');
-            // owlSliderPagination = owlCarouselSlider.attr('data-pagination');
+    function () {
+        $('html').niceScroll({
+            cursorcolor: "#000",
+            cursorborder: "0px solid #fff",
+            railpadding: {
+                top: 0,
+                right: 0,
+                left: 0,
+                bottom: 0
+            },
+            cursorwidth: "10px",
+            cursorborderradius: "0px",
+            cursoropacitymin: 0.2,
+            cursoropacitymax: 0.8,
+            boxzoom: true,
+            horizrailenabled: false,
+            zindex: 9999
+        });
+        // Owl Carousel
+        var owlCarousel = $('#owl-carousel'),
+            owlItems = owlCarousel.attr('data-items'),
+            owlCarouselSlider = $('#owl-carousel-slider'),
+            owlNav = owlCarouselSlider.attr('data-nav');
+        // owlSliderPagination = owlCarouselSlider.attr('data-pagination');
 
-            owlCarousel.owlCarousel({
-                items: owlItems,
-                navigation: true,
-                navigationText: ['', '']
-            });
+        owlCarousel.owlCarousel({
+            items: owlItems,
+            navigation: true,
+            navigationText: ['', '']
+        });
 
-            owlCarouselSlider.owlCarousel({
-                slideSpeed: 300,
-                paginationSpeed: 400,
-                // pagination: owlSliderPagination,
-                singleItem: true,
-                navigation: true,
-                navigationText: ['', ''],
-                transitionStyle: 'fade',
-                autoPlay: 4500
-            });
+        owlCarouselSlider.owlCarousel({
+            slideSpeed: 300,
+            paginationSpeed: 400,
+            // pagination: owlSliderPagination,
+            singleItem: true,
+            navigation: true,
+            navigationText: ['', ''],
+            transitionStyle: 'fade',
+            autoPlay: 4500
+        });
 
 
-            // footer always on bottom
-            var docHeight = $(window).height();
-            var footerHeight = $('#main-footer').height();
-            var footerTop = $('#main-footer').position().top + footerHeight;
+        // footer always on bottom
+        var docHeight = $(window).height();
+        var footerHeight = $('#main-footer').height();
+        var footerTop = $('#main-footer').position().top + footerHeight;
 
-            if (footerTop < docHeight) {
-                $('#main-footer').css('margin-top', (docHeight - footerTop) + 'px');
-            }
+        if (footerTop < docHeight) {
+            $('#main-footer').css('margin-top', (docHeight - footerTop) + 'px');
         }
+    }
 
 
 );
 
 
 $('.nav-drop').dropit();
+
 
 
 $("#price-slider").ionRangeSlider({
@@ -257,8 +259,8 @@ $('.booking-item-review-expand').click(function (event) {
 
 $('.stats-list-select > li > .booking-item-rating-stars > li').each(function () {
     var list = $(this).parent(),
-            listItems = list.children(),
-            itemIndex = $(this).index();
+        listItems = list.children(),
+        itemIndex = $(this).index();
 
     $(this).hover(function () {
         for (var i = 0; i < listItems.length; i++) {
@@ -314,7 +316,7 @@ $('.form-group-cc-cvc input').payment('formatCardCVC');
 jQuery(function ($) {
     if ($('#map-canvas').length) {
         var map,
-                service;
+            service;
         var latitude = $('#latitude').val();
         var longitude = $('#longitude').val();
         $(document).ready(function () {
@@ -437,8 +439,8 @@ $('.popup-iframe').magnificPopup({
 
 $('.form-group-select-plus').each(function () {
     var self = $(this),
-            btnGroup = self.find('.btn-group').first(),
-            select = self.find('select');
+        btnGroup = self.find('.btn-group').first(),
+        select = self.find('select');
     btnGroup.children('label').last().click(function () {
         btnGroup.addClass('hidden');
         select.removeClass('hidden');
@@ -564,6 +566,11 @@ function abortTimer() { // to be called when you want to stop the timer
     clearInterval(tid);
 }
 
+/************************
+ * FILTERS VIEWS FUNCTIONS
+ * **********************/
+
+
 
 var filters = {
 
@@ -603,7 +610,6 @@ var filters = {
      *
      * Executing filter
      * @param string entity | values ('hotels', 'circuits', 'transfers')
-     * @param string url
      *
      **/
     launchFilter: function (entity, url) {
@@ -630,20 +636,14 @@ var filters = {
                 }
             });
         });
-    },
-
-    getHotelsDataFilter: function () {
-        
-    },
-    getCircuitsDataFilter: function () {
-
-    },
-    getTransfersDataFilter: function () {
-
-
-    },
-    getRating: function () {
-        var rating = $('#filter-rating ')
     }
-    
 }
+
+$(document).ajaxComplete(function(event, xhr, settings) {
+    var url = settings.url;
+    var substr = "en/hotels/ajax/";
+    if (url.match(substr)) {
+        $('.nav-drop').dropit();
+
+    }
+});

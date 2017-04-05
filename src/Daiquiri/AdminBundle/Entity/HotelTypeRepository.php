@@ -10,4 +10,15 @@ namespace Daiquiri\AdminBundle\Entity;
  */
 class HotelTypeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getHotelsTypes(){
+        $dql = "SELECT ht as type,
+                  (SELECT count(hoteles) FROM DaiquiriAdminBundle:Hotel hoteles where hoteles.hotelType = ht) as cantType            
+                FROM DaiquiriAdminBundle:HotelType ht";
+
+        $query = $this->getEntityManager()->createQuery($dql)
+            ->getResult();
+
+        return $query;
+    }
 }
+
