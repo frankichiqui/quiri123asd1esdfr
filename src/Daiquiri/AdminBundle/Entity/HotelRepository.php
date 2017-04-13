@@ -19,15 +19,15 @@ class HotelRepository extends \Doctrine\ORM\EntityRepository {
         $query->setParameter(1, $id_province);
         return $query->getResult();
     }
-     public function getHotelsByPolo($id_polo = null) {
-         if(!$id_polo || $id_polo < 0){
-             return new \Doctrine\Common\Collections\ArrayCollection();
-         }
+    public function getHotelsByPolo($id_polo = null) {
+        if(!$id_polo || $id_polo < 0){
+            return new \Doctrine\Common\Collections\ArrayCollection();
+        }
         $q = 'SELECT rh FROM DaiquiriAdminBundle:Hotel rh JOIN rh.zone z JOIN z.province p JOIN p.polos po WHERE po.id = ?1';
         $query = $this->getEntityManager()->createQuery($q);
         $query->setParameter(1, $id_polo);
         return $query->getResult();
-        
+
     }
 
 }

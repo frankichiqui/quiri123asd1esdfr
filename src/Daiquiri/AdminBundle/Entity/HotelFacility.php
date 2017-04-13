@@ -31,7 +31,13 @@ class HotelFacility {
      */
     private $title;
 
-    
+    /**
+     * @var string
+     *
+     * @Gedmo\Translatable
+     * @ORM\Column(name="description", type="string", length=2000, nullable=true)
+     */
+    private $description;
 
     /**
      * @var \Daiquiri\AdminBundle\Entity\Hotel
@@ -42,6 +48,17 @@ class HotelFacility {
      * })
      */
     private $hotel;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Daiquiri\AdminBundle\Entity\Hotel", mappedBy="hotelIdFacility")
+     */
+    private $hotels;
+
+
+
 
     /**
      * @var string
@@ -89,7 +106,7 @@ class HotelFacility {
      * this is not a mapped field of entity metadata, just a simple property
      */
     protected $locale;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="RentalHouseFacilityType", inversedBy="hotelfacility")
      * @ORM\JoinColumn(name="hotelfacilitytype_id", referencedColumnName="id")
@@ -105,8 +122,8 @@ class HotelFacility {
     public function getId() {
         return $this->id;
     }
-    
-   
+
+
 
     /**
      * Set title
@@ -130,7 +147,27 @@ class HotelFacility {
         return $this->title;
     }
 
-    
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return HotelFacility
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription() {
+        return $this->description;
+    }
 
     /**
      * Set slug
@@ -176,7 +213,7 @@ class HotelFacility {
         return $this->uniqueSlug;
     }
 
-    
+
 
     /**
      * Set picture
@@ -283,5 +320,46 @@ class HotelFacility {
     public function getHotelfacilitytype()
     {
         return $this->hotelfacilitytype;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hotels = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add hotel
+     *
+     * @param \Daiquiri\AdminBundle\Entity\Hotel $hotel
+     *
+     * @return HotelFacility
+     */
+    public function addHotel(\Daiquiri\AdminBundle\Entity\Hotel $hotel)
+    {
+        $this->hotels[] = $hotel;
+
+        return $this;
+    }
+
+    /**
+     * Remove hotel
+     *
+     * @param \Daiquiri\AdminBundle\Entity\Hotel $hotel
+     */
+    public function removeHotel(\Daiquiri\AdminBundle\Entity\Hotel $hotel)
+    {
+        $this->hotels->removeElement($hotel);
+    }
+
+    /**
+     * Get hotels
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHotels()
+    {
+        return $this->hotels;
     }
 }

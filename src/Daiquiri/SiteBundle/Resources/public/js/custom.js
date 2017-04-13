@@ -574,8 +574,14 @@ function abortTimer() { // to be called when you want to stop the timer
 
 var filters = {
 
+    route : "",
+    entity: "",
+
     onReady: function () {
         this.toggleRadios();
+        this.clearAllSort();
+        this.launchSort();
+        this.launchClearAllFilters();
     },
 
     /**
@@ -613,11 +619,19 @@ var filters = {
      *
      **/
     launchFilter: function (entity, url) {
+        this.route = url;
         $('#exec-filter').on("click", function () {
 
             switch (entity){
                 case 'hotels':
-                    var data = {"idType": 1};
+                    var rating = filters.getRatingSelected();
+                    var type = filters.getTypeSelected();
+                    var sort = filters.getSortSelected();
+                    var data = {
+                        "idType": type,
+                        "rating": rating,
+                        "sort" : sort
+                    };
                     break;
                 case 'circuits':
 
@@ -636,7 +650,72 @@ var filters = {
                 }
             });
         });
+    },
+
+
+    getRatingSelected: function () {
+        var rating = -1;
+        var $ratingSelected = $('#filter-rating .i-radio.checked .i-radio');
+        if ($ratingSelected.length){
+            rating = $ratingSelected.data('stars');
+        }
+        return rating;
+    },
+
+    getTypeSelected: function () {
+        var idType = -1;
+        var $radioSelected = $('#filter-hotel-types .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            idType = $radioSelected.data('idtype');
+        }
+        return idType;
+    },
+
+
+    getSortSelected: function() {
+        var sort = -1;
+        var $sortSelected = $('li.sortSelected');
+        if ($sortSelected.length){
+            sort = $sortSelected.data('sort');
+        }
+        return sort;
+    },
+
+    launchSort: function(){
+        $('.booking-sort li').click(function(){
+            $(this).addClass('sortSelected');
+            $('#exec-filter').trigger('click');
+        });
+    },
+
+    clearAllSort: function(){
+        $('li.sortSelected').each(function(){
+            $(this).removeClass('sortSelected');
+        });
+    },
+
+    clearAllFilters: function(){
+        $('.i-radio.checked').each(function(){
+            $(this).removeClass('checked');
+            $('#exec-filter').trigger('click');
+        });
+    },
+
+    launchClearAllFilters: function(){
+        $('#clear-filters').click(function(){
+            if (filters.route != "" && filters.entity != ""){
+                filters.clearAllFilters();
+                filters.clearAllSort();
+                filters.launchFilter(filters.entity, filters.route);
+            }
+            else{
+                filters.clearAllFilters();
+                filters.clearAllSort();
+            }
+
+        });
     }
+
 }
 
 $(document).ajaxComplete(function(event, xhr, settings) {
@@ -644,6 +723,20 @@ $(document).ajaxComplete(function(event, xhr, settings) {
     var substr = "en/hotels/ajax/";
     if (url.match(substr)) {
         $('.nav-drop').dropit();
+        filters.clearAllSort();
+        filters.launchSort();
+        filters.launchClearAllFilters();
 
+        // Lighbox text
+        $('.popup-text').magnificPopup({
+            removalDelay: 500,
+            closeBtnInside: true,
+            callbacks: {
+                beforeOpen: function () {
+                    this.st.mainClass = this.st.el.attr('data-effect');
+                }
+            },
+            midClick: true
+        });
     }
 });

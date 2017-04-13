@@ -10,4 +10,14 @@ namespace Daiquiri\AdminBundle\Entity;
  */
 class HotelFacilityRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getHotelsFacilities(){
+        $dql = "SELECT DISTINCT ht.title as facility,
+                  (SELECT count(hoteles) FROM DaiquiriAdminBundle:Hotel hoteles where hoteles.hotelIdFacility = ht) as cantTypeFacility            
+                FROM DaiquiriAdminBundle:HotelFacility ht";
+
+        $query = $this->getEntityManager()->createQuery($dql)
+            ->getResult();
+
+        return $query;
+    }
 }

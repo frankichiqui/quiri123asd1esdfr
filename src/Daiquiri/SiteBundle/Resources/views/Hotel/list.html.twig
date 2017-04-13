@@ -11,108 +11,83 @@
 
         {% if salida.haveToPaginate %}
             <h3 class="booking-title">{{ salida | length }} {{ 'Hotels availables' | trans({}, 'hotel') }}<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Change search' | trans({}, 'hotel') }}</a></small></h3>
-                {% else %}
+        {% else %}
             <h3 class="booking-title">{% if salida | length < 0 %}{{ salida | length }} {{ 'Hotels' | trans({}, 'hotel') }}{% else %}{{ salida | length }} {{ 'Hotels availables' | trans({}, 'hotel') }}{% endif %}<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Change search' | trans({}, 'hotel') }}</a></small></h3>
-                {% endif %}
+        {% endif %}
         <div class="row">
             <div class="col-md-3">
+                <div class="row">
+                    <div class="col-xs-12" style="padding-bottom: 10px">
+                        <button class="btn btn-default" id="exec-filter">Filter</button>
+                        <button class="btn btn-default" id="clear-filters">Clear Filters</button>
+                    </div>
+                </div>
+
+
                 <aside class="booking-filters text-white">
                     <h3>Filter By:</h3>
                     <ul class="list booking-filters-list">
                         <li>
                             <h5 class="booking-filters-title">Star Rating</h5>
                             <div id="filter-rating" class="radio-group">
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />5 star (220)</label>
+                                <div class="radio">
+                                    <label>
+                                        <input data-stars="5" class="i-radio" type="radio" />5 stars ({{ stars[5] }})</label>
                                     <input type="hidden" value="5">
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />4 star (112)</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input data-stars="4" class="i-radio" type="radio" />4 star ({{ stars[4] }})</label>
                                     <input type="hidden" value="5">
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />3 star (75)</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input data-stars="3" class="i-radio" type="radio" />3 star ({{ stars[3] }})</label>
                                     <input type="hidden" value="5">
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />2 star (60)</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input data-stars="2" class="i-radio" type="radio" />2 star ({{ stars[2] }})</label>
                                     <input type="hidden" value="5">
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />1 star (20)</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input data-stars="1" class="i-radio" type="radio" />1 star ({{ stars[1] }})</label>
                                     <input type="hidden" value="5">
-                            </div>
+                                </div>
 
                             </div>
                         </li>
                         <li>
-                            <h5 class="booking-filters-title">Attractions</h5>
-                            <div class="radio-group">
-                            {% for filter in filters %}
-                                <div class="radio">
-                                    <label>
-                                        <input data-idType="{{ filter.type.id }}" class="i-radio" type="radio" />{{ filter.type~' ('~filter.cantType~')' }}</label>
-                                        <input type="hidden" value="{{ filter.type }}">
-                                </div>
-                            {% endfor %}
+                            <h5 class="booking-filters-title">Hotel Types</h5>
+                            <div id="filter-hotel-types" class="radio-group">
+                                {% for hotelType in hotelTypes %}
+                                    <div class="radio">
+                                        <label>
+                                            <input data-idType="{{ hotelType.type.id }}" class="i-radio" type="radio" />{{ hotelType.type~' ('~hotelType.cantType~')' }}</label>
+                                        <input type="hidden" value="{{ hotelType.type }}">
+                                    </div>
+                                {% endfor %}
                             </div>
 
-                            <button class="btn btn-default" id="exec-filter">Filter</button>
-                        </li>
-                        <li>
-                            <h5 class="booking-filters-title">Activities</h5>
-                            <div class="radio-group">
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Sightseeing Tours (184)</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Wellness & Spas (130)</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Food & Drink (40)</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Adventure (15)</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Classes (34)</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Gear Rentals (10)</label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input class="i-radio" type="radio" />Ranch & Farm (1)</label>
-                            </div>
-                                </div>
-                        </li>
-                        <li>
-                            <h5 class="booking-filters-title">Nightlife</h5>
-                            <div class="radio-group">
-                                <div class="radio">
-                                    <label>
-                                        <input class="i-radio" type="radio" />Bars (115)</label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input class="i-radio" type="radio" />Clubs (63)</label>
-                                </div>
-                            </div>
 
+                        </li>
+                        <li>
+                            <h5 class="booking-filters-title">Facilities</h5>
+                            <div class="radio-group">
+
+                                    {% for hotelFacility in hotelFacilities %}
+                                        <div class="radio">
+                                            <label>
+                                                <input class="i-radio" type="radio" />{{ hotelFacility.facility }} ({{ hotelFacility.cantTypeFacility }})
+                                            </label>
+                                        </div>
+                                    {% endfor %}
                         </li>
                     </ul>
                 </aside>
+
+
             </div>
             <div class="col-md-9">
                 <div id="ajax-hotels">
@@ -135,7 +110,6 @@
 
     </script>
 {% endblock %}
-
 
 
 

@@ -28,8 +28,8 @@ class OcupationSearcherController extends Controller {
         $form = $this->createCreateForm($entity);
 
         return $this->render('DaiquiriSiteBundle:Hotel:form.html.twig', array(
-                    'entity' => $entity,
-                    'form' => $form->createView(),
+            'entity' => $entity,
+            'form' => $form->createView(),
         ));
     }
 
@@ -37,8 +37,8 @@ class OcupationSearcherController extends Controller {
 
         $repository = $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Hotel');
         $query = $repository->createQueryBuilder('h')
-                ->where('h.available = TRUE')
-                ->orderBy('h.priority', 'ASC');
+            ->where('h.available = TRUE')
+            ->orderBy('h.priority', 'ASC');
 
         $adapter = new DoctrineORMAdapter($query);
         $pagerfanta = new Pagerfanta($adapter);
@@ -49,28 +49,45 @@ class OcupationSearcherController extends Controller {
             throw new NotFoundHttpException();
         }
 
+        $allHotels = $query->getQuery()->getResult();
+        $stars = array(
+            0 => 0,
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0,
+        );
+
+        foreach ($allHotels as $key => $hotel) {
+            $starAvg = $hotel->getAverageVotes();
+            $starAvg = (int)$starAvg;
+            $stars[$starAvg] = $stars[$starAvg] + 1;
+        }
 
         return $this->render('DaiquiriSiteBundle:Hotel:list.html.twig', array(
             'salida' => $pagerfanta,
-            'filters' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelType')->getHotelsTypes(),
+            'stars' => $stars,
+            'hotelFacilities' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelFacility')->getHotelsFacilities(),
+            'hotelTypes' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelType')->getHotelsTypes(),
         ));
     }
 
-    public function listAjaxByTypeAction($page = 1) {
+    public function listAjaxFilterAction($page = 1) {
         $idType = $this->container->get('request_stack')->getCurrentRequest()->get("idType");
-        
-        $repository = $this->getDoctrine()
-            ->getRepository('DaiquiriAdminBundle:Hotel');
-        $query = $repository->createQueryBuilder('h')
-            ->where('h.available = TRUE')
-            ->andWhere('h.hotelType = :idType')
-            ->orderBy('h.priority', 'ASC')
-            ->setParameter("idType",$idType)
-            ->getQuery();
+        $rating = $this->container->get('request_stack')->getCurrentRequest()->get("rating");
+        $sort = $this->container->get('request_stack')->getCurrentRequest()->get("sort");
+        $filterVars = array(
+            'type' => $idType,
+            'rating' => $rating,
+            'sort' => $sort
+        );
+
+        $query = $this->resolveHotelFilter($filterVars);
 
         $adapter = new DoctrineORMAdapter($query);
         $pagerfanta = new Pagerfanta($adapter);
-            $pagerfanta->setMaxPerPage(100);
+        $pagerfanta->setMaxPerPage(100);
         try {
             $pagerfanta->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
@@ -84,16 +101,55 @@ class OcupationSearcherController extends Controller {
         ));
     }
 
+    public function resolveHotelFilter($filterVars){
+        $repository = $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Hotel');
+        $idType = $filterVars['type'];
+        $rating = $filterVars['rating'];
+        $sort =  $filterVars['sort'];
+
+        $query = $repository->createQueryBuilder('h')
+            ->where('h.available = TRUE');
+
+        if ($idType != -1){
+            $query->andWhere('h.hotelType = :idType')
+                ->setParameter("idType", $idType);
+        }
+
+        if ($rating != -1){
+            $query->andWhere('h.avgReviews = :rating')
+                ->setParameter("rating", $rating);
+        }
+
+
+        if ($sort != -1){
+            switch ($sort) {
+                case 1:
+                    $query->orderBy('h.title', 'ASC');
+                    break;
+                case 2:
+                    $query->orderBy('h.title', 'DESC');
+                    break;
+                case 3:
+                    $query->orderBy('h.reviews', 'ASC');
+                    break;
+            }
+        }
+
+
+        return $query->getQuery();
+
+    }
+
     public function listByPoloAction($polo, $page) {
         $em = $this->getDoctrine()->getManager();
         $polo = $em->getRepository('DaiquiriAdminBundle:Polo')->findOneBySlug($polo);
         $repository = $this->getDoctrine()
-                ->getRepository('DaiquiriAdminBundle:Hotel');
+            ->getRepository('DaiquiriAdminBundle:Hotel');
         $query = $repository->createQueryBuilder('h')
-                ->where('h.available = TRUE AND h.polo = :polo')
-                ->orderBy('h.priority', 'ASC')
-                ->setParameter('polo', $polo)
-                ->getQuery();
+            ->where('h.available = TRUE AND h.polo = :polo')
+            ->orderBy('h.priority', 'ASC')
+            ->setParameter('polo', $polo)
+            ->getQuery();
         $adapter = new DoctrineORMAdapter($query);
         $pagerfanta = new Pagerfanta($adapter);
         //$pagerfanta->setMaxPerPage(1);
@@ -106,8 +162,8 @@ class OcupationSearcherController extends Controller {
         //dump($pagerfanta);die;
 
         return $this->render('DaiquiriSiteBundle:Hotel:list.html.twig', array(
-                    'salida' => $pagerfanta,
-                    'polo' => $polo
+            'salida' => $pagerfanta,
+            'polo' => $polo
         ));
     }
 
@@ -130,8 +186,8 @@ class OcupationSearcherController extends Controller {
         $request->request->set('_route_params', array('_locale' => $request->getLocale()));
         $request->request->set('_sonata_admin', 'admin.ocupation.searcher');
         return $this->forward('DaiquiriReservationBundle:OcupationSearcher:initSearcher', array(
-                    'page' => $page,
-                    'view_render' => 'DaiquiriSiteBundle:Hotel:search_result.html.twig',
+            'page' => $page,
+            'view_render' => 'DaiquiriSiteBundle:Hotel:search_result.html.twig',
         ));
     }
 
@@ -141,7 +197,7 @@ class OcupationSearcherController extends Controller {
 
 
         return $this->render('DaiquiriSiteBundle:Hotel:sub_menu.html.twig', array(
-                    'list' => $polos
+            'list' => $polos
         ));
     }
 
@@ -181,11 +237,11 @@ class OcupationSearcherController extends Controller {
         $entity->setHotel($hotel);
         $form = $this->createCreateForm($entity);
         return $this->render('DaiquiriSiteBundle:Hotel:show.html.twig', array(
-                    'hotel' => $hotel,
-                    'similar' => $this->getDoctrine()->getManager()->getRepository('DaiquiriAdminBundle:Hotel')->findBy(array('stars' => $hotel->getStars(),
-                    )),
-                    //'review' => $hotel->getReviews(),
-                    'form_search' => $form->createView()));
+            'hotel' => $hotel,
+            'similar' => $this->getDoctrine()->getManager()->getRepository('DaiquiriAdminBundle:Hotel')->findBy(array('stars' => $hotel->getStars(),
+            )),
+            //'review' => $hotel->getReviews(),
+            'form_search' => $form->createView()));
     }
 
     public function searchIntoshowAction(Request $request, $page, $slug) {
@@ -201,18 +257,18 @@ class OcupationSearcherController extends Controller {
             $session = $request->getSession();
             $session->set('searcher', $entity->getId());
             return $this->forward('DaiquiriReservationBundle:OcupationSearcher:initSearcher', array(
-                        'page' => $page,
-                        '_route' => $request->get('_route'),
-                        '_route_params' => $request->get('_route_params'),
-                        '_locale' => $request->get('_locale'),
-                        '_sonata_admin' => 'admin.ocupation.searcher',
-                        'view_render' => 'DaiquiriSiteBundle:Hotel:show.html.twig',
-                        'other' => array(
-                            'hotel' => $entity->getHotel(),
-                            'similar' => $this->getDoctrine()->getManager()->getRepository('DaiquiriAdminBundle:Hotel')->findBy(array('stars' => $entity->getHotel()->getStars())),
-                            'form_search' => $form->createView()))
-                    )
-            ;
+                    'page' => $page,
+                    '_route' => $request->get('_route'),
+                    '_route_params' => $request->get('_route_params'),
+                    '_locale' => $request->get('_locale'),
+                    '_sonata_admin' => 'admin.ocupation.searcher',
+                    'view_render' => 'DaiquiriSiteBundle:Hotel:show.html.twig',
+                    'other' => array(
+                        'hotel' => $entity->getHotel(),
+                        'similar' => $this->getDoctrine()->getManager()->getRepository('DaiquiriAdminBundle:Hotel')->findBy(array('stars' => $entity->getHotel()->getStars())),
+                        'form_search' => $form->createView()))
+            )
+                ;
         }
         $this->addFlash('error', 'data is invalid');
         return $this->showAction($slug);
@@ -230,15 +286,22 @@ class OcupationSearcherController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            //Setear el average
+            $hotel = $entity->getHotel();
+            $hotel->setAvgReviews($hotel->getAverageVotes());
+            $em->persist($hotel);
+            $em->flush();
+
             return new \Symfony\Component\HttpFoundation\Response(json_encode(array(
-                        'success' => true,
-                        'class' => 'alert-success',
+                'success' => true,
+                'class' => 'alert-success',
             )));
         }
 
         return new \Symfony\Component\HttpFoundation\Response(json_encode(array(
-                    'success' => false,
-                    'class' => 'alert-danger',
+            'success' => false,
+            'class' => 'alert-danger',
         )));
     }
 
@@ -251,7 +314,7 @@ class OcupationSearcherController extends Controller {
             $entity->setVotes(5);
             $form = $this->createForm(new \Daiquiri\SiteBundle\Form\ReviewHotelType(), $entity);
             return $this->render('DaiquiriSiteBundle:Hotel:form_to_new_review_into_hotel.html.twig', array('form' => $form->createView(),
-                        'review' => $entity));
+                'review' => $entity));
         }
         return new Response();
     }

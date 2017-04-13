@@ -43,18 +43,6 @@ class Hotel extends Place {
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="checkin", type="string", length=255, nullable=true)
-     */
-    private $checkin;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="checkout", type="string", length=255, nullable=true)
-     */
-    private $checkout;
 
     /**
      * @var string
@@ -136,8 +124,8 @@ class Hotel extends Place {
     /**
      * @ORM\ManyToOne(targetEntity="Daiquiri\AdminBundle\Entity\Zone", inversedBy="hotels")
      * @ORM\JoinColumn(name="zone", referencedColumnName="id")
-     * 
-     *   
+     *
+     *
      */
     private $zone;
 
@@ -162,6 +150,16 @@ class Hotel extends Place {
     private $hotelType;
 
     /**
+     * @var \Daiquiri\AdminBundle\Entity\HotelFacility
+     *
+     * @ORM\ManyToOne(targetEntity="Daiquiri\AdminBundle\Entity\HotelFacility", inversedBy="hotels")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="hotelIdFacility", referencedColumnName="id")
+     * })
+     */
+    private $hotelIdFacility;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="available", type="boolean", nullable=true)
@@ -182,7 +180,7 @@ class Hotel extends Place {
      */
     private $payonline;
 
-   
+
 
     /**
      * @var boolean
@@ -244,6 +242,15 @@ class Hotel extends Place {
      * this is not a mapped field of entity metadata, just a simple property
      */
     protected $locale;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avg_reviews", type="integer", nullable=true)
+     */
+    private $avgReviews;
+
+
 
     /**
      * Constructor
@@ -811,7 +818,7 @@ class Hotel extends Place {
         return $this->payonline;
     }
 
-    
+
 
 
     /**
@@ -1202,8 +1209,8 @@ class Hotel extends Place {
 
     public function getPlusForDiet(\Daiquiri\ReservationBundle\Entity\OcupationItem $item) {
         return $this->auxgetPlusForDiet($item->getPlan()) *
-                ($item->getAdults() + $item->getKids()) *
-                ($item->getDiffDays());
+        ($item->getAdults() + $item->getKids()) *
+        ($item->getDiffDays());
     }
 
     public function getFullLocation() {
@@ -1338,50 +1345,50 @@ class Hotel extends Place {
 
 
     /**
-     * Set checkin
+     * Set avgReviews
      *
-     * @param string $checkin
+     * @param integer $avgReviews
      *
      * @return Hotel
      */
-    public function setCheckin($checkin)
+    public function setAvgReviews($avgReviews)
     {
-        $this->checkin = $checkin;
+        $this->avgReviews = $avgReviews;
 
         return $this;
     }
 
     /**
-     * Get checkin
+     * Get avgReviews
      *
-     * @return string
+     * @return integer
      */
-    public function getCheckin()
+    public function getAvgReviews()
     {
-        return $this->checkin;
+        return $this->avgReviews;
     }
 
     /**
-     * Set checkout
+     * Set hotelIdFacility
      *
-     * @param string $checkout
+     * @param \Daiquiri\AdminBundle\Entity\HotelFacility $hotelIdFacility
      *
      * @return Hotel
      */
-    public function setCheckout($checkout)
+    public function setHotelIdFacility(\Daiquiri\AdminBundle\Entity\HotelFacility $hotelIdFacility = null)
     {
-        $this->checkout = $checkout;
+        $this->hotelIdFacility = $hotelIdFacility;
 
         return $this;
     }
 
     /**
-     * Get checkout
+     * Get hotelIdFacility
      *
-     * @return string
+     * @return \Daiquiri\AdminBundle\Entity\HotelFacility
      */
-    public function getCheckout()
+    public function getHotelIdFacility()
     {
-        return $this->checkout;
+        return $this->hotelIdFacility;
     }
 }
