@@ -108,6 +108,7 @@ class OcupationSearcherController extends Controller {
         $sort =  $filterVars['sort'];
 
         $query = $repository->createQueryBuilder('h')
+            ->leftJoin('h.reviews', 'r')
             ->where('h.available = TRUE');
 
         if ($idType != -1){
@@ -120,7 +121,6 @@ class OcupationSearcherController extends Controller {
                 ->setParameter("rating", $rating);
         }
 
-
         if ($sort != -1){
             switch ($sort) {
                 case 1:
@@ -130,7 +130,7 @@ class OcupationSearcherController extends Controller {
                     $query->orderBy('h.title', 'DESC');
                     break;
                 case 3:
-                    $query->orderBy('h.reviews', 'ASC');
+                    $query->orderBy('r.hotel', 'ASC');
                     break;
             }
         }
