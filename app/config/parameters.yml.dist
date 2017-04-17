@@ -4,8 +4,8 @@ parameters:
     database_host: 127.0.0.1
     database_port: 5432
     database_name: daiqui6_daiquiri3
-    database_user: postgres
-    database_password: postgres
+    database_user: pepe
+    database_password: pepe
     locale: en
     languages: (en|es|it)
     secret: f976e7279f64f21a67105a3bc14d7e1b3

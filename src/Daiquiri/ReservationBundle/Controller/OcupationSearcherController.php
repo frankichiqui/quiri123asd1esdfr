@@ -325,8 +325,40 @@ class OcupationSearcherController extends SonataCRUDController {
         //  dump($this->result);
     }
 
-    public function initSearcherAction(Request $request, $page, $view_render = 'DaiquiriReservationBundle:Hotel:full_search_result.html.twig', $other = array()) {
 
+    public function getFilterViewVars(){
+
+        $repository = $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Hotel');
+        $query = $repository->createQueryBuilder('h')
+            ->where('h.available = TRUE')
+            ->orderBy('h.priority', 'ASC');
+
+        $allHotels = $query->getQuery()->getResult();
+        $stars = array(
+            0 => 0,
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0,
+        );
+
+        foreach ($allHotels as $key => $hotel) {
+            $starAvg = $hotel->getAverageVotes();
+            $starAvg = (int)$starAvg;
+            $stars[$starAvg] = $stars[$starAvg] + 1;
+        }
+
+        $vars = array(
+            'stars' => $stars,
+            'hotelFacilities' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelFacility')->getHotelsFacilities(),
+            'hotelTypes' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelType')->getHotelsTypes(),
+            );        
+
+        return $vars;
+    }
+
+    public function initSearcherAction(Request $request, $page, $view_render = 'DaiquiriReservationBundle:Hotel:full_search_result.html.twig',  $other = array()) {
 
         $session = $request->getSession();
         $id = $session->get('searcher');
@@ -383,6 +415,10 @@ class OcupationSearcherController extends SonataCRUDController {
         }
         $this->result = $salida;
 
+
+        $filterViewVars = $this->getFilterViewVars();
+
+
         if ($page != null) {
 
             $adapter = new ArrayAdapter($salida);
@@ -404,6 +440,8 @@ class OcupationSearcherController extends SonataCRUDController {
               $pagerfanta->getCurrentPageResults(); */
 
             $rooms = 0;
+
+
             foreach ($pagerfanta as $p) {
                 $rooms += count($p['availableroom']);
             }
@@ -412,7 +450,10 @@ class OcupationSearcherController extends SonataCRUDController {
                 'startdate' => $this->searcher->getStartDate(),
                 'enddate' => $this->searcher->getEndDate(),
                 'searcher' => $this->searcher,
-                'salida' => $pagerfanta
+                'salida' => $pagerfanta,
+                'stars' => $filterViewVars['stars'],
+                'hotelFacilities' => $filterViewVars['hotelFacilities'],
+                'hotelTypes' => $filterViewVars['hotelTypes'],                 
                     ), $other);
 
             return $this->render($view_render, $array);
@@ -420,6 +461,9 @@ class OcupationSearcherController extends SonataCRUDController {
 
         return $this->render($view_render, array_merge(array(
                     'form' => $this->admin->getForm()->createView(),
+                    'stars' => $filterViewVars['stars'],
+                    'hotelFacilities' => $filterViewVars['hotelFacilities'],
+                    'hotelTypes' => $filterViewVars['hotelTypes'],              
                     'action' => 'create',
                     'searcher' => $this->searcher,
                     'salida' => $this->result

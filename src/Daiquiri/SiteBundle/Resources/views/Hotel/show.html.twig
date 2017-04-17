@@ -112,7 +112,7 @@
                                     <ul class="booking-list">
                                         {% for s in similar %}
                                             <li>
-                                                <a class="booking-item" href="#">
+                                                <a class="booking-item" href="{{ path('hotel_show',{'slug':s.slug})}}">
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <div class="booking-item-img-wrap">
@@ -129,12 +129,8 @@
                                                         <div class="col-md-6">
                                                             <div class="booking-item-rating">
                                                                 <ul class="icon-group booking-item-rating-stars">
-                                                                    {% for n in 0..s.stars %}
-                                                                        <li>
-                                                                            <i class="fa fa-star"></i>
-                                                                        </li>
-                                                                    {% endfor %}
-                                                                </ul><span class="booking-item-rating-number"><b >3.5</b> of 5</span><small>(478 reviews)</small>
+                                                                    {{s.printStart() | raw}}
+                                                                </ul><span class="booking-item-rating-number"><b >{{s.getAverageVotes()}}</b> of 5</span><small>({{ s.getReviews().count()}}  reviews)</small>
                                                             </div>
                                                             <h5 class="booking-item-title">{{ s }}</h5>
                                                             <p class="booking-item-address"><i class="fa fa-map-marker"></i> {{ s.address }}</p><small class="booking-item-last-booked"></small>

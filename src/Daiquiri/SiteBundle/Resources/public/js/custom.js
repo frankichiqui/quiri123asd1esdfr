@@ -570,8 +570,6 @@ function abortTimer() { // to be called when you want to stop the timer
  * FILTERS VIEWS FUNCTIONS
  * **********************/
 
-
-
 var filters = {
 
     route : "",
@@ -627,16 +625,37 @@ var filters = {
                     var rating = filters.getRatingSelected();
                     var type = filters.getTypeSelected();
                     var sort = filters.getSortSelected();
+                    var facility = filters.getFacilitySelected();
                     var data = {
                         "idType": type,
                         "rating": rating,
-                        "sort" : sort
+                        "sort" : sort,
+                        "facility" : facility
                     };
                     break;
                 case 'circuits':
-
+                    var rating = filters.getRatingSelected();
+                    var hasChildren = filters.getHasChildrenSelected();
+                    var polos = filters.getPolosSelected();
+                    var sort = filters.getSortSelected();
+                    var data = {                      
+                        "rating": rating,
+                        "haschildren": hasChildren,
+                        "polos": polos,
+                        "sort" : sort,
+                    };
                     break;
                 case 'transfers':
+                    var pickup = filters.getPickUpSelected();
+                    var dropoff = filters.getDropOffSelected();
+                    var type = filters.getTypeTransferSelected();
+                    var sort = filters.getSortSelected();                                       
+                    var data = {                      
+                        "pickup": pickup,
+                        "dropoff": dropoff,
+                        "type": type,
+                        "sort" : sort,
+                    };
 
                     break;
             }
@@ -662,16 +681,6 @@ var filters = {
         return rating;
     },
 
-    getTypeSelected: function () {
-        var idType = -1;
-        var $radioSelected = $('#filter-hotel-types .i-radio.checked .i-radio');
-        if ($radioSelected.length){
-            idType = $radioSelected.data('idtype');
-        }
-        return idType;
-    },
-
-
     getSortSelected: function() {
         var sort = -1;
         var $sortSelected = $('li.sortSelected');
@@ -680,6 +689,84 @@ var filters = {
         }
         return sort;
     },
+
+
+    /*HOTEL FILTERS************
+    ***************************/
+    getTypeSelected: function () {
+        var idType = -1;
+        var $radioSelected = $('#filter-hotel-types .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            idType = $radioSelected.data('idtype');
+        }
+        return idType;
+    },    
+
+    getFacilitySelected: function () {
+        var facility = -1;
+        var $radioSelected = $('#filter-hotel-facilities .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            facility = $radioSelected.data('facility');
+        }
+        return facility;
+    },    
+
+    /*END HOTEL FILTERS*********/
+    
+
+    /*CIRCUIT FILTERS************
+    ****************************/
+    getHasChildrenSelected: function(){
+        var hasChildren= -1;
+        var $radioSelected = $('#filter-circuits-haschildrens .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            hasChildren = $radioSelected.data('haschildren');
+        }
+        return hasChildren;
+    },
+        
+    getPolosSelected: function(){
+        var Polos= -1;
+        var $radioSelected = $('#filter-circuits-polofrom .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            Polos = $radioSelected.data('polos');
+        }
+        return Polos;
+
+    },
+    /*END CIRCUIT FILTERS*********/
+
+
+    /*TRANSFERS FILTERS*************
+    ********************************/
+    getPickUpSelected: function(){
+        var pickUp = -1;
+        var $radioSelected = $('#filter-transfers-pickUp .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            pickUp = $radioSelected.data('pickup');
+        }
+        return pickUp;
+    },
+    
+    getDropOffSelected: function(){
+        var dropOff = -1;
+        var $radioSelected = $('#filter-transfers-dropOff .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            dropOff = $radioSelected.data('dropoff');
+        }
+        return dropOff;
+    },
+
+    getTypeTransferSelected: function(){
+        var price = -1;
+        var $radioSelected = $('#filter-transfers-type .i-radio.checked .i-radio');
+        if ($radioSelected.length){
+            price = $radioSelected.data('type');
+        }
+        return price;
+    },
+
+    /*END TRANSFERS FILTERS*********/
 
     launchSort: function(){
         $('.booking-sort li').click(function(){
@@ -696,9 +783,9 @@ var filters = {
 
     clearAllFilters: function(){
         $('.i-radio.checked').each(function(){
-            $(this).removeClass('checked');
-            $('#exec-filter').trigger('click');
+            $(this).removeClass('checked');            
         });
+        $('#exec-filter').trigger('click');
     },
 
     launchClearAllFilters: function(){
@@ -719,9 +806,15 @@ var filters = {
 }
 
 $(document).ajaxComplete(function(event, xhr, settings) {
-    var url = settings.url;
-    var substr = "en/hotels/ajax/";
-    if (url.match(substr)) {
+    var url = settings.url;    
+    var substrHotel          = "en/hotels/ajax/";
+    var substrCircuit        = "en/circuits/ajax/";
+    var substrTransfer       = "en/transfers/ajax/";
+    var substrSearchHotel    = "en/search/hotels/";
+    var substrSearchTransfer = "en/search/transfers/";
+    var substrSearchCircuit  = "en/search/circuits/";
+
+    if (url.match(substrHotel) || url.match(substrCircuit) || url.match(substrTransfer) || url.match(substrSearchHotel) || url.match(substrSearchTransfer) || url.match(substrSearchCircuit)) {        
         $('.nav-drop').dropit();
         filters.clearAllSort();
         filters.launchSort();
@@ -740,3 +833,5 @@ $(document).ajaxComplete(function(event, xhr, settings) {
         });
     }
 });
+
+

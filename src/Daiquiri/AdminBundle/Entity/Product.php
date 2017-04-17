@@ -190,6 +190,13 @@ class Product {
      */
     private $reviews;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avg_reviews", type="integer", nullable=true)
+     */
+    private $avgReviews;
+
     public function getReviewEvaluation() {
         $cant = 0;
         foreach ($this->reviews as $r) {
@@ -781,4 +788,28 @@ class Product {
         return $this->reviews;
     }
 
+
+    /**
+     * Set avgReviews
+     *
+     * @param integer $avgReviews
+     *
+     * @return Product
+     */
+    public function setAvgReviews($avgReviews)
+    {
+        $this->avgReviews = $avgReviews;
+
+        return $this;
+    }
+
+    /**
+     * Get avgReviews
+     *
+     * @return integer
+     */
+    public function getAvgReviews()
+    {
+        return $this->avgReviews;
+    }
 }

@@ -6,12 +6,12 @@
                 </li>
                 <li class="active"><a href="#tab-2" data-toggle="tab"><i class="fa fa-building-o"></i> <span >{{ 'Hotels' | trans({}, 'search') }}</span></a>
                 </li>
-                <li><a href="#tab-3" data-toggle="tab"><i class="fa fa-photo"></i> <span >{{ 'Excursions' | trans({}, 'search') }}</span></a>
-                </li>
-                <li><a href="#tab-4" data-toggle="tab"><i class="fa fa-home"></i> <span >{{ 'Rentals' | trans({}, 'search') }}</span></a>
-                </li>
-                <li><a href="#tab-5" data-toggle="tab"><i class="fa fa-car"></i> <span >{{ 'Cars' | trans({}, 'search') }}</span></a>
-                </li>
+                {#<li><a href="#tab-3" data-toggle="tab"><i class="fa fa-photo"></i> <span >{{ 'Excursions' | trans({}, 'search') }}</span></a>
+                </li>#}
+                {#<li><a href="#tab-4" data-toggle="tab"><i class="fa fa-home"></i> <span >{{ 'Rentals' | trans({}, 'search') }}</span></a>
+                </li>#}
+                {#<li><a href="#tab-5" data-toggle="tab"><i class="fa fa-car"></i> <span >{{ 'Cars' | trans({}, 'search') }}</span></a>
+                </li>#}
                 <li><a href="#tab-6" data-toggle="tab"><i class="fa fa-refresh"></i> <span >{{ 'Circuits' | trans({}, 'search') }}</span></a>
                 </li>
             </ul>
@@ -24,18 +24,18 @@
                     <h2>{{ 'Search for Hotels' | trans({}, 'search') }}</h2>
                     {{ render(controller('DaiquiriSiteBundle:OcupationSearcher:new')) }}
                 </div>
-                <div class="tab-pane fade" id="tab-3">
+                {#<div class="tab-pane fade" id="tab-3">
                     <h2>{{ 'Search for Excursions'| trans({}, 'search') }}</h2>
                     {{ render(controller('DaiquiriSiteBundle:ExcursionSearcher:new')) }}
-                </div>
-                <div class="tab-pane fade" id="tab-4">
+                </div>#}
+                {#<div class="tab-pane fade" id="tab-4">
                     <h2>{{ 'Find Your Perfect House' | trans({}, 'search') }}</h2>
                     {{ render(controller('DaiquiriSiteBundle:RentalHouseRoomSearcher:new')) }}
-                </div>
-                <div class="tab-pane fade" id="tab-5">
+                </div>#}
+                {#<div class="tab-pane fade" id="tab-5">
                     <h2>{{ 'Search for Rental Cars' | trans({}, 'search') }}</h2>
                     {{ render(controller('DaiquiriSiteBundle:CarSearcher:new')) }}
-                </div>
+                </div>#}
                 <div class="tab-pane fade" id="tab-6">
                     <h2>{{ 'Search for Circuits' | trans({}, 'search') }}</h2>
                     {% render(controller('DaiquiriSiteBundle:CircuitSearcher:new')) %}

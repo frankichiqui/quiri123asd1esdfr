@@ -1011,4 +1011,38 @@ class RentalHouse {
         return $min;
     }
 
+
+    /**
+     * Add review
+     *
+     * @param \Daiquiri\AdminBundle\Entity\ReviewRentalHouse $review
+     *
+     * @return RentalHouse
+     */
+    public function addReview(\Daiquiri\AdminBundle\Entity\ReviewRentalHouse $review)
+    {
+        $this->reviews[] = $review;
+
+        return $this;
+    }
+
+    /**
+     * Remove review
+     *
+     * @param \Daiquiri\AdminBundle\Entity\ReviewRentalHouse $review
+     */
+    public function removeReview(\Daiquiri\AdminBundle\Entity\ReviewRentalHouse $review)
+    {
+        $this->reviews->removeElement($review);
+    }
+
+    /**
+     * Get reviews
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
 }

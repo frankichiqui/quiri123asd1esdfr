@@ -36,6 +36,10 @@ daiquiri_site_review:
 circuit_list:
     path:   /circuits/
     defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:list, page: 1}
+
+circuit_list_ajax:
+    path:   /circuits/ajax/{page}
+    defaults: {_controller: DaiquiriSiteBundle:CircuitSearcher:listAjaxFilter }
     
 circuit_list_paginated:
     path:   /circuits/{page}/
@@ -254,7 +258,11 @@ transfer_list_pickupplace:
 transfer_list_pickupplace_paginated:
     path:   /transfers/pick-up-place/{pickupplace}/{page}/
     defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:listByPickUpPlace}
-    
+
+transfer_list_ajax:
+    path:   /transfer/ajax/{page}
+    defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:listAjaxFilter }
+
 transfer_search:
     path:   /search/transfers/
     defaults: {_controller: DaiquiriSiteBundle:TransferSearcher:search, page: 1}

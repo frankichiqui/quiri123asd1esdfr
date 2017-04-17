@@ -307,4 +307,38 @@ class CancelationProduct {
         return $this->houses;
     }
 
+
+    /**
+     * Add package
+     *
+     * @param \Daiquiri\AdminBundle\Entity\Package $package
+     *
+     * @return CancelationProduct
+     */
+    public function addPackage(\Daiquiri\AdminBundle\Entity\Package $package)
+    {
+        $this->packages[] = $package;
+
+        return $this;
+    }
+
+    /**
+     * Remove package
+     *
+     * @param \Daiquiri\AdminBundle\Entity\Package $package
+     */
+    public function removePackage(\Daiquiri\AdminBundle\Entity\Package $package)
+    {
+        $this->packages->removeElement($package);
+    }
+
+    /**
+     * Get packages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPackages()
+    {
+        return $this->packages;
+    }
 }

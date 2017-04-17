@@ -1,0 +1,149 @@
+'-': '-'   # FIXME
+0: '0'   # FIXME
+1: '1'   # FIXME
+'1 Hora': '1 Hora'   # FIXME
+10: '10'   # FIXME
+'10 +': '10 +'   # FIXME
+'10 Horas': '10 Horas'   # FIXME
+11: '11'   # FIXME
+'11 Horas': '11 Horas'   # FIXME
+12: '12'   # FIXME
+'12 Horas': '12 Horas'   # FIXME
+13: '13'   # FIXME
+'13 Horas': '13 Horas'   # FIXME
+14: '14'   # FIXME
+'14 Horas': '14 Horas'   # FIXME
+15: '15'   # FIXME
+'15 Horas': '15 Horas'   # FIXME
+16: '16'   # FIXME
+'16 Horas': '16 Horas'   # FIXME
+17: '17'   # FIXME
+'17 Horas': '17 Horas'   # FIXME
+18: '18'   # FIXME
+'18 Horas': '18 Horas'   # FIXME
+19: '19'   # FIXME
+'19 Horas': '19 Horas'   # FIXME
+2: '2'   # FIXME
+'2 Horas': '2 Horas'   # FIXME
+20: '20'   # FIXME
+'20 Horas': '20 Horas'   # FIXME
+21: '21'   # FIXME
+'21 Horas': '21 Horas'   # FIXME
+22: '22'   # FIXME
+'22 Horas': '22 Horas'   # FIXME
+23: '23'   # FIXME
+'23 Horas': '23 Horas'   # FIXME
+24: '24'   # FIXME
+'24 Horas': '24 Horas'   # FIXME
+25: '25'   # FIXME
+26: '26'   # FIXME
+27: '27'   # FIXME
+28: '28'   # FIXME
+29: '29'   # FIXME
+3: '3'   # FIXME
+'3 Horas': '3 Horas'   # FIXME
+30: '30'   # FIXME
+31: '31'   # FIXME
+32: '32'   # FIXME
+33: '33'   # FIXME
+34: '34'   # FIXME
+35: '35'   # FIXME
+36: '36'   # FIXME
+37: '37'   # FIXME
+38: '38'   # FIXME
+39: '39'   # FIXME
+4: '4'   # FIXME
+'4 Horas': '4 Horas'   # FIXME
+40: '40'   # FIXME
+5: '5'   # FIXME
+'5 Horas': '5 Horas'   # FIXME
+6: '6'   # FIXME
+'6 Horas': '6 Horas'   # FIXME
+7: '7'   # FIXME
+'7 +': '7 +'   # FIXME
+'7 Horas': '7 Horas'   # FIXME
+8: '8'   # FIXME
+'8 Horas': '8 Horas'   # FIXME
+9: '9'   # FIXME
+'9 Horas': '9 Horas'   # FIXME
+Adults: Adults   # FIXME
+All: All   # FIXME
+Amount: Amount   # FIXME
+Anyone: Anyone   # FIXME
+Anywhere: Anywhere   # FIXME
+BirthDate: BirthDate   # FIXME
+Capacity: Capacity   # FIXME
+Captcha: Captcha   # FIXME
+Category: Category   # FIXME
+'Check In': 'Check In'   # FIXME
+'Check Out': 'Check Out'   # FIXME
+'Check in': 'Check in'   # FIXME
+'Check out': 'Check out'   # FIXME
+'Circuit name': 'Circuit name'   # FIXME
+Class: Class   # FIXME
+Colective: Colective   # FIXME
+Color: Color   # FIXME
+'Color to show': 'Color to show'   # FIXME
+'Complete House': 'Complete House'   # FIXME
+'Confirm Code': 'Confirm Code'   # FIXME
+Confirmacion: Confirmacion   # FIXME
+Create: Create   # FIXME
+Currency: Currency   # FIXME
+Date/IP: Date/IP   # FIXME
+Dbl: Dbl   # FIXME
+Departure: Departure   # FIXME
+Destination: Destination   # FIXME
+Driver: Driver   # FIXME
+Dropoff: Dropoff   # FIXME
+'Dropoff Time Time': 'Dropoff Time Time'   # FIXME
+'Dropoff date': 'Dropoff date'   # FIXME
+DropoffPlace: DropoffPlace   # FIXME
+Duration: Duration   # FIXME
+Duration(s): Duration(s)   # FIXME
+Email: Email   # FIXME
+Exclusive: Exclusive   # FIXME
+Female: Female   # FIXME
+Gender: Gender   # FIXME
+'Gender Name': 'Gender Name'   # FIXME
+Identification: Identification   # FIXME
+'Identification (Pasport/DNI/CI)': 'Identification (Pasport/DNI/CI)'   # FIXME
+
+'Infants (0 - 1':
+    '99 years)': 'Infants (0 - 1.99 years)'   # FIXME
+
+Kids: Kids   # FIXME
+'Last Name': 'Last Name'   # FIXME
+Lastname: Lastname   # FIXME
+'Luggage Capacity': 'Luggage Capacity'   # FIXME
+Male: Male   # FIXME
+ManagmentStatus: ManagmentStatus   # FIXME
+Market: Market   # FIXME
+Name: Name   # FIXME
+Night: Night   # FIXME
+One: One   # FIXME
+'Only Room': 'Only Room'   # FIXME
+'Order ID': 'Order ID'   # FIXME
+Paxs: Paxs   # FIXME
+Pickup: Pickup   # FIXME
+'Pickup Time': 'Pickup Time'   # FIXME
+'Pickup date': 'Pickup date'   # FIXME
+'Pickup place Hotel': 'Pickup place Hotel'   # FIXME
+Pickupplace: Pickupplace   # FIXME
+Plan: Plan   # FIXME
+Quantity: Quantity   # FIXME
+'Return Date': 'Return Date'   # FIXME
+'Rooms number': 'Rooms number'   # FIXME
+'Roundtrip ': 'Roundtrip '   # FIXME
+'Select your Fligth': 'Select your Fligth'   # FIXME
+Services: Services   # FIXME
+Sgl: Sgl   # FIXME
+'Start Date': 'Start Date'   # FIXME
+Status: Status   # FIXME
+Three: Three   # FIXME
+Time: Time   # FIXME
+Two: Two   # FIXME
+Type: Type   # FIXME
+'Without driver': 'Without driver'   # FIXME
+time: time   # FIXME
+'to Rental': 'to Rental'   # FIXME
+user: user   # FIXME

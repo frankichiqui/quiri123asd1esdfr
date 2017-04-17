@@ -1,0 +1,177 @@
+<div class="nav-drop booking-sort">
+    <h5 class="booking-sort-title"><a href="#">Sort: Aviability<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a></h5>
+    <ul class="nav-drop-menu ">
+        <li data-sort=1><a href="#">Name (A-Z)</a>
+        </li>
+        <li data-sort=2><a href="#">Name (Z-A)</a>
+        </li>
+    </ul>
+</div>
+    <ul class="booking-list">
+        {% for transfer in salida.currentPageResults %}
+            <li>
+                <div class="booking-item-container">
+                    <div class="booking-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="booking-item-airline-logo">
+                                    {% if transfer.provider.picture.galleryHasMedias is defined %}
+                                        <img src="{% path transfer.provider.picture, 'reference' %}" alt="{{ transfer.provider }}" title="{{ transfer.provider }}" />
+                                    {% else %}
+                                        <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ transfer.provider }}" title="{{ transfer.provider }}" />
+                                    {% endif %}
+
+                                    <p>{{ transfer.provider }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="booking-item-flight-details">
+                                    <div class="booking-item-arrival">
+                                        {% if transfer.getColective() == false %}
+                                        <p><i class="fa fa-taxi fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b></p>
+                                        {% else %}
+                                        <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Pick-up' | trans({}, 'transfer') }}</b><p>
+                                            {% endif %}
+                                        <p class="booking-item-destination"><i class="fa fa-clock-o"></i> {{ transfer.starttime  }}</p>
+                                        <p class="booking-item-destination"><i class="fa fa-map-marker"></i> {{ transfer.placefrom }}</p>
+                                    </div>
+                                    <div class="booking-item-arrival">
+                                        {% if transfer.getColective() == false %}
+                                        <p> <i class="fa fa-taxi fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b></p>
+                                        {% else %}
+                                        <p><i class="fa fa-bus fa-2x"></i> <b>{{ 'Drop-off' | trans({}, 'transfer') }}</b><p>
+                                            {% endif %}
+                                        <p class="booking-item-destination"><i class="fa fa-clock-o"></i> {{ transfer.endtime }}</p>
+                                        <p class="booking-item-destination"><i class="fa fa-map-marker"> {{ transfer.placeto }}</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {% if transfer.starttime is not null and transfer.endtime is not null %}
+                                    <h5>{{ transfer.getFullTime() }}
+                                    {% if transfer.getFullTime() < 2 %}
+                                        {{ 'hour' | trans({}, 'transfer') }}
+                                    {% else %} </h5>
+                                        {{ 'hours' | trans({}, 'transfer') }}
+                                    {% endif %}
+                                {% else %}
+                                    <h5> - {{ 'hour(s)' | trans({}, 'transfer') }}</h5>
+                                {% endif %}
+                                {% if transfer.stop == 0 %}
+                                    <p>{{ 'non-stop' | trans({}, 'transfer') }}</p>
+                                {% elseif transfer.stop == 1 %}
+                                    <p>{{ transfer.stop }} {{ 'stop' | trans({}, 'transfer') }}</p>
+                                {% else %}
+                                    <p>{{ transfer.stop }} {{ 'stops' | trans({}, 'transfer') }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3"><small>
+                                    {% if transfer.getColective() == false %}
+                                        <span class="booking-item-price">{{ transfer.price0102 | price | raw }}</span><span>/{{ 'person' | trans({}, 'transfer') }}</span>
+                                    {% else %}
+                                        <span class="booking-item-price">{{ transfer.pricepax | price | raw }}</span><span>/{{ 'person' | trans({}, 'transfer') }}</span>
+                                    {% endif %}</small>
+                                <button type="submit" class="btn btn-primary">{{ 'Add to Cart' | trans({}, 'car') }}</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="booking-item-details">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p>{{ 'Transfer Details' | trans({}, 'transfer') }}</p>
+                                <h5 class="booking-item-title">{{ transfer.title }}</h5>
+                                <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                                    <small><b>{{ 'Pick-up Place' | trans({}, 'transfer') }}: </b>
+                                        {{ transfer.placefrom }}
+                                    </small>
+
+                                </p>
+                                <p class="booking-item-address"><i class="fa fa-calendar"></i>
+                                    <small><b>{{ 'Pick-up Time' | trans({}, 'transfer') }}: </b>
+                                        {{ transfer.starttime | date('g:i a')}}
+                                    </small>
+
+                                </p>
+                                <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                                    <small><b>{{ 'Drop-off Place' | trans({}, 'transfer') }}: </b>
+                                        {{ transfer.placeto }}
+                                    </small>
+                                </p>
+                                <p class="booking-item-address"><i class="fa fa-calendar"></i>
+                                    <small><b>{{ 'Drop-off Time' | trans({}, 'transfer') }}: </b>
+                                        {{ transfer.endtime | date('g:i a')}}
+                                    </small>
+
+                                </p>
+                                {% if transfer.getColective() == false %}
+                                    <p class="booking-item-address"><i class="fa fa-taxi"></i>
+                                        <small><b>{{ 'Transfer Type' | trans({}, 'transfer') }}: </b>
+                                            {{ 'Exclusive' | trans({}, 'transfer') }}
+                                        </small>
+                                    </p>
+                                {% else %}
+                                    <p class="booking-item-address"><i class="fa fa-bus"></i>
+                                        <small><b>{{ 'Transfer Type' | trans({}, 'transfer') }}: </b>
+                                            {{ 'Colective' | trans({}, 'transfer') }}
+                                        </small>
+                                    </p>
+                                {% endif %}
+
+                                {% if transfer.getColective() == false %}<i class="fa fa-dollar"></i>
+                                    <b><small>{{ 'Price' | trans({}, 'transfer') }}:</b> {{ transfer.price0102 | price | raw }}<span>/{{ 'person' | trans({}, 'transfer') }}</small></span>
+                                {% else %}<i class="fa fa-dollar"></i>
+                                    <b><small>{{ 'Price' | trans({}, 'transfer') }}:</b> {{ transfer.pricepax | price | raw }}<span>/{{ 'person' | trans({}, 'transfer') }}</small></span>
+                                {% endif %}
+
+                                <p><b><i class="fa fa-clock-o"></i><small> {{ 'Total trip time' | trans({}, 'transfer') }}:</b>
+                                    {% if transfer.starttime is not null and transfer.endtime is not null %}
+                                    {{ transfer.getFullTime() }}
+                                    {% if transfer.getFullTime() < 2 %}
+                                        {{ 'hour' | trans({}, 'transfer') }}
+                                    {% else %}
+                                        {{ 'hours' | trans({}, 'transfer') }}
+                                    {% endif %}
+                                    {% else %}
+                                    - {{ 'hour(s)' | trans({}, 'transfer') }}
+                                    {% endif %}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% else %}
+
+            <div class="alert alert-info">
+
+                <p class="text-bigger"> {{ 'No results for your search criteria' | trans({}, 'search') }}</p>
+            </div>
+
+
+        {% endfor %}
+
+    </ul>
+
+    <div class="row">
+
+        <div class="col-md-7">
+            {% if salida.haveToPaginate %}
+                <p><small>
+                        <h3 class="booking-title">{{ salida | length }} {{ 'Transfers on' | trans({}, 'transfer') }} {{ date | date('M j, Y') }}{% if roundtrip is defined and roundtrip == true %} - {{ dateroundtrip | date('M j, Y') }}{% endif %} &nbsp;&nbsp;{{ 'Showing' | trans({}, 'transfer') }} {{ salida.getCurrentPage }} ? {{ salida.getNbPages }}</small>
+                </p>
+                {% if place is defined and polo == false %}
+                    {{ pagerfanta(salida, 'page_view', {'routeName': 'transfer_list_pickupplace_paginated', 'routeParams' : { 'pickupplace': place.slug }}, pagerfanta_opts) }}
+                {% elseif place is defined and polo == true %}
+                    {{ pagerfanta(salida, 'page_view', {'routeName': 'transfer_list_polo_paginated', 'routeParams' : { 'polo': place.slug }}, pagerfanta_opts) }}
+                {% else %}
+                    {{ pagerfanta(salida, 'page_view', {'routeName': 'transfer_list_paginated'}, pagerfanta_opts) }}
+                {% endif %}
+
+            {% endif %}
+        </div>
+        <div class="col-md-5 text-right">
+            <p>{{ "Not what you\'re looking for?" | trans({}, 'transfer') }} <a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Try your search again' | trans({}, 'transfer') }}</a>
+            </p>
+        </div>
+    </div>

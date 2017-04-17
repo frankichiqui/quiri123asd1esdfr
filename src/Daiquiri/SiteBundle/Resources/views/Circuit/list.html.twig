@@ -14,200 +14,20 @@
         {% endif %}
         <div class="row">
             <div class="col-md-3">
-                <aside class="booking-filters text-white">
-                    <h3>Filter By:</h3>
-                    <ul class="list booking-filters-list">
-                        <li>
-                            <h5 class="booking-filters-title">Star Rating</h5>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />5 star (220)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />4 star (112)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />3 star (75)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />2 star (60)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />1 star (20)</label>
-                            </div>
-                        </li>
-                        <li>
-                            <h5 class="booking-filters-title">Attractions</h5>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Perfomances (126)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Cultural (80)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Museums (130)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Landmarks (52)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Outdoors (62)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Amusement (22)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Sports (32)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Zoos & Aquariums (7)</label>
-                            </div>
-                        </li>
-                        <li>
-                            <h5 class="booking-filters-title">Activities</h5>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Sightseeing Tours (184)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Wellness & Spas (130)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Food & Drink (40)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Adventure (15)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Classes (34)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Gear Rentals (10)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Ranch & Farm (1)</label>
-                            </div>
-                        </li>
-                        <li>
-                            <h5 class="booking-filters-title">Nightlife</h5>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Bars (115)</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input class="i-check" type="checkbox" />Clubs (63)</label>
-                            </div>
-                        </li>
-                    </ul>
-                </aside>
+            {% include '@DaiquiriSite/Circuit/filters_circuits.html.twig' %}
             </div>
             <div class="col-md-9">
-                <div class="nav-drop booking-sort">
-                    <h5 class="booking-sort-title"><a href="#">Sort: Ranking<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a></h5>
-                    <ul class="nav-drop-menu">
-                        <li><a href="#">Name (A-Z)</a>
-                        </li>
-                        <li><a href="#">Name (Z-A)</a>
-                        </li>
-                        <li><a href="#">Number of Reviews</a>
-                        </li>
-                        <li><a href="#">Just Added</a>
-                        </li>
-                    </ul>
-                </div>
-                <ul class="booking-list">
-                    {% for circuit in salida.currentPageResults %}
-                        <li>
-                            <a class="booking-item" href="{{ path('circuit_show',{'slug': circuit.slug })}}">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        {% if circuit.picture.galleryHasMedias is defined %}
-                                            <img src="{% path circuit.picture, 'reference' %}" alt="{{ circuit.title }}" title="{{ circuit.title }}" />
-                                        {% else %}
-                                            <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ circuit.title }}" title="{{ circuit.title }}" />
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="booking-item-rating">
-                                            <ul class="icon-group booking-item-rating-stars">
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star"></i>
-                                                </li>
-                                                <li><i class="fa fa-star-o"></i>
-                                                </li>
-                                            </ul><span class="booking-item-rating-number"><b >3.9</b> of 5</span><small>(668 reviews)</small>
-                                        </div>
-                                        <h5 class="booking-item-title">{{ circuit.title }}</h5>
-                                        <p class="booking-item-address"><i class="fa fa-map-marker"></i>
-                                            {% set places = "" %}
-                                            {% for circuit_day in circuit.getCircuitDays() %}
-                                                {% for place in circuit_day.places %}
-                                                    {% set places = places ~ place ~ "(" ~ place.province ~ "), " %} 
-                                                {% endfor %}
-                                            {% endfor %}
-                                            <small>{{ places | trim(", ") }}</small>
-                                        </p>
-                                        <p class="booking-item-description">{{ circuit.description | truncate(120) | raw }}</p>
-                                    </div>
-                                    <div class="col-md-3"><span class="booking-item-price">{{ circuit.getCurrentPrice() | price | raw }}</span><span>/{{ 'person' | trans({}, 'circuit') }}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    {% else %}
-
-                        <div class="alert alert-info">                            
-                            <p class="text-bigger"> {{ 'No circuits to show' | trans({}, 'search') }}</p>
-                        </div>
-
-
-                    {% endfor %}
-
-                </ul>
-                <div class="row">
-
-                    <div class="col-md-7">
-                        {% if salida.haveToPaginate %}
-                            <p><small>{{ salida | length }} {{ 'Circuits on' | trans({}, 'circuit') }}  {{ pickupdays[0] | date('M j, Y') }} - {{ pickupdays[pickupdays | length -1] | date('M j, Y') }} &nbsp;&nbsp;{{ 'Showing' | trans({}, 'circuit') }} {{ salida.getCurrentPage }} – {{ salida.getNbPages }}</small>
-                            </p>                            
-
-                            {{ pagerfanta(salida, 'page_view', {'routeName': 'circuit_list_paginated'}, pagerfanta_opts) }}
-
-                        {% endif %}
-                    </div>                   
-                    <div class="col-md-5 text-right">
-                        <p>{{ "Not what you\'re looking for?" | trans({}, 'circuit') }} <a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Try your search again' | trans({}, 'circuit') }}</a>
-                        </p>
-                    </div>
+                <div id="ajax-circuits">
+                    {% include 'DaiquiriSiteBundle:Circuit:ajax_circuits.html.twig' %}
                 </div>
             </div>
         </div>
         <div class="gap"></div>
     </div>
 
+
     {% include 'DaiquiriSiteBundle:Default:footer.html.twig' %}
+
+
+
 {% endblock %}

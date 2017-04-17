@@ -49,6 +49,18 @@ class OcupationSearcherController extends Controller {
             throw new NotFoundHttpException();
         }
 
+        $filterViewVars = $this->getFilterHotelVars($query);
+
+        return $this->render('DaiquiriSiteBundle:Hotel:list.html.twig', array(
+            'salida' => $pagerfanta,
+            'stars' => $filterViewVars['stars'],
+            'hotelFacilities' => $filterViewVars['hotelFacilities'],
+            'hotelTypes' => $filterViewVars['hotelTypes'],            
+        ));
+    }
+
+    public function getFilterHotelVars($query) {
+
         $allHotels = $query->getQuery()->getResult();
         $stars = array(
             0 => 0,
@@ -65,22 +77,26 @@ class OcupationSearcherController extends Controller {
             $stars[$starAvg] = $stars[$starAvg] + 1;
         }
 
-        return $this->render('DaiquiriSiteBundle:Hotel:list.html.twig', array(
-            'salida' => $pagerfanta,
+        $vars = array(
             'stars' => $stars,
             'hotelFacilities' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelFacility')->getHotelsFacilities(),
             'hotelTypes' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:HotelType')->getHotelsTypes(),
-        ));
+            );        
+
+        return $vars;
     }
 
     public function listAjaxFilterAction($page = 1) {
+        
         $idType = $this->container->get('request_stack')->getCurrentRequest()->get("idType");
         $rating = $this->container->get('request_stack')->getCurrentRequest()->get("rating");
         $sort = $this->container->get('request_stack')->getCurrentRequest()->get("sort");
+        $facility = $this->container->get('request_stack')->getCurrentRequest()->get("facility");
         $filterVars = array(
             'type' => $idType,
             'rating' => $rating,
-            'sort' => $sort
+            'sort' => $sort,
+            'facility' => $facility
         );
 
         $query = $this->resolveHotelFilter($filterVars);
@@ -106,9 +122,11 @@ class OcupationSearcherController extends Controller {
         $idType = $filterVars['type'];
         $rating = $filterVars['rating'];
         $sort =  $filterVars['sort'];
+        $facility = $filterVars['facility'];
 
         $query = $repository->createQueryBuilder('h')
             ->leftJoin('h.reviews', 'r')
+            ->leftJoin('h.hotel_facilitys', 'f')
             ->where('h.available = TRUE');
 
         if ($idType != -1){
@@ -119,6 +137,11 @@ class OcupationSearcherController extends Controller {
         if ($rating != -1){
             $query->andWhere('h.avgReviews = :rating')
                 ->setParameter("rating", $rating);
+        }
+
+        if ($facility != -1){
+            $query->andWhere('f.title = :facility')
+                ->setParameter("facility", $facility);
         }
 
         if ($sort != -1){
@@ -185,6 +208,9 @@ class OcupationSearcherController extends Controller {
         $request->request->set('_route', $request->get('_route'));
         $request->request->set('_route_params', array('_locale' => $request->getLocale()));
         $request->request->set('_sonata_admin', 'admin.ocupation.searcher');
+              
+       
+
         return $this->forward('DaiquiriReservationBundle:OcupationSearcher:initSearcher', array(
             'page' => $page,
             'view_render' => 'DaiquiriSiteBundle:Hotel:search_result.html.twig',

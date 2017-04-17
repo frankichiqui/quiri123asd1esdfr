@@ -1,6 +1,11 @@
-<li class="booking-item" style="margin-bottom: 2%">
-    {{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
-    <div class="row">
+<ul class="booking-list">
+    <a   href="{{ path('circuit_show',{'slug': obj.slug })}}">
+    <li class="booking-item">
+
+                {{ form_start(form_item, {'name':'item_result'~ obj.id, 'action': admin.generateUrl('addtocart'), 'method': 'POST'}) }}
+            <div class="row">
+
+       
         <div class="col-md-4">
             {% if obj.picture.galleryHasMedias is defined %}
                 <img src="{% path obj.picture, 'reference' %}" alt="{{ obj.title }}" title="{{ obj.title }}" />
@@ -34,11 +39,15 @@
                         <small><b>{{ ' from Departure' | trans({}, 'circuit') }}:</b></small> {{ searcher.date | date("M j, Y") }}:</b></small> {{ form_widget(form_item.pickupplace, {'attr':{'class': 'form-control inline' }}) }}
             </p>            
         </div>
-        <div class="col-md-2"><span class="booking-item-price">{% if obj.getCurrentPrice() is not null %} {{ obj.getCurrentPrice() | price | raw }}{% endif %} </span><button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="{% if obj.getCurrentPrice() is null or obj.getCurrentPrice() == 0 %} disabled {% endif %}btn btn-primary">{{ 'Add to Cart' | trans({}, 'circuit') }}</button>
+        <div class="col-md-2">
+            <span class="booking-item-price">{% if obj.getCurrentPrice() is not null %} {{ obj.getCurrentPrice() | price | raw }}{% endif %} </span>
+            <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="{% if obj.getCurrentPrice() is null or obj.getCurrentPrice() == 0 %} disabled {% endif %}btn btn-primary">{{ 'Add to Cart' | trans({}, 'circuit') }}</button>
         </div>
 
-    </div>    
-    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a>  
+    </div>
+
+
+    <a id="a_modal" class="popup-text" href="#generic_modal" data-effect="mfp-zoom-out"></a>
     <div class="hidden">        
         {{ form_widget(form_item.title,{'attr':{'value':obj.type ~ ' ' ~ obj.title}}) }}
         {{ form_widget(form_item.quantity,{'attr':{'value':1}}) }}
@@ -57,3 +66,5 @@
         });
     </script>
 </li>
+    </a>
+    </ul>

@@ -1,0 +1,77 @@
+
+    <div class="nav-drop booking-sort">
+    <h5 class="booking-sort-title"><a href="#">Sort: Aviability<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a></h5>
+    <ul class="nav-drop-menu ">
+        <li data-sort=1><a href="#">Name (A-Z)</a>
+        </li>
+        <li data-sort=2><a href="#">Name (Z-A)</a>
+        </li>
+        <li data-sort=3><a href="#">Number of Reviews</a>
+        </li>
+    </ul>
+</div>
+    <ul class="booking-list">
+        {% for circuit in salida.currentPageResults %}
+            <li>
+                <a class="booking-item" href="{{ path('circuit_show',{'slug': circuit.slug })}}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if circuit.picture.galleryHasMedias is defined %}
+                                <img src="{% path circuit.picture, 'reference' %}" alt="{{ circuit.title }}" title="{{ circuit.title }}" />
+                            {% else %}
+                                <img src="{{ asset('bundles/daiquirisite/img/800x600.png') }}" alt="{{ circuit.title }}" title="{{ circuit.title }}" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-5">
+                            <div class="booking-item-rating">
+                                <ul class="icon-group booking-item-rating-stars">
+                                    {{ circuit.printStart() |raw}}
+                                </ul><span class="booking-item-rating-number"><b >{{ circuit.getAverageVotes()}}</b> of 5</span><small>({{ circuit.getReviews().count()}} reviews)</small>
+
+
+                            </div>
+                            <h5 class="booking-item-title">{{ circuit.title }}</h5>
+                            <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                                {% set places = "" %}
+                                {% for circuit_day in circuit.getCircuitDays() %}
+                                    {% for place in circuit_day.places %}
+                                        {% set places = places ~ place ~ "(" ~ place.province ~ "), " %}
+                                    {% endfor %}
+                                {% endfor %}
+                                <small>{{ places | trim(", ") }}</small>
+                            </p>
+                            <p class="booking-item-description">{{ circuit.description | truncate(120) | raw }}</p>
+                        </div>
+                        <div class="col-md-3"><span class="booking-item-price">{{ circuit.getCurrentPrice() | price | raw }}</span><span>/{{ 'person' | trans({}, 'circuit') }}</span>
+                            <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="{% if circuit.getCurrentPrice() is null or circuit.getCurrentPrice() == 0 %} disabled {% endif %}btn btn-primary">{{ 'Add to Cart' | trans({}, 'circuit') }}</button>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        {% else %}
+
+            <div class="alert alert-info">
+                <p class="text-bigger"> {{ 'No circuits to show' | trans({}, 'search') }}</p>
+            </div>
+
+
+        {% endfor %}
+
+    </ul>
+    <div class="row">
+
+        <div class="col-md-7">
+            {% if salida.haveToPaginate %}
+                <p><small>{{ salida | length }} {{ 'Circuits on' | trans({}, 'circuit') }}  {{ pickupdays[0] | date('M j, Y') }} - {{ pickupdays[pickupdays | length -1] | date('M j, Y') }} &nbsp;&nbsp;{{ 'Showing' | trans({}, 'circuit') }} {{ salida.getCurrentPage }} ? {{ salida.getNbPages }}</small>
+                </p>
+
+                {{ pagerfanta(salida, 'page_view', {'routeName': 'circuit_list_paginated'}, pagerfanta_opts) }}
+
+            {% endif %}
+        </div>
+        <div class="col-md-5 text-right">
+            <p>{{ "Not what you\'re looking for?" | trans({}, 'circuit') }} <a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">{{ 'Try your search again' | trans({}, 'circuit') }}</a>
+            </p>
+        </div>
+    </div>
+</div>

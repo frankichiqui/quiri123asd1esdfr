@@ -23,5 +23,18 @@ class PoloRepository extends \Doctrine\ORM\EntityRepository {
                 ->getResult();
         return $r;
     }
+    public function getPolos(){
+        $dql = "SELECT DISTINCT polo as TYPE,
+                  (SELECT count(c) FROM DaiquiriAdminBundle:Circuit c where c.polofrom = polo) as cantPolo
+                FROM DaiquiriAdminBundle:Polo polo";
+
+       /* $dql = "SELECT DISTINCT pol.title as polo,
+                  (SELECT count(c) FROM DaiquiriAdminBundle:Circuit c where c.poloFrom = pol.) as cantPolo
+                FROM DaiquiriAdminBundle:Polo pol";*/
+
+        $query = $this->getEntityManager()->createQuery($dql)
+            ->getResult();
+        return $query;
+    }
 
 }

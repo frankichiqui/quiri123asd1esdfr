@@ -1,0 +1,98 @@
+
+    <div class="row">
+        <div class="col-xs-12" style="padding-bottom: 10px">
+            <button class="btn btn-default" id="exec-filter">Filter</button>
+            <button class="btn btn-default" id="clear-filters">Clear Filters</button>
+        </div>
+    </div>
+    <aside class="booking-filters text-white">
+        <h3>Filter By:</h3>
+        <ul class="list booking-filters-list">
+            <li>
+                <h5 class="booking-filters-title">Star Rating</h5>
+                <div id="filter-rating" class="radio-group">
+                    <div class="radio">
+                        <label>
+                            <input data-stars="5" class="i-radio" type="radio" />5 stars ({{ stars[5] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="4" class="i-radio" type="radio" />4 star ({{ stars[4] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="3" class="i-radio" type="radio" />3 star ({{ stars[3] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="2" class="i-radio" type="radio" />2 star ({{ stars[2] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="1" class="i-radio" type="radio" />1 star ({{ stars[1] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="0" class="i-radio" type="radio" />0 star ({{ stars[0] }})</label>
+                        <input type="hidden" value="0">
+                    </div>
+
+                </div>
+            </li>
+            <li>
+                <h5 class="booking-filters-title">Kids Allowed</h5>
+                <div id="filter-circuits-haschildrens" class="radio-group">
+
+                    <div class="radio">
+                        <label>
+                            <input data-haschildren=1 class="i-radio" type="radio" />Kids allowed ({{ cantAllowKids[0]['allowkids'] }})</label>
+
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-haschildren=0 class="i-radio" type="radio" />No kids Allowed ({{ NotAllowKids[0]['notallowkids'] }})</label>
+
+                    </div>
+
+                </div>
+
+
+
+
+            </li>
+            <li>
+                <h5 class="booking-filters-title">Polo From</h5>
+                <div id="filter-circuits-polofrom" class="radio-group">
+
+                    {% for circuitPolo in polos %}
+                        <div id="filter-hotel-facilities" class="radio">
+                            <label>
+                                <input data-polos="{{ circuitPolo.TYPE }}" class="i-radio" type="radio" />{{ circuitPolo.TYPE }} ({{ circuitPolo.cantPolo }})
+                            </label>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+
+
+
+            </li>
+
+        </ul>
+    </aside>
+
+    <script>
+    
+        jQuery(document).ready(function () {
+            filters.onReady();
+            var url = '{{ path('circuit_list_ajax', { page:1 }) }}';
+            filters.launchFilter('circuits', url);
+        });
+
+    </script>

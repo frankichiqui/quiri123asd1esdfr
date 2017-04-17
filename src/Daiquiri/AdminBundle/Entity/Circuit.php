@@ -384,8 +384,8 @@ class Circuit extends Product {
         return false;
     }
 
-    public function constainPolofrom(Polo $polo) {
-        return $this->polofrom->contains($polo);
+    public function constainPolofrom($polo) {
+        return $this->polofrom->getTitle() == $polo;
     }
 
     public function deleteDateDeparture($date) {

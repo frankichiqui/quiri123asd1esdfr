@@ -37,7 +37,7 @@ class CircuitSearcherController extends Controller {
     public function listAction($page) {
         $repository = $this->getDoctrine()
                 ->getRepository('DaiquiriAdminBundle:Circuit');
-        $query = $repository->createQueryBuilder('c')
+                $query = $repository->createQueryBuilder('c')
                 ->where('c.available = TRUE')
                 ->orderBy('c.priority', 'ASC')
                 ->getQuery();
@@ -52,9 +52,106 @@ class CircuitSearcherController extends Controller {
         }
 
 
+        $allCircuits = $query->getResult();
+        $stars = array(
+            0 => 0,
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0,
+        );
+
+        foreach ($allCircuits as $key => $circuit) {
+            $starAvg = $circuit->getAverageVotes();
+            $starAvg = (int)$starAvg;
+            $stars[$starAvg] = $stars[$starAvg] + 1; 
+             }
+
+
         return $this->render('DaiquiriSiteBundle:Circuit:list.html.twig', array(
+                    'stars' => $stars,
+                    'cantAllowKids' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Circuit')->getCountAllowedKids(),
+                    'NotAllowKids' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Circuit')->getNotAllowedKids(),
+                    'polos' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Polo')->getPolos(),
                     'salida' => $pagerfanta
         ));
+    }
+
+    public function listAjaxFilterAction($page = 1) {        
+        $rating = $this->container->get('request_stack')->getCurrentRequest()->get("rating");
+        $hasChildren = $this->container->get('request_stack')->getCurrentRequest()->get("haschildren");
+        $polo = $this->container->get('request_stack')->getCurrentRequest()->get("polos");
+        $sort = $this->container->get('request_stack')->getCurrentRequest()->get("sort");
+        $filterVars = array(     
+            'rating' => $rating,
+            'hasChildren' => $hasChildren,
+            'polo' => $polo,
+            'sort' => $sort
+        );
+
+        $query = $this->resolveCircuitFilter($filterVars);
+
+        $adapter = new DoctrineORMAdapter($query);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(100);
+        
+        try {
+            $pagerfanta->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException();
+        }
+
+
+        return $this->render('DaiquiriSiteBundle:Circuit:ajax_circuits.html.twig', array(
+            'salida' => $pagerfanta,
+            'isAjax' => true,
+        ));
+    }
+
+     public function resolveCircuitFilter($filterVars){
+        $repository = $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Circuit');
+        $rating = $filterVars['rating'];
+         $hasChildren= $filterVars['hasChildren'];
+         $polo= $filterVars['polo'];
+         $sort =  $filterVars['sort'];
+
+        $query = $repository->createQueryBuilder('c')
+           ->leftJoin('c.polofrom', 'p')
+           ->leftJoin('c.reviews', 'r')
+           ->where('c.available = TRUE');
+        
+
+        if ($rating != -1){
+            $query->andWhere('c.avgReviews = :rating')
+                ->setParameter("rating", $rating);
+        }
+        if ($hasChildren != -1){
+            $query->andWhere('c.allowkid = :hasChildren')
+                ->setParameter("hasChildren", $hasChildren);
+
+        }
+
+        if ($polo != -1) {
+             $query->andWhere('p.title = :ptitle')
+                 ->setParameter("ptitle", $polo);
+        }
+        if ($sort != -1){
+            switch ($sort) {
+                case 1:
+                    $query->orderBy('c.title', 'ASC');
+                    break;
+                case 2:
+                    $query->orderBy('c.title', 'DESC');
+                    break;
+                case 3:
+                    $query->orderBy('r.product', 'ASC');
+                    break;
+            }
+        }
+
+        return $query->getQuery();
+
     }
 
     public function searchAction(Request $request, $page) {
@@ -255,6 +352,13 @@ class CircuitSearcherController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            //Setear el average
+            $circuit = $entity->getCircuit();
+            $circuit->setAvgReviews($circuit->getAverageVotes());
+            $em->persist($circuit);
+            $em->flush();
+
             return new \Symfony\Component\HttpFoundation\Response(json_encode(array(
                         'success' => true,
                         'class' => 'alert-success',

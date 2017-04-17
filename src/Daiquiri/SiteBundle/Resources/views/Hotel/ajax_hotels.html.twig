@@ -7,7 +7,6 @@
         </li>
         <li data-sort=3><a href="#">Number of Reviews</a>
         </li>
-
     </ul>
 </div>
 <ul class="booking-list">
@@ -36,7 +35,9 @@
                         <h5 class="booking-item-title">{{ hotel.title }}</h5>
                         <p class="booking-item-address"><i class="fa fa-map-marker"></i> {{ hotel.address }} ({{ hotel.zone.province }}) </p><small class="booking-item-last-booked">Latest booking: 1 hour ago</small>
                     </div>
-                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">${{ hotel.getFromprice() }}</span><span>/night</span>{#<span class="btn btn-primary">Book Now</span>#}
+                    <div class="col-md-3"><span class="booking-item-price-from">from</span><span class="booking-item-price">${{ hotel.getFromprice() }}</span><span>/night</span>
+                    <br>
+                        <button name="btn_addtocart_form_daiquiri_reservationbundle_caritem" type="submit" class="{% if hotel.getMountC() is null or hotel.getMountC() == 0 %} disabled {% endif %}btn btn-primary">{{ 'Add to Cart' | trans({}, 'hotel') }}</button>
                     </div>
                 </div>
             </a>

@@ -10,4 +10,36 @@ namespace Daiquiri\AdminBundle\Entity;
  */
 class TransferRepository extends \Doctrine\ORM\EntityRepository
 {
+    /*public function getHotelsTypes(){
+        $dql = "SELECT ht as type,
+                  (SELECT count(hoteles) FROM DaiquiriAdminBundle:Hotel hoteles where hoteles.hotelType = ht) as cantType
+                FROM DaiquiriAdminBundle:HotelType ht";
+
+        $query = $this->getEntityManager()->createQuery($dql)
+            ->getResult();
+
+        return $query;
+    }*/
+    public function getTransfersByPlaceTo(){
+
+        $dql = "SELECT  place as type,
+                  (SELECT count(transfer) FROM DaiquiriAdminBundle:Transfer transfer where transfer.placeto = place) as cantPlaceTo
+                FROM DaiquiriAdminBundle:Place place";
+
+        $query = $this->getEntityManager()->createQuery($dql)
+            ->getResult();
+
+        return $query;
+    }
+    public function getTransfersByPlaceFrom(){
+
+        $dql = "SELECT  place as type,
+                  (SELECT count(transfer) FROM DaiquiriAdminBundle:Transfer transfer where transfer.placefrom = place) as cantPlaceFrom
+                FROM DaiquiriAdminBundle:Place place";
+
+        $query = $this->getEntityManager()->createQuery($dql)
+            ->getResult();
+
+        return $query;
+    }
 }

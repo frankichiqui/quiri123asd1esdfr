@@ -12,34 +12,33 @@
             </li>
             <li><a href="{{ path('hotel_list') }}">{{ 'Hotels' | trans({}, 'menu') }}</a>
                 <ul>
-                   {# {%  render(controller('DaiquiriSiteBundle:OcupationSearcher:getHotelsByPoloForMenu'))%} #}
+                    {#{%  render(controller('DaiquiriSiteBundle:OcupationSearcher:getHotelsByPoloForMenu'))%} #}
                     
                 </ul>
             </li>
-            <li><a href="{{ path('excursion_list') }}">{{ 'Excursions' | trans({}, 'menu') }}</a>
+            {#<li><a href="{{ path('excursion_list') }}">{{ 'Excursions' | trans({}, 'menu') }}</a>
                 <ul>
-                   {# {%  render(controller('DaiquiriSiteBundle:ExcursionSearcher:getExcursionsByPoloForMenu'))%}#}
+                    {%  render(controller('DaiquiriSiteBundle:ExcursionSearcher:getExcursionsByPoloForMenu'))%}
                 </ul>
 
-            </li>
+            </li>#}
             <li><a href="{{ path('circuit_list') }}">{{ 'Circuits' | trans({}, 'menu') }}</a>
                 <ul>                    
-                    {#{%  render(controller('DaiquiriSiteBundle:CircuitSearcher:getCircuitsSlugAndTitle'))%}#}
+                   {%  render(controller('DaiquiriSiteBundle:CircuitSearcher:getCircuitsSlugAndTitle'))%} 
                 </ul>
 
             </li>
-            <li><a href="{{ path('rental_list') }}">{{ 'Rentals' | trans({}, 'menu') }}</a>
+            {#<li><a href="{{ path('rental_list') }}">{{ 'Rentals' | trans({}, 'menu') }}</a>
                 <ul>
-                    {#{%  render(controller('DaiquiriSiteBundle:RentalHouseRoomSearcher:getRentalHouseByProvinceForMenu'))%}#}
+                    {%  render(controller('DaiquiriSiteBundle:RentalHouseRoomSearcher:getRentalHouseByProvinceForMenu'))%}
                 </ul>
 
-            </li>
-            <li><a href="{{ path('car_list') }}">{{ 'Cars' | trans({}, 'menu') }}</a>
+            </li>#}
+            {#<li><a href="{{ path('car_list') }}">{{ 'Cars' | trans({}, 'menu') }}</a>
                 <ul>                    
                     {%  render(controller('DaiquiriSiteBundle:CarSearcher:getCarsCategoriesSlugAndTitle')) %}
                 </ul>
-
-            </li>
+            </li>#}
 
         </ul>
     </div>

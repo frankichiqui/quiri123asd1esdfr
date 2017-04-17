@@ -207,6 +207,43 @@ class CircuitSearcherController extends SonataCRUDController {
         $this->apllyAllFilters();
     }
 
+      public function getFilterCircuitVars() {
+
+        $repository = $this->getDoctrine()
+                ->getRepository('DaiquiriAdminBundle:Circuit');
+                $query = $repository->createQueryBuilder('c')
+                ->where('c.available = TRUE')
+                ->orderBy('c.priority', 'ASC')
+                ->getQuery();
+
+        $allCircuits = $query->getResult();
+
+         $stars = array(
+            0 => 0,
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0,
+        );
+
+        foreach ($allCircuits as $key => $circuit) {
+            $starAvg = $circuit->getAverageVotes();
+            $starAvg = (int)$starAvg;
+            $stars[$starAvg] = $stars[$starAvg] + 1; 
+             }
+
+        $vars = array(
+            'stars' => $stars,
+            'cantAllowKids' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Circuit')->getCountAllowedKids(),
+            'NotAllowKids' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Circuit')->getNotAllowedKids(),
+            'polos' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Polo')->getPolos(),            
+              );
+
+        return $vars;
+    }
+
+
     public function initSearcherAction($page, $view_render = 'DaiquiriReservationBundle:Circuit:full_search_result.html.twig', $other = array()) {
 
         $request = $this->getRequest();
@@ -226,6 +263,7 @@ class CircuitSearcherController extends SonataCRUDController {
 
         $salida = array();
 
+        $vars = $this->getFilterCircuitVars();
 
         if (count($this->result)) {
             foreach ($this->result as $r) {
@@ -274,6 +312,10 @@ class CircuitSearcherController extends SonataCRUDController {
             return $this->render($view_render, array_merge(array(
                         'searcher' => $this->searcher,
                         'salida' => $pagerfanta,
+                        'stars' => $vars['stars'],
+                        'cantAllowKids' => $vars['cantAllowKids'],
+                        'NotAllowKids' => $vars['NotAllowKids'],
+                        'polos' => $vars['polos'],  
                         'searcher_date' => $this->searcher->getDate(),
                         'pickupdays' => $this->getAllPickUpDaysCircuits()
                                     ), $other));
@@ -282,6 +324,10 @@ class CircuitSearcherController extends SonataCRUDController {
                     'form' => $this->admin->getForm()->createView(),
                     'action' => 'create',
                     'searcher' => $this->searcher,
+                    'stars' => $vars['stars'],
+                    'cantAllowKids' => $vars['cantAllowKids'],
+                    'NotAllowKids' => $vars['NotAllowKids'],
+                    'polos' => $vars['polos'],  
                     'salida' => $salida
                                 ), $other));
     }

@@ -1,0 +1,87 @@
+
+    <div class="row">
+        <div class="col-xs-12" style="padding-bottom: 10px">
+            <button class="btn btn-default" id="exec-filter">Filter</button>
+            <button class="btn btn-default" id="clear-filters">Clear Filters</button>
+        </div>
+    </div>
+
+
+    <aside class="booking-filters text-white">
+        <h3>Filter By:</h3>
+        <ul class="list booking-filters-list">
+            <li>
+                <h5 class="booking-filters-title">Star Rating</h5>
+                <div id="filter-rating" class="radio-group">
+                    <div class="radio">
+                        <label>
+                            <input data-stars="5" class="i-radio" type="radio" />5 stars ({{ stars[5] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="4" class="i-radio" type="radio" />4 star ({{ stars[4] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="3" class="i-radio" type="radio" />3 star ({{ stars[3] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="2" class="i-radio" type="radio" />2 star ({{ stars[2] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="1" class="i-radio" type="radio" />1 star ({{ stars[1] }})</label>
+                        <input type="hidden" value="5">
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input data-stars="0" class="i-radio" type="radio" />0 star ({{ stars[0] }})</label>
+                        <input type="hidden" value="0">
+                    </div>
+
+                </div>
+            </li>
+            <li>
+                <h5 class="booking-filters-title">Hotel Types</h5>
+                <div id="filter-hotel-types" class="radio-group">
+                    {% for hotelType in hotelTypes %}
+                        <div class="radio">
+                            <label>
+                                <input data-idType="{{ hotelType.type.id }}" class="i-radio" type="radio" />{{ hotelType.type~' ('~hotelType.cantType~')' }}</label>
+                            <input type="hidden" value="{{ hotelType.type }}">
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+            </li>
+            <li>
+                <h5 class="booking-filters-title">Facilities</h5>
+                <div class="radio-group">
+
+                    {% for hotelFacility in hotelFacilities %}
+                        <div id="filter-hotel-facilities" class="radio">
+                            <label>
+                                <input data-facility="{{ hotelFacility.facility }}" class="i-radio" type="radio" />{{ hotelFacility.facility }} ({{ hotelFacility.cantTypeFacility }})
+                            </label>
+                        </div>
+                    {% endfor %}
+            </li>
+        </ul>
+    </aside>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            filters.onReady();
+            var url = '{{ path('hotel_list_ajax', { page:1 }) }}';
+            filters.launchFilter('hotels', url);
+        });
+
+    </script>
+

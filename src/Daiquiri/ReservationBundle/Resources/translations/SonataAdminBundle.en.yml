@@ -1,0 +1,13 @@
+all_elements: All   # FIXME
+btn_advanced_filters: Advanced Filters   # FIXME
+btn_batch: Ok   # FIXME
+btn_filter: Filter   # FIXME
+flash_create_error: Error to Create   # FIXME
+flash_create_success: Success   # FIXME
+flash_edit_error: Error to edit   # FIXME
+flash_edit_success: Success to edit   # FIXME
+flash_lock_error: flash_lock_error   # FIXME
+label_export_download: Export and Download   # FIXME
+link_filters: Filters   # FIXME
+link_reset_filter: Reset Filter   # FIXME
+no_result: No Result   # FIXME

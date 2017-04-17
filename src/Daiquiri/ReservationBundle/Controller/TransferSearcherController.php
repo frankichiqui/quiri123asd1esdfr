@@ -111,6 +111,25 @@ class TransferSearcherController extends SonataCRUDController {
         return new Response();
     }
 
+
+    public function getFilterTransfersVars() {            
+
+        $repository = $this->getDoctrine()
+                ->getRepository('DaiquiriAdminBundle:Transfer');
+        $query = $repository->createQueryBuilder('t')
+                ->where('t.available = TRUE')
+                ->orderBy('t.priority', 'ASC')                
+                ->getQuery();
+
+
+        $vars = array(            
+            'placetos' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Transfer')->getTransfersByPlaceTo(),
+            'placefrom' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Transfer')->getTransfersByPlaceFrom(),
+            'date' =>  (new \DateTime('now'))->modify('+4 days')
+              );
+        return $vars;
+    }
+
     public function initSearcherAction($page, $view_render = 'DaiquiriReservationBundle:Transfer:full_search_result.html.twig') {
         $request = $this->getRequest();
         $session = $request->getSession();
@@ -122,6 +141,8 @@ class TransferSearcherController extends SonataCRUDController {
                     'No searcher found for id ' . $id
             );
         }
+
+        $vars = $this->getFilterTransfersVars();
 
         $this->setSearcher($searcher);
 
@@ -183,7 +204,10 @@ class TransferSearcherController extends SonataCRUDController {
                         'salida' => $pagerfanta,
                         'date' => $this->searcher->getDate(),
                         'dateroundtrip' => $this->searcher->getDateroundtrip(),
-                        'roundtrip' => $this->searcher->getRoundtrip()
+                        'roundtrip' => $this->searcher->getRoundtrip(),
+                        'placetos' => $vars['placetos'],
+                        'placefrom' => $vars['placefrom'],
+                        'date' => $vars['date'],
             ));
         }
 
@@ -191,7 +215,10 @@ class TransferSearcherController extends SonataCRUDController {
                     'form' => $this->admin->getForm()->createView(),
                     'action' => 'create',
                     'searcher' => $this->searcher,
-                    'salida' => $salida
+                    'salida' => $salida,
+                    'placetos' => $vars['placetos'],
+                    'placefrom' => $vars['placefrom'],
+                    'date' => $vars['date'],
         ));
     }
 

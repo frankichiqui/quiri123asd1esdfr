@@ -39,7 +39,7 @@ class TransferSearcherController extends Controller {
                 ->getRepository('DaiquiriAdminBundle:Transfer');
         $query = $repository->createQueryBuilder('t')
                 ->where('t.available = TRUE')
-                ->orderBy('t.priority', 'ASC')
+                ->orderBy('t.priority', 'ASC')                
                 ->getQuery();
 
         $adapter = new DoctrineORMAdapter($query);
@@ -51,12 +51,95 @@ class TransferSearcherController extends Controller {
             throw new NotFoundHttpException();
         }
 
-        $date = (new \DateTime('now'))->modify('+4 days');
 
-        return $this->render('DaiquiriSiteBundle:Transfer:list.html.twig', array(
+        $vars = $this->getFilterTransfersVars($query);
+
+        return $this->render('DaiquiriSiteBundle:Transfer:list.html.twig', array(                    
                     'salida' => $pagerfanta,
-                    'date' => $date
+                    'placetos' => $vars['placetos'],
+                    'placefrom' => $vars['placefrom'],
+                    'date' => $vars['date'],
+                    
         ));
+    }
+
+    public function getFilterTransfersVars($query) {            
+
+        $vars = array(            
+            'placetos' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Transfer')->getTransfersByPlaceTo(),
+            'placefrom' => $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Transfer')->getTransfersByPlaceFrom(),
+            'date' =>  (new \DateTime('now'))->modify('+4 days')
+              );
+        return $vars;
+    }
+
+    public function listAjaxFilterAction($page = 1) {
+        $pickup = $this->container->get('request_stack')->getCurrentRequest()->get("pickup");
+        $dropoff = $this->container->get('request_stack')->getCurrentRequest()->get("dropoff");
+        $type  = $this->container->get('request_stack')->getCurrentRequest()->get("type");
+        $sort  = $this->container->get('request_stack')->getCurrentRequest()->get("sort");
+
+        $filterVars = array(
+            'pickup' => $pickup,
+            'dropoff' => $dropoff,
+            'type' => $type,
+            'sort' => $sort
+        );
+
+        $query = $this->resolveTransferFilter($filterVars);
+
+        $adapter = new DoctrineORMAdapter($query);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(100);
+
+        try {
+            $pagerfanta->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException();
+        }
+        
+        return $this->render('@DaiquiriSite/Transfer/ajax_transfer.html.twig', array(
+            'salida' => $pagerfanta,
+            'isAjax' => true,
+        ));
+    }
+
+    public function resolveTransferFilter($filterVars){
+        $repository = $this->getDoctrine()->getRepository('DaiquiriAdminBundle:Transfer');
+        $pickup = $filterVars['pickup'];
+        $dropoff= $filterVars['dropoff'];
+        $type= $filterVars['type'];
+        $sort =  $filterVars['sort'];
+
+        $query = $repository->createQueryBuilder('t')
+            //->leftJoin('c.polofrom', 'p')
+            ->leftJoin('t.placefrom', 'pl')            
+            ->where('t.available = TRUE');
+
+
+        if ($pickup != -1){
+            $query->andWhere('pl.title = :pickup')
+                ->setParameter("pickup", $pickup);
+        }
+        if ($dropoff != -1){
+            $query->andWhere('pl.title = :dropoff')
+                ->setParameter("dropoff", $dropoff);
+
+        }
+
+        if ($sort != -1){
+            switch ($sort) {
+                case 1:
+                    $query->orderBy('t.title', 'ASC');
+                    break;
+                case 2:
+                    $query->orderBy('t.title', 'DESC');
+                    break;                
+            }
+        }
+
+        return $query->getQuery();
+
     }
 
     public function listByPoloAction($polo, $page) {
@@ -82,11 +165,21 @@ class TransferSearcherController extends Controller {
 
         //dump($pagerfanta);die;
 
+               $repository = $this->getDoctrine()
+                ->getRepository('DaiquiriAdminBundle:Transfer');
+        $query = $repository->createQueryBuilder('t')
+                ->where('t.available = TRUE')
+                ->orderBy('t.priority', 'ASC')                
+                ->getQuery();
+        $vars = $this->getFilterTransfersVars($query);
+
         return $this->render('DaiquiriSiteBundle:Transfer:list.html.twig', array(
                     'salida' => $pagerfanta,
                     'place' => $polo,
-                    'polo' => true,
-                    'date' => (new \DateTime())->modify('+5 days')
+                    'polo' => true,                    
+                    'placetos' => $vars['placetos'],
+                    'placefrom' => $vars['placefrom'],
+                    'date' => $vars['date'],
         ));
     }
 

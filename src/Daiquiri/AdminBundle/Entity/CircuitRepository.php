@@ -22,5 +22,47 @@ class CircuitRepository extends \Doctrine\ORM\EntityRepository {
             return null;
         }
     }
+    public function getCountAllowedKids(){
+       $em = $this->getEntityManager()
+           ->createQuery("
+           SELECT count(circuitos) as allowkids from DaiquiriAdminBundle:Circuit circuitos
+            where circuitos.allowkid=TRUE
+
+           ")
+           ->getResult();
+if (count($em) > 0) {
+    return $em;
+} else {
+    return null;
+}
+
+
+/*//        $dql = " SELECT (count(circuits)
+// FROM DaiquiriAdminBundle:Circuit circuits
+// where circuits.allowkids = TRUE) as countAllow,
+// (count(circuits)
+// FROM DaiquiriAdminBundle:Circuit circuits
+// where circuits.allowkids = FALSE ) as countNotAllow";
+//        $query = $this->getEntityManager()->createQuery($dql)
+//            ->getResult();
+//
+//        return $query;*/
+    }
+    public function getNotAllowedKids() {
+        $em = $this->getEntityManager()
+            ->createQuery("
+           SELECT count(circuitos) as notallowkids from DaiquiriAdminBundle:Circuit circuitos
+            where circuitos.allowkid=FALSE
+
+           ")
+            ->getResult();
+        if (count($em) > 0) {
+            return $em;
+        } else {
+            return null;
+        }
+
+    }
+
 
 }
